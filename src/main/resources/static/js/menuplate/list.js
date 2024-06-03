@@ -1,4 +1,6 @@
 
+var paperCount = 0;
+
 window.addEventListener('load', () => {
 
     scrollToCenter();
@@ -21,7 +23,7 @@ function scrollToCenter(){
 
 function appendMenuToPlate(){
     let count = 0;
-    let paperCount = 0;
+    paperCount = 0;
     let $menuPlate = $('.menu');
     let $currentPaper = null;
 
@@ -65,11 +67,16 @@ function appendMenuToPlate(){
 
         count++;
     });
+
+    let fr = "";
+    for(let i = 0; i < paperCount; i++)
+        fr += "1fr ";
+    $menuPlate.css({ 'grid-template-columns': `${fr.trim()}` });
 }
 
 function openMenu() {
     var menu = document.getElementById("menu");
-    menu.animate({ width: '2000px' },
+    menu.animate({ width: `${paperCount * 500}px` },
         {
             duration: 1000, // 밀리초 지정
             fill: 'forwards', // 종료 시 속성을 지님
