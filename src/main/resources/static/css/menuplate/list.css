@@ -1,0 +1,231 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #10573e;
+    margin-bottom: 1000px;
+    caret-color: transparent;
+    overflow-x: hidden;
+}
+
+/*------------------------------------------- main */
+#decoContent{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    pointer-events: none; /* 부모의 이벤트 무시 */
+}
+.deco{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40%;
+    height: 40%;
+    position: absolute;
+}
+#leftup{
+    background-image: url('/img/maindeco/leftup.png');
+    left: 0%;
+    top: 0%;
+    transition: left 0.5s ease; /* Smooth transition */
+}
+#rightup{
+    background-image: url('/img/maindeco/rightup.png');
+    right: 0%;
+    top: 0%;
+    transition: right 0.5s ease; /* Smooth transition */
+}
+#leftdown{
+    background-image: url('/img/maindeco/leftdown.png');
+    left: 0%;
+    bottom: 0%;
+    transition: left 0.5s ease; /* Smooth transition */
+}
+#rightdown{
+    background-image: url('/img/maindeco/rightdown.png');
+    right: 0%;
+    bottom: 0%;
+    transition: right 0.5s ease; /* Smooth transition */
+}
+
+#mainContent{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    /*background-color: lightblue; !* 원하는 배경색 *!*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#menuText{
+    font-family: "Meddon", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 90px;
+    color: #f8e9d7;
+    transform: skewY(-20deg); /* Adjust the skew angle */
+    position: absolute;
+    /*left: 40%;*/
+    /*top: 50%;*/
+}
+
+/*------------------------------------------- menu */
+#menuContent{
+    position: relative;
+    top: 100px;
+}
+#menuBody{
+    height: 1000px;
+    max-width: 1300px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+    /*background-color: #9eb0c5;*/
+    overflow-x: hidden;
+    overflow-y: hidden;
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+    background-color: #1b654b;
+    box-shadow: inset -10px 0 10px -5px rgba(0, 0, 0, 0.5), /* 왼쪽 그림자 */
+                inset 10px 0 10px -5px rgba(0, 0, 0, 0.5);  /* 오른쪽 그림자 */
+}
+
+#menuscroll{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 900px;
+    width: 2800px;
+    position: relative;
+    top: 60px;
+}
+#menuscroll > div {
+    flex-shrink: 0; /* Prevent child divs from shrinking */
+}
+
+.menuTitle {
+    width: 500px;
+    height: 800px;
+    background: linear-gradient(to bottom, #f8e9d7, #DAC0A3, #dea4af);
+    position: relative;
+    top: -18px;
+    padding-left: 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menuTitle #label{
+    background-image: url('/img/menu/barLabel.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 400px;
+    height: 400px;
+    transform: translate(-5%, -25%);
+}
+.menuTitle #labelText{
+    font-family: "Meddon", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 80px;
+    color: #54320f;
+    transform: skewY(-20deg); /* Adjust the skew angle */
+    position: absolute;
+    bottom: 250px;
+}
+
+.menu {
+    width: 0px;
+    height: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.paper {
+    height: 100%; /* Adjust as needed */
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.paperRight {
+    height: 100%; /* Adjust as needed */
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    transform: skewY(4deg); /* Adjust the skew angle */
+    /*background-color: #F8F0E5;*/
+    background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.paperLeft{
+    height: 100%; /* Adjust as needed */
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    transform: skewY(-4deg); /* Adjust the skew angle */
+    /*background-color: #EADBC8;*/
+    background: linear-gradient(to bottom, #f6ecdf, #EADBC8, #fdd8df);
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.cocktailpart {
+    /*background-color: aquamarine;*/
+    height: 160px;
+    /*margin-top: 10px;*/
+    display: flex;
+    justify-content: center;
+    gap: 2%; /* 플렉스 아이템 간 10px 간격 설정 */
+    align-items: center;
+}
+
+.thumbnail{
+    /*background-color: cadetblue;*/
+    width: 30%;
+    height: 100%;
+}
+.explain{
+    /*background-color: coral;*/
+    width: 50%;
+    height: 100%;
+    position: relative; /* 자식 div의 기준이 되는 부모 div */
+    overflow: hidden;
+}
+
+.thumbnail {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+}
+
+.cocktailname{
+    font-family: "Damion", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    top: 15px;
+    position: absolute;
+    color: #512C1C;
+}
+.cocktailinfo{
+    font-family: "Coming Soon", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    position: absolute;
+    top: 60px;
+    color: #512C1C;
+}
+
+/*----------------------------------- footer*/
+#footer{
+    height: 600px;
+    width: 600px;
+    max-width: 1300px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+}
+

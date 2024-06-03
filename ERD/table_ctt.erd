@@ -4,8 +4,8 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -197.6698,
-    "scrollLeft": -133.607,
+    "scrollTop": 0,
+    "scrollLeft": -574.7843,
     "zoomLevel": 0.8,
     "show": 511,
     "database": 4,
@@ -33,7 +33,8 @@
     "tableIds": [
       "qaWp0OqZsKnkTpqQJOXxq",
       "kKoQAvIeA38pTMGT5KRwY",
-      "wT8pe6oi5htx9OQU69OTL"
+      "wT8pe6oi5htx9OQU69OTL",
+      "lg2Gpw-FVp0ytRIWd3rNr"
     ],
     "relationshipIds": [
       "yRsHwqnXq8wDyRVao0YPV",
@@ -126,6 +127,33 @@
         "meta": {
           "updateAt": 1717112655361,
           "createAt": 1717112617486
+        }
+      },
+      "lg2Gpw-FVp0ytRIWd3rNr": {
+        "id": "lg2Gpw-FVp0ytRIWd3rNr",
+        "name": "ctt_menuplate",
+        "comment": "손님에게보이는메뉴",
+        "columnIds": [
+          "wRCOZFHpTlRbrvC57AWRd",
+          "goTHp5813q5vHNkPHHcNQ",
+          "ZtdVnvAvMVwiM3osb_nzG"
+        ],
+        "seqColumnIds": [
+          "wRCOZFHpTlRbrvC57AWRd",
+          "goTHp5813q5vHNkPHHcNQ",
+          "ZtdVnvAvMVwiM3osb_nzG"
+        ],
+        "ui": {
+          "x": 645.7588,
+          "y": 73.3373,
+          "zIndex": 52,
+          "widthName": 77,
+          "widthComment": 110,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1717296179632,
+          "createAt": 1717296054565
         }
       }
     },
@@ -349,6 +377,66 @@
           "updateAt": 1717112685962,
           "createAt": 1717112648502
         }
+      },
+      "wRCOZFHpTlRbrvC57AWRd": {
+        "id": "wRCOZFHpTlRbrvC57AWRd",
+        "tableId": "lg2Gpw-FVp0ytRIWd3rNr",
+        "name": "name",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 14,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 81,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1717296125990,
+          "createAt": 1717296103553
+        }
+      },
+      "goTHp5813q5vHNkPHHcNQ": {
+        "id": "goTHp5813q5vHNkPHHcNQ",
+        "tableId": "lg2Gpw-FVp0ytRIWd3rNr",
+        "name": "img_url",
+        "comment": "",
+        "dataType": "VARCHAR(500)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 81,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1717296155968,
+          "createAt": 1717296129579
+        }
+      },
+      "ZtdVnvAvMVwiM3osb_nzG": {
+        "id": "ZtdVnvAvMVwiM3osb_nzG",
+        "tableId": "lg2Gpw-FVp0ytRIWd3rNr",
+        "name": "info",
+        "comment": "",
+        "dataType": "LONGTEXT",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1717296174974,
+          "createAt": 1717296157599
+        }
       }
     },
     "relationshipEntities": {
@@ -570,6 +658,47 @@
       1717112648500,
       -1,
       {}
+    ],
+    "lg2Gpw-FVp0ytRIWd3rNr": [
+      "tableEntities",
+      1717296054564,
+      -1,
+      {
+        "name": 1717296095400,
+        "comment": 1717296101957
+      }
+    ],
+    "wRCOZFHpTlRbrvC57AWRd": [
+      "tableColumnEntities",
+      1717296103552,
+      -1,
+      {
+        "name": 1717296115971,
+        "dataType": 1717296120385,
+        "options(notNull)": 1717296122682,
+        "options(unique)": 1717296124250,
+        "options(primaryKey)": 1717296125989
+      }
+    ],
+    "goTHp5813q5vHNkPHHcNQ": [
+      "tableColumnEntities",
+      1717296129578,
+      -1,
+      {
+        "name": 1717296140470,
+        "dataType": 1717296155068,
+        "options(notNull)": 1717296155968
+      }
+    ],
+    "ZtdVnvAvMVwiM3osb_nzG": [
+      "tableColumnEntities",
+      1717296157598,
+      -1,
+      {
+        "name": 1717296161203,
+        "dataType": 1717296169988,
+        "options(notNull)": 1717296174973
+      }
     ]
   }
 }

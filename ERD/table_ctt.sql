@@ -1,11 +1,23 @@
 
 CREATE TABLE ctt_authority
-(    id   INT         NOT NULL AUTO_INCREMENT,
+(
+    id   INT         NOT NULL AUTO_INCREMENT,
     name VARCHAR(40) NOT NULL,
     PRIMARY KEY (id)
 );
 
 ALTER TABLE ctt_authority
+    ADD CONSTRAINT UQ_name UNIQUE (name);
+
+CREATE TABLE ctt_menuplate
+(
+    name    VARCHAR(100) NOT NULL,
+    img_url VARCHAR(500) NOT NULL,
+    info    LONGTEXT     NOT NULL,
+    PRIMARY KEY (name)
+) COMMENT '손님에게보이는메뉴';
+
+ALTER TABLE ctt_menuplate
     ADD CONSTRAINT UQ_name UNIQUE (name);
 
 CREATE TABLE ctt_user
