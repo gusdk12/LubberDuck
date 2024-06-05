@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #10573e;
+    margin-bottom: 1000px;
+    caret-color: transparent;
+    overflow-x: hidden;
+}
+
+#mainContent{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    /*background-color: lightblue; !* 원하는 배경색 *!*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#menuText{
+    font-family: "Meddon", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 90px;
+    color: #f8e9d7;
+    transform: skewY(-20deg); /* Adjust the skew angle */
+    position: absolute;
+    /*left: 40%;*/
+    /*top: 50%;*/
+}
+#decoContent{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    pointer-events: none; /* 부모의 이벤트 무시 */
+}
+.deco{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40%;
+    height: 40%;
+    position: absolute;
+}
+#leftup{
+    background-image: url('/img/maindeco/leftup.png');
+    left: 0%;
+    top: 0%;
+    transition: left 0.5s ease; /* Smooth transition */
+}
+#rightup{
+    background-image: url('/img/maindeco/rightup.png');
+    right: 0%;
+    top: 0%;
+    transition: right 0.5s ease; /* Smooth transition */
+}
+#leftdown{
+    background-image: url('/img/maindeco/leftdown.png');
+    left: 0%;
+    bottom: 0%;
+    transition: left 0.5s ease; /* Smooth transition */
+}
+#rightdown{
+    background-image: url('/img/maindeco/rightdown.png');
+    right: 0%;
+    bottom: 0%;
+    transition: right 0.5s ease; /* Smooth transition */
+}
