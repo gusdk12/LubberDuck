@@ -12,7 +12,7 @@ INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
 
 -- 샘플 칵테일
 INSERT INTO ctt_menu (name, img_url, info, sequence) VALUES
-    ('Colver Club', '/img/menu/CloverClub.png', 'Dry shake ingredients to emulsify, add ice, shake and served straight up.', -1);
+    ('Clover Club', '/img/menu/CloverClub.png', 'Dry shake ingredients to emulsify, add ice, shake and served straight up.', -1);
 INSERT INTO ctt_menu (name, img_url, info, sequence) VALUES
     ('Americano', '/img/menu/Americano.png', 'Pour the Campari and vermouth over ice into glass, add a splash of soda water and garnish with half orange slice.', -1);
 INSERT INTO ctt_menu (name, img_url, info, sequence) VALUES
