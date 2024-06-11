@@ -1,7 +1,7 @@
-package com.lec.spring.service.menuplate;
+package com.lec.spring.service.menu;
 
-import com.lec.spring.domain.menuplate.Menu;
-import com.lec.spring.repository.menuplate.MenuRepository;
+import com.lec.spring.domain.menu.Menu;
+import com.lec.spring.repository.menu.MenuRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,11 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<Menu> list() {
         return menuRepository.findAll();
+    }
+
+    @Override
+    public List<Menu> sequenceList() {
+        return menuRepository.findAllSequenceMenu();
     }
 
     @Override

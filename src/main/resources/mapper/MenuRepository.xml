@@ -3,24 +3,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lec.spring.repository.menuplate.MenuRepository">
+<mapper namespace="com.lec.spring.repository.menu.MenuRepository">
 
     <sql id="SELECT_BASE">
         SELECT
-            name "name"
+            id "id"
+             , name "name"
              , img_url "imgUrl"
              , info "info"
-        FROM ctt_menuplate
+             , price "price"
+             , sequence "sequence"
+        FROM ctt_menu
         WHERE 1 = 1
     </sql>
 
-    <select id="findByName" resultType="com.lec.spring.domain.menuplate.Menu">
+    <select id="findByName" resultType="com.lec.spring.domain.menu.Menu">
         <include refid="SELECT_BASE"/>
         AND id = #{id}
     </select>
 
-    <select id="findAll" resultType="com.lec.spring.domain.menuplate.Menu">
+    <select id="findAll" resultType="com.lec.spring.domain.menu.Menu">
         <include refid="SELECT_BASE"/>
+    </select>
+
+    <select id="findAllSequenceMenu" resultType="com.lec.spring.domain.menu.Menu">
+        <include refid="SELECT_BASE"/>
+        AND sequence NOT IN(-1)
+        ORDER BY sequence ASC
     </select>
 
 </mapper>

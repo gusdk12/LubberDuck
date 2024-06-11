@@ -1,5 +1,4 @@
 
-DROP TABLE IF EXISTS ctt_user_authorities;
 DROP TABLE IF EXISTS ctt_user;
 DROP TABLE IF EXISTS ctt_authority;
-DROP TABLE IF EXISTS ctt_menuplate;
+DROP TABLE IF EXISTS ctt_menu;
