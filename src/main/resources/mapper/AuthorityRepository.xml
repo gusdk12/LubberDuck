@@ -16,13 +16,13 @@
             parameterType="com.lec.spring.domain.User"
             resultType="com.lec.spring.domain.Authority">
         SELECT a.id "id", a.name "name"
-        FROM ctt_authority a, ctt_user_authorities u
-        WHERE a.id = u.authority_id AND u.user_id = #{id};
+        FROM ctt_authority a, ctt_user u
+        WHERE a.id = u.authority_id AND u.id = #{id};
     </select>
 
     <insert id="addAuthority" flushCache="true">
-        INSERT INTO ctt_user_authorities(user_id, authority_id)
-        VALUES(#{param1}, #{param2})
+        UPDATE ctt_user SET authority_id = #{param2}
+        WHERE id = #{param1}
     </insert>
 
 </mapper>

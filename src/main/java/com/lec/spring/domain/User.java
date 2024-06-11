@@ -3,6 +3,7 @@ package com.lec.spring.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,9 +20,12 @@ public class User {
     @JsonIgnore
     private String re_password; // 비밀번호 확인 입력
 
-    private String name; // 회원 이름
+    private String nickname; // 회원 닉네임
     private String email; // 이메일
+    private LocalDate birth_date;
 
     @JsonIgnore
     private LocalDateTime regDate;
+
+    private Integer authority_id;
 }
