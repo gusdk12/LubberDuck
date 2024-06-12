@@ -30,7 +30,7 @@ public class ChatService {
 
     public String getResponse(String prompt) {
 
-        List<Menu> menuList = menuService.list();
+        List<Menu> menuList = menuService.sequenceList();
         ArrayList<String> menus = new ArrayList<>();
         for(Menu menu : menuList){
             menus.add(menu.getName());
