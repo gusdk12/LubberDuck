@@ -33,4 +33,15 @@ public class UserController {
     public String rejectAuth() {
         return "common/rejectAuth";
     }
+
+
+    @RequestMapping("/registerChoice")
+    public void registerChoice(){
+
+    }
+
+    @RequestMapping("/register")
+    public void register(){
+
+    }
 }

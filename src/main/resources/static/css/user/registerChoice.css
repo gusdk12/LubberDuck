@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #10573e;
+    caret-color: transparent;
+    overflow-x: hidden;
+}
+
+#mainContent{
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#menuText{
+    font-family: "Meddon", cursive;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 50px;
+    position: absolute;
+    top: 120px;
+    color: #f8e9d7;
+    transform: skewY(-20deg);
+}
+
+.container {
+    position: relative;
+    top: 40px;
+    display: flex;
+    width: 100%;
+}
+
+
+
+.customer{
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: 150px;
+
+    text-align: center;
+    height: 00px;
+    color: #f8e9d7;
+    font-weight: bolder;
+
+}
+
+.border{
+    border-right: 3px solid #f8e9d7;
+}
+.manager{
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: 150px;
+
+    text-align: center;
+    height: 00px;
+    color: #f8e9d7;
+    font-weight: bolder;
+}
+
+.customer_button, .manager_button {
+    margin-top: 15px;
+    width: 250px;
+    height: 40px;
+    border: none;
+    padding: 3px;
+    background-color: #f8e9d7;
+    color: #444444;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#decoContent{
+    left: 5%;
+    top: 5%;
+    position: relative;
+    z-index: -1;
+}
+
+.deco{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 400px;
+    height: 400px;
+}
+
+#flower_register{
+    /* background-image: url('img/flower_register.png'); */
+    opacity: 0.7;
+    z-index: -1;
+}
+
+
