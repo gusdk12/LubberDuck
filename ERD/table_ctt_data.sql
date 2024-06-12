@@ -9,6 +9,9 @@ INSERT INTO ctt_authority (name) VALUES
 INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
       ('MANAGER1', '$2a$10$ZYPlIVx3aQED1LRGb1vrNeSezD3.rARxjmOYeBksGf0bC0dAzBIzy', '사장님1', 'manager1@mail.com', 2)
 ;
+INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
+    ('USER1', '$2a$10$ZYPlIVx3aQED1LRGb1vrNeSezD3.rARxjmOYeBksGf0bC0dAzBIzy', '손님1', 'user1@mail.com', 1)
+;
 
 -- 샘플 칵테일
 INSERT INTO ctt_menu (name, img_url, info, sequence) VALUES

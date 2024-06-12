@@ -86,13 +86,22 @@ function openMenu() {
 }
 
 window.addEventListener('scroll', function() {
+    var decoMain = document.getElementById("decoContent");
     var leftup = document.getElementById("leftup");
     var rightup = document.getElementById("rightup");
     var leftdown = document.getElementById("leftdown");
     var rightdown = document.getElementById("rightdown");
     const scrollPosition = window.scrollY;
 
-    if (scrollPosition > 0) {
+    if (scrollPosition < 200) {
+        decoMain.style.position = 'absolute';
+        decoMain.style.top = 200 + 'px';
+    } else {
+        decoMain.style.position = 'fixed';
+        decoMain.style.top = '0px';
+    }
+
+    if (scrollPosition > 200) {
         leftup.style.left = '-30%';
         rightup.style.right = '-25%';
         leftdown.style.left = '-30%';
