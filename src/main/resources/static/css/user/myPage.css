@@ -1,0 +1,68 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-size:14px;
+    background-color: #10573e;
+    line-height: 1.5em;
+    color :  black;
+    margin: 0;
+}
+.container{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.member{
+    width: 400px;
+    margin: auto;
+    padding: 5px 20px;
+    background-color: white;
+    overflow: auto;
+}
+
+.member .logo{
+    display: block;
+    margin :50px auto;
+    /* border: 3px solid red; */
+}
+
+.member .field{
+    margin :20px 0;
+}
+
+
+.member input:not(input[type=text]),.member select{
+    border: 1px solid #dadada;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 5px;
+
+}
+
+.member input[type=text]{
+    padding: 15px;
+    width: 100%;
+}
+
+.submit{
+    background-color: #10573e;
+    color: #f8e9d7;
+    float:right;
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.field.birth div{
+    display: flex;
+    gap:10px;
+}
+
+
+.nickname{
+    font-size: 18px;
+}
