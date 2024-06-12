@@ -10,7 +10,8 @@ body{
     margin: 0;
 }
 .container{
-    margin-top: 100px;
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
 .member{
     width: 400px;

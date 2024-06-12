@@ -22,16 +22,16 @@ body {
     font-style: normal;
     font-size: 50px;
     position: absolute;
-    top: 150px;
+    top: 100px;
     color: #f8e9d7;
     transform: skewY(-20deg);
 }
 
 .container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 120px;
     height: 100px;
 }
 
@@ -39,12 +39,11 @@ body {
 .customer, .manager{
     width: 250px;
     text-align: center;
-    margin: 0 20px; /* 좌우 여백 조절 */
+    margin: 0 50px; /* 좌우 여백 조절 */
     max-width: 1300px;
-    height: 00px;
+    height: 200px;
     color: #f8e9d7;
     font-weight: bolder;
-
 }
 
 .button-like {
@@ -62,7 +61,9 @@ body {
     transition: background-color 0.3s;
 }
 
-
+.button-like:hover {
+    background-color: #e0d4c3;
+}
 
 
 .container::before {
@@ -70,8 +71,8 @@ body {
     position: absolute;
     top: 350px;
     left: 50%;
-    width: 3px; /* 세로선 너비 */
-    height: 30%;
+    width: 1px; /* 세로선 너비 */
+    height: 40%;
     background-color:  #f8e9d7; /* 세로선 색상 */
     transform: translateX(-50%);
     z-index: -1;
