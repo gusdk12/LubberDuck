@@ -40,8 +40,13 @@ public class UserController {
 
     }
 
-    @RequestMapping("/register")
-    public void register(){
+    @RequestMapping("/registerCustomer")
+    public void registerCustomer(){
+
+    }
+
+    @RequestMapping("/registerManager")
+    public void registerManager(){
 
     }
 }
