@@ -1,0 +1,281 @@
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    background-color: #10573e;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1300px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 100px;
+}
+
+.receipt {
+    padding: 20px;
+    width: 400px;
+    border: 1px solid #ccc;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 50px;
+}
+
+.receipt .background {
+    position: absolute;
+    width: 110%;
+    height: 130%;
+    top: -17%;
+    left: -5%;
+    z-index: 1;
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.receipt .content {
+    position: relative;
+    z-index: 2;
+}
+
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.dashed {
+    border-top: 1.5px dashed #00000060;
+    margin: 10px 0px;
+}
+
+.shopname {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.date-time {
+    font-size: 14px;
+    text-align: right;
+}
+
+.order-nm {
+    text-align: left;
+    font-size: 13px;
+    color: #979797;
+
+}
+
+.name {
+    font-size: 18px;
+}
+
+.item-header {
+    /*display: flex;*/
+    justify-content: space-between;
+    font-size: 13px;
+
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+}
+
+.menuName {
+    text-align: left;
+}
+
+.review {
+    text-align: right;
+}
+
+.items .item {
+    /*display: flex;*/
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    /*white-space: nowrap;*/
+    margin: 3px;
+
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+}
+
+.item-name {
+    float: left;
+    text-align: left;
+}
+
+.item-price {
+    text-align: center;
+}
+
+[name="reviewBtn"] {
+    background-color: white;
+    border: 1px solid rgb(211, 211, 211);
+    font-weight: 500;
+    float: right;
+}
+
+[name="reviewBtn"]:hover {
+    background-color: rgb(131, 187, 131);
+    color: black;
+    border: n;
+}
+
+[name="reviewBtn"]:active {
+    background-color: rgb(107, 161, 107);
+}
+
+[name="showBtn"] {
+    background-color: rgb(229, 247, 233);
+    border: 1px solid rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
+    float: right;
+}
+
+.totals {
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.total-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#consultation-form {
+    width: 380px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f6f6f6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(243, 243, 243);
+}
+
+.form-group label {
+    margin-top: 7px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    justify-items: center;
+}
+
+input[type="text"],
+textarea {
+    width: 78%;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+
+.form-left {
+    float: left;
+    font-size: 12px;
+}
+
+input[type="text"] {
+    float: right;
+    background-color: rgb(237, 237, 237);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+    float: right;
+}
+
+#submit_btn {
+    padding: 12px 20px;
+    background-color: #10573e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    font-weight: 500;
+}
+
+#submit_btn:hover {
+    background-color: #468969;
+}
+
+#consultation-form hr {
+    border: none;
+    height: 1px;
+    background-color: #dbdbdb;
+    width: 100%;
+}
+
+.footer {
+    margin-top: 20px;
+}
+
+#star_rate{
+    display: block;
+    align-items: center;
+    margin-left: 63px;
+    direction: rtl;
+}
+
+/*찬별*/
+.rating > input:checked ~ label, .rating > input:checked ~ label:before {
+    background-image: url('/img/review/yellow_star.png');
+    background-size: contain;
+    width: 30px;
+    height: 29px;
+    margin: 0 0;
+    margin-bottom: 2px;
+}
+
+/*빈별*/
+.rating > label {
+    display: inline-block;
+    cursor: pointer;
+    background-image: url('/img/review/grey_star.png');
+    background-size: contain;
+    width: 30px;
+    height: 29px;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    margin: 0 0;
+    margin-bottom: 2px;
+}
+
+.rating > input[type="radio"] {
+    display: none;
+}
+
+textarea#content {
+    background-color: white;
+    height: 150px;
+    text-overflow: inherit;
+    resize: none;
+}
+
+.rating-group {
+    display: flex;
+    align-items: center;
+}

@@ -33,4 +33,5 @@ public class UserController {
     public String rejectAuth() {
         return "common/rejectAuth";
     }
+
 }
