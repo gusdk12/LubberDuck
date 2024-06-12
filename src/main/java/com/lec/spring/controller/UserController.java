@@ -49,4 +49,9 @@ public class UserController {
     public void registerManager(){
 
     }
+
+    @RequestMapping("/myPage")
+    public void myPage(){
+
+    }
 }
