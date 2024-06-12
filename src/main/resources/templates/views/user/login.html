@@ -13,46 +13,60 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
 
-    <title>Menu List</title>
+    <title>Login</title>
 </head>
-<section id="decoContent">
-    <div class="deco" id="leftup"></div>
-    <div class="deco" id="rightup"></div>
-    <div class="deco" id="leftdown"></div>
-    <div class="deco" id="rightdown"></div>
-</section>
-
 <body>
+
+
 <section id="mainContent">
     <div id="menuText">Lubber<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bar</div>
 </section>
 
-<div>
-    <form th:action="@{/user/login}" method="POST">
-        <h1 class="">로그인 하세요</h1>
-        <div class="">
+
+<div class="mainform">
+    <section id="decoContent">
+        <div class="deco" id="flower_login"></div>
+    </section>
+
+
+    <form th:action="@{/user/login}" method="POST" class="textform">
+        <h1 class="text1">Login</h1>
+        <div class="errorMSG">
             <div class="" th:text="${errorMessage}">
-                <!-- 에러 메세지 -->
+
             </div>
         </div>
-        <div>
-            <input type="text" class="form-control" name="username" id="username" th:value="${username}" placeholder="name@example.com" required>
+        <div class="id">
             <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" id="username" th:value="${username}" placeholder="name" required>
+
         </div>
-        <div>
-            <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
+        <div class="pw">
             <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
+
         </div>
 
-        <div>
-<!--            <label>-->
-<!--                <input type="checkbox" value="remember-me"> Remember me-->
-<!--            </label>-->
-        </div>
-        <button class="" type="submit">로그인</button><br>
-        <a class="" th:href="@{/user/register}">회원가입</a>
+        <button class="submit" type="submit">로그인</button><br>
+
+        <a class="register" th:href="@{/user/registerChoice}" onclick="toggleUserPanel()">회원가입</a>
+
     </form>
 </div>
+
+<script>
+    function toggleUserPanel() {
+        var userPanel = document.getElementById("userPanel");
+        if (userPanel.style.display === "none") {
+            userPanel.style.display = "block";
+        } else {
+            userPanel.style.display = "none";
+        }
+    }
+    function closePanel() {
+        document.getElementById('userPanel').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>

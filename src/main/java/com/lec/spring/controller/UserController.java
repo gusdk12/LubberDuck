@@ -34,4 +34,19 @@ public class UserController {
         return "common/rejectAuth";
     }
 
+
+    @RequestMapping("/registerChoice")
+    public void registerChoice(){
+
+    }
+
+    @RequestMapping("/registerCustomer")
+    public void registerCustomer(){
+
+    }
+
+    @RequestMapping("/registerManager")
+    public void registerManager(){
+
+    }
 }
