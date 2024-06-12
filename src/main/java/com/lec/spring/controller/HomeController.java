@@ -2,24 +2,33 @@ package com.lec.spring.controller;
 
 import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.User;
+import com.lec.spring.service.menu.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
+
+    @Autowired
+    private MenuService menuService;
+
     @RequestMapping("/")
-    public String home(Model model){
+    public String homeBasic(Model model){
         return "redirect:/home";
     }
 
-    @RequestMapping("/home")
-    public void home(){}
+    @GetMapping("/home")
+    public void home(Model model){
+        model.addAttribute("menuList", menuService.sequenceList());
+    }
 
     //-------------------------------------------------------------------------
     // 현재 Authentication 보기 (디버깅 등 용도로 활용)

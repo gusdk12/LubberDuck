@@ -11,12 +11,13 @@ body {
 #decoContent{
     position: fixed;
     left: 0px;
-    top: 0px;
+    top: 200px;
     width: 100vw;
     height: 100vh;
     z-index: 100;
     pointer-events: none; /* 부모의 이벤트 무시 */
 }
+
 .deco{
     background-size: contain;
     background-repeat: no-repeat;
@@ -53,7 +54,7 @@ body {
 #mainContent{
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 150vh;
     /*background-color: lightblue; !* 원하는 배경색 *!*/
     display: flex;
     justify-content: center;
@@ -67,8 +68,7 @@ body {
     color: #f8e9d7;
     transform: skewY(-20deg); /* Adjust the skew angle */
     position: absolute;
-    /*left: 40%;*/
-    /*top: 50%;*/
+    top: 30%;
 }
 
 /*------------------------------------------- menu */
