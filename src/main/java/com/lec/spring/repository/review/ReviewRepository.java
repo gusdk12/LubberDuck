@@ -1,6 +1,6 @@
-package com.lec.spring.repository;
+package com.lec.spring.repository.review;
 
-import com.lec.spring.domain.Review;
+import com.lec.spring.domain.review.Review;
 
 import java.util.List;
 

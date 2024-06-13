@@ -1,7 +1,7 @@
-package com.lec.spring.controller;
+package com.lec.spring.controller.review;
 
-import com.lec.spring.domain.Review;
-import com.lec.spring.service.ReviewService;
+import com.lec.spring.domain.review.Review;
+import com.lec.spring.service.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

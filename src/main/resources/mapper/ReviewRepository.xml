@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lec.spring.repository.ReviewRepository">
+<mapper namespace="com.lec.spring.repository.review.ReviewRepository">
 
     <insert id="save" flushCache="true"
-            parameterType="com.lec.spring.domain.Review"
+            parameterType="com.lec.spring.domain.review.Review"
             useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO ctt_review
             (item_id, content, rate, regdate)
@@ -26,24 +26,24 @@
             1 = 1
     </sql>
 
-    <select id="findAll" resultType="com.lec.spring.domain.Review">
+    <select id="findAll" resultType="com.lec.spring.domain.review.Review">
         <include refid="SELECT_BASE"/>
         ORDER BY id DESC
     </select>
 
-    <select id="findById" resultType="com.lec.spring.domain.Review">
+    <select id="findById" resultType="com.lec.spring.domain.review.Review">
         <include refid="SELECT_BASE"/>
         AND id = #{id}
     </select>
 
-    <update id="update" flushCache="true" parameterType="com.lec.spring.domain.Review">
+    <update id="update" flushCache="true" parameterType="com.lec.spring.domain.review.Review">
         UPDATE ctt_review
         SET item_id = #{item_id}, content=#{content} ,rate=#{rate}, regdate=#{regdate}
         WHERE id=#{id}
     </update>
 
     <delete id="delete" flushCache="true"
-            parameterType="com.lec.spring.domain.Review">
+            parameterType="com.lec.spring.domain.review.Review">
         DELETE FROM ctt_review WHERE id = #{id}
     </delete>
 
