@@ -22,11 +22,11 @@
                 <div class="headeruser">
                     <div sec:authorize="hasRole('CUSTOMER')" id="userIcon"></div>
                 </div>
-                <div><button sec:authorize="isAnonymous()" class="loginButton" th:onclick="|location.href='@{/user/login}'|">Login</button></div>
+                <div><button sec:authorize="isAnonymous()" class="headerButton" th:onclick="|location.href='@{/user/login}'|">Login</button></div>
 
                 <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
                 <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}">
-                    <div><button type="submit" class="logoutButton">Logout</button></div>
+                    <div><button type="submit" class="headerButton">Logout</button></div>
                 </form>
             </section>
 
