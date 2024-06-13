@@ -10,15 +10,8 @@ window.addEventListener('load', () => {
 
 function scrollToCenter(){
     const menuBody = document.querySelector('#menuBody');
-    const menuscroll = document.querySelector('#menuscroll');
 
-    menuBody.scrollLeft = (menuscroll.offsetWidth / 2) - 650;
-
-    menuBody.addEventListener('wheel', (event) => {
-        event.preventDefault();
-        const delta = event.deltaY || event.detail || event.wheelDelta;
-        menuBody.scrollLeft += (delta * 4);
-    });
+    menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 150;
 }
 
 function appendMenuToPlate(){
@@ -74,6 +67,9 @@ function appendMenuToPlate(){
     $menuPlate.css({ 'grid-template-columns': `${fr.trim()}` });
 }
 
+let isDragging = false;
+let startX;
+let scrollLeft;
 function openMenu() {
     var menu = document.getElementById("menu");
     menu.animate({ width: `${paperCount * 500}px` },
@@ -83,6 +79,30 @@ function openMenu() {
             easing: 'ease', // 가속도 종류
         }
     );
+
+    const menuBody = document.querySelector('#menuBody');
+
+    menuBody.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - menuBody.offsetLeft;
+        scrollLeft = menuBody.scrollLeft;
+    });
+
+    menuBody.addEventListener('mouseleave', () => {
+        isDragging = false;
+    });
+
+    menuBody.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+
+    menuBody.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - menuBody.offsetLeft;
+        const walk = x - startX;
+        menuBody.scrollLeft = scrollLeft - walk;
+    });
 }
 
 window.addEventListener('scroll', function() {

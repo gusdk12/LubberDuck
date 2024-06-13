@@ -5,6 +5,11 @@ body {
     margin-bottom: 1000px;
     caret-color: transparent;
     overflow-x: hidden;
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 /*------------------------------------------- main */
@@ -78,16 +83,16 @@ body {
 }
 #menuBody{
     height: 1000px;
-    max-width: 1300px;  /* 최대 폭 지정 */
+    /*max-width: 1300px;  !* 최대 폭 지정 *!*/
     margin-left: auto;
     margin-right: auto;
     /*background-color: #9eb0c5;*/
     overflow-x: hidden;
     overflow-y: hidden;
-    scroll-behavior: smooth; /* Enable smooth scrolling */
-    background-color: #1b654b;
-    box-shadow: inset -10px 0 10px -5px rgba(0, 0, 0, 0.5), /* 왼쪽 그림자 */
-                inset 10px 0 10px -5px rgba(0, 0, 0, 0.5);  /* 오른쪽 그림자 */
+    /*scroll-behavior: smooth; !* Enable smooth scrolling *!*/
+    background-color: rgba(27, 101, 75, 0);
+    /*box-shadow: inset -10px 0 10px -5px rgba(0, 0, 0, 0.5), !* 왼쪽 그림자 *!*/
+    /*            inset 10px 0 10px -5px rgba(0, 0, 0, 0.5);  !* 오른쪽 그림자 *!*/
 }
 
 #menuscroll{
