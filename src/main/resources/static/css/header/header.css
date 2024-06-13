@@ -1,8 +1,17 @@
 
 .topnav {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     overflow: visible;
-    /*background-color: #72513f;*/
+    /*background-color: #EADBC8;*/
+    /*background-color: #F9EDD4;*/
+    /*background: linear-gradient(to right,*/
+    /*    rgba(0, 0, 0, 0) 0%,*/
+    /*    #F9EDD4 20%,*/
+    /*    #F9EDD4 40%,*/
+    /*    #F9EDD4 60%,*/
+    /*    #F9EDD4 80%,*/
+    /*    rgba(0, 0, 0, 0) 100%);*/
+
     height: 90px;
     max-width: 1300px;  /* 최대 폭 지정 */
     margin-left: auto;
@@ -13,6 +22,8 @@
 
     display: flex;
     justify-content: space-between;
+
+    /*border-bottom: 1px solid #f8e9d7;*/
 }
 
 section {
@@ -68,7 +79,6 @@ a {
     color: #f8e9d7;
     text-align: center;
     text-decoration: none;
-    padding: 14px;
     display: block;
 
     font-family: "League Gothic", sans-serif;
@@ -92,19 +102,21 @@ button{
     background-repeat: no-repeat;
     background-position: 50%;
     background-color: rgba(255, 255, 255, 0);
-    color: #f8e9d7;
+    color: #10573e;
     border: none;
     width: 100px;
     height: 100%;
 
     text-align: center;
-    padding: 14px;
+    padding: 28px;
     display: block;
 
     font-family: "League Gothic", sans-serif;
-    font-size: 23px;
+    font-size: 20px;
     font-weight: 400;
     font-style: normal;
+
+    background-color: #EADBC8;
 }
 button:hover {
     background-color: #ffdcd9;
