@@ -109,7 +109,7 @@ body {
 }
 
 .register {
-    margin-top: 15px;
+    margin-top: 20px;
     display: block;
     text-align: center;
     color: lightgray;
@@ -129,17 +129,21 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2px;
 }
 
 label[for="username"], label[for="password"] {
     font-size: 13px;
 }
 
+.btn-container {
+    text-align: center;
+}
+
 .btn{
-    background-color: #979797;
     position: relative;
-    margin: 0;
+    align-items: center;
+    margin-top: -20px;
+    margin-bottom: -10px;
 }
 
 img{
