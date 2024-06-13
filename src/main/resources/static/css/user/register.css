@@ -1,8 +1,14 @@
 *{
     box-sizing: border-box;
 }
-
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body{
+    font-family: 'GmarketSansMedium';
     font-size:14px;
     background-color: #10573e;
     line-height: 1.5em;
@@ -31,6 +37,7 @@ body{
 
 
 .member input:not(input[type=radio]),.member select{
+    font-family: 'GmarketSansMedium';
     border: 1px solid #dadada;
     padding: 15px;
     width: 100%;
