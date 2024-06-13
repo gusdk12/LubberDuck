@@ -1,0 +1,125 @@
+
+.topnav {
+    /*padding-top: 10px;*/
+    overflow: visible;
+    /*background-color: #EADBC8;*/
+    /*background-color: #F9EDD4;*/
+    /*background: linear-gradient(to right,*/
+    /*    rgba(0, 0, 0, 0) 0%,*/
+    /*    #F9EDD4 20%,*/
+    /*    #F9EDD4 40%,*/
+    /*    #F9EDD4 60%,*/
+    /*    #F9EDD4 80%,*/
+    /*    rgba(0, 0, 0, 0) 100%);*/
+
+    height: 90px;
+    max-width: 1300px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    display: flex;
+    justify-content: space-between;
+
+    /*border-bottom: 1px solid #f8e9d7;*/
+}
+
+section {
+    flex-basis: 150px;
+}
+
+.headermenu{
+    position: absolute;
+    /*background-color: #a2ff4b;*/
+    width: 70px;
+    height: 70px;
+    padding: 20px;
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+#menuIcon{
+    background-image: url('/img/header/menuIcon.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    filter: invert(100%) sepia(5%) saturate(4714%) hue-rotate(305deg) brightness(95%) contrast(108%);
+}
+.headeruser{
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    position: relative;
+    margin-right: 10px;
+}
+#userIcon{
+    background-image: url('/img/header/userIcon.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    filter: invert(100%) sepia(5%) saturate(4714%) hue-rotate(305deg) brightness(95%) contrast(108%);
+}
+
+#headerlogo{
+    padding: 10px;
+}
+.headerlogo{
+    background-image: url('/img/header/logo.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+a {
+    color: #f8e9d7;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+
+    font-family: "League Gothic", sans-serif;
+    font-size: 23px;
+    font-weight: 400;
+    font-style: normal;
+    height: 100%;
+}
+
+
+#headeruser{
+    display: flex;
+    align-items: center;
+}
+#login{
+    background-color: #DAC0A3;
+    /*margin-left: auto;*/
+}
+button{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-color: rgba(255, 255, 255, 0);
+    color: #10573e;
+    border: none;
+    width: 100px;
+    height: 100%;
+
+    text-align: center;
+    padding: 28px;
+    display: block;
+
+    font-family: "League Gothic", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+
+    background-color: #EADBC8;
+}
+button:hover {
+    background-color: #ffdcd9;
+    color: #512C1C;
+}
+
