@@ -54,4 +54,8 @@ public class UserController {
     public void myPage(){
 
     }
+
+    @RequestMapping("/myPageUpdate")
+    public void myPageUpdate(){}
+
 }

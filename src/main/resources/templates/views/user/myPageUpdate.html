@@ -13,7 +13,7 @@
     <form>
     <div class="member">
         <div class="logo">
-            <h1>내 정보</h1>
+            <h1>정보 수정</h1>
         </div>
 
 
@@ -30,19 +30,20 @@
 
         <div class="field">
             <b>이름</b>
-            <input type="text" required disabled>
+            <input type="text" required>
         </div>
 
         <div class="field">
             <b>이메일</b>
-            <input type="email" placeholder="email" required disabled>
+            <input type="email" placeholder="email" required>
         </div>
+
 
         <div class="field birth">
             <b>생년월일</b>
             <div>
-                <input type="number" placeholder="년(yyyy)" required disabled>
-                <select disabled>
+                <input type="number" placeholder="년(yyyy)" required>
+                <select>
                     <option value="">월</option>
                     <option value="">1월</option>
                     <option value="">2월</option>
@@ -57,11 +58,12 @@
                     <option value="">11월</option>
                     <option value="">12월</option>
                 </select>
-                <input type="number" placeholder="일(dd)" required disabled>
+                <input type="number" placeholder="일(dd)" required>
             </div>
         </div>
 
-        <button class="submit" type="button" onclick="location.href='/user/myPageUpdate'">정보 수정</button>
+
+        <button class="submit" type="button" onclick="location.href='/user/myPage'">수정 완료</button>
 
     </div>
     </form>

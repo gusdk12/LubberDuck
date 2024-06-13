@@ -76,9 +76,9 @@ body {
 }
 
 .text1{
-    font-weight: 400;
+    /*font-weight: bold;*/
     font-style: normal;
-    font-size: 40px;
+    font-size: 30px;
     color: #f8e9d7;
     text-align: center;
     z-index: 1;
@@ -97,7 +97,7 @@ body {
     margin-top: 15px;
     width: 200px;
     border: none;
-    padding: 10px;
+    padding: 8px;
     background-color: #f8e9d7;
     color: #444444;
     border-radius: 5px;
