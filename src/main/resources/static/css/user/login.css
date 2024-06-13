@@ -76,7 +76,6 @@ body {
 }
 
 .text1{
-    /* font-family: "Meddon", cursive; */
     font-weight: 400;
     font-style: normal;
     font-size: 40px;
@@ -87,7 +86,7 @@ body {
 
 .id, .pw{
     color: lightgray;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
 }
 
 .form-control{
@@ -96,7 +95,7 @@ body {
 
 .submit {
     margin-top: 15px;
-    width: 100%;
+    width: 200px;
     border: none;
     padding: 10px;
     background-color: #f8e9d7;
@@ -105,7 +104,6 @@ body {
     cursor: pointer;
     font-size: 13px;
     font-weight: bolder;
-    /*margin-bottom: 10px;*/
 }
 
 .register {
@@ -129,6 +127,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 300px;
 }
 
 label[for="username"], label[for="password"] {
@@ -148,4 +147,13 @@ label[for="username"], label[for="password"] {
 
 img{
     object-fit: contain;
+}
+
+.errorMSG {
+    max-height: 70px; /* 고정된 최대 높이 설정 */
+    overflow-y: auto; /* 내용이 넘칠 때 스크롤바 표시 */
+    color: red; /* 오류 메시지 색상 설정 */
+    width: 250px; /* 오류 메시지 영역의 너비 고정 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    word-wrap: break-word; /* 긴 단어 줄바꿈 */
 }
