@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-.all {
-    max-width: 1200px;  /* 최대 폭 지정 */
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .article {
     display: flex;
     justify-content: center;
