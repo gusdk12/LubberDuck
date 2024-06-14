@@ -5,6 +5,9 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -27,5 +30,9 @@ public class User {
     @JsonIgnore
     private LocalDateTime regDate;
 
-    private Integer authority_id;
+    //@Singular
+    @ToString.Exclude
+    private Long authority_id;
+    //@EqualsAndHashCode.Exclude
+    //private Set<Authority> authorities = new HashSet<>(); // 권한 목록
 }

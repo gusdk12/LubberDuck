@@ -16,6 +16,10 @@ INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
     ('USER2', '$2a$10$ZYPlIVx3aQED1LRGb1vrNeSezD3.rARxjmOYeBksGf0bC0dAzBIzy', '손님2', 'user2@mail.com', 1)
 ;
 
+INSERT INTO ctt_user (username, password, nickname, email, birth_date, authority_id) VALUES
+    ('USER3', '$2a$10$ZYPlIVx3aQED1LRGb1vrNeSezD3.rARxjmOYeBksGf0bC0dAzBIzy', '손님3', 'user3@mail.com', '1997-01-01', 1)
+;
+
 
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
     (2, 3, 1)
