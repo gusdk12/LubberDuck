@@ -1,17 +1,50 @@
 *{
     box-sizing: border-box;
 }
-
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body{
+    font-family: 'GmarketSansMedium';
     font-size:14px;
     background-color: #10573e;
     line-height: 1.5em;
     color :  black;
     margin: 0;
+    position: relative;
 }
+#decoContent{
+    top: 380px;
+    left: 920px;
+    z-index: 1;
+    position: absolute;
+}
+
+.deco{
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    animation: shakeX 5s infinite ease-in-out;
+}
+
+#pen{
+    background-image: url('/img/user/pen.png');
+    left: 20%;
+    top: 50%;
+    opacity: 0.9;
+    z-index: -1;
+}
+
+
 .container{
     margin-top: 50px;
     margin-bottom: 40px;
+    position: relative;
 }
 .member{
     width: 400px;
@@ -31,6 +64,7 @@ body{
 
 
 .member input:not(input[type=radio]),.member select{
+    font-family: 'GmarketSansMedium';
     border: 1px solid #dadada;
     padding: 15px;
     width: 100%;
@@ -53,3 +87,12 @@ body{
         width: 100%;
     }
 }
+
+/*@keyframes shakeX {*/
+/*    0%, 100% {*/
+/*        transform: translateX(0);*/
+/*    }*/
+/*    50% {*/
+/*        transform: translateX(30px);*/
+/*    }*/
+/*}*/
