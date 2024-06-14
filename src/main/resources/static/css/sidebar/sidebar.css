@@ -17,7 +17,7 @@ body {
     float: left;
     position: sticky;
     width: 20%;
-    height: 100vh;
+    height: 700px;
 
     text-align: center;
 
@@ -48,6 +48,6 @@ body {
     height: 100vh;
     float: left;
 
-    background-color: #f8e9d7;
+    background-color: #fff6ec;
     border-radius: 10px;
 }

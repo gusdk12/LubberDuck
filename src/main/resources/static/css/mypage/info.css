@@ -17,17 +17,21 @@ body{
 }
 .container{
     margin-top: 20px;
+    width: 550px;
     /*margin-bottom: 100px;*/
-    margin-left: -50px;
+    /*margin-left: -50px;*/
+    /*background-color: #ffdcd9;*/
 }
 
 .member{
-    width: 400px;
+    /*width: 400px;*/
+    width: 100%;
     margin: auto;
     padding: 5px 20px;
-    background-color: floralwhite;
+    /*background-color: floralwhite;*/
     overflow: auto;
     border-radius: 6px;
+    float: left;
 }
 
 .member .logo{
@@ -40,6 +44,9 @@ body{
     margin :20px 0;
 }
 
+input{
+    background-color: #ffffff;
+}
 
 .member input:not(input[type=text]),.member select{
     font-family: 'GmarketSansMedium';
@@ -58,7 +65,8 @@ body{
 .submit{
     font-family: 'GmarketSansMedium';
     background-color: #10573e;
-    color: #f8e9d7;
+    /*color: #f8e9d7;*/
+    color: floralwhite;
     float:right;
     margin-left: 10px;
     padding: 10px;
@@ -75,4 +83,9 @@ body{
 
 .nickname{
     font-size: 18px;
+}
+
+.article {
+    /*width: 80%;*/
+    height: 690px;
 }
