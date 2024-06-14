@@ -60,7 +60,7 @@
         <th:block th:with="logged_user=${#authentication.principal.user}">
             <section id="customer">
                 <div id="cutomerButtons">
-                    <div id="buttonsbackground"></div>
+                    <img id="buttonsbackground">
                     <div id="exit" class="hidden"></div>
                     <div id="chat"></div>
                     <div id="board"></div>
@@ -69,7 +69,6 @@
                     <div id="carttotal" class="hidden"></div>
                 </div>
             </section>
-
             <script th:inline="javascript">
                 const logged_id = [[${logged_user.id}]]
             </script>

@@ -30,6 +30,25 @@ function addToCart(cocktailName) {
     // });
 }
 
+function findItemInCart(cocktailName){
+    $.ajax({
+        url: "/cart/detail/" + user_id + "/" + cocktailName,
+        type: "GET",
+        cache: false,
+        success: function (data, status) {
+            if (status == "success") {
+                // 서버쪽 에러 메세지 있는경우
+                if (data.status !== "OK") {
+                    alert("실패");
+                    alert(data.status);
+                    return;
+                }
+
+                buildCart(data);
+            }
+        },
+    });
+}
 
 // 특정 글(post_id) 의 댓글 목록 읽어오기
 async function loadCart(user_id) {
@@ -47,13 +66,6 @@ async function loadCart(user_id) {
                 }
 
                 buildCart(data);
-
-                // let list = [];
-                // data.data.forEach(item => {
-                //     // alert("유저이름" + item.user.username + "칵테일이름" + item.menu.name + "수량" + item.quantity);
-                //     list.push(item)
-                // });
-                // return list;
             }
         },
     });
@@ -83,4 +95,24 @@ function buildCart(cart){
                 <div id="cartline"></div>
             `);
     document.querySelector(`#carttotal`).textContent = `Total ${totalPrice} ￦`;
+
+
+    // for(let i = 0; i < 5; i++){
+    //     $('#cartcontent').append(`
+    //             <div id="cartline"></div>
+    //             <div id="cartbox">
+    //                 <div id="cartitemimg" style="background-image: url('/img/menu/Eggnog.png')"></div>
+    //                 <div id="cartiteminfo">
+    //                     <div id="cartitemname">Eggnog</div>
+    //                     <div id="cartitemquantity">수량 : 2</div>
+    //                     <div id="cartitemprice">5000￦</div>
+    //                 </div>
+    //             </div>
+    //         `);
+    // }
+    //
+    // $('#cartcontent').append(`
+    //             <div id="cartline"></div>
+    //         `);
+    // document.querySelector(`#carttotal`).textContent = `Total 10000 ￦`;
 }

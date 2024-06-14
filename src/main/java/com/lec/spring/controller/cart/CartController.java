@@ -1,5 +1,6 @@
 package com.lec.spring.controller.cart;
 
+import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.cart.Cart;
 import com.lec.spring.domain.cart.QryCartList;
 import com.lec.spring.service.cart.CartService;
@@ -23,5 +24,12 @@ public class CartController {
 
         return list;
     }
+
+//    @GetMapping("/detail/{userId}/{cocktailId}")
+//    public QryResult detail(@PathVariable Long userId, @PathVariable Long cocktailId){
+//        QryResult item = cartService.list(userId);
+//
+//        return item;
+//    }
 
 }
