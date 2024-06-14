@@ -3,11 +3,24 @@ var paperCount = 0;
 
 window.addEventListener('load', () => {
 
+    preloadImages();
     scrollToCenter();
     appendMenuToPlate();
     addEventCustomerButtons();
 
 });
+
+function preloadImages(){
+    // 미리 로드할 이미지 URL 목록
+    var images = [
+        '/img/management/menu.jpg'
+    ];
+
+    // 각 이미지 URL을 순회하며 로드
+    $.each(images, function(index, url) {
+        $('<img>').attr('src', url).addClass('hidden').appendTo('body');
+    });
+}
 
 function scrollToCenter(){
     const menuBody = document.querySelector('#menuBody');
@@ -186,16 +199,18 @@ function hideCartBox(){
     $('#cartcontent').addClass("hidden");
     $('#carttotal').addClass("hidden");
     $('#cutomerButtons').css({'width': '170px', 'height': '80px'});
+    $('#buttonsbackground').css({'content': 'none'});
     $('#cartcontent').empty();
 }
 function showCartBox(){
+    loadCart(logged_id);
     $('#chat').addClass("hidden");
     $('#board').addClass("hidden");
     $('#exit').removeClass("hidden");
     $('#cutomerButtons').css({'width': '400px', 'height': '500px'});
+    $('#buttonsbackground').css({'content': 'url("/img/management/menu.jpg")'});
     $('#cartcontent').removeClass("hidden");
     $('#carttotal').removeClass("hidden");
-    loadCart(logged_id);
 }
 function hideChatBox(){
 

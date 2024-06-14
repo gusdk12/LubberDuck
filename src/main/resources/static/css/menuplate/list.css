@@ -288,25 +288,19 @@ body {
     border-radius: 5px;
     width: 100%;
     height: 100%;
-    /*content: url("/img/maindeco/label.png");*/
-    /*background-image: url('/img/maindeco/label.png');*/
-    /*background-size: contain;*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: center;*/
-    background-color: #79B4A3;
-    /*border: 1px solid #512C1C;*/
-    /*filter: invert(54%) sepia(80%) saturate(1485%) hue-rotate(321deg) brightness(93%) contrast(94%);*/
+    /*content: url("/img/management/menu.jpg");*/
+    background-color: #FEF9F3;
 }
 #cutomerButtons #exit{
     position: absolute;
-    margin: 10px;
+    margin: 30px;
     width: 25px;
     height: 25px;
     background-image: url('/img/common/exit.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    filter: invert(100%) sepia(30%) saturate(1254%) hue-rotate(296deg) brightness(102%) contrast(112%);
+    filter: invert(35%) sepia(3%) saturate(2314%) hue-rotate(314deg) brightness(89%) contrast(98%);
     right: 0px;
     top: 0px;
     z-index: 3;
@@ -319,7 +313,8 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    filter: invert(100%) sepia(30%) saturate(1254%) hue-rotate(296deg) brightness(102%) contrast(112%);
+    filter: invert(35%) sepia(3%) saturate(2314%) hue-rotate(314deg) brightness(89%) contrast(98%);
+    color: #604c4c;
 }
 #cutomerButtons #board{
     width: 48%;
@@ -329,17 +324,17 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    filter: invert(100%) sepia(30%) saturate(1254%) hue-rotate(296deg) brightness(102%) contrast(112%);
+    filter: invert(35%) sepia(3%) saturate(2314%) hue-rotate(314deg) brightness(89%) contrast(98%);
 }
 #cartcontent{
     position: absolute;
-    width: 90%;
-    height: 75%;
+    width: 85%;
+    height: 64%;
     /*background-color: #b1d2c9;*/
     border-radius: 5px;
     z-index: 1;
     overflow-y: scroll;
-    top: 40px;
+    top: 60px;
 }
 #cartcontent::-webkit-scrollbar {
     width: 5px; /* 스크롤바 너비 */
@@ -350,17 +345,20 @@ body {
     border-radius: 10px; /* 트랙 모서리 둥글게 */
 }
 #cartcontent::-webkit-scrollbar-thumb {
-    background: #fff5e4;
+    background: #604c4c;
     border-radius: 10px; /* 핸들 모서리 둥글게 */
 }
 #cartcontent::-webkit-scrollbar-thumb:hover {
-    background: #e8cfb1;
+    background: #422626;
 }
 #cartline{
-    width: 100%;
-    height: 2px;
-    background-color: #fff5e4;
+    width: 95%;
+    height: 1px;
+    background-color: #422626;
     margin-top: 7px;
+    border-radius: 50%;
+    position: relative;
+    left: 2%;
 }
 #cartbox{
     margin-left: 2.5%;
@@ -376,7 +374,7 @@ body {
 #cartitemimg{
     /*background-color: azure;*/
     width: 30%;
-    height: 90%;
+    height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -408,14 +406,14 @@ body {
 }
 #carttotal{
     /*background-color: darkkhaki;*/
-    bottom: 15px;
-    width: 90%;
+    bottom: 50px;
+    width: 85%;
     height: 13%;
     position: absolute;
     z-index: 1;
     text-align: end;
     align-content: center;
-    color: #fff5e4;
+    color: #422626;
     font-family: 'GmarketSansBold';
     font-size: 30px;
     padding-right: 20px;
