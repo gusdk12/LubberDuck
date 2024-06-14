@@ -19,7 +19,7 @@
     <resultMap id="mapMenu" type="com.lec.spring.domain.menu.Menu">
         <result column="m_id" property="id"/>
         <result column="m_name" property="name"/>
-        <result column="m_imgUrl" property="imgUrl"/>
+        <result column="m_img_url" property="imgUrl"/>
         <result column="m_info" property="info"/>
         <result column="m_price" property="price"/>
         <result column="m_sequence" property="sequence"/>
