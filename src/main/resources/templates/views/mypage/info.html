@@ -23,7 +23,64 @@
         <th:block th:insert="~{common/sidebar::sidebar}"></th:block>
 
         <div class="article">
-            <!-- 여기에 코드 넣어주세용~~ -->
+
+            <div class="container">
+            <form>
+                <div class="member">
+                    <div class="logo">
+                        <h1>내 정보</h1>
+                    </div>
+
+
+                    <div class="field">
+                        <b class="nickname">nickname</b> <b>님</b>
+                    </div>
+
+
+                    <div class="field">
+                        <b style="display: inline;">ID</b>
+                        <input type="text" disabled placeholder="userID">
+                    </div>
+
+
+                    <div class="field">
+                        <b>이름</b>
+                        <input type="text" required disabled>
+                    </div>
+
+                    <div class="field">
+                        <b>이메일</b>
+                        <input type="email" placeholder="email" required disabled>
+                    </div>
+
+                    <div class="field birth">
+                        <b>생년월일</b>
+                        <div>
+                            <input type="number" placeholder="년(yyyy)" required disabled>
+                            <select disabled>
+                                <option value="">월</option>
+                                <option value="">1월</option>
+                                <option value="">2월</option>
+                                <option value="">3월</option>
+                                <option value="">4월</option>
+                                <option value="">5월</option>
+                                <option value="">6월</option>
+                                <option value="">7월</option>
+                                <option value="">8월</option>
+                                <option value="">9월</option>
+                                <option value="">10월</option>
+                                <option value="">11월</option>
+                                <option value="">12월</option>
+                            </select>
+                            <input type="number" placeholder="일(dd)" required disabled>
+                        </div>
+                    </div>
+
+                    <button class="submit" type="button" onclick="location.href='/user/myPageUpdate'">정보 수정</button>
+
+                </div>
+            </form>
+            </div>
         </div>
     </div>
 

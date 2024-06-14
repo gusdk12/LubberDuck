@@ -50,10 +50,6 @@ public class UserController {
 
     }
 
-    @RequestMapping("/myPage")
-    public void myPage(){
-
-    }
 
     @RequestMapping("/myPageUpdate")
     public void myPageUpdate(){}

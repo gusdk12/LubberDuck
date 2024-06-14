@@ -20,7 +20,7 @@ body{
     top: 380px;
     left: 920px;
     z-index: 1;
-    position: absolute;
+    position: relative;
 }
 
 .deco{
@@ -29,12 +29,11 @@ body{
     width: 400px;
     height: 400px;
     position: absolute;
-    animation: shakeX 5s infinite ease-in-out;
 }
 
 #pen{
     background-image: url('/img/user/pen.png');
-    left: 20%;
+    left: 0%;
     top: 50%;
     opacity: 0.9;
     z-index: -1;
@@ -82,17 +81,9 @@ body{
 }
 
 
-@media (max-width:768px) {
+@media (max-width:1080px) {
     .member{
-        width: 100%;
+        width: 80%;
     }
 }
 
-/*@keyframes shakeX {*/
-/*    0%, 100% {*/
-/*        transform: translateX(0);*/
-/*    }*/
-/*    50% {*/
-/*        transform: translateX(30px);*/
-/*    }*/
-/*}*/
