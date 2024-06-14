@@ -22,7 +22,156 @@
         <th:block th:insert="~{common/sidebar::sidebar}"></th:block>
 
         <div class="article">
-            <!-- 여기에 코드 넣어주세용~~ -->
+            <div class="container">
+                <div class="receipt">
+                    <div class="background">
+                        <img th:src="@{/img/mypage/receipt.png}">
+                    </div>
+                    <div class="content">
+                        <h2 class="shopname">LubberDuck</h2>
+                        <div class="header-info">
+                            <p class="name">반짝반짝유신걸님</p>
+                            <p class="date-time">주문일시 : 2024-06-07 11:21</p>
+                        </div>
+                        <p class="order-nm">주문번호: 25623</p>
+                        <div class="dashed"></div>
+                        <div class="item-header">
+                            <span class="menuName">&lt;메뉴이름&gt;</span>
+                            <span class="quantity">&lt;주문수량&gt;</span>
+                            <span class="menuPrice">&lt;메뉴가격&gt;</span>
+                            <span class="review">&lt;리뷰작성&gt;</span>
+                        </div>
+                        <div class="dashed"></div>
+                        <div class="items">
+                            <div class="item">
+                                <span class="item-name">Daiquiri</span>
+                                <span class="quantity">1</span>
+                                <span class="item-price">8,900원</span>
+                                <span><input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='reviews.html'"></span>
+                            </div>
+                            <div class="item">
+                                <span class="item-name">Negroni</span>
+                                <span class="quantity">2</span>
+                                <span class="item-price">19,800원</span>
+                                <span><input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='reviews.html'"></span>
+                            </div>
+                            <div class="item">
+                                <span class="item-name">French Martini</span>
+                                <span class="quantity">1</span>
+                                <span class="item-price">9,900원</span>
+                                <span><input type="button" value="리뷰확인" name="showBtn" onclick="location.href='review_detail.html'"></span>
+                            </div>
+                        </div>
+                        <div class="dashed"></div>
+                        <div class="totals">
+                            <div class="total-item">
+                                <span class="total-label">TOTAL:</span>
+                                <span class="total-price">31,700원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="receipt">
+                    <div class="background">
+                        <img th:src="@{/img/mypage/receipt.png}">
+                    </div>
+                    <div class="content">
+                        <h2 class="shopname">LubberDuck</h2>
+                        <div class="header-info">
+                            <p class="name">반짝반짝유신걸님</p>
+                            <p class="date-time">주문일시 : 2024-06-07 11:21</p>
+                        </div>
+                        <p class="order-nm">주문번호: 25623</p>
+                        <div class="dashed"></div>
+                        <div class="item-header">
+                            <span class="menuName">&lt;메뉴이름&gt;</span>
+                            <span class="quantity">&lt;주문수량&gt;</span>
+                            <span class="menuPrice">&lt;메뉴가격&gt;</span>
+                            <span class="review">&lt;리뷰작성&gt;</span>
+                        </div>
+                        <div class="dashed"></div>
+                        <div class="items">
+                            <div class="item">
+                                <span class="item-name">Daiquiri</span>
+                                <span class="quantity">1</span>
+                                <span class="item-price">8,900원</span>
+                                <span><input type="button" value="리뷰작성" name="reviewBtn" href="#"></span>
+                            </div>
+                            <div class="item">
+                                <span class="item-name">Negroni</span>
+                                <span class="quantity">2</span>
+                                <span class="item-price">19,800원</span>
+                                <span><input type="button" value="리뷰작성" name="reviewBtn" href="#"></span>
+                            </div>
+                            <div class="item">
+                                <span class="item-name">French Martini</span>
+                                <span class="quantity">1</span>
+                                <span class="item-price">9,900원</span>
+                                <span><input type="button" value="리뷰확인" name="showBtn" href="#"></span>
+                            </div>
+                        </div>
+                        <div class="dashed"></div>
+                        <div class="totals">
+                            <div class="total-item">
+                                <span class="total-label">TOTAL:</span>
+                                <span class="total-price">31,700원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="receipt">
+                    <div class="background">
+                        <img th:src="@{/img/mypage/receipt.png}">
+                    </div>
+                    <div class="content">
+                        <h2 class="shopname">LubberDuck</h2>
+                        <div class="header-info">
+                            <p class="name">반짝반짝유신걸님</p>
+                            <p class="date-time">주문일시 : 2024-06-07 11:21</p>
+                        </div>
+                        <p class="order-nm">주문번호: 25623</p>
+                        <div class="dashed"></div>
+                        <div class="item-header">
+                            <span class="menuName">&lt;메뉴이름&gt;</span>
+                            <span class="quantity">&lt;주문수량&gt;</span>
+                            <span class="menuPrice">&lt;메뉴가격&gt;</span>
+                            <span class="review">&lt;리뷰작성&gt;</span>
+                        </div>
+                        <div class="dashed"></div>
+                        <div class="items">
+                            <div class="item">
+                                <span class="item-name">Daiquiri</span>
+                                <span class="quantity">1</span>
+                                <span class="item-price">8,900원</span>
+                                <span><input type="button" value="리뷰작성" name="reviewBtn" href="#"></span>
+                            </div>
+                            <div class="item">
+                                <span class="item-name">Negroni</span>
+                                <span class="quantity">2</span>
+                                <span class="item-price">19,800원</span>
+                                <span><input type="button" value="리뷰작성" name="reviewBtn" href="#"></span>
+                            </div>
+                            <div class="item">
+                                <span class="item-name">French Martini</span>
+                                <span class="quantity">1</span>
+                                <span class="item-price">9,900원</span>
+                                <span><input type="button" value="리뷰확인" name="showBtn" href="#"></span>
+                            </div>
+                        </div>
+                        <div class="dashed"></div>
+                        <div class="totals">
+                            <div class="total-item">
+                                <span class="total-label">TOTAL:</span>
+                                <span class="total-price">31,700원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
     </div>
 

@@ -46,15 +46,41 @@ async function loadCart(user_id) {
                     return;
                 }
 
-                let list = [];
-                data.data.forEach(item => {
-                    // alert("유저이름" + item.user.username + "칵테일이름" + item.menu.name + "수량" + item.quantity);
-                    list.push(item)
-                });
-                return list;
+                buildCart(data);
+
+                // let list = [];
+                // data.data.forEach(item => {
+                //     // alert("유저이름" + item.user.username + "칵테일이름" + item.menu.name + "수량" + item.quantity);
+                //     list.push(item)
+                // });
+                // return list;
             }
         },
     });
 
 }
 
+function buildCart(cart){
+    let totalPrice = 0;
+    cart.data.forEach(item => {
+        let price = item.menu.price * item.quantity;
+        totalPrice += price;
+
+        $('#cartcontent').append(`
+                <div id="cartline"></div>
+                <div id="cartbox">
+                    <div id="cartitemimg" style="background-image: url(${item.menu.imgUrl})"></div>
+                    <div id="cartiteminfo">
+                        <div id="cartitemname">${item.menu.name}</div>
+                        <div id="cartitemquantity">수량 : ${item.quantity}</div>
+                        <div id="cartitemprice">${price}￦</div>
+                    </div>
+                </div>
+            `);
+    });
+
+    $('#cartcontent').append(`
+                <div id="cartline"></div>
+            `);
+    document.querySelector(`#carttotal`).textContent = `Total ${totalPrice} ￦`;
+}

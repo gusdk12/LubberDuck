@@ -10,6 +10,8 @@ DROP TABLE IF EXISTS ctt_menu;
 
 
 
+DELETE FROM ctt_menu;
+DELETE FROM ctt_cart;
 
 
 

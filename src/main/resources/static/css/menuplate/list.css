@@ -11,6 +11,12 @@ body {
     -ms-user-select:none;
     user-select:none;
 }
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /*------------------------------------------- main */
 #decoContent{
@@ -187,6 +193,9 @@ body {
 }
 
 .thumbnail{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     /*background-color: cadetblue;*/
     width: 30%;
     height: 100%;
@@ -197,13 +206,7 @@ body {
     height: 100%;
     position: relative; /* 자식 div의 기준이 되는 부모 div */
     overflow: hidden;
-}
-
-.thumbnail {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100%;
+    align-items: center;
 }
 
 .cocktailname{
@@ -270,21 +273,21 @@ body {
 #cutomerButtons{
     position: fixed;
     /*background-color: fuchsia;*/
-    width: 130px;
-    height: 75px;
-    bottom: -20%;
-    left: 15%;
+    width: 170px;
+    height: 80px;
+    left: 200px;
     z-index: 10;
-    transition: 0.5s ease;
+    transition: 0.2s ease;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.19);
 }
 #cutomerButtons #buttonsbackground{
     position: absolute;
-    border-radius: 5%;
-    width: 160%;
-    height: 130%;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
     /*content: url("/img/maindeco/label.png");*/
     /*background-image: url('/img/maindeco/label.png');*/
     /*background-size: contain;*/
@@ -293,7 +296,20 @@ body {
     background-color: #79B4A3;
     /*border: 1px solid #512C1C;*/
     /*filter: invert(54%) sepia(80%) saturate(1485%) hue-rotate(321deg) brightness(93%) contrast(94%);*/
-    left: -30%;
+}
+#cutomerButtons #exit{
+    position: absolute;
+    margin: 10px;
+    width: 25px;
+    height: 25px;
+    background-image: url('/img/common/exit.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(100%) sepia(30%) saturate(1254%) hue-rotate(296deg) brightness(102%) contrast(112%);
+    right: 0px;
+    top: 0px;
+    z-index: 3;
 }
 #cutomerButtons #chat{
     width: 48%;
@@ -314,6 +330,98 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     filter: invert(100%) sepia(30%) saturate(1254%) hue-rotate(296deg) brightness(102%) contrast(112%);
+}
+#cartcontent{
+    position: absolute;
+    width: 90%;
+    height: 75%;
+    /*background-color: #b1d2c9;*/
+    border-radius: 5px;
+    z-index: 1;
+    overflow-y: scroll;
+    top: 40px;
+}
+#cartcontent::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+    height: 5px; /*가로 스크롤바 높이*/
+}
+#cartcontent::-webkit-scrollbar-track {
+    background:none; /* 트랙 배경 색상 */
+    border-radius: 10px; /* 트랙 모서리 둥글게 */
+}
+#cartcontent::-webkit-scrollbar-thumb {
+    background: #fff5e4;
+    border-radius: 10px; /* 핸들 모서리 둥글게 */
+}
+#cartcontent::-webkit-scrollbar-thumb:hover {
+    background: #e8cfb1;
+}
+#cartline{
+    width: 100%;
+    height: 2px;
+    background-color: #fff5e4;
+    margin-top: 7px;
+}
+#cartbox{
+    margin-left: 2.5%;
+    width: 95%;
+    height: 110px;
+    align-self: center;
+    margin-top: 7px;
+    /*background-color: chartreuse;*/
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+#cartitemimg{
+    /*background-color: azure;*/
+    width: 30%;
+    height: 90%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#cartiteminfo{
+    /*background-color: chocolate;*/
+    width: 60%;
+    height: 100%;
+    align-content: center;
+    text-align: right;
+    font-family: 'GmarketSansMedium';
+    font-size: 15px;
+}
+#cartitemquantity{
+    /*float: right;*/
+    /*width: 30%;*/
+    height: 24px;
+    /*background-color: fuchsia;*/
+}
+#cartitemprice{
+    /*float: right;*/
+    /*width: 50%;*/
+    height: 24px;
+    /*background-color: #00ff04;*/
+}
+#cartitemname{
+    font-family: 'GmarketSansBold';
+    font-size: 20px;
+}
+#carttotal{
+    /*background-color: darkkhaki;*/
+    bottom: 15px;
+    width: 90%;
+    height: 13%;
+    position: absolute;
+    z-index: 1;
+    text-align: end;
+    align-content: center;
+    color: #fff5e4;
+    font-family: 'GmarketSansBold';
+    font-size: 30px;
+    padding-right: 20px;
+}
+.hidden{
+    display: none;
 }
 
 /*----------------------------------- footer*/
