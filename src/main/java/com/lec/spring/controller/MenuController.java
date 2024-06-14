@@ -19,12 +19,6 @@ public class MenuController {
   @Autowired
   private MenuService menuService;
 
-  @GetMapping("/write")
-  public void list(Model model){
-    model.addAttribute("allList", menuService.list());
-    model.addAttribute("menuList", menuService.sequenceList());
-  }
-
   @GetMapping("/find/{cocktailName}")
   public QryResult find(@PathVariable String cocktailName){
     Menu menu = menuService.findByCocktailName(cocktailName);
@@ -39,7 +33,4 @@ public class MenuController {
     return result;
   }
 
-
-//  @GetMapping("/wrtie")
-//  public String wrtie()
 }
