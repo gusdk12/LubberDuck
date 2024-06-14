@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/menuplate/menuList.css}">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script th:src="@{/js/menuplate/menuList.js}"></script>
+
+  <link
+          href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
+          rel="stylesheet">
+
+  <title>Menu Management</title>
+</head>
+
+<body>
+<th:block th:insert="~{common/header::header}"></th:block>
+
+<section id="conMenu">
+  <div class="decoContent">
+    <div class="deco" id="rightUp"></div>
+    <div class="deco" id="leftUp"></div>
+    <div class="deco" id="middleUp"></div>
+    <div class="deco" id="leftDown"></div>
+  </div>
+  <div id="container">
+    <!-- 메뉴 모음집 -->
+    <div class="menu_container">
+      <div class="titleText">Menu List</div>
+      <table class="menuTable">
+        <thead class="tableList">
+        <tr>
+          <th class="checkbox title"><input type="checkbox" id="selectAll" class="custom-checkbox" value="">
+            <label th:for="selectAll" class="custom-label"></label>
+          </th>
+          <th class="ctt_name_title">칵테일 이름</th>
+        </tr>
+        </thead>
+        <tbody class="table-content">
+        <tr th:each="menu : ${allList}">
+          <td class="checkbox">
+            <input type="checkbox" th:id="${menu.name}" class="list_checkbox custom-checkbox" th:value="${menu.name}">
+            <label th:for="${menu.name}" class="custom-label"></label>
+          </td>
+          <td class="ctt_name" th:text="${menu.name}"></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="icon">
+        <button class="btn_add">
+          <img src="/img/management/right.png" alt="btn_add">
+        </button>
+      </div>
+    </div>
+
+    <!-- 손님 메뉴판 -->
+    <div class="menu_container">
+      <div class="titleText">Menu</div>
+      <table class="menuTable">
+        <thead class="tableList">
+        <tr>
+          <th class="sequence_title">#</th>
+          <th class="ctt_name_title_chg">칵테일 이름</th>
+          <th class="checkbox title_chg">
+            <input type="checkbox" id="menu_selectAll" class="custom-checkbox" value="">
+            <label th:for="menu_selectAll" class="custom-label"></label>
+          </th>
+        </tr>
+        </thead>
+        <tbody class="table-content">
+        <tr th:each="list : ${menuList}">
+          <td class="sequence" th:text="${list.sequence}"></td>
+          <td class="item"><a href="" th:text="${list.name}"></a></td>
+          <td class="checkbox chg">
+            <input type="checkbox" th:id="${list.sequence}" class="menu_checkbox custom-checkbox" th:value="${list.sequence}">
+            <label th:for="${list.sequence}" class="custom-label"></label>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="icon btn-sequence">
+        <button class="btn_up">
+          <img src="/img/management/up.png" alt="btn_up">
+        </button>
+        <button class="btn_down">
+          <img src="/img/management/down.png" alt="btn_down">
+        </button>
+        <button class="btn_del">
+          <img src="/img/management/btn_del.png" alt="btn_del">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn save">
+    <button class="btn_save">
+      <img src="/img/management/free-icon-font-disk.png" alt="btn_save">
+    </button>
+  </div>
+</section>
+
+</body>
+
+</html>

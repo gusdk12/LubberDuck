@@ -9,6 +9,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu&family=Gamja+Flower&family=Hi+Melody&family=Stylish&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
@@ -19,7 +22,7 @@
 
 
 <section id="mainContent">
-    <div id="menuText">Lubber<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bar</div>
+    <div id="menuText">Rubber<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bar</div>
 </section>
 
 
@@ -49,19 +52,22 @@
 
         <button class="submit" type="submit">로그인</button><br>
 
-        <a class="btn"
+        <div class="btns">
+        <a class="btnKakao"
            th:href="@{https://kauth.kakao.com/oauth/authorize(response_type=${'code'},
                     client_id=${@environment.getProperty('app.oauth2.kakao.client-id')},
                     redirect_uri=${@environment.getProperty('app.oauth2.kakao.redirect-uri')})}">
-            <img th:src="@{/img/user/kakao_login.png}" height="40px" width=" 185px">
+            <img th:src="@{/img/user/kakao_login.png}" height="40px" width=" 150px">
         </a>
         <br>
-        <a class="btn" th:href="@{/oauth2/authorization/naver}">
-            <img th:src="@{/img/user/naver_login.png}" height="40px" width=" 185px">
+        <a class="btnNaver" th:href="@{/oauth2/authorization/naver}">
+            <img th:src="@{/img/user/naver_login.png}" height="40px" width=" 150px">
         </a>
 
+        </div>
 
-        <a class="register" th:href="@{/user/registerChoice}" onclick="toggleUserPanel()">회원가입</a>
+
+        <a class="register" th:href="@{/user/registerChoice}">회원가입</a>
 
     </form>
 </div>

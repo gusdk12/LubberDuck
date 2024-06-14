@@ -28,7 +28,7 @@ public class CustomLoginFailureHandler  implements AuthenticationFailureHandler 
         //=================================================
         //< incorrect the identify or password
         if(exception instanceof BadCredentialsException || exception instanceof InternalAuthenticationServiceException) {
-            errorMessage = "아이디나 비밀번호가 맞지 않습니다. 다시 확인해 주십시오.";
+            errorMessage = "아이디나 비밀번호가 맞지 않습니다.다시 확인해 주십시오.";
         }
         //< account is disabled
         else if(exception instanceof DisabledException) {

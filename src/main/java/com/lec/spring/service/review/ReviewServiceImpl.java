@@ -1,16 +1,10 @@
-package com.lec.spring.service;
+package com.lec.spring.service.review;
 
-import com.lec.spring.domain.Review;
-import com.lec.spring.domain.User;
-import com.lec.spring.repository.AuthorityRepository;
-import com.lec.spring.repository.ReviewRepository;
-import com.lec.spring.repository.UserRepository;
+import com.lec.spring.domain.review.Review;
+import com.lec.spring.repository.review.ReviewRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.List;
 

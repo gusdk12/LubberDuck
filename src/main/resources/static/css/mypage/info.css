@@ -14,47 +14,26 @@ body{
     line-height: 1.5em;
     color :  black;
     margin: 0;
-    position: relative;
 }
-#decoContent{
-    top: 380px;
-    left: 920px;
-    z-index: 1;
-    position: relative;
-}
-
-.deco{
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 400px;
-    height: 400px;
-    position: absolute;
-}
-
-#pen{
-    background-image: url('/img/user/pen.png');
-    left: 0%;
-    top: 50%;
-    opacity: 0.9;
-    z-index: -1;
-}
-
-
 .container{
-    margin-top: 50px;
-    margin-bottom: 40px;
-    position: relative;
+    margin-top: 20px;
+    /*margin-bottom: 100px;*/
+    margin-left: -50px;
 }
+
 .member{
     width: 400px;
     margin: auto;
     padding: 5px 20px;
-    background-color: white;
+    background-color: floralwhite;
+    overflow: auto;
+    border-radius: 6px;
 }
 
 .member .logo{
     display: block;
     margin :50px auto;
+    /* border: 3px solid red; */
 }
 
 .member .field{
@@ -62,17 +41,30 @@ body{
 }
 
 
-.member input:not(input[type=radio]),.member select{
+.member input:not(input[type=text]),.member select{
     font-family: 'GmarketSansMedium';
     border: 1px solid #dadada;
     padding: 15px;
     width: 100%;
     margin-bottom: 5px;
+
 }
 
-.member input[type=submit]{
+.member input[type=text]{
+    padding: 15px;
+    width: 100%;
+}
+
+.submit{
+    font-family: 'GmarketSansMedium';
     background-color: #10573e;
     color: #f8e9d7;
+    float:right;
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .field.birth div{
@@ -81,9 +73,6 @@ body{
 }
 
 
-@media (max-width:1080px) {
-    .member{
-        width: 80%;
-    }
+.nickname{
+    font-size: 18px;
 }
-

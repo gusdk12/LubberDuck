@@ -1,0 +1,53 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #10573e;
+}
+
+.all {
+    max-width: 1200px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.side {
+    float: left;
+    position: sticky;
+    width: 20%;
+    height: 100vh;
+
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #f8e9d7;
+}
+
+.side #sideMenu {
+    margin-top: 30px;
+}
+
+.side a {
+    color: #f8e9d7;
+    text-decoration: none;
+}
+
+.side .sm {
+    display: block;
+    height: 50px;
+
+    text-align: center;
+    line-height: 50px;
+}
+
+.article {
+    width: 80%;
+    height: 100vh;
+    float: left;
+
+    background-color: #1b654b;
+    border-radius: 10px;
+}

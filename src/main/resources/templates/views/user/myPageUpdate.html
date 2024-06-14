@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/user/mypage.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user/mypageUpdate.css}">
     <title>myPage</title>
 </head>
 <body>
 <div class="container">
 
 
+    <form>
     <div class="member">
         <div class="logo">
-            <h1>내 정보</h1>
+            <h1>정보 수정</h1>
         </div>
 
 
@@ -29,13 +30,19 @@
 
         <div class="field">
             <b>이름</b>
-            <input type="text">
+            <input type="text" required>
         </div>
+
+        <div class="field">
+            <b>이메일</b>
+            <input type="email" placeholder="email" required>
+        </div>
+
 
         <div class="field birth">
             <b>생년월일</b>
             <div>
-                <input type="number" placeholder="년(yyyy)">
+                <input type="number" placeholder="년(yyyy)" required>
                 <select>
                     <option value="">월</option>
                     <option value="">1월</option>
@@ -51,21 +58,15 @@
                     <option value="">11월</option>
                     <option value="">12월</option>
                 </select>
-                <input type="number" placeholder="일(dd)">
+                <input type="number" placeholder="일(dd)" required>
             </div>
         </div>
 
 
-        <div class="field">
-            <b>이메일</b>
-            <input type="email" placeholder="선택입력">
-        </div>
-
-
-
-        <button class="submit"type="button" onclick="location.href='/user/mypageUpdate'">정보 수정</button>
+        <button class="submit" type="button" onclick="location.href='/user/myPage'">수정 완료</button>
 
     </div>
+    </form>
 </div>
 </body>
 </html>
