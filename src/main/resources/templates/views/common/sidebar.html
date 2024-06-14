@@ -7,11 +7,11 @@
     <th:block th:fragment="sidebar">
         <aside class="side">
             <div id="sideMenu">
-                <p>MY PAGE</p>
-                <a href="#" class="sm">내 정보</a>
-                <a href="#" class="sm">주문내역</a>
-                <a href="#" class="sm">리뷰내역</a>
-                <a href="#" class="sm">즐겨찾기</a>
+                <a th:href="@{/mypage/info}" class="sm">MY PAGE</a>
+                <a th:href="@{/mypage/info}" class="sm">내 정보</a>
+                <a th:href="@{/mypage/order}" class="sm">주문내역</a>
+                <a th:href="@{/mypage/review}" class="sm">리뷰내역</a>
+                <a th:href="@{/mypage/bookmark}" class="sm">즐겨찾기</a>
             </div>
         </aside>
     </th:block>

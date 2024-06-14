@@ -1,4 +1,4 @@
-
+@charset "UTF-8";
 * {
     box-sizing: border-box;
 }
@@ -8,16 +8,16 @@ body {
 }
 
 .all {
-    max-width: 1200px;  /* 최대 폭 지정 */
+    width: 1200px;
+    height: 1000px; /* 높이를 페이지에 맞게 고치기 */
     margin-left: auto;
     margin-right: auto;
 }
 
 .side {
     float: left;
-    position: sticky;
-    width: 20%;
-    height: 700px;
+    width: 235px;
+    height: 100%;
 
     text-align: center;
 
@@ -44,10 +44,11 @@ body {
 }
 
 .article {
-    width: 80%;
-    height: 100vh;
-    float: left;
+    width: 965px;
+    height: 100%;
 
-    background-color: #fff6ec;
+    background-color: #f8e9d7;
     border-radius: 10px;
+
+    float: left;
 }
