@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'KCC-Hanbit';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+  font-family: 'GmarketSansMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 body {
   margin: 0;
-  /* height: 100vh; */
+  /*height: 100vh;*/
   background-color: #10573e;
-  /* margin-bottom: 1000px; */
+  /*margin-bottom: 500px;*/
   caret-color: transparent;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 
 #conMenu {
@@ -21,7 +21,6 @@ body {
   max-width: 1300px;  /* 최대 폭 지정 */
   margin-left: auto;
   margin-right: auto;
-  /*padding: 0 auto;*/
   z-index: 100;
 }
 
@@ -29,7 +28,7 @@ body {
   text-align: center;
   width: 450px;
   height: 700px;
-  margin: 30px 30px 10px 30px;
+  margin: 30px;
   padding: 50px;
   background-image: url('/img/management/menu.jpg');
   background-size: 550px 700px;
@@ -50,7 +49,7 @@ body {
 .menuTable {
   width: 450px;
   border-collapse: collapse;
-  font-family: 'KCC-Hanbit';
+  font-family: 'GmarketSansMedium';
 }
 
 .tableList {
@@ -82,12 +81,12 @@ body {
 }
 
 .table-content::-webkit-scrollbar-thumb {
-  background: burlywood; /* 핸들 색상 */
+  background: rgba(16, 87, 62, 0.89); /* 핸들 색상 */
   border-radius: 10px; /* 핸들 모서리 둥글게 */
 }
 
 .table-content::-webkit-scrollbar-thumb:hover {
-  background: rgb(222, 160, 80); /* 호버 시 핸들 색상 */
+  background: #10573e; /* 호버 시 핸들 색상 */
 }
 
 th, td {
@@ -115,32 +114,38 @@ td.checkbox {
 }
 
 .ctt_name {
-  font-family: 'KCC-Hanbit';
+  font-family: 'GmarketSansMedium';
   text-align: center;
   font-size: 18px;
   width: 300px;
 }
 
-a, a:hover {
-  text-decoration: none;
-  color: black;
-  font-size: 18px;
-}
-
 .sequence {
-  width: 29.5px;
+  width: 74px;
   text-align: center;
   font-size: 16px;
+  border:1px solid burlywood;
   border-bottom: 0;
 }
 
 .item {
-  width: 120px;
-  font-family: 'KCC-Hanbit';
+  width: 312px;
+  font-family: 'GmarketSansMedium';
   font-size: 18px;
   text-align: center;
-  border: 1px solid burlywood;
-  border-bottom: 0;
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  height: 50px;
+}
+
+a, a:hover {
+  font-family: 'GmarketSansMedium';
+  display: inline-block;
+  line-height: 36px;
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
 }
 
 .title, .sequence_title {
@@ -149,8 +154,10 @@ a, a:hover {
 }
 
 td.chg {
-  width: 20px;
-  border: none;
+  width: 62px;
+  border:1px solid burlywood;
+  border-bottom: 0;
+  border-right: 0;
 }
 
 .title_chg {
@@ -242,7 +249,7 @@ td.chg {
 .btn_add, .btn_del, .btn_up, .btn_down, .btn_save {
   display: inline-block;
   border: none;
-  background: none;
+  background: none;;
   cursor: pointer;
   padding: 0;
   margin-right: 0px;
@@ -287,7 +294,16 @@ img {
 }
 
 .save {
-  margin: 0px 90px 30px 0px;
+  position: relative;
+  max-width: 1300px;
+  height: 50px;
+  top: 0;
+  left: 0;
+}
+.btn_save {
+  position: absolute;
+  right: 90px;
+  top: 805px;
 }
 
 .btn_save img {
@@ -296,31 +312,62 @@ img {
 
 .decoContent {
   position: relative;
+  max-width: 1300px;
+  height: 50px;
+  top: 0;
+  left: 0;
 }
+
 #leftDown {
-  width: 220px;
-  height: 155px;
+  position: absolute;
+  width: 300px;
+  height: 250px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('/img/management/rightdown.png');
-  position: absolute;
-  left: 5%;
-  bottom: 0%;
-  transform: rotate(25deg);
-  z-index: -1;
+  left: 10px;
+  top: 860px;
+  transform: rotate(30deg) translate(-50%, -50%);
+  z-index: 101;
 }
-#rightUp{
+#rightUp {
+  position: absolute;
   width: 280px;
-  height: 230px;
+  height: 200px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('/img/management/rightup.png');
-  right: -14%;
-  top: 0%;
+  background-image: url('/img/management/butterfly.png');
+  left: 390px;
+  top: 10px;
+  transform: rotate(40deg);
+  z-index: 101;
+}
+#middleUp {
   position: absolute;
-  transform: rotate(38deg);
+  width: 150px;
+  height: 120px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/img/management/rose.png');
+  left: 0px;
+  bottom: 690px;
+  transform: rotate(33deg);
+  z-index: 101;
+}
+#leftUp {
+  position: absolute;
+  width: 230px;
+  height: 150px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/img/management/rosestick.png');
+  left: 420px;
+  bottom: 690px;
+  transform: rotate(20deg) scaleY(-1);
   z-index: 101;
 }
 
@@ -332,28 +379,62 @@ img {
     max-width: 1300px;  /* 최대 폭 지정 */
   }
   .menu_container {
-    margin: 120px 30px;
+    margin: 80px 50px 0px 50px;
   }
-  #conA, #conBtn {
-    max-width: 1300px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 0;
-  }
+
   #rightUp{
-    width: 400px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('/img/management/rightup.png');
-    right: -5%;
-    transform: rotate(45deg);
+    left: 1100px;
+    top: -380px;
+    transform: rotate(40deg);
   }
   #leftDown {
-    width: 400px;
-    height: 300px;
-    left: -3%;
-    bottom: 0%;
+    display: block;
+    position: absolute;
+    width: 280px;
+    height: 170px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/img/management/rightdown.png');
+    transform: rotate(33deg) translate(-50%, -50%);
+    left: 20px;
+    top: 495px;
+    z-index: 101;
+  }
+  #middleUp{
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/img/management/rose.png');
+    left: 510px;
+    top: -260px;
+    transform: rotate(33deg);
+    z-index: 101;
+  }
+  #leftUp{
+    position: absolute;
+    width: 260px;
+    height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/img/management/rosestick.png');
+    left: -50px;
+    top: -350px;
+    transform: rotate(-20deg) scaleY(-1) scaleX(-1);
+    z-index: 101;
+  }
+  .btn_save {
+    position: absolute;
+    right: 110px;
+    top: 430px;
   }
 }
