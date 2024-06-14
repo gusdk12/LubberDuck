@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
@@ -50,14 +51,32 @@
         </div>
     </section>
 
+
     <section id="footer">
 
     </section>
 
+    <th:block sec:authorize="hasRole('CUSTOMER')">
+        <th:block th:with="logged_user=${#authentication.principal.user}">
+            <section id="customer">
+                <div id="cutomerButtons">
+                    <div id="buttonsbackground"></div>
+                    <div id="chat"></div>
+                    <div id="board"></div>
+                </div>
+            </section>
+
+            <script th:inline="javascript">
+                const logged_id = [[${logged_user.id}]]
+            </script>
+        </th:block>
+    </th:block>
+
     <script th:inline="javascript">
         var menuList = [[${menuList}]];
     </script>
-    <script  th:src="@{/js/menuplate/list.js}"></script>
+    <script th:src="@{/js/order/order.js}"></script>
+    <script th:src="@{/js/menuplate/list.js}"></script>
 </body>
 </html>
 
