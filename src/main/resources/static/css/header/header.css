@@ -97,7 +97,7 @@ a {
     background-color: #DAC0A3;
     /*margin-left: auto;*/
 }
-button{
+.headerButton{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -118,7 +118,7 @@ button{
 
     background-color: #EADBC8;
 }
-button:hover {
+.headerButton:hover {
     background-color: #ffdcd9;
     color: #512C1C;
 }
