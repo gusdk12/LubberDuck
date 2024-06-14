@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #1b654b;
+    background-color: #10573e;
 }
 
 .all {
@@ -48,6 +48,6 @@ body {
     height: 100vh;
     float: left;
 
-    background-color: #f8e9d7;
+    background-color: #1b654b;
     border-radius: 10px;
 }

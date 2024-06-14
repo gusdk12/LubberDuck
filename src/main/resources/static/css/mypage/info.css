@@ -1,0 +1,78 @@
+*{
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family: 'GmarketSansMedium';
+    font-size:14px;
+    background-color: #10573e;
+    line-height: 1.5em;
+    color :  black;
+    margin: 0;
+}
+.container{
+    margin-top: 20px;
+    /*margin-bottom: 100px;*/
+    margin-left: -50px;
+}
+
+.member{
+    width: 400px;
+    margin: auto;
+    padding: 5px 20px;
+    background-color: floralwhite;
+    overflow: auto;
+    border-radius: 6px;
+}
+
+.member .logo{
+    display: block;
+    margin :50px auto;
+    /* border: 3px solid red; */
+}
+
+.member .field{
+    margin :20px 0;
+}
+
+
+.member input:not(input[type=text]),.member select{
+    font-family: 'GmarketSansMedium';
+    border: 1px solid #dadada;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 5px;
+
+}
+
+.member input[type=text]{
+    padding: 15px;
+    width: 100%;
+}
+
+.submit{
+    font-family: 'GmarketSansMedium';
+    background-color: #10573e;
+    color: #f8e9d7;
+    float:right;
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.field.birth div{
+    display: flex;
+    gap:10px;
+}
+
+
+.nickname{
+    font-size: 18px;
+}
