@@ -3,16 +3,14 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script th:src="@{/js/sidebar/sidebar.js}"></script>
-</head>
 <body>
 
     <th:block th:fragment="sidebar">
         <aside class="side">
             <div id="sideMenu">
-                <p class="smTitle">MY PAGE</p>
+                <div class="smTitle">
+                    <p>MY PAGE</p>
+                </div>
                 <a th:href="@{/mypage/info}" class="sm">내 정보</a>
                 <a th:href="@{/mypage/order}" class="sm">주문내역</a>
                 <a th:href="@{/mypage/review}" class="sm">리뷰내역</a>
