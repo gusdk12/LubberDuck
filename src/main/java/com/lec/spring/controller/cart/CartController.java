@@ -19,7 +19,9 @@ public class CartController {
 
     @GetMapping("/list/{userId}")
     public QryCartList list(@PathVariable Long userId){
-        return cartService.list(userId);
+        QryCartList list = cartService.list(userId);
+
+        return list;
     }
 
 }

@@ -5,6 +5,7 @@ window.addEventListener('load', () => {
 
     scrollToCenter();
     appendMenuToPlate();
+    addEventCustomerButtons();
 
 });
 
@@ -163,4 +164,11 @@ window.addEventListener('scroll', function() {
         if(cutomerButtons) cutomerButtons.style.bottom = '-20%';
     }
 });
+
+function addEventCustomerButtons() {
+    $('#board').click(function(){
+
+    });
+}
+
 

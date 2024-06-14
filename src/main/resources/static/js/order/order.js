@@ -9,8 +9,9 @@ function addToCart(cocktailName) {
     //     "quantity": ,
     // };
 
-    loadCart(logged_id);
-
+    // currentCart.forEach(item => {
+    //     alert("유저이름" + item.user.username + "칵테일이름" + item.menu.name + "수량" + item.quantity);
+    // });
     // $.ajax({
     //     url: "/comment/write",
     //     type: "POST",
@@ -31,24 +32,26 @@ function addToCart(cocktailName) {
 
 
 // 특정 글(post_id) 의 댓글 목록 읽어오기
-function loadCart(user_id){
-    $.ajax({
+async function loadCart(user_id) {
+    await $.ajax({
         url: "/cart/list/" + user_id,
         type: "GET",
         cache: false,
-        success: function(data, status){
-            if(status == "success"){
+        success: function (data, status) {
+            if (status == "success") {
                 // 서버쪽 에러 메세지 있는경우
-                if(data.status !== "OK"){
+                if (data.status !== "OK") {
                     alert("실패");
                     alert(data.status);
                     return;
                 }
 
-
+                let list = [];
                 data.data.forEach(item => {
-                    alert("유저이름" + item.user.name + " 칵테일이름" + item.cocktail.name + "수량" + item.quantity)
+                    // alert("유저이름" + item.user.username + "칵테일이름" + item.menu.name + "수량" + item.quantity);
+                    list.push(item)
                 });
+                return list;
             }
         },
     });
