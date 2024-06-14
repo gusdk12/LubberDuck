@@ -223,6 +223,97 @@ body {
     position: absolute;
     top: 60px;
     color: #512C1C;
+    height: 62%;
+    /*background-color: fuchsia;*/
+}
+.cocktailbutton{
+    position: absolute;
+    width: 70px;
+    height: 35px;
+    /*background-color: cornflowerblue;*/
+
+    right: 0px;
+    bottom: 10px;
+
+    /*display: flex;*/
+    display: none;
+    justify-content: space-between;
+}
+#cocktailadd{
+    width: 43%;
+    height: 100%;
+    /*background-color: #ffdcd9;*/
+    background-image: url('/img/menu/addIcon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(63%) sepia(71%) saturate(461%) hue-rotate(309deg) brightness(101%) contrast(104%);
+}
+#cocktailadd:hover{
+    filter: invert(39%) sepia(38%) saturate(1775%) hue-rotate(319deg) brightness(97%) contrast(85%);
+}
+#cocktaildetail{
+    width: 47%;
+    height: 100%;
+    /*background-color: #ffdcd9;*/
+    background-image: url('/img/menu/scopeIcon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(72%) sepia(15%) saturate(658%) hue-rotate(112deg) brightness(91%) contrast(87%);
+}
+#cocktaildetail:hover{
+    filter: invert(47%) sepia(79%) saturate(372%) hue-rotate(113deg) brightness(92%) contrast(95%);
+}
+
+/*----------------------------------- customer buttons*/
+#cutomerButtons{
+    position: fixed;
+    /*background-color: fuchsia;*/
+    width: 10vw;
+    height: 10vh;
+    bottom: -20%;
+    left: 15%;
+    z-index: 10;
+    transition: 0.5s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#cutomerButtons #buttonsbackground{
+    position: absolute;
+    border-radius: 5%;
+    width: 160%;
+    height: 130%;
+    content: url("/img/maindeco/label.png");
+    /*background-image: url('/img/maindeco/label.png');*/
+    /*background-size: contain;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    /*background-color: #f6ecdf;*/
+    /*border: 1px solid #512C1C;*/
+    filter: invert(54%) sepia(80%) saturate(1485%) hue-rotate(321deg) brightness(93%) contrast(94%);
+    left: -30%;
+}
+#cutomerButtons #chat{
+    width: 48%;
+    height: 70%;
+    /*background-color: chartreuse;*/
+    background-image: url('/img/maindeco/chat.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(100%) sepia(30%) saturate(1254%) hue-rotate(296deg) brightness(102%) contrast(112%);
+}
+#cutomerButtons #board{
+    width: 48%;
+    height: 96%;
+    /*background-color: darkorange;*/
+    background-image: url('/img/maindeco/clipboard.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(100%) sepia(30%) saturate(1254%) hue-rotate(296deg) brightness(102%) contrast(112%);
 }
 
 /*----------------------------------- footer*/

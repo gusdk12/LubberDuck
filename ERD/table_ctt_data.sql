@@ -12,6 +12,20 @@ INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
 INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
     ('USER1', '$2a$10$ZYPlIVx3aQED1LRGb1vrNeSezD3.rARxjmOYeBksGf0bC0dAzBIzy', '손님1', 'user1@mail.com', 1)
 ;
+INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
+    ('USER2', '$2a$10$ZYPlIVx3aQED1LRGb1vrNeSezD3.rARxjmOYeBksGf0bC0dAzBIzy', '손님2', 'user2@mail.com', 1)
+;
+
+
+INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
+    (2, 3, 1)
+;
+INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
+    (2, 4, 2)
+;
+INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
+    (3, 4, 2)
+;
 
 -- 샘플 칵테일
 INSERT INTO ctt_menu (name, img_url, info, sequence) VALUES

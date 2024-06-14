@@ -35,7 +35,13 @@ function appendMenuToPlate(){
                     <div class="thumbnail" style="background-image: url('${cocktail.imgUrl}')"></div>
                     <div class="explain">
                         <div class="cocktailname">${cocktail.name}</div>
-                        <div class="cocktailinfo">${cocktail.info}</div>
+                        <div class="cocktailinfo">
+                            <div class="cocktailbutton">
+                                <div id="cocktailadd"></div>
+                                <div id="cocktaildetail"></div>
+                            </div>
+                            ${cocktail.info}
+                        </div>
                     </div>
                 </div>
             `);
@@ -44,22 +50,43 @@ function appendMenuToPlate(){
                 <div class="cocktailpart">
                     <div class="explain">
                         <div class="cocktailname">${cocktail.name}</div>
-                        <div class="cocktailinfo">${cocktail.info}</div>
+                        <div class="cocktailinfo">
+                            <div class="cocktailbutton">
+                                <div id="cocktailadd"></div>
+                                <div id="cocktaildetail"></div>
+                            </div>
+                            ${cocktail.info}
+                        </div>
                     </div>
                     <div class="thumbnail" style="background-image: url('${cocktail.imgUrl}')"></div> 
                 </div>
             `);
         }
-
-        $(".cocktailpart").mouseenter(function(){
-            this.style.backgroundColor = 'white';
-        });
-        $(".cocktailpart").mouseleave(function(){
-            this.style.backgroundColor = 'unset';
-        });
-
         count++;
     });
+
+
+
+    for(cocktailpart of document.querySelectorAll(".cocktailpart")){
+        cocktailpart.addEventListener("mouseenter", function(){
+            this.style.backgroundColor = 'white';
+            $(this).find(".cocktailbutton").css({ 'display': `flex` });
+        });
+        cocktailpart.addEventListener("mouseleave", function(){
+            this.style.backgroundColor = 'unset';
+            $(this).find(".cocktailbutton").css({ 'display': `none` });
+        });
+    }
+    for(cocktailadd of document.querySelectorAll("#cocktailadd")){
+        cocktailadd.addEventListener("click", function(e){
+            e.preventDefault();
+
+            var cocktailName = $(this).parent().parent().siblings("div").text();
+
+            addToCart(cocktailName);
+        });
+    }
+
 
     let fr = "";
     for(let i = 0; i < paperCount; i++)
@@ -111,6 +138,7 @@ window.addEventListener('scroll', function() {
     var rightup = document.getElementById("rightup");
     var leftdown = document.getElementById("leftdown");
     var rightdown = document.getElementById("rightdown");
+    var cutomerButtons = document.getElementById("cutomerButtons");
     const scrollPosition = window.scrollY;
 
     if (scrollPosition < 200) {
@@ -126,11 +154,13 @@ window.addEventListener('scroll', function() {
         rightup.style.right = '-25%';
         leftdown.style.left = '-30%';
         rightdown.style.right = '-25%';
+        if(cutomerButtons) cutomerButtons.style.bottom = '5%';
     } else {
         leftup.style.left = '0%';
         rightup.style.right = '0%';
         leftdown.style.left = '0%';
         rightdown.style.right = '0%';
+        if(cutomerButtons) cutomerButtons.style.bottom = '-20%';
     }
 });
 
