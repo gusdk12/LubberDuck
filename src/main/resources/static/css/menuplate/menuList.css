@@ -100,12 +100,12 @@ th, td {
   height: 50px;
   width: 440px;
   border-top: 1px solid burlywood;
+  border-bottom: 1px solid burlywood;
 }
 
 td.checkbox {
   width: 45px;
-  border: 1px solid burlywood;
-  border-bottom: 0;
+  border-right: 1px solid burlywood;
 }
 
 .ctt_name_title {
@@ -124,19 +124,18 @@ td.checkbox {
   width: 74px;
   text-align: center;
   font-size: 16px;
-  border:1px solid burlywood;
-  border-bottom: 0;
+  border-right: 1px solid burlywood;
 }
 
 .item {
-  width: 312px;
+  width: 310px;
   font-family: 'GmarketSansMedium';
   font-size: 18px;
   text-align: center;
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
-  height: 50px;
+  height: 48px;
 }
 
 a, a:hover {
@@ -156,7 +155,7 @@ a, a:hover {
 td.chg {
   width: 62px;
   border:1px solid burlywood;
-  border-bottom: 0;
+
   border-right: 0;
 }
 
