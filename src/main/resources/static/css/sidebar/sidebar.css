@@ -1,4 +1,18 @@
 
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1b654b;
+}
+
+.all {
+    max-width: 1200px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .side {
     float: left;
     position: sticky;
@@ -27,4 +41,13 @@
 
     text-align: center;
     line-height: 50px;
+}
+
+.article {
+    width: 80%;
+    height: 100vh;
+    float: left;
+
+    background-color: #f8e9d7;
+    border-radius: 10px;
 }
