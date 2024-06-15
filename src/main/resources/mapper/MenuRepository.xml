@@ -37,6 +37,18 @@
         ORDER BY sequence ASC
     </select>
 
+    <select id="findInfoById" resultType="com.lec.spring.domain.menu.Menu">
+        <include refid="SELECT_BASE"/>
+        AND id = #{id}
+    </select>
+
+    <update id="change" flushCache="true" parameterType="com.lec.spring.domain.menu.Menu">
+        UPDATE ctt_menu
+        SET price = #{price},
+            info = #{info}
+        WHERE id = #{id}
+    </update>
+
 </mapper>
 
 

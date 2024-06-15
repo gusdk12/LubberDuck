@@ -303,7 +303,7 @@ img {
 .btn_save {
   position: absolute;
   right: 90px;
-  top: 805px;
+  top: -70px;
 }
 
 .btn_save img {
@@ -436,6 +436,6 @@ img {
   .btn_save {
     position: absolute;
     right: 110px;
-    top: 430px;
+    top: 840px;
   }
 }

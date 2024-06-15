@@ -9,7 +9,7 @@ body {
   margin: 0;
   /* height: 100vh; */
   background-color: #10573e;
-  /* margin-bottom: 1000px; */
+   margin-bottom: 100px;
   caret-color: transparent;
   overflow-x: hidden;
 }
@@ -199,13 +199,13 @@ body {
   left: 0;
 }
 
-.btn_preview, .btn_list, .btn_update, .btn_back, .btn_savebtn {
+.btn_preview, .btn_list, .btn_update, .btn_back, .btn_savebtn, .btn_list_update {
   display: inline-block;
   border: none;
   background: none;
   cursor: pointer;
   padding: 0;
-  margin-right: 0px;
+  margin-right: 0;
   margin-top: 3px;
   width: 0;
 }
@@ -227,7 +227,7 @@ img:hover {
   right: 960px;
 }
 
-.btn_list img, .btn_back img {
+.btn_list img, .btn_list_update img {
   display: block;
   right: 80px;
   width: 48px;
@@ -236,6 +236,11 @@ img:hover {
 .btn_update img, .btn_savebtn img  {
   display: block;
   right: 10px;
+}
+
+.btn_back img {
+  display: block;
+  right: 150px;
 }
 
 .img {
@@ -291,7 +296,7 @@ img:hover {
 
 .ch_price {
   align-self: flex-end;
-  margin-right: 20px;
+  margin-right: 13px;
   font-size: 25px;
 }
 
@@ -324,6 +329,18 @@ img:hover {
 #ch_price::selection, #ch_info::selection {
   background: burlywood;
   color: white;
+}
+
+/* 크로스 브라우저 호환성을 위한 스타일 */
+/* Webkit 브라우저 (Chrome, Safari) */
+#ch_price::-webkit-inner-spin-button, #ch_price::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#ch_price {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield;  /* 일반 브라우저 스타일 재정의 */
 }
 
 .infomation_update{

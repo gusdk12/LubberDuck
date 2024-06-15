@@ -6,10 +6,15 @@ import java.util.List;
 
 public interface MenuRepository {
 
-    Menu findById(Long menuId);
-    Menu findByName(String name);
+  Menu findById(Long menuId);
 
-    List<Menu> findAll();
+  Menu findByName(String name);
 
-    List<Menu> findAllSequenceMenu();
+  List<Menu> findAll();
+
+  List<Menu> findAllSequenceMenu();
+
+  Menu findInfoById(Long id);
+
+  int change(Menu menu);
 }

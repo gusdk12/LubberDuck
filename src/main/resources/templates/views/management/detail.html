@@ -26,6 +26,7 @@
 <th:block th:insert="~{common/header::header}"></th:block>
 
 <section id="menudetail">
+
   <div class="container">
     <div class="detail_container">
       <div class="titleText">Menu Infomation</div>
@@ -35,32 +36,32 @@
             <img th:src="${menu.imgUrl}" class="ctt_img">
           </div>
           <div class="ctt name">
-            <div class="textbox_name" th:text="${menu.name}">Americano</div>
+            <div class="textbox_name" th:text="${menu.name}"></div>
           </div>
         </div>
         <div class="info_B">
           <div class="ctt price">
             <div class="textbox_price">[판매 가격]</div>
-            <span id="show_price" th:text="${menu.price}">15000원</span>
+            <span id="show_price" th:text="${menu.price}"></span>
           </div>
           <div class="ctt infomation">
             <div class="textbox_info">[소개]</div>
-            <span id="show_info" th:text="${menu.info}">미국인들이 밀라노-토리노의 씁쓸한 맛을 부드럽게 마시기 위해 탄산수를 섞어 만든 칵테일 (14도)</span>
+            <span id="show_info" th:text="${menu.info}"></span>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="detail_btn">
-    <button class="btn_preview">
-      <img src="img/preview.png" alt="btn_preview">
-    </button>
-    <button class="btn_list">
-      <img src="img/list.png" alt="btn_list">
-    </button>
-    <button class="btn_update">
-      <img src="img/update.png" alt="btn_update">
-    </button>
+    <a class="btn_preview">
+      <img src="/img/management/preview.png" alt="btn_preview">
+    </a>
+    <a class="btn_list" th:href="@{/management/write}">
+      <img src="/img/management/list.png" alt="btn_list">
+    </a>
+    <a class="btn_update" th:href="@{'/management/update/' + ${menu.id}}">
+      <img src="/img/management/update.png" alt="btn_update">
+    </a>
   </div>
 </section>
 </body>
