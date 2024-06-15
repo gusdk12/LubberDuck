@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+  <!--<script th:unless="${post}">-->
+  <!--    alert("해당 정보가 삭제되거나 없습니다");-->
+  <!--    history.back(); // 페이지 뒤로 가기-->
+  <!--</script>-->
+
+<!--  <th:block th:if="${post}">  &lt;!&ndash; 넘겨온 post 의 값이 있을 때만 렌더링 될 수 있게 설정 &ndash;&gt;-->
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/management/menudetail.css}">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <link
+          href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
+          rel="stylesheet">
+
+  <title>Menu Update</title>
+</head>
+
+<body>
+<th:block th:insert="~{common/header::header}"></th:block>
+
+<section id="menudetail">
+  <div class="container">
+    <div class="detail_container_update">
+      <div class="titleText">Menu Infomation</div>
+      <div class="info_update">
+        <div class="info_A">
+          <div class="ctt img">
+            <img th:src="${menu.imgUrl}" class="ctt_img">
+          </div>
+          <div class="ctt name">
+            <div class="textbox_name">Americano</div>
+          </div>
+        </div>
+        <div class="info_B_update">
+          <div class="ctt price">
+            <div class="textbox_price">[판매 가격]</div>
+            <div class="ch_price"><input type="text" id="ch_price" placeholder="가격을 입력해주세요">원</div>
+          </div>
+          <div class="error_text er_price"><span class="errorMessage">0 이상의 가격을 입력해주세요</span></div>
+          <div class="ctt infomation_update">
+            <div class="textbox_info">[소개]</div>
+            <textarea id="ch_info" placeholder="내용을 입력해주세요">미국인들이 밀라노-토리노의 씁쓸한 맛을 부드럽게 마시기 위해 탄산수를 섞어 만든 칵테일 (14도)</textarea>
+          </div>
+          <div class="error_text er_info"><span class="errorMessage">소개 내용은 필수입니다</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail_btn">
+    <button class="btn_back">
+      <img class="update_btn" src="img/back.png" alt="btn_back">
+    </button>
+    <button class="btn_savebtn">
+      <img class="update_btn" src="img/savebtn.png" alt="btn_save">
+    </button>
+  </div>
+</section>
+</body>
+
+</html>

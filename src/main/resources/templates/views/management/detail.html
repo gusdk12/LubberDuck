@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<script th:unless="${menu}">-->
+<!--    alert("해당 정보가 삭제되거나 없습니다");-->
+<!--    history.back(); // 페이지 뒤로 가기-->
+<!--</script>-->
+
+<!--<th:block th:if="${menu}">  &lt;!&ndash; 넘겨온 post 의 값이 있을 때만 렌더링 될 수 있게 설정 &ndash;&gt;-->
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/management/menudetail.css}">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<!--  <script th:src="@{/js/management/menudetail.js}"></script>-->
+
+  <link
+          href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
+          rel="stylesheet">
+
+  <title>Menu Detail</title>
+</head>
+
+<body>
+<th:block th:insert="~{common/header::header}"></th:block>
+
+<section id="menudetail">
+  <div class="container">
+    <div class="detail_container">
+      <div class="titleText">Menu Infomation</div>
+      <div class="info">
+        <div class="info_A">
+          <div class="ctt img">
+            <img th:src="${menu.imgUrl}" class="ctt_img">
+          </div>
+          <div class="ctt name">
+            <div class="textbox_name" th:text="${menu.name}">Americano</div>
+          </div>
+        </div>
+        <div class="info_B">
+          <div class="ctt price">
+            <div class="textbox_price">[판매 가격]</div>
+            <span id="show_price" th:text="${menu.price}">15000원</span>
+          </div>
+          <div class="ctt infomation">
+            <div class="textbox_info">[소개]</div>
+            <span id="show_info" th:text="${menu.info}">미국인들이 밀라노-토리노의 씁쓸한 맛을 부드럽게 마시기 위해 탄산수를 섞어 만든 칵테일 (14도)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail_btn">
+    <button class="btn_preview">
+      <img src="img/preview.png" alt="btn_preview">
+    </button>
+    <button class="btn_list">
+      <img src="img/list.png" alt="btn_list">
+    </button>
+    <button class="btn_update">
+      <img src="img/update.png" alt="btn_update">
+    </button>
+  </div>
+</section>
+</body>
+
+</html>
