@@ -29,6 +29,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public Menu findById(Long menu_id) {
+        return menuRepository.findById(menu_id);
+    }
+
+    @Override
     public Menu findByCocktailName(String name) {
         return menuRepository.findByName(name);
     }

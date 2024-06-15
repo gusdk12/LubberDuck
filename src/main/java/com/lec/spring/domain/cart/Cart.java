@@ -1,27 +1,21 @@
 package com.lec.spring.domain.cart;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.menu.Menu;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Cart {
+    private Long user_id;   // PK
+    private Long menu_id;   // PK
+
     @ToString.Exclude
-    private User user;   // PK
+    private User user;
     @ToString.Exclude
-    private Menu menu;   // PK
+    private Menu menu;
 
     private Integer quantity;
 }

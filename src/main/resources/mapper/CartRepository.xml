@@ -26,12 +26,14 @@
     </resultMap>
 
     <resultMap id="mapCart" type="com.lec.spring.domain.cart.Cart">
+        <result column="c_user_id" property="user_id"/>
+        <result column="c_cocktail_id" property="menu_id"/>
         <result column="c_quantity" property="quantity"/>
         <collection property="user" resultMap="mapUser"/>
         <collection property="menu" resultMap="mapMenu"/>
     </resultMap>
 
-    <select id="findByUser" resultMap="mapCart">
+    <sql id="SELECT_BASE">
         SELECT
             c.user_id "c_user_id",
             c.cocktail_id "c_cocktail_id",
@@ -51,9 +53,42 @@
             m.price "m_price",
             m.sequence "m_sequence"
         FROM ctt_cart c, ctt_user u, ctt_menu m
+    </sql>
+
+    <select id="findByUser" resultMap="mapCart">
+        <include refid="SELECT_BASE"/>
         WHERE c.user_id = u.id AND c.cocktail_id = m.id AND c.user_id = #{user_id}
         ORDER BY c.cocktail_id DESC
     </select>
+
+    <select id="findByUserAndMenu" resultMap="mapCart">
+        <include refid="SELECT_BASE"/>
+        WHERE c.user_id = u.id AND c.cocktail_id = m.id
+        AND c.user_id = #{user_id} AND c.cocktail_id = #{menu_id}
+        ORDER BY c.cocktail_id DESC
+    </select>
+
+    <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.cart.Cart"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO ctt_cart(user_id, cocktail_id, quantity)
+        VALUES(#{user_id}, #{menu_id}, #{quantity})
+    </insert>
+
+    <update id="incQuantity" flushCache="true">
+        UPDATE ctt_cart
+        SET quantity = quantity + 1
+        WHERE user_id = #{user_id} AND cocktail_id = #{menu_id}
+    </update>
+
+    <update id="decQuantity" flushCache="true">
+        UPDATE ctt_cart
+        SET quantity = quantity - 1
+        WHERE user_id = #{user_id} AND cocktail_id = #{menu_id}
+    </update>
+
+    <delete id="delete" flushCache="true">
+        DELETE FROM ctt_cart WHERE user_id = #{user_id} AND cocktail_id = #{menu_id}
+    </delete>
 
 </mapper>
 

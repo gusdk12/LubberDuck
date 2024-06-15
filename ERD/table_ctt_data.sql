@@ -35,7 +35,7 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
   ('Long Island Iced Tea', '/img/menu/IcedTeaWithLemon.png', '달달하고 부드러운 맛이 특징이며 강한 도수 때문에 칵테일계의 폭탄주라고 불리는 칵테일 (29도)', -1, 6000),
   ('Irish Coffee', '/img/menu/IrishCream.png', '고소한 풍미의 커피 향과 위스키의 조화로 달콤한 휘핑크림을 얹어 단맛과 쓴맛이 매력적인 칵테일 (14도)', 13, 5500),
   ('Kir Royale', '/img/menu/KirRoyale.png', '샴페인의 청량함과 카시스의 달콤함으로 부드럽고 달콤한 매력적인 맛을 가진 칵테일 (14도)', -1, 6000),
-  ('Lemonade Classic', '/img/menu/LomonadeClassic.png', '진 베이스로 레몬의 새콤함과 시원한 맛을 가진 칵테일 (12도)', 15, 5000),
+  ('Lemonade Classic', '/img/menu/LemonadeClassic.png', '진 베이스로 레몬의 새콤함과 시원한 맛을 가진 칵테일 (12도)', 15, 5000),
   ('Mai-Tai', '/img/menu/MaiTai.png', '열대과일의 풍부한 향이 조화를 이루며 트로피컬 칵테일의 여왕이라고 불리는 칵테일 (30도)', 10, 7000),
   ('Dry Martini', '/img/menu/MartiniDry.png', '칵테일의 제왕이라고 불리며 고유한 씁쓸한 맛과 올리브의 짠맛을 음미할 수 있는 칵테일 (37도)', -1, 8000),
   ('Mojito', '/img/menu/Mojito.png', '민트의 시원한 청량감과 달달함이 섞인 입체적인 맛을 가진 칵테일 (19도)', 7, 8100),
@@ -64,10 +64,13 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
 
 -- 샘플 카트
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
-    (2, 4, 1)
+    (2, 40, 2)
 ;
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
-    (2, 40, 2)
+    (2, 2, 1)
+;
+INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
+    (2, 20, 3)
 ;
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
     (3, 18, 2)

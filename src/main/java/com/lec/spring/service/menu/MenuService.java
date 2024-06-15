@@ -10,6 +10,7 @@ public interface MenuService {
 
     List<Menu> sequenceList();
 
+    Menu findById(Long menu_id);
     Menu findByCocktailName(String name);
 
 }
