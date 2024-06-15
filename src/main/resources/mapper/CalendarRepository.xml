@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.spring.repository.calendar.CalendarRepository">
+
+    <!-- 특정 id에 해당하는 날짜(date)의 메모 조회 -->
+    <select id="findMemoById" resultType="com.lec.spring.domain.calendar.Calendar">
+        SELECT memo, comment, date
+        FROM ctt_calendar
+        WHERE id = #{id}
+    </select>
+
+    <!-- 특정 id에 해당하는 날짜(date)의 메모 삽입 -->
+    <insert id="insertMemoById" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO ctt_calendar (memo, date)
+        VALUES (#{memo}, #{date})
+    </insert>
+
+    <!-- 특정 id에 해당하는 날짜(date)의 메모 삭제 -->
+    <delete id="deleteMemoById">
+        DELETE FROM ctt_calendar
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 특정 id에 해당하는 날짜(date)의 관리자 코멘트 삽입 -->
+    <insert id="insertCommentById" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO ctt_calendar (comment, date)
+        VALUES (#{comment}, #{date})
+    </insert>
+
+    <!-- 특정 id에 해당하는 날짜(date)의 관리자 코멘트 수정 -->
+    <update id="updateCommentById" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true">
+        UPDATE ctt_calendar
+        SET comment = #{comment}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 특정 id에 해당하는 날짜(date)의 관리자 코멘트 삭제 -->
+    <update id="deleteCommentById" flushCache="true">
+        UPDATE ctt_calendar
+        SET comment = NULL
+        WHERE id = #{id}
+    </update>
+
+</mapper>
