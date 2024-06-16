@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/calendar/calendar.css}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script th:src="@{/js/calendar/calendar.js}"></script>
+
+    <title>Calendar</title>
+</head>
+
+<body>
+    <th:block th:insert="~{common/header::header}"></th:block>
+
+    <!-- 오늘의 메뉴 리스트 팝업 -->
+    <div class="form-popup1" id="myForm">
+        <form action="/action_page.php" class="form-container form-text-style">
+            <button type="button" class="menu-close">
+                <span class="fa fa-xmark">X</span>
+            </button>
+            <h2 class="title-text">오늘의 메뉴</h2>
+            <hr class="line">
+            <div class="menu-list">
+                <div th:each="menu : ${menuList}" class="menu">
+                    <img class="menu-img-list" th:src="${menu.imgUrl}" th:alt="${menu.name}">
+                    <p class="menu-name" th:text="${menu.name}"></p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- 오늘의 메뉴 작성 및 수정 팝업 -->
+    <div class="form-popup2" id="myForm2">
+        <form action="/action_page.php" class="form-container form-text-style">
+            <button type="button" class="menu-close menu-close2">
+                <span class="fa fa-xmark">X</span>
+            </button>
+            <h2 class="title-text">오늘의 메뉴</h2>
+            <div class="select-menu">
+                <img src="" alt="">
+                <p class="select-menu-name"></p>
+            </div>
+            <div class="select-menu-text">
+                <textarea name=""></textarea>
+            </div>
+            <div class="select-menu-buttons">
+                <button class="btn-cancle">취소</button>
+                <button class="btn-save">저장</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 메인 화면 -->
+    <div class="main-view">
+        <div class="container-fluid my-calendar clearfix">
+
+            <!-- 일정 -->
+            <div class="schedule-container">
+                <div class="memo-container">
+                    <p class="event-text">일정</p>
+                    <button id="btn-add-memo">+</button>
+                </div>
+                <div class="clicked-date">
+                    <ul class="event-list"></ul>
+                    <textarea id="new-memo"></textarea>
+                </div>
+                <div id="notification" class="notification-container">
+                    <div class="notification-content">
+                        <p class="notification-text">일정 추가 버튼을 클릭해 일정을 <br>저장하시려면 ENTER 버튼, 취소하시려면<br> ESC 버튼을 누르세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 캘린더-->
+            <div class="calendar-box">
+                <div class="ctr-box clearfix">
+                    <div class="cal-controls">
+                        <button type="button" title="prev" class="btn-cal prev"></button>
+                        <span class="cal-year"></span>
+                        <span class="cal-month"></span>
+                        <button type="button" title="next" class="btn-cal next"></button>
+                    </div>
+                </div>
+                <table class="cal-table">
+                    <thead>
+                    <tr>
+                        <th>일</th>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                        <th>토</th>
+                    </tr>
+                    </thead>
+                    <tbody class="cal-body"></tbody>
+                </table>
+            </div>
+
+            <!-- 오늘의 메뉴 -->
+            <div class="add-menu-container">
+                <div class="menu-text-container">
+                    <p class="event-text">오늘의 메뉴</p>
+                    <button id="btn-add-menu">+</button>
+                </div>
+
+                <div id="notification-menu" class="notification-menu-container">
+                    <div class="notification-menu-content">
+                        <p class="notification-menu-text">등록한 오늘의 메뉴가 없습니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-container today-menu-container">
+                    <img class="menu-img" alt="Menu Image">
+                    <div class="menu-text">
+                        <textarea name="" id="" readonly></textarea>
+                    </div>
+                    <div class="menu-buttons">
+                        <button class="btn-edit">수정</button>
+                        <button class="btn-delete">삭제</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

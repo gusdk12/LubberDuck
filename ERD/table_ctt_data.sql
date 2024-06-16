@@ -16,11 +16,15 @@ INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
     ('USER2', '$2a$10$ZYPlIVx3aQED1LRGb1vrNeSezD3.rARxjmOYeBksGf0bC0dAzBIzy', '손님2', 'user2@mail.com', 1)
 ;
 
+INSERT INTO ctt_user (username, password, nickname, email, birth_date, authority_id) VALUES
+    ('USER3', '$2a$10$ZYPlIVx3aQED1LRGb1vrNeSezD3.rARxjmOYeBksGf0bC0dAzBIzy', '손님3', 'user3@mail.com', '1997-01-01', 1)
+;
+
 
 -- 메뉴 모음집
 INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
   ('Americano', '/img/menu/Americano.png', '미국인들이 밀라노-토리노의 씁쓸한 맛을 부드럽게 마시기 위해 탄산수를 섞어 만든 칵테일 (14도)', -1, 7600),
-  ('Aviation', '/img/menu/Aviation.png', '비행기 하늘을 연상시키는 보라빛 빛깔과 풍미를 가진 클래식 칵테일 (27도)', 1, 6700),
+  ('Aviation', '/img/menu/Aviation.png', '비행기 하늘을 연상시키는 보라색 빛깔과 풍미를 가진 클래식 칵테일 (27도)', 1, 6700),
   ('Bellini', '/img/menu/Bellini.png', '아름답고 화사한 색으로 복숭아의 상큼함과 샴페인의 탄산이 조화를 이루는 칵테일 (10도)', -1, 4600),
   ('Black Russian', '/img/menu/BlackRussian.png', '커피 리큐르의 달콤함과 보드카를 한번에 즐길 수 있는 도수 높은 칵테일 (33도)', 9, 6800),
   ('Blue Hawaii', '/img/menu/BlueHawaii.png', '푸른 바다로 둘러싸인 하와이 섬을 연상시키며 상쾌한 맛이 강한 트로피컬 칵테일 (11도)', -1, 7000),
@@ -35,7 +39,7 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
   ('Long Island Iced Tea', '/img/menu/IcedTeaWithLemon.png', '달달하고 부드러운 맛이 특징이며 강한 도수 때문에 칵테일계의 폭탄주라고 불리는 칵테일 (29도)', -1, 6000),
   ('Irish Coffee', '/img/menu/IrishCream.png', '고소한 풍미의 커피 향과 위스키의 조화로 달콤한 휘핑크림을 얹어 단맛과 쓴맛이 매력적인 칵테일 (14도)', 13, 5500),
   ('Kir Royale', '/img/menu/KirRoyale.png', '샴페인의 청량함과 카시스의 달콤함으로 부드럽고 달콤한 매력적인 맛을 가진 칵테일 (14도)', -1, 6000),
-  ('Lemonade Classic', '/img/menu/LomonadeClassic.png', '진 베이스로 레몬의 새콤함과 시원한 맛을 가진 칵테일 (12도)', 15, 5000),
+  ('Lemonade Classic', '/img/menu/LemonadeClassic.png', '진 베이스로 레몬의 새콤함과 시원한 맛을 가진 칵테일 (12도)', 15, 5000),
   ('Mai-Tai', '/img/menu/MaiTai.png', '열대과일의 풍부한 향이 조화를 이루며 트로피컬 칵테일의 여왕이라고 불리는 칵테일 (30도)', 10, 7000),
   ('Dry Martini', '/img/menu/MartiniDry.png', '칵테일의 제왕이라고 불리며 고유한 씁쓸한 맛과 올리브의 짠맛을 음미할 수 있는 칵테일 (37도)', -1, 8000),
   ('Mojito', '/img/menu/Mojito.png', '민트의 시원한 청량감과 달달함이 섞인 입체적인 맛을 가진 칵테일 (19도)', 7, 8100),
@@ -64,10 +68,13 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
 
 -- 샘플 카트
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
-    (2, 4, 1)
+    (2, 40, 2)
 ;
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
-    (2, 40, 2)
+    (2, 2, 1)
+;
+INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
+    (2, 20, 3)
 ;
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
     (3, 18, 2)

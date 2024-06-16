@@ -1,0 +1,675 @@
+
+/*********************************************/
+/* 메인화면 설정 */
+body {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: #0c4833c4 !important;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+}
+
+.container-fluid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 0.5fr;
+    gap: 0;
+    font-size: 0;
+    height: 690px;
+    border-radius: 10px;
+    font-family: "Noto Sans KR", sans-serif;
+    background-color: white;
+}
+
+.my-calendar {
+    margin: 30px 0;
+    text-align: center;
+    font-weight: 400;
+    cursor: default;
+}
+/*********************************************/
+/* 일정 */
+.schedule-container {
+    width: 100%;
+    min-width: 270px;
+    max-height: 600px;
+    margin-top: 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    text-align: center;
+}
+
+.schedule-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.schedule-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.schedule-container::-webkit-scrollbar-thumb {
+    background: #aaadac56;
+    border-radius: 20px;
+}
+
+.schedule-container::-webkit-scrollbar-thumb:hover {
+    background: #aaadac7b;
+}
+
+/* 스크롤 맨 위 */
+.schedule-container.scroll-top {
+    animation: scrollAnimationTop 0.5s ease-in-out;
+}
+
+/* 스크롤 맨 아래 */
+.schedule-container.scroll-bottom {
+    animation: scrollAnimationBottom 0.5s ease-in-out;
+}
+
+@keyframes scrollAnimationTop {
+    0% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes scrollAnimationBottom {
+    0% {
+        transform: translateY(10px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.memo-container {
+    margin-top: -30px;
+    position: relative;
+}
+
+.event-text {
+    display: inline-block;
+    margin-top: 45px;
+    font-size: 19px;
+    font-weight: 600;
+    text-align: center;
+}
+
+#btn-add-memo {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    position: absolute;
+    bottom: 18px;
+    right: 95px;
+    border: none;
+    border-radius: 50%;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+#btn-add-memo:hover {
+    opacity: 80%;
+}
+
+.event-list .event-list li {
+    padding: 0;
+    margin: 0;
+}
+
+.event-list {
+    padding-inline-start: 0;
+    list-style: none;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #434444;
+}
+
+.event-list li {
+    position: relative;
+    width: 270px;
+    min-height: 100px;
+    padding: 20px;
+    display: inline-block;
+    text-align: start;
+    background-color: #EAF1EF;
+}
+
+#new-memo {
+    width: 270px;
+    display: none;
+    margin: 8px 0;
+    border: none;
+    resize: none;
+    overflow: hidden;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #434444;
+}
+
+#new-memo:focus {
+    display: block;
+    background-color: #EAF1EF;
+    outline: none;
+    padding: 20px;
+}
+
+.memo-gap {
+    background-color: white;
+    height: 20px;
+}
+
+.memo-delete {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    background-color: #EAF1EF;
+    float: right;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.memo-delete:hover {
+    opacity: 1;
+}
+
+/*********************************************/
+/* 일정 알림 텍스트 */
+
+.notification-text {
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    font-family: "Noto Sans KR", sans-serif;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.notification-container {
+    display: block;
+}
+
+/*********************************************/
+/* 캘린더 설정 */
+
+.calendar-box {
+    height: 100%;
+    min-width: 650px;
+    min-height: 650px;
+    margin-left: 8px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.ctr-box {
+    margin: 20px;
+    margin-left: 50px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #5e6060;
+    text-align: left;
+    position: relative;
+}
+
+.ctr-box .cal-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ctr-box .btn-cal {
+    margin-top: 5px;
+    font-size: 20px;
+    color: #064B46;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.ctr-box .btn-cal.prev {
+    position: absolute;
+    left: -30px;
+}
+
+.ctr-box .btn-cal.next {
+    position: absolute;
+    left: 140px;
+}
+
+.ctr-box .btn-cal:after {
+    content: '<';
+    line-height: 25px;
+    font-weight: bold;
+}
+
+.ctr-box .btn-cal.next:after {
+    content: '>';
+}
+
+.ctr-box .ctr-box .cal-month {
+    margin: 0 10px;
+}
+
+.cal-year,
+.cal-month {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.ctr-box:hover .btn-cal {
+    display: block;
+}
+
+.cal-table {
+    width: 100%;
+    height: 86%;
+    border-collapse: separate;
+    border-spacing: 8px;
+}
+
+.cal-table th {
+    padding-bottom: 5px;
+    font-size: 21px;
+    font-weight: 500;
+    opacity: 80%;
+}
+
+.cal-table td {
+    padding: 3px 0;
+    height: 50px;
+    font-size: 19px;
+    opacity: 80%;
+    vertical-align: middle;
+}
+
+.cal-table a {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cal-table td.day {
+    position: relative;
+    cursor: pointer;
+}
+
+.cal-table td.event {
+    background: radial-gradient(circle, #EAF1EF 0%, #EAF1EF 50%, transparent 50%);
+}
+
+.cal-table td.today {
+    background: radial-gradient(circle, #289871bc 0%, #289871bc 50%, transparent 50%);
+    color: #fff;
+    opacity: 70%;
+}
+
+.cal-table td.day-active {
+    background: radial-gradient(circle, #064B46 0%, #064B46 50%, transparent 50%);
+    color: #fff;
+    opacity: 70%;
+}
+
+.cal-table td.has-event:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: #FFC107;
+}
+
+.menu-icon {
+    width: 10px;
+}
+
+/*********************************************/
+/* 오늘의 메뉴 설정 */
+.add-menu-container {
+    min-width: 310px;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.today-menu-container {
+    display: none;
+}
+
+.menu-text-container {
+    position: relative;
+}
+
+#btn-add-menu {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 48px;
+    right: 60px;
+    border: none;
+    border-radius: 50%;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+#btn-add-menu:hover {
+    opacity: 80%;
+}
+
+.menu-img {
+    width: 130px;
+    margin-bottom: 30px;
+}
+
+.menu-text {
+    width: 100%;
+    text-align: center;
+}
+
+.menu-text textarea {
+    width: 86%;
+    height: 230px;
+    resize: none;
+    overflow-y: auto;
+    padding: 9px;
+    border: 1px solid #d1d5d4;
+    margin-bottom: 30px;
+    color:#434444;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.menu-text textarea:focus {
+    border:1px solid #033734;
+    outline: none;
+}
+
+.menu-buttons {
+    text-align: end;
+    margin-right: 37px;
+}
+
+.menu-buttons button {
+    border: none;
+    background-color: white;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.btn-edit {
+    color: rgb(88, 88, 108);
+}
+
+.btn-delete {
+    color: #0a9866;
+}
+
+/*********************************************/
+/* 오늘의 메뉴 알림 텍스트 */
+
+.notification-menu-container:hover {
+    opacity: 80%;
+}
+
+.notification-menu-container {
+    display: block;
+}
+
+.notification-menu-content {
+    margin-top: 10px;
+    padding: 0 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.notification-menu-text {
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    font-family: "Noto Sans KR", sans-serif;
+    vertical-align: middle;
+}
+
+.notification-menu-container:hover {
+    opacity: 80%;
+}
+
+/*********************************************/
+/* 오늘의 메뉴 리스트 팝업 */
+
+.form-container {
+    width: 500px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.966);
+    border-radius: 22px;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 300;
+}
+
+.form-popup1 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    z-index: 400;
+    overflow-y: auto;
+    margin-top: 30px;
+    height: 600px;
+}
+
+.form-popup1::-webkit-scrollbar {
+    width: 4px;
+}
+
+.form-popup1::-webkit-scrollbar-thumb {
+    /*background-color: none;*/
+    border-radius: 10px;
+}
+
+.form-popup1::-webkit-scrollbar-track {
+    /*background-color: none;*/
+}
+
+.form-popup2 {
+    position: fixed;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    z-index: 400;
+    overflow-y: auto;
+    margin-top: 30px;
+    height: 600px;
+}
+
+.form-popup2::-webkit-scrollbar {
+    width: 4px;
+}
+
+.form-popup2::-webkit-scrollbar-thumb {
+    /*background-color: none;*/
+    border-radius: 10px;
+}
+
+.form-popup2::-webkit-scrollbar-track {
+    /*background-color: none;*/
+}
+
+.menu-close {
+    float: right;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+}
+
+.menu-close span {
+    display: inline-block;
+    vertical-align: top;
+    color: #1a1d1cd2;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.menu-close:hover {
+    opacity: 70%;
+}
+
+.title-text {
+    padding-left: 32px;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+.form-text-style {
+    font-size: 14px;
+    color: black;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+.menu-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.line {
+    margin: 0 -30px;
+    margin-bottom: 40px;
+    height: 0.2px;
+    background-color: #42555072;
+}
+
+.menu {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.966);
+    cursor: pointer;
+}
+
+.menu:hover {
+    opacity: 90%;
+    border: 1px solid lightgray;
+}
+
+.menu-img {
+    width: 150px;
+    height: auto;
+}
+
+.menu img {
+    width: 150px;
+    height: 210px;
+    margin-bottom: 20px;
+}
+
+.menu-name {
+    font-weight: 500;
+    font-size: 17px;
+    color: rgb(56, 56, 56);
+}
+
+.select-menu {
+    text-align: center;
+}
+
+.select-menu img {
+    width: 150px;
+    height: auto;
+}
+
+.select-menu-name {
+    font-weight: 600;
+    font-size: 18px;
+    color:#033734;
+    margin-bottom: 30px;
+}
+
+.select-menu-text {
+    width: 100%;
+    text-align: center;
+}
+
+.select-menu-text textarea {
+    width: 86%;
+    height: 230px;
+    resize: none;
+    overflow-y: auto;
+    padding: 16px 20px;
+    border: 1px solid #d1d5d4;
+    margin-bottom: 30px;
+    color:#434444;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.select-menu-text textarea:focus {
+    border:1px solid #033734;
+    outline: none;
+}
+
+.select-menu-buttons {
+    text-align: end;
+    margin-right: 24px;
+}
+
+.select-menu-buttons button {
+    border: none;
+    background-color: white;
+    font-size: 16px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 500;
+}
+
+.btn-cancle {
+    color: rgb(0, 0, 0);
+}
+
+.btn-save {
+    color: #064B46;
+}

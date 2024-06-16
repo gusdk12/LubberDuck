@@ -123,7 +123,7 @@ textarea {
 
 /*찬별*/
 .rating > input:checked ~ label, .rating > input:checked ~ label:before {
-    background-image: url(/static/img/review/yellow_star.png);
+    background-image: url(/img/review/yellow_star.png);
     background-repeat: no-repeat;
     background-size: contain;
     width: 30px;
@@ -136,7 +136,7 @@ textarea {
 .rating > label {
     display: inline-block;
     cursor: pointer;
-    background-image: url(/static/img/review/grey_star.png);
+    background-image: url(/img/review/grey_star.png);
     background-repeat: no-repeat;
     background-size: contain;
     width: 30px;

@@ -20,7 +20,7 @@ CREATE TABLE ctt_bookmark
     PRIMARY KEY (id)
 ) COMMENT '즐겨찾기테이블';
 
-CREATE TABLE ctt_calender
+CREATE TABLE ctt_calendar
 (
     id          INT          NOT NULL AUTO_INCREMENT COMMENT '캘린더아이디',
     date        DATE         NOT NULL COMMENT '날짜',
@@ -30,7 +30,7 @@ CREATE TABLE ctt_calender
     PRIMARY KEY (id)
 ) COMMENT '관리자캘린더테이블';
 
-ALTER TABLE ctt_calender
+ALTER TABLE ctt_calendar
     ADD CONSTRAINT UQ_id UNIQUE (id);
 
 CREATE TABLE ctt_cart
@@ -140,8 +140,8 @@ ALTER TABLE ctt_bookmark
         FOREIGN KEY (cocktail_id)
             REFERENCES ctt_menu (id);
 
-ALTER TABLE ctt_calender
-    ADD CONSTRAINT FK_ctt_menu_TO_ctt_calender
+ALTER TABLE ctt_calendar
+    ADD CONSTRAINT FK_ctt_menu_TO_ctt_calendar
         FOREIGN KEY (cocktail_id)
             REFERENCES ctt_menu (id);
 

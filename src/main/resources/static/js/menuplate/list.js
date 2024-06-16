@@ -35,15 +35,15 @@ function appendMenuToPlate(){
     let $currentPaper = null;
 
     menuList.forEach(cocktail => {
-        if(count % 4 == 0){
+        if(count % 4 === 0){
             paperCount++;
 
-            (paperCount % 2 == 0) && $menuPlate.append(`<div class="paperLeft" id=paper${paperCount}></div>`);
-            (paperCount % 2 == 1) && $menuPlate.append(`<div class="paperRight" id=paper${paperCount}></div>`);
+            (paperCount % 2 === 0) && $menuPlate.append(`<div class="paperLeft" id=paper${paperCount}></div>`);
+            (paperCount % 2 === 1) && $menuPlate.append(`<div class="paperRight" id=paper${paperCount}></div>`);
             $currentPaper = $(`#paper${paperCount}`);
         }
 
-        if(count % 2 == 0) {
+        if(count % 2 === 0) {
             $currentPaper.append(`
                 <div class="cocktailpart">
                     <div class="thumbnail" style="background-image: url('${cocktail.imgUrl}')"></div>
@@ -97,7 +97,7 @@ function appendMenuToPlate(){
 
             var cocktailName = $(this).parent().parent().siblings("div").text();
 
-            addToCart(cocktailName);
+            addToCart(menuList.find(menu => menu.name === cocktailName));
         });
     }
 
