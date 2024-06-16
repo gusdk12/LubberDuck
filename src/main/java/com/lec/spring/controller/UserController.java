@@ -3,6 +3,7 @@ package com.lec.spring.controller;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
 import com.lec.spring.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,7 +71,6 @@ public class UserController {
                                      @RequestParam("year") int year,
                                      @RequestParam("month") int month,
                                      @RequestParam("day") int day,
-                                     Model model,
                                      RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
             // 유효성 검사 오류 처리
@@ -84,9 +84,10 @@ public class UserController {
 
         int cnt = userService.register(user);
 
+
         if (cnt > 0) {
             redirectAttrs.addFlashAttribute("message", "회원 가입이 성공적으로 완료되었습니다.");
-            return "redirect:/user/registerCustomerOK";
+            return "redirect:/user/registerCustomerOk";
         } else {
             redirectAttrs.addFlashAttribute("error", "회원 가입 중 오류가 발생했습니다. 다시 시도해 주세요.");
             return "redirect:/user/registerCustomer";
@@ -94,8 +95,18 @@ public class UserController {
     }
 
 
-    @GetMapping("/registerCustomerOK")
-    public String registerCustomerOkPage() {
+    @GetMapping("/registerCustomerOk")
+    public String registerCustomerOkPage(HttpServletRequest request, Model model) {
+        String message = (String) request.getSession().getAttribute("message");
+        String error = (String) request.getSession().getAttribute("error");
+
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
+        if (error != null) {
+            model.addAttribute("error", error);
+        }
+
         return "user/registerCustomerOK";
     }
 
