@@ -22,6 +22,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 $(document).ready(function() {
+
+    // 사이드바 메뉴 클릭시 css 변경 => 가연 추가!
+    $('.sm').eq(2).css({
+        'background-color':'#f8e9d7',
+        'border-radius' : "10px 0 0 10px",
+        'color' : '#54320f',
+        'font-weight': 'bold'
+    });
+
     // 페이지 로드 시 최신순으로 정렬되도록 설정
     var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
     var reviews = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<script th:unless="${menu}">
+    alert("해당 정보가 삭제되거나 없습니다");
+    history.back(); // 페이지 뒤로 가기
+</script>
+
+<th:block th:if="${menu}">  <!-- 넘겨온 menu 의 값이 있을 때만 렌더링 될 수 있게 설정 -->
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/management/menudetail.css}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link
+            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
+            rel="stylesheet">
+
+    <title>Menu Update</title>
+  </head>
+
+  <body>
+  <th:block th:insert="~{common/header::header}"></th:block>
+
+  <section id="menudetail">
+    <form th:action="@{/management/update}" method="post">
+      <input type="hidden" name="id" th:value="${menu.id}"/>
+      <div class="container">
+        <div class="detail_container_update">
+          <div class="titleText">Menu Infomation</div>
+          <div class="info_update">
+            <div class="info_A">
+              <div class="ctt img">
+                <img th:src="${menu.imgUrl}" class="ctt_img">
+              </div>
+              <div class="ctt name">
+                <div class="textbox_name" th:text="${menu.name}"></div>
+              </div>
+            </div>
+            <div class="info_B_update">
+              <div class="ctt price">
+                <div class="textbox_price">[판매 가격]</div>
+                <div class="ch_price"><input type="number" id="ch_price" placeholder="가격을 입력해주세요" name="price" th:value="${price} ? ${price} : ${menu.price}"></div>
+              </div>
+              <div class="error_text er_price"><span class="errorMessage" th:if="${error_price}"
+                                                     th:utext="${error_price}"></span></div>
+              <div class="ctt infomation_update">
+                <div class="textbox_info">[소개]</div>
+                <textarea id="ch_info" placeholder="내용을 입력해주세요" name="info" th:utext="${info} ? ${info} : ${menu.info}"></textarea>
+              </div>
+              <div class="error_text er_info"><span class="errorMessage" th:if="${error_info}"
+                                                    th:utext="${error_info}"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail_btn">
+          <button class="btn_back" type="button" onclick="history.back()">
+            <img class="update_btn" src="/img/management/back.png" alt="btn_back">
+          </button>
+          <a class="btn_list_update" th:href="@{/management/write}">
+            <img class="update_btn" src="/img/management/list.png" alt="btn_list">
+          </a>
+          <button class="btn_savebtn" type="submit">
+            <img class="update_btn" src="/img/management/savebtn.png" alt="btn_save">
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+  </body>
+</th:block>
+</html>

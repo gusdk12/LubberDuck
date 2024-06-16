@@ -9,6 +9,8 @@ public interface UserService {
     // username(회원 아이디) 의 User 정보 읽어오기
     User findByUsername(String username);
 
+    User findById(Long user_id);
+
     // 특정 username(회원 아이디) 의 회원이 존재하는지 확인
     boolean isExist(String username);
 

@@ -271,6 +271,7 @@ img:hover {
 
 img {
   opacity: 0.8;
+  filter: invert(76%) sepia(51%) saturate(257%) hue-rotate(352deg) brightness(90%) contrast(92%);
 }
 
 .btn_add img {
@@ -302,11 +303,12 @@ img {
 .btn_save {
   position: absolute;
   right: 90px;
-  top: 805px;
+  top: -70px;
 }
 
 .btn_save img {
   width: 60px;
+  filter: invert(98%) sepia(17%) saturate(792%) hue-rotate(309deg) brightness(100%) contrast(97%);
 }
 
 .decoContent {
@@ -434,6 +436,6 @@ img {
   .btn_save {
     position: absolute;
     right: 110px;
-    top: 430px;
+    top: 840px;
   }
 }

@@ -20,7 +20,7 @@ INSERT INTO ctt_user (username, password, nickname, email, authority_id) VALUES
 -- 메뉴 모음집
 INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
   ('Americano', '/img/menu/Americano.png', '미국인들이 밀라노-토리노의 씁쓸한 맛을 부드럽게 마시기 위해 탄산수를 섞어 만든 칵테일 (14도)', -1, 7600),
-  ('Aviation', '/img/menu/Aviation.png', '비행기 하늘을 연상시키는 보라빛 빛깔과 풍미를 가진 클래식 칵테일 (27도)', 1, 6700),
+  ('Aviation', '/img/menu/Aviation.png', '비행기 하늘을 연상시키는 보라색 빛깔과 풍미를 가진 클래식 칵테일 (27도)', 1, 6700),
   ('Bellini', '/img/menu/Bellini.png', '아름답고 화사한 색으로 복숭아의 상큼함과 샴페인의 탄산이 조화를 이루는 칵테일 (10도)', -1, 4600),
   ('Black Russian', '/img/menu/BlackRussian.png', '커피 리큐르의 달콤함과 보드카를 한번에 즐길 수 있는 도수 높은 칵테일 (33도)', 9, 6800),
   ('Blue Hawaii', '/img/menu/BlueHawaii.png', '푸른 바다로 둘러싸인 하와이 섬을 연상시키며 상쾌한 맛이 강한 트로피컬 칵테일 (11도)', -1, 7000),
@@ -58,18 +58,21 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
   ('Whiskey Sour', '/img/menu/WhiskeySour.png', '레몬 주스와 설탕으로 신맛과 단맛이 부드럽게 조화를 이루는 칵테일 (18도)', 5, 4000),
   ('White Lady', '/img/menu/WhiteLady.png', '갓 짜낸 레몬 주스처럼 귀여운 연노랑색 빛깔의 상큼함과 세련되고 부드러운 크리미한 질감을 가진 칵테일 (30도)', -1, 9000),
   ('White Russian', '/img/menu/WhiteRussian.png', 'Black Russian에 크림을 첨가해 훨씬 부드럽고 중후한 맛을 가진 칵테일 (23도)', -1, 7700),
-  ('Zombie', '/img/menu/Zombie.png', '여러 과일과 시럽의 조합으로 새콤달콤한 맛을 가졌지만 "Zombie" 이름처럼 될 수 있는 높은 도수의 칵테일 (31도)', 4, 7800)
+  ('Zombie', '/img/menu/Zombie.png', '여러 과일과 시럽의 조합으로 새콤달콤한 맛을 가졌지만 "Zombie" 이름처럼 될 수 있는 높은 도수의 칵테일 (31도)', 4, 7800);
 
 
 
 -- 샘플 카트
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
-    (2, 3, 1)
+    (2, 40, 2)
 ;
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
-    (2, 4, 2)
+    (2, 2, 1)
 ;
 INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
-    (3, 4, 2)
+    (2, 20, 3)
+;
+INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
+    (3, 18, 2)
 ;
 
