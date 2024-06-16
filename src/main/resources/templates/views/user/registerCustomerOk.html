@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<script th:unless="${result > 0 }">
-    alert("가입 실패");
+<!--<script th:unless="${result > 0 }">-->
+<!--    alert("가입 실패");-->
+<!--    history.back();-->
+<!--</script>-->
+<!--<script th:if="${result > 0 }">-->
+<!--    alert("가입 성공");-->
+<!--    location.href = "/user/login";-->
+<!--</script>-->
+
+
+<script th:if="${message}">
+    alert("[[${message}]]");
+    window.location.href = "/user/login";
+</script>
+<script th:if="${error}">
+    alert("[[${error}]]");
     history.back();
 </script>
-<script th:if="${result > 0 }">
-    alert("가입 성공");
-    location.href = "/user/login";
-</script>
+
 </html>
 
 
