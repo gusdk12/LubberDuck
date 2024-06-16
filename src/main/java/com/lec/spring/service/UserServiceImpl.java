@@ -8,7 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -42,10 +45,21 @@ public class UserServiceImpl implements UserService {
         return user != null;
     }
 
+
     @Override
-    public int register(User user) {
-        return 0; // TODO : Yushin
-    }
+        public int register(User user) {
+            user.setUsername(user.getUsername().toUpperCase());
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRegDate(LocalDateTime.now());
+
+            Authority auth = authorityRepository.findByName("ROLE_CUSTOMER");
+            user.setAuthority_id(auth.getId());
+            userRepository.save(user);  // 데이터베이스에 저장 후 ID가 설정됨
+            Long userId = user.getId();  // 이 시점에서 ID 값을 가져올 수 있음
+//            authorityRepository.addAuthority(userId, auth.getId());  // userId를 사용하여 권한 추가
+            return 1;
+        }
+
 
     @Override
     public List<Authority> selectAuthoritiesById(Long id) {
