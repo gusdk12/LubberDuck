@@ -36,9 +36,17 @@ $(document).ready(function(){
     );
 
     $('#drop').click(function(){
-        alert('삭제하시겠습니까?');
+        // alert('삭제하시겠습니까?');
     });
 
-    var randomIndex = Math.floor(Math.random() * 5+1);
-    $('#background').addClass(randomIndex);
+    // var randomIndex = Math.floor(Math.random() * 5+1);
+    // $('#background').addClass(randomIndex);
+
+    // 현재 유저의 id 값
+    const id = $("input[name='id']").val().trim();
+
+    // 현재 유저의 즐겨찾기들을 불러온다
+    loadBook(id);
 });
+
+loadBook
