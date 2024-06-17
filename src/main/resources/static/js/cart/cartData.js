@@ -188,24 +188,4 @@ function buildCart(cart){
 
     scrollableDiv.scrollTop = currentscrollTop;
     document.querySelector(`#carttotal`).textContent = `Total ${totalPrice} ￦`;
-
-
-    // for(let i = 0; i < 5; i++){
-    //     $('#cartcontent').append(`
-    //             <div id="cartline"></div>
-    //             <div id="cartbox">
-    //                 <div id="cartitemimg" style="background-image: url('/img/menu/Eggnog.png')"></div>
-    //                 <div id="cartiteminfo">
-    //                     <div id="cartitemname">Eggnog</div>
-    //                     <div id="cartitemquantity">수량 : 2</div>
-    //                     <div id="cartitemprice">5000￦</div>
-    //                 </div>
-    //             </div>
-    //         `);
-    // }
-    //
-    // $('#cartcontent').append(`
-    //             <div id="cartline"></div>
-    //         `);
-    // document.querySelector(`#carttotal`).textContent = `Total 10000 ￦`;
 }

@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
 
     <script th:inline="javascript">
         var menu = [[${menu}]];
@@ -23,13 +25,40 @@
     <th:block th:insert="~{common/header::header}"></th:block>
 
     <div id="container">
-        <section id="cocktailsection">
+        <div id="backgoundflower1"></div>
+        <div id="backgoundflower2"></div>
+        <img src='/img/menu/detailFrame1.png' id="backgoundframe1">
+        <img src='/img/menu/detailFrame1.png' id="backgoundframe2">
+        <div id="cocktailsection">
+            <div id="cocktailImg">
+                <div id="img"></div>
+            </div>
+            <div id="cocktailInfo">
+                <div id="name"></div>
+                <div id="star">
+                    <div class="stars"></div> <!--임시-->
+                    <div class="stars"></div> <!--임시-->
+                    <div class="stars"></div> <!--임시-->
+                    <div class="stars"></div> <!--임시-->
+                    <div class="stars"></div> <!--임시-->
+                    <div>5.0</div> <!--임시-->
+                </div>
+                <div id="info"></div>
+                <div id="price"></div>
+                <div id="cart">
+                    <div id="quantitychoice">
+                        <div id="plusQuantity"></div>
+                        <div id="nowQuantity"></div>
+                        <div id="minusQuantity"></div>
+                    </div>
+                    <div id="toCart">담기</div>
+                </div>
+            </div>
+        </div>
 
-        </section>
+        <div id="reviewsection">
 
-        <section id="reviewsection">
-
-        </section>
+        </div>
     </div>
 
     <section id="footer"></section>

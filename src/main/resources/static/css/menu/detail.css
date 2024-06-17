@@ -2,7 +2,6 @@ body {
     margin: 0;
     height: 100vh;
     background-color: #10573e;
-    margin-bottom: 1000px;
     caret-color: transparent;
     overflow-x: hidden;
 
@@ -11,19 +10,226 @@ body {
     -ms-user-select:none;
     user-select:none;
 }
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #container{
     background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
-    height: 1100px;
+    height: 1700px;
     max-width: 1100px;  /* 최대 폭 지정 */
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 20px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content : center;
+    align-items: center;
+    gap: 30px;
 }
+#backgoundflower1{
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+    width: 450px;
+    height: 450px;
+    align-self: end;
+    top: 30px;
+    background-image: url('/img/menu/detailFlower1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    transform: translate(80px) rotate(-10deg);
+}
+#backgoundflower2{
+    position: absolute;
+    z-index: 2;
+    width: 400px;
+    height: 400px;
+    align-self: start;
+    top: 700px;
+    background-image: url('/img/menu/detailFlower2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    transform: translate(-200px) rotate(-90deg);
+}
+#backgoundframe1{
+    position: absolute;
+    z-index: 1;
+    width: 700px;
+    height: 90px;
+    /*background-color: #fde0e5;*/
+    top: 160px;
+    /*background-image: url('/img/menu/detailFrame1.png');*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(95%) sepia(98%) saturate(1570%) hue-rotate(300deg) brightness(107%) contrast(80%);
+}
+#backgoundframe2{
+    position: absolute;
+    z-index: 1;
+    width: 700px;
+    height: 90px;
+    top: 1720px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(95%) sepia(98%) saturate(1570%) hue-rotate(300deg) brightness(107%) contrast(80%);
+    transform: rotate(-180deg);
+}
+
 #cocktailsection{
-
+    height: 40%;
+    width: 90%;
+    /*background-color: #0a9866;*/
+    display: flex;
+    justify-content : center;
+    align-items: center;
+    gap: 20px;
 }
-#reviewsection{
+#cocktailImg{
+    height: 80%;
+    width: 45%;
+    /*background-color: #e74c3c;*/
+}
+#img{
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#cocktailInfo{
+    height: 70%;
+    width: 45%;
+    /*background-color: chartreuse;*/
+    display: flex;
+    flex-direction: column;
+    justify-content : space-between;
+    align-items: center;
+}
+#cocktailInfo #name{
+    /*background-color: #e74c3c;*/
+    height: 20%;
+    width: 95%;
+    font-family: "Meddon", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 45px;
+    align-content: center;
+    white-space: nowrap;
+}
+#cocktailInfo #star{
+    /*background-color: aqua;*/
+    height: 10%;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    font-family: 'GmarketSansMedium';
+    font-size: 20px;
+}
+.stars{
+    height: 40px;
+    width: 40px;
+    background-image: url('/img/review/yellow_star.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#cocktailInfo #info{
+    /*background-color: blueviolet;*/
+    height: 30%;
+    width: 95%;
+    font-family: 'GmarketSansMedium';
+    font-size: 20px;
+}
+#cocktailInfo #price{
+    /*background-color: greenyellow;*/
+    height: 15%;
+    width: 95%;
+    font-family: 'GmarketSansMedium';
+    font-size: 40px;
+    align-content: center;
+    text-align: end;
+}
+#cocktailInfo #cart{
+    /*background-color: lightcyan;*/
+    height: 15%;
+    width: 95%;
+    font-family: 'GmarketSansMedium';
+    font-size: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+#cart #quantitychoice{
+    /*background-color: #e74c3c;*/
+    height: 100%;
+    width: 180px;
+    display: flex;
+    justify-content : center;
+    align-items: center;
+}
+#quantitychoice #plusQuantity{
+    width: 25%;
+    height: 60%;
+    text-align: center;
+    background-color: #F9E3CC;
+    align-content: center;
+    background-image: url('/img/common/addThin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#quantitychoice #plusQuantity:hover{
+    background-color: #F3BD86;
+}
+#quantitychoice #nowQuantity{
+    font-family: 'GmarketSansMedium';
+    font-size: 20px;
+    width: 20%;
+    height: 60%;
+    text-align: center;
+    /*background-color: #c4eacd;*/
+    align-content: center;
+}
+#quantitychoice #minusQuantity{
+    width: 25%;
+    height: 60%;
+    text-align: center;
+    background-color: #F9E3CC;
+    align-content: center;
+    background-image: url('/img/common/minusThin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#quantitychoice #minusQuantity:hover{
+     background-color: #F3BD86;
+ }
+#cart #toCart{
+    background-color: #F9E3CC;
+    height: 80%;
+    width: 120px;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
+}
+#cart #toCart:hover{
+    background-color: #F3BD86;
+}
 
+/*-----------------------------------*/
+#reviewsection{
+    height: 40%;
+    width: 90%;
+    /*background-color: #c4eacd;*/
 }
 #footer{
     height: 200px;
