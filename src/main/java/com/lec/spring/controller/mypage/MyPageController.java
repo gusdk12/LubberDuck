@@ -40,10 +40,24 @@ public class MyPageController {
     }
 
     @GetMapping("/myPageUpdate")
-    public void myPageUpdate(Model model,
+    public String myPageUpdate(Model model,
                              @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            // UserDetails가 null일 경우에 대한 처리
+            return "redirect:/user/login";
+        }
 
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            // 사용자가 null일 경우에 대한 처리
+            return "redirect:/error";
+        }
+
+        model.addAttribute("user", user);
+        return "mypage/myPageUpdate";
     }
+
 
 
 
