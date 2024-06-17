@@ -62,9 +62,11 @@ public class MyPageController {
         }
 
         LocalDate birthDate = user.getBirth_date(); // 예: "1995-05-05"
-        model.addAttribute("year", birthDate.getYear());
-        model.addAttribute("month", birthDate.getMonthValue());
-        model.addAttribute("day", birthDate.getDayOfMonth());
+        if(birthDate != null){
+            model.addAttribute("year", birthDate.getYear());
+            model.addAttribute("month", birthDate.getMonthValue());
+            model.addAttribute("day", birthDate.getDayOfMonth());
+        }
 
         model.addAttribute("user", user);
         return "mypage/myPageUpdate";
