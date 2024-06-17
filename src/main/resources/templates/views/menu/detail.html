@@ -7,11 +7,13 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu/detail.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common/chatCart.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
 
     <script th:inline="javascript">
         var menu = [[${menu}]];
@@ -23,6 +25,9 @@
 
     <!--/* 헤더 */-->
     <th:block th:insert="~{common/header::header}"></th:block>
+
+    <!-- chat&cart -->
+    <th:block th:insert="~{common/chatCart::chatCart}"></th:block>
 
     <div id="container">
         <div id="backgoundflower1"></div>
@@ -46,12 +51,9 @@
                 <div id="info"></div>
                 <div id="price"></div>
                 <div id="cart">
-                    <div id="quantitychoice">
-                        <div id="plusQuantity"></div>
-                        <div id="nowQuantity"></div>
-                        <div id="minusQuantity"></div>
-                    </div>
-                    <div id="toCart">담기</div>
+                    <th:block sec:authorize="hasRole('CUSTOMER')">
+                        <div id="toCart">담기</div>
+                    </th:block>
                 </div>
             </div>
         </div>
@@ -59,6 +61,18 @@
         <div id="reviewsection">
 
         </div>
+
+        <th:block sec:authorize="hasRole('CUSTOMER')">
+            <th:block th:with="logged_user=${#authentication.principal.user}">
+                <script th:inline="javascript">
+                    const logged_id = [[${logged_user.id}]]
+                    const menuList = [[${menuList}]];
+                </script>
+
+                <script th:src="@{/js/common/chatCart.js}"></script>
+                <script th:src="@{/js/cart/cartData.js}"></script>
+            </th:block>
+        </th:block>
     </div>
 
     <section id="footer"></section>

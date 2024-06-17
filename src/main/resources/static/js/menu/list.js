@@ -92,9 +92,7 @@ function appendMenuToPlate(){
     for(cocktailadd of document.querySelectorAll("#cocktailadd")){
         cocktailadd.addEventListener("click", function(e){
             e.preventDefault();
-
-            var cocktailName = $(this).parent().parent().siblings("div").text();
-
+            var cocktailName = $(this).parent().siblings(".cocktailname").text();
             addToCart(menuList.find(menu => menu.name === cocktailName));
         });
     }

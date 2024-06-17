@@ -1,9 +1,8 @@
-var currentQuantity = 1;
-
 window.addEventListener('load', () => {
 
     loadMenu();
     addEvent();
+    addEventCustomerButtons();
 
 });
 
@@ -12,16 +11,10 @@ function loadMenu(){
     document.querySelector(`#name`).textContent = `${menu.name}`;
     document.querySelector(`#info`).textContent = `${menu.info}`;
     document.querySelector(`#price`).textContent = `${menu.price} ￦`;
-    document.querySelector(`#nowQuantity`).textContent = `${currentQuantity}`;
 }
 function addEvent(){
-    $('#plusQuantity').click(function(){
-        currentQuantity++;
-        document.querySelector(`#nowQuantity`).textContent = `${currentQuantity}`;
-    });
-    $('#minusQuantity').click(function(){
-        if(currentQuantity == 1) return;
-        currentQuantity--;
-        document.querySelector(`#nowQuantity`).textContent = `${currentQuantity}`;
+    $('#toCart').click(function(){
+        var cocktailName = $(this).parent().siblings("#name").text();
+        addToCart(menuList.find(menu => menu.name === cocktailName));
     });
 }
