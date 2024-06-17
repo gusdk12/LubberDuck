@@ -7,7 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common/chatCart.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu/list.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +27,8 @@
 
 <!--/* 헤더 */-->
 <th:block th:insert="~{common/header::header}"></th:block>
+<!-- chat&cart -->
+<th:block th:insert="~{common/chatCart::chatCart}"></th:block>
 
     <section id="decoContent">
         <div class="deco" id="leftup"></div>
@@ -56,22 +59,12 @@
 
     </section>
 
-    <th:block sec:authorize="hasRole('CUSTOMER')">
-        <th:block th:with="logged_user=${#authentication.principal.user}">
-            <section id="customer">
-                <div id="cutomerButtons">
-                    <img id="buttonsbackground">
-                    <div id="exit" class="hidden"></div>
-                    <div id="chat"></div>
-                    <div id="board"></div>
-
-                    <div id="cartcontent" class="hidden"></div>
-                    <div id="carttotal" class="hidden"></div>
-                </div>
-            </section>
+     <th:block sec:authorize="hasRole('CUSTOMER')">
+         <th:block th:with="logged_user=${#authentication.principal.user}">
             <script th:inline="javascript">
                 const logged_id = [[${logged_user.id}]]
             </script>
+             <script th:src="@{/js/common/chatCart.js}"></script>
         </th:block>
     </th:block>
 

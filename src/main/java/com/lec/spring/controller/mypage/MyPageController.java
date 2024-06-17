@@ -2,6 +2,7 @@ package com.lec.spring.controller.mypage;
 
 import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
+import com.lec.spring.service.menu.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,9 @@ public class MyPageController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MenuService menuService;
 
     @GetMapping("/info")
     public String info(Model model,
@@ -58,5 +62,7 @@ public class MyPageController {
     public void review(){}
 
     @GetMapping("/bookmark")
-    public void bookmark(){}
+    public void bookmark(Model model){
+        model.addAttribute("menuList", menuService.sequenceList());
+    }
 }
