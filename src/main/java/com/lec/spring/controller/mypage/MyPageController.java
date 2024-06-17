@@ -2,6 +2,7 @@ package com.lec.spring.controller.mypage;
 
 import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
+import com.lec.spring.service.menu.MenuService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,14 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/mypage")
@@ -25,6 +23,9 @@ public class MyPageController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MenuService menuService;
 
     @GetMapping("/info")
     public String info(Model model,
@@ -110,5 +111,7 @@ public class MyPageController {
     public void review(){}
 
     @GetMapping("/bookmark")
-    public void bookmark(){}
+    public void bookmark(Model model){
+        model.addAttribute("menuList", menuService.sequenceList());
+    }
 }
