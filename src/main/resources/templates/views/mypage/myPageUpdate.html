@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar/sidebar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/mypageUpdate.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <title>myPage</title>
+</head>
+<body>
+
+<th:block th:insert="~{common/header::header}"></th:block>
+
+<div class="all">
+    <!-- sidebar -->
+    <th:block th:insert="~{common/sidebar::sidebar}"></th:block>
+
+
+    <div class="article">
+<div class="container">
+
+
+    <form>
+    <div class="member">
+        <div class="logo">
+            <h1>정보 수정</h1>
+        </div>
+
+
+        <div class="field">
+            <b class="nickname">nickname</b> <b>님</b>
+        </div>
+
+
+        <div class="field">
+            <b style="display: inline;">ID</b>
+            <input type="text" disabled placeholder="userID">
+        </div>
+
+
+        <div class="field">
+            <b>이름</b>
+            <input type="text" required>
+        </div>
+
+        <div class="field">
+            <b>이메일</b>
+            <input type="email" placeholder="email" required>
+        </div>
+
+
+        <div class="field birth">
+            <b>생년월일</b>
+            <div>
+                <input type="number" placeholder="년(yyyy)" required>
+                <input type="number" placeholder="월(MM)" required>
+                <input type="number" placeholder="일(dd)" required>
+            </div>
+        </div>
+
+
+        <button class="submit" type="button" onclick="location.href='/mypage/info'">수정 완료</button>
+
+    </div>
+    </form>
+</div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<!--    <script th:src="@{/js/sidebar/sidebar.js}"></script>-->
+<script th:src="@{/js/mypage/info.js}"></script>
+</body>
+</html>

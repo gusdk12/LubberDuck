@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
+
     @Autowired
     private UserService userService;
 
@@ -37,6 +38,16 @@ public class MyPageController {
         model.addAttribute("user", user);
         return "mypage/info";
     }
+
+    @GetMapping("/myPageUpdate")
+    public void myPageUpdate(Model model,
+                             @AuthenticationPrincipal UserDetails userDetails) {
+
+    }
+
+
+
+
 
     @RequestMapping("/info")
     public void info(){}
