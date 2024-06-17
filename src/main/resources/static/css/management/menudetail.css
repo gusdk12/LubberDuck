@@ -1,9 +1,9 @@
-@font-face {
-  font-family: 'GmarketSansMedium';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+/*@font-face {*/
+/*  font-family: 'GmarketSansMedium';*/
+/*  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');*/
+/*  font-weight: normal;*/
+/*  font-style: normal;*/
+/*}*/
 
 body {
   margin: 0;
@@ -12,6 +12,11 @@ body {
    margin-bottom: 100px;
   caret-color: transparent;
   overflow-x: hidden;
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 25px;
 }
 
 #menudetail {
@@ -94,11 +99,9 @@ body {
 }
 
 .textbox_name {
-  font-family: 'GmarketSansMedium';
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   margin-left: 15px;
-  margin-top: 5px;
 }
 
 .price {
@@ -112,12 +115,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  font-family: 'GmarketSansMedium';
   font-size: 23px;
 }
 
 .textbox_price {
-  font-family: 'GmarketSansMedium';
   font-size: 30px;
   text-align: left;
   margin-top: 10px;
@@ -127,9 +128,7 @@ body {
 
 #show_price {
   height: 35px;
-  width: 250px;
-  font-family: 'GmarketSansMedium';
-  font-size: 25px;
+  font-size: 28px;
   text-align: right;
   margin-top: 5px;
   margin-right: 30px;
@@ -152,7 +151,6 @@ body {
 }
 
 .textbox_info {
-  font-family: 'GmarketSansMedium';
   font-size: 30px;
   text-align: left;
   margin-top: 30px;
@@ -165,7 +163,6 @@ body {
   margin-left: 15px;
   width: 420px;
   height: 180px;
-  font-family: 'GmarketSansMedium';
   font-size: 25px;
   padding: 10px;
   overflow-y: scroll;
@@ -303,13 +300,12 @@ img:hover {
 
 #ch_price, #ch_info {
   height: 35px;
-  width: 250px;
-  font-family: 'GmarketSansMedium';
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 25px;
   text-align: right;
   margin-top: 5px;
   margin-right: 5px;
-  padding-top: 7px;
+  padding-bottom: 5px;
   width: 300px;
   background-color: blanchedalmond;
   border: 3px solid burlywood;
@@ -362,7 +358,6 @@ img:hover {
   margin-left: 18px;
   width: 400px;
   height: 170px;
-  font-family: 'GmarketSansMedium';
   font-size: 24px;
   padding: 10px;
   overflow-y: scroll;
@@ -412,11 +407,10 @@ img:hover {
 }
 
 .er_info {
-  margin-bottom: 3px;
+  margin-bottom: 10px;
 }
 .errorMessage {
   text-align: left;
-  font-family: 'GmarketSansMedium';
   font-size: 18px;
   color: red;
 }

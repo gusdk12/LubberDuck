@@ -1,9 +1,9 @@
-@font-face {
-  font-family: 'GmarketSansMedium';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+/*@font-face {*/
+/*  font-family: 'GmarketSansMedium';*/
+/*  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');*/
+/*  font-weight: normal;*/
+/*  font-style: normal;*/
+/*}*/
 
 body {
   margin: 0;
@@ -12,6 +12,11 @@ body {
   /*margin-bottom: 500px;*/
   caret-color: transparent;
   /*overflow-x: hidden;*/
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 25px;
 }
 
 #conMenu {
@@ -49,7 +54,7 @@ body {
 .menuTable {
   width: 450px;
   border-collapse: collapse;
-  font-family: 'GmarketSansMedium';
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .tableList {
@@ -114,7 +119,6 @@ td.checkbox {
 }
 
 .ctt_name {
-  font-family: 'GmarketSansMedium';
   text-align: center;
   font-size: 18px;
   width: 300px;
@@ -128,8 +132,8 @@ td.checkbox {
 }
 
 .item {
+  font-family: "Noto Sans KR", sans-serif;
   width: 310px;
-  font-family: 'GmarketSansMedium';
   font-size: 18px;
   text-align: center;
   display: flex;
@@ -139,7 +143,8 @@ td.checkbox {
 }
 
 a, a:hover {
-  font-family: 'GmarketSansMedium';
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
   display: inline-block;
   line-height: 36px;
   text-decoration: none;
