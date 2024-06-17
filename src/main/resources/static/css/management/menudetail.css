@@ -254,6 +254,7 @@ img:hover {
 .ctt_img {
   width: 300px;
   height: 300px;
+  object-fit: contain;
   align-self: center;
   justify-self: center;
   position: static;
