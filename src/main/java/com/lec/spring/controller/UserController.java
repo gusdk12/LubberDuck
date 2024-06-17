@@ -101,9 +101,6 @@ public class UserController {
     }
 
 
-    @RequestMapping("/myPageUpdate")
-    public void myPageUpdate() {
-    }
 
 
     @Autowired

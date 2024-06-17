@@ -80,6 +80,14 @@ INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
     (3, 18, 2)
 ;
 
+INSERT INTO ctt_order (user_id, number, regdate) VALUES
+    (2, 1, 20240617);
+
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+ (1, 18, 1, 7600);
+
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (1, 19, 2, 6700);
 -- 샘플 즐겨찾기
 INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
     (2, 1, '어려워요'),
@@ -92,4 +100,8 @@ INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
     (3, 32, '생각을 시작하기 어려워요')
 ;
 
-
+INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
+     (2, 6, 'test1'),
+     (2, 12, 'test2'),
+     (2, 16, 'test3')
+;
