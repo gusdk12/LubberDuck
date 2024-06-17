@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -37,13 +38,14 @@ public class MyPageController {
         return "mypage/info";
     }
 
-
+    @RequestMapping("/info")
+    public void info(){}
     @RequestMapping("/order")
     public void order(){}
 
     @RequestMapping("/review")
     public void review(){}
 
-    @RequestMapping("/bookmark")
+    @GetMapping("/bookmark")
     public void bookmark(){}
 }

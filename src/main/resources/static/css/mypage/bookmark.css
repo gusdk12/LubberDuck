@@ -118,8 +118,7 @@ table {
     padding-bottom: -5px;
 }
 
-#cocktail1, #cocktail2, #cocktail3 {
-    background-image: url('/img/menu/Eggnog.png');
+#cocktailImg {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -133,14 +132,6 @@ table {
 
     margin: 0 auto;
     text-align: center;
-}
-
-#cocktail2 {
-    background-image: url('/img/menu/MaiTai.png');
-}
-
-#cocktail3 {
-    background-image: url('/img/menu/RobRoy.png');
 }
 
 .CII {
