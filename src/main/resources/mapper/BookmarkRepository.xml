@@ -12,6 +12,7 @@
     </resultMap>
 
     <resultMap id="mapBookmark" type="com.lec.spring.domain.mypage.Bookmark">
+        <result column="b_menu_id" property="menu_id"/>
         <result column="b_comment" property="comment"/>
         <result column="b_user_id" property="user_id"/>
         <collection property="menu" resultMap="mapCocktail"/>
@@ -20,6 +21,7 @@
     <!-- 특정 유저(id) 의 즐겨찾기 목록 -->
     <select id="findByUser" resultMap="mapBookmark">
         SELECT
+            b.cocktail_id "b_menu_id",
             b.comment "b_comment",
             b.user_id "b_user_id",
             m.id "m_id",
