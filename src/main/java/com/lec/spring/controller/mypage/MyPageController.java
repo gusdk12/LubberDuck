@@ -3,14 +3,19 @@ package com.lec.spring.controller.mypage;
 import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
 import com.lec.spring.service.menu.MenuService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/mypage")
@@ -44,11 +49,55 @@ public class MyPageController {
     }
 
     @GetMapping("/myPageUpdate")
-    public void myPageUpdate(Model model,
+    public String myPageUpdate(Model model,
                              @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return "redirect:/user/login";
+        }
+
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return "redirect:/error";
+        }
+
+        LocalDate birthDate = user.getBirth_date(); // 예: "1995-05-05"
+        model.addAttribute("year", birthDate.getYear());
+        model.addAttribute("month", birthDate.getMonthValue());
+        model.addAttribute("day", birthDate.getDayOfMonth());
+
+        model.addAttribute("user", user);
+        return "mypage/myPageUpdate";
 
     }
 
+    @PostMapping("/myPageUpdate")
+    public String myPageUpdateOk(
+            @RequestParam("year") int year
+            ,@RequestParam("month") int month
+            ,@RequestParam("day") int day
+            , @Valid User user
+            , BindingResult result
+            , Model model
+            , RedirectAttributes redirectAttrs
+    ){
+        if (result.hasErrors()){
+            redirectAttrs.addFlashAttribute("nickname", user.getNickname());
+            redirectAttrs.addFlashAttribute("email", user.getEmail());
+
+            List<FieldError> errList = result.getFieldErrors();
+            for(FieldError err : errList){
+                redirectAttrs.addFlashAttribute("error", err.getCode());
+                break;
+            }
+            return "redirect:/mypage/myPageUpdate";
+        }
+
+        user.setBirth_date(LocalDate.of(year, month, day));
+
+        model.addAttribute("result", userService.update(user));
+        return "mypage/myPageUpdateOk";
+    }
 
 
 

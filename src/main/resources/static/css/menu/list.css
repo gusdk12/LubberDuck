@@ -220,14 +220,24 @@ body {
 }
 .cocktailinfo{
     font-family: "Coming Soon", cursive;
-    font-weight: 400;
-    font-style: normal;
     font-size: 15px;
     position: absolute;
     top: 60px;
     color: #512C1C;
-    height: 62%;
+    height: 43%;
+    overflow: hidden;
+    text-overflow: ellipsis;
     /*background-color: fuchsia;*/
+}
+.cocktailprice{
+    font-family: "Coming Soon", cursive;
+    font-size: 20px;
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    left: 0px;
+    bottom: 5px;
+    color: #4d7267;
 }
 .cocktailbutton{
     position: absolute;

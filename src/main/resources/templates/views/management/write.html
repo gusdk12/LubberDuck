@@ -6,6 +6,10 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/css/management/menuList.css}">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <script th:src="@{/js/management/menuList.js}"></script>
 
@@ -44,7 +48,8 @@
           <tbody class="table-content">
           <tr th:each="menu : ${allList}">
             <td class="checkbox">
-              <input type="checkbox" th:id="${menu.name}" class="list_checkbox custom-checkbox" th:value="${menu.name}">
+              <input type="checkbox" th:id="${menu.name}" class="list_checkbox custom-checkbox"
+                     th:value="${menu.sequence}">
               <label th:for="${menu.name}" class="custom-label"></label>
             </td>
             <td class="ctt_name" th:text="${menu.name}"></td>
@@ -62,7 +67,7 @@
       <!-- 손님 메뉴판 -->
       <div class="menu_container">
         <div class="titleText">Menu</div>
-        <table class="menuTable">
+        <table class="menuTable" id="menuList">
           <thead class="tableList">
           <tr>
             <th class="sequence_title">#</th>
@@ -75,8 +80,8 @@
           </thead>
           <tbody class="table-content">
           <tr th:each="list : ${menuList}">
-            <td class="sequence" th:text="${list.sequence}"></td>
-            <td class="item"><a th:href="@{'/management/detail/' + ${list.id}}" th:text="${list.name}"></a></td>
+            <td class="sequence" th:text="${list.sequence}" th:value="${list.sequence}"></td>
+            <td class="item"><a class="itemName" th:href="@{'/management/detail/' + ${list.id}}" th:text="${list.name}"></a></td>
             <td class="checkbox chg">
               <input type="checkbox" th:id="${list.sequence}" class="menu_checkbox custom-checkbox"
                      th:value="${list.sequence}">
@@ -85,11 +90,11 @@
           </tr>
           </tbody>
         </table>
-
         <div class="icon btn-sequence">
           <button class="btn_up" type="button">
             <img src="/img/management/up.png" alt="btn_up">
           </button>
+
           <button class="btn_down" type="button">
             <img src="/img/management/down.png" alt="btn_down">
           </button>

@@ -49,12 +49,11 @@ function appendMenuToPlate(){
                     <div class="thumbnail" style="background-image: url('${cocktail.imgUrl}')"></div>
                     <div class="explain">
                         <div class="cocktailname">${cocktail.name}</div>
-                        <div class="cocktailinfo">
-                            <div class="cocktailbutton">
-                                <div id="cocktailadd"></div>
-                                <div id="cocktaildetail"></div>
-                            </div>
-                            ${cocktail.info}
+                        <div class="cocktailinfo">${cocktail.info}</div>
+                        <div class="cocktailprice">${cocktail.price}￦</div>
+                        <div class="cocktailbutton">
+                            <div id="cocktailadd"></div>
+                            <div id="cocktaildetail" onClick="location.href ='/menu/detail/${cocktail.id}'"></div>
                         </div>
                     </div>
                 </div>
@@ -64,12 +63,11 @@ function appendMenuToPlate(){
                 <div class="cocktailpart">
                     <div class="explain">
                         <div class="cocktailname">${cocktail.name}</div>
-                        <div class="cocktailinfo">
-                            <div class="cocktailbutton">
-                                <div id="cocktailadd"></div>
-                                <div id="cocktaildetail"></div>
-                            </div>
-                            ${cocktail.info}
+                        <div class="cocktailinfo">${cocktail.info}</div>
+                        <div class="cocktailprice">${cocktail.price}￦</div>
+                        <div class="cocktailbutton">
+                            <div id="cocktailadd"></div>
+                            <div id="cocktaildetail" onClick="location.href ='/menu/detail/${cocktail.id}'"></div>
                         </div>
                     </div>
                     <div class="thumbnail" style="background-image: url('${cocktail.imgUrl}')"></div> 
@@ -94,9 +92,7 @@ function appendMenuToPlate(){
     for(cocktailadd of document.querySelectorAll("#cocktailadd")){
         cocktailadd.addEventListener("click", function(e){
             e.preventDefault();
-
-            var cocktailName = $(this).parent().parent().siblings("div").text();
-
+            var cocktailName = $(this).parent().siblings(".cocktailname").text();
             addToCart(menuList.find(menu => menu.name === cocktailName));
         });
     }
