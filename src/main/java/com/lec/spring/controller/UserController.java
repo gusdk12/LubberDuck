@@ -71,44 +71,35 @@ public class UserController {
                                      @RequestParam("year") int year,
                                      @RequestParam("month") int month,
                                      @RequestParam("day") int day,
+                                     Model model,
                                      RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
             // 유효성 검사 오류 처리
-            redirectAttrs.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
-            redirectAttrs.addFlashAttribute("user", user);
+            redirectAttrs.addFlashAttribute("username", user.getUsername());
+            redirectAttrs.addFlashAttribute("nickname", user.getNickname());
+            redirectAttrs.addFlashAttribute("email", user.getEmail());
+            redirectAttrs.addFlashAttribute("year", year);
+            redirectAttrs.addFlashAttribute("month", month);
+            redirectAttrs.addFlashAttribute("day", day);
+
+            List<FieldError> errList = result.getFieldErrors();
+            for (FieldError err : errList) {
+                redirectAttrs.addFlashAttribute("error", err.getCode());
+                break;
+            }
+
             return "redirect:/user/registerCustomer";
         }
 
         user.setBirth_date(LocalDate.of(year, month, day));
 
-
+        String page = "/user/registerCustomerOk";
         int cnt = userService.register(user);
+        model.addAttribute("result", cnt);
+        return page;
 
-
-        if (cnt > 0) {
-            redirectAttrs.addFlashAttribute("message", "회원 가입이 성공적으로 완료되었습니다.");
-            return "redirect:/user/registerCustomerOk";
-        } else {
-            redirectAttrs.addFlashAttribute("error", "회원 가입 중 오류가 발생했습니다. 다시 시도해 주세요.");
-            return "redirect:/user/registerCustomer";
-        }
     }
 
-
-    @GetMapping("/registerCustomerOk")
-    public String registerCustomerOkPage(HttpServletRequest request, Model model) {
-        String message = (String) request.getSession().getAttribute("message");
-        String error = (String) request.getSession().getAttribute("error");
-
-        if (message != null) {
-            model.addAttribute("message", message);
-        }
-        if (error != null) {
-            model.addAttribute("error", error);
-        }
-
-        return "user/registerCustomerOK";
-    }
 
     @RequestMapping("/myPageUpdate")
     public void myPageUpdate() {
@@ -122,8 +113,6 @@ public class UserController {
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(userValidator);
     }
-
-
 }
 
 
