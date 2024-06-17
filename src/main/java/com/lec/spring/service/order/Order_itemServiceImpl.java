@@ -1,0 +1,27 @@
+package com.lec.spring.service.order;
+
+import com.lec.spring.domain.order.Order;
+import com.lec.spring.domain.order.Order_item;
+import com.lec.spring.repository.order.Order_ItemRepository;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class Order_itemServiceImpl implements Order_itemService {
+
+    @Autowired
+    private Order_ItemRepository orderItemRepository;
+
+    @Autowired
+    public Order_itemServiceImpl(SqlSession sqlSession){
+        orderItemRepository = sqlSession.getMapper(Order_ItemRepository.class);
+    }
+
+    @Override
+    public List<Order_item> findByOrder(Long order_id) {
+        return orderItemRepository.findByOrder(order_id);
+    }
+}
