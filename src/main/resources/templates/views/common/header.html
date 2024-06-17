@@ -14,13 +14,13 @@
             </section>
 
             <section id="headerlogo">
-                <a href="#" class="headerlogo"></a>
+                <a href="/home" class="headerlogo"></a>
             </section>
 
             <section id="headeruser">
                 <!-- 로그인 안했을때는 로그인 form 보여주기 -->
                 <div class="headeruser">
-                    <div sec:authorize="hasRole('CUSTOMER')" id="userIcon"></div>
+                    <button sec:authorize="hasRole('CUSTOMER')" th:onclick="|location.href='@{/mypage/info}'|" id="userIcon"></button>
                 </div>
                 <div><button sec:authorize="isAnonymous()" class="headerButton" th:onclick="|location.href='@{/user/login}'|">Login</button></div>
 

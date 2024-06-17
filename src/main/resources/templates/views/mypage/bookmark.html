@@ -11,6 +11,9 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/sidebar/sidebar.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/bookmark.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!--/* 헤더 */-->
@@ -20,42 +23,25 @@
         <!-- sidebar -->
         <th:block th:insert="~{common/sidebar::sidebar}"></th:block>
 
-        <div class="article" id="custom-scrollbar">
-            <div id="favorite">
-                <div class="box" id="randomrotate1">
-                    <img src="" class="background1">
-                    <img src="/img/bookmark/drop.png" alt="삭제" id="drop">
-                    <div class="CII">
-                        <img src="/img/bookmark/cartIn.png" alt="담기" id="cartIn">
-                    </div>
-                    <div class="info">
-                        <table>
-                            <tr>
-                                <td><div id="bookmark_name">Americano</div></td>
-                            </tr>
-                            <tr>
-                                <td id="cocktail-con">
-                                    <div id="cocktail1"></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="CI">
-                                    <p class="C1">.집에 가고싶은걸?</p>
-                                    <div class="I">
-                                        <img src="/img/bookmark/modify.png" alt="수정" id="modify">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+        <th:block th:with="logged_user=${#authentication.principal.user}">
+            <div class="article" id="custom-scrollbar">
+                <div id="favorite">
                 </div>
             </div>
-        </div>
+
+            <!-- user 정보 받기 -->
+            <script th:inline="javascript">
+                const logged_id = [[${logged_user.id}]]
+            </script>
+        </th:block>
     </div>
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<!--    <script th:src="@{/js/sidebar/sidebar.js}"></script>-->
+    <script th:src="@{/js/sidebar/sidebar.js}"></script>
+    <!-- 순서? -->
+<!--    <script th:src="@{/js/mypage/bookmark.js}"></script>-->
+    <script th:src="@{/js/bookmark/bookData.js}"></script>
     <script th:src="@{/js/mypage/bookmark.js}"></script>
 </body>
 </html>
