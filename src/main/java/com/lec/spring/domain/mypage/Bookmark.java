@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class Bookmark {
     private Long user_id; // 해당 유저 (PK)
+    private Long menu_id; // (PK)
 
     @ToString.Exclude
     private Menu menu; //칵테일 아이디 (FK)
