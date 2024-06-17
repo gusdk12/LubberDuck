@@ -80,3 +80,11 @@ INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
     (3, 18, 2)
 ;
 
+INSERT INTO ctt_order (user_id, number, regdate) VALUES
+    (2, 1, 20240617);
+
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+ (1, 18, 1, 7600);
+
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (1, 19, 2, 6700);
