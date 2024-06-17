@@ -100,18 +100,26 @@ table {
     text-align: center;
 }
 
-#drop {
-    width: 20px;
-    height: 20px;
+
+.drop {
+    width: 25px;
+    height: 25px;
 
     position: absolute;
     top: 7px;
-    left: 27px;
+    left: 34px;
+
+    z-index: 4;
 
     display: none;
 }
 
-#bookmark_name {
+.drop img {
+    width: 25px;
+    height: 25px;
+}
+
+.cocktail_name {
     font-size: 20px;
     font-weight: bold;
 
