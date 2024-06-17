@@ -41,27 +41,27 @@
 
         <div class="field">
             <b style="display: inline;">ID</b>
-            <input type="text" disabled th:value="${user.username}">
+            <input type="text" name="username" disabled th:value="${user.username}">
         </div>
 
 
         <div class="field">
             <b>이름</b>
-            <input type="text" th:value="${user.nickname}" required>
+            <input type="text" name="nickname" th:value="${user.nickname}" required>
         </div>
 
         <div class="field">
             <b>이메일</b>
-            <input type="email" th:value="${user.email}" required>
+            <input type="email" name="email" th:value="${user.email}" required>
         </div>
 
 
         <div class="field birth">
             <b>생년월일</b>
             <div>
-                <input type="number" placeholder="년(yyyy)" required>
-                <input type="number" placeholder="월(MM)" required>
-                <input type="number" placeholder="일(dd)" required>
+                <input type="number" name="year" th:value="${year}" required>
+                <input type="number" name="month" th:value="${month}" required>
+                <input type="number" name="day" th:value="${day}" required>
             </div>
         </div>
 

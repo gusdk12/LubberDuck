@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -65,5 +67,13 @@ public class UserServiceImpl implements UserService {
     public List<Authority> selectAuthoritiesById(Long id) {
         User user = userRepository.findById(id);
         return authorityRepository.findByUser(user);
+    }
+
+    @Override
+    public int update(User user) {
+        int result = 0;
+        result = userRepository.update(user);
+
+        return result;
     }
 }
