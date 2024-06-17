@@ -103,7 +103,7 @@
         VALUES(#{order_id}, #{cocktail_id}, #{quantity}, #{price})
     </insert>
 
-    <select id="findOrdersByUserId" resultMap="orderResultMap">
+    <select id="findOrdersByUserId" resultMap="mapOrder">
         SELECT * FROM ctt_order WHERE user_id = #{userId}
     </select>
 
