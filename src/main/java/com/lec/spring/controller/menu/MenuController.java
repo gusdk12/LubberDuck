@@ -23,6 +23,7 @@ public class MenuController {
     public String detail(@PathVariable Long menu_id, Model model){
         Menu menu = menuService.findById(menu_id);
         model.addAttribute("menu", menu);
+        model.addAttribute("menuList", menuService.sequenceList());
         return "menu/detail";
     }
 

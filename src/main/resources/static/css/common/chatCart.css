@@ -116,7 +116,10 @@
     height: 100%;
     align-content: center;
     text-align: right;
-    font-family: 'GmarketSansMedium';
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
     font-size: 15px;
 }
 #cartitemquantity{
@@ -164,7 +167,10 @@
     /*background-color: #00ff04;*/
 }
 #cartitemname{
-    font-family: 'GmarketSansBold';
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
     font-size: 20px;
 }
 #carttotal{
@@ -177,7 +183,10 @@
     text-align: end;
     align-content: center;
     color: #422626;
-    font-family: 'GmarketSansBold';
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
     font-size: 30px;
     padding-right: 20px;
 }
