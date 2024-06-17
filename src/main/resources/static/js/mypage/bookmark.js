@@ -1,5 +1,9 @@
 
 $(document).ready(function(){
+
+    loadBookmark(logged_id);
+
+
     // 사이드바 메뉴 클릭시 css 변경
     $('.sm').eq(3).css({
         'background-color':'#f8e9d7',
@@ -39,14 +43,6 @@ $(document).ready(function(){
         // alert('삭제하시겠습니까?');
     });
 
-    // var randomIndex = Math.floor(Math.random() * 5+1);
-    // $('#background').addClass(randomIndex);
-
-    // 현재 유저의 id 값
-    const id = $("input[name='id']").val().trim();
-
-    // 현재 유저의 즐겨찾기들을 불러온다
-    loadBook(id);
+    var randomIndex = Math.floor(Math.random() * 5+1);
+    $('#background').addClass(randomIndex);
 });
-
-loadBook

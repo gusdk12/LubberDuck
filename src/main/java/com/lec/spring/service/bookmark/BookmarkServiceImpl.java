@@ -25,7 +25,12 @@ public class BookmarkServiceImpl implements BookmarkService {
 
         List<Bookmark> books = bookmarkRepository.findByUser(userId);
 
+
+
+        list.setCount(books.size());
         list.setList(books);
+        list.setStatus("OK");
+
         return list;
     }
 }

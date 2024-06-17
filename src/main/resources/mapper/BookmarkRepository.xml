@@ -12,16 +12,14 @@
     </resultMap>
 
     <resultMap id="mapBookmark" type="com.lec.spring.domain.mypage.Bookmark">
-        <result column="b_id" property="id"/>
         <result column="b_comment" property="comment"/>
         <result column="b_user_id" property="user_id"/>
-        <collection property="ctId" resultMap="mapCocktail"/>
+        <collection property="menu" resultMap="mapCocktail"/>
     </resultMap>
 
     <!-- 특정 유저(id) 의 즐겨찾기 목록 -->
     <select id="findByUser" resultMap="mapBookmark">
         SELECT
-            b.id "b_id",
             b.comment "b_comment",
             b.user_id "b_user_id",
             m.id "m_id",
@@ -30,7 +28,6 @@
             m.sequence "m_sequence"
         FROM ctt_bookmark b, ctt_menu m
         WHERE b.cocktail_id = m.id AND b.user_id = #{user_id}
-        ORDER BY b.id DESC
     </select>
 
 </mapper>

@@ -13,11 +13,10 @@ ALTER TABLE ctt_authority
 
 CREATE TABLE ctt_bookmark
 (
-    id          INT          NOT NULL AUTO_INCREMENT COMMENT '즐겨찾기아이디',
     user_id     INT          NOT NULL COMMENT '유저아이디',
     cocktail_id INT          NOT NULL COMMENT '칵테일아이디',
-    comment     VARCHAR(100) NULL     COMMENT '코멘트',
-    PRIMARY KEY (id)
+    comment     VARCHAR(200) NULL     COMMENT '코멘트',
+    PRIMARY KEY (user_id, cocktail_id)
 ) COMMENT '즐겨찾기테이블';
 
 CREATE TABLE ctt_calendar
@@ -37,7 +36,7 @@ CREATE TABLE ctt_cart
 (
     user_id     INT NOT NULL COMMENT '유저아이디',
     cocktail_id INT NOT NULL COMMENT '칵테일아이디',
-    quantity    INT NOT NULL DEFAULT 1 COMMENT '수량',
+    quantity    INT CHECK (quantity > 0) NOT NULL DEFAULT 1 COMMENT '수량',
     PRIMARY KEY (user_id, cocktail_id)
 ) COMMENT '카트 테이블';
 
@@ -47,7 +46,7 @@ CREATE TABLE ctt_menu
     name     VARCHAR(100) NOT NULL COMMENT '칵테일이름',
     img_url  VARCHAR(500) NOT NULL COMMENT '이미지url',
     info     LONGTEXT     NOT NULL,
-    price    INT          NULL     DEFAULT 0 COMMENT '칵테일가격',
+    price    INT CHECK (price >= 0) NULL DEFAULT 0 COMMENT '칵테일가격',
     sequence INT          NOT NULL DEFAULT -1 COMMENT '등록x:-1/등록:1이상',
     PRIMARY KEY (id)
 ) COMMENT '칵테일메뉴';
@@ -75,8 +74,8 @@ CREATE TABLE ctt_order_item
     id          INT NOT NULL AUTO_INCREMENT COMMENT '주문아이템아이디',
     order_id    INT NOT NULL COMMENT '주문아이디',
     cocktail_id INT NOT NULL COMMENT '칵테일아이디',
-    quantity    INT NOT NULL DEFAULT 1 COMMENT '수량',
-    price       INT NOT NULL DEFAULT 0 COMMENT '주문당시가격',
+    quantity    INT CHECK (quantity > 0) NOT NULL DEFAULT 1 COMMENT '수량',
+    price       INT CHECK (price >= 0) NOT NULL DEFAULT 0 COMMENT '주문당시가격',
     PRIMARY KEY (id)
 ) COMMENT '주문아이템';
 
@@ -87,7 +86,7 @@ CREATE TABLE ctt_review
 (
     id      INT          NOT NULL AUTO_INCREMENT COMMENT '후기아이디',
     item_id INT          NOT NULL COMMENT '주문아이템아이디',
-    rate    INT          NOT NULL DEFAULT 0 COMMENT '별점',
+    rate    INT CHECK (rate >= 0) NOT NULL DEFAULT 0 COMMENT '별점',
     content VARCHAR(500) NOT NULL COMMENT '후기내용',
     regdate DATETIME     NOT NULL DEFAULT now() COMMENT '둥록일시',
     PRIMARY KEY (id)

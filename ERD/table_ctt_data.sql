@@ -83,7 +83,11 @@ INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
 -- 샘플 즐겨찾기
 INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
     (2, 1, '어려워요'),
-    (2, 8, '이게뭐죠'),
+    (2, 8, 'test1'),
+    (2, 10, 'test2'),
+    (2, 21, 'test3'),
+    (2, 32, 'test4'),
+    (2, 3, 'test5'),
     (3, 5, '강사님 제 시험은 복붙 그자체인걸요'),
     (3, 32, '생각을 시작하기 어려워요')
 ;
