@@ -20,10 +20,14 @@
             <h1>회원가입</h1>
         </div>
 
+        <div style="color: red" class="text-danger" th:text="${error }">
+            <!--/* 에러메세지 */-->
+        </div>
+
         <form th:action="@{/user/registerCustomer}" method="post">
             <div class="field">
                 <b>아이디</b>
-                <span name="username" class="userid"><input type="text" name="username" required></span>
+                <span name="username" class="userid"><input type="text" name="username" th:value="${username}" required></span>
             </div>
             <div class="field">
                 <b>비밀번호</b>
@@ -36,35 +40,20 @@
 
             <div class="field">
                 <b>이름</b>
-                <input name="nickname" type="text" required>
+                <input name="nickname" type="text" th:value="${nickname}" required>
             </div>
 
             <div class="field">
                 <b>이메일</b>
-                <input name="email" type="email" placeholder="선택입력" required>
+                <input name="email" type="email" placeholder="선택입력" th:value="${email}" required>
             </div>
 
             <div class="field birth">
                 <b>생년월일</b>
                 <div>
-                    <input name="year" type="number" placeholder="년(yyyy)" required>
-                    <input name="month" type="number" placeholder= "월(MM)" required>
-<!--                    <select name="month" required>-->
-<!--                        <option value="">월</option>-->
-<!--                        <option value="01">1월</option>-->
-<!--                        <option value="02">2월</option>-->
-<!--                        <option value="03">3월</option>-->
-<!--                        <option value="04">4월</option>-->
-<!--                        <option value="05">5월</option>-->
-<!--                        <option value="06">6월</option>-->
-<!--                        <option value="07">7월</option>-->
-<!--                        <option value="08">8월</option>-->
-<!--                        <option value="09">9월</option>-->
-<!--                        <option value="10">10월</option>-->
-<!--                        <option value="11">11월</option>-->
-<!--                        <option value="12">12월</option>-->
-<!--                    </select>-->
-                    <input name="day" type="number" placeholder="일(dd)" required>
+                    <input name="year" type="number" placeholder="년(yyyy)" th:value="${year}" required>
+                    <input name="month" type="number" placeholder= "월(MM)" th:value="${month}" required>
+                    <input name="day" type="number" placeholder="일(dd)" th:value="${day}" required>
                 </div>
             </div>
 
