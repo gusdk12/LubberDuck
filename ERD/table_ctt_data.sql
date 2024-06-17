@@ -92,4 +92,8 @@ INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
     (3, 32, '생각을 시작하기 어려워요')
 ;
 
-
+INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
+     (2, 6, 'test1'),
+     (2, 12, 'test2'),
+     (2, 16, 'test3')
+;
