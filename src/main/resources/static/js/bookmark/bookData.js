@@ -94,6 +94,19 @@ function buildBook(result){
         }
     );
 
+    // 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러를 추가합니다.
+    $('#favorite').on('click', '.cartIn', function(e) {
+        e.preventDefault();
+
+        // 클릭된 요소의 부모 요소를 찾아서 해당 칵테일 이름을 가져옵니다.
+        var cocktailName = $(this).closest('.box').find('.bookmark_name').text();
+
+        alert(cocktailName);
+
+        // 칵테일 이름에 맞는 객체를 찾아서 addToCart 함수에 전달합니다.
+        addToCart(menuList.find(menu => menu.name === cocktailName));
+    });
+
     $('#drop').click(function(){
         // alert('삭제하시겠습니까?');
     });
