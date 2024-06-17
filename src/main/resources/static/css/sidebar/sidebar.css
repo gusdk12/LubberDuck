@@ -8,7 +8,7 @@ body {
 }
 
 .all {
-    width: 1200px;
+    width: 1000px;
     height: 1000px; /* 높이를 페이지에 맞게 고치기 */
     margin-left: auto;
     margin-right: auto;
@@ -16,7 +16,7 @@ body {
 
 .side {
     float: left;
-    width: 235px;
+    width: 20%;
     height: 100%;
 
     text-align: center;
@@ -50,10 +50,11 @@ body {
 }
 
 .article {
-    width: 965px;
+    width: 80%;
     height: 100%;
 
-    background-color: #f8e9d7;
+    /*background-color: #f8e9d7;*/
+    background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
     border-radius: 10px;
 
     float: left;
