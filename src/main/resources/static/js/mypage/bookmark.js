@@ -12,4 +12,5 @@ $(document).ready(function(){
         'font-weight': 'bold'
     });
 
+    addEventCustomerButtons();
 });
