@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu/detail.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+
+    <script th:inline="javascript">
+        var menu = [[${menu}]];
+    </script>
+    <title>[[${menu.name}]]</title>
+
+</head>
+<body>
+
+    <!--/* 헤더 */-->
+    <th:block th:insert="~{common/header::header}"></th:block>
+
+    <div id="container">
+        <section id="cocktailsection">
+
+        </section>
+
+        <section id="reviewsection">
+
+        </section>
+    </div>
+
+    <section id="footer"></section>
+
+    <script th:src="@{/js/menu/detail.js}"></script>
+</body>
+</html>

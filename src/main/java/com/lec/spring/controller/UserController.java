@@ -3,6 +3,7 @@ package com.lec.spring.controller;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
 import com.lec.spring.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,30 +75,31 @@ public class UserController {
                                      RedirectAttributes redirectAttrs) {
         if (result.hasErrors()) {
             // 유효성 검사 오류 처리
-            redirectAttrs.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
-            redirectAttrs.addFlashAttribute("user", user);
+            redirectAttrs.addFlashAttribute("username", user.getUsername());
+            redirectAttrs.addFlashAttribute("nickname", user.getNickname());
+            redirectAttrs.addFlashAttribute("email", user.getEmail());
+            redirectAttrs.addFlashAttribute("year", year);
+            redirectAttrs.addFlashAttribute("month", month);
+            redirectAttrs.addFlashAttribute("day", day);
+
+            List<FieldError> errList = result.getFieldErrors();
+            for (FieldError err : errList) {
+                redirectAttrs.addFlashAttribute("error", err.getCode());
+                break;
+            }
+
             return "redirect:/user/registerCustomer";
         }
 
         user.setBirth_date(LocalDate.of(year, month, day));
 
-
+        String page = "/user/registerCustomerOk";
         int cnt = userService.register(user);
+        model.addAttribute("result", cnt);
+        return page;
 
-        if (cnt > 0) {
-            redirectAttrs.addFlashAttribute("message", "회원 가입이 성공적으로 완료되었습니다.");
-            return "redirect:/user/registerCustomerOK";
-        } else {
-            redirectAttrs.addFlashAttribute("error", "회원 가입 중 오류가 발생했습니다. 다시 시도해 주세요.");
-            return "redirect:/user/registerCustomer";
-        }
     }
 
-
-    @GetMapping("/registerCustomerOK")
-    public String registerCustomerOkPage() {
-        return "user/registerCustomerOK";
-    }
 
     @RequestMapping("/myPageUpdate")
     public void myPageUpdate() {
@@ -111,8 +113,6 @@ public class UserController {
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(userValidator);
     }
-
-
 }
 
 
