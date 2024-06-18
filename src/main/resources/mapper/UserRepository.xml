@@ -37,10 +37,9 @@
 
     <update id="update" flushCache="true" parameterType="com.lec.spring.domain.User">
         UPDATE ctt_user
-        SET username = #{username},
-            nickname = #{nickname},
+        SET nickname = #{nickname},
             email = #{email},
-            birth_date = #{birth_date},
+            birth_date = #{birth_date}
         WHERE id = #{id}
     </update>
 

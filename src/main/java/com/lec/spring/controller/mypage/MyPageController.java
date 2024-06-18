@@ -62,9 +62,11 @@ public class MyPageController {
         }
 
         LocalDate birthDate = user.getBirth_date(); // 예: "1995-05-05"
-        model.addAttribute("year", birthDate.getYear());
-        model.addAttribute("month", birthDate.getMonthValue());
-        model.addAttribute("day", birthDate.getDayOfMonth());
+        if(birthDate != null){
+            model.addAttribute("year", birthDate.getYear());
+            model.addAttribute("month", birthDate.getMonthValue());
+            model.addAttribute("day", birthDate.getDayOfMonth());
+        }
 
         model.addAttribute("user", user);
         return "mypage/myPageUpdate";
@@ -84,6 +86,9 @@ public class MyPageController {
         if (result.hasErrors()){
             redirectAttrs.addFlashAttribute("nickname", user.getNickname());
             redirectAttrs.addFlashAttribute("email", user.getEmail());
+            redirectAttrs.addFlashAttribute("year", year);
+            redirectAttrs.addFlashAttribute("month", month);
+            redirectAttrs.addFlashAttribute("day", day);
 
             List<FieldError> errList = result.getFieldErrors();
             for(FieldError err : errList){
@@ -95,7 +100,14 @@ public class MyPageController {
 
         user.setBirth_date(LocalDate.of(year, month, day));
 
-        model.addAttribute("result", userService.update(user));
+        int updateResult = userService.update(user);
+
+        if (updateResult > 0) {
+            model.addAttribute("success", true);
+        } else {
+            model.addAttribute("success", false);
+        }
+
         return "mypage/myPageUpdateOk";
     }
 

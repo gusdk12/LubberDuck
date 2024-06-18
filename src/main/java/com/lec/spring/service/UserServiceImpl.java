@@ -1,11 +1,13 @@
 package com.lec.spring.service;
 
+import com.lec.spring.config.PrincipalDetails;
 import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
 import com.lec.spring.repository.AuthorityRepository;
 import com.lec.spring.repository.UserRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,9 +73,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int update(User user) {
-        int result = 0;
-        result = userRepository.update(user);
 
-        return result;
+        // 현재 로그인한 유저
+        PrincipalDetails userDetails  = (PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user1 = userDetails.getUser();
+        user1 = userRepository.findById(user1.getId());
+        //User user1 = userRepository.findById(user.getId());
+        if (user1 != null) {
+            // 예를 들어, 닉네임과 이메일만 업데이트하고자 할 때
+            user1.setNickname(user.getNickname());
+            user1.setEmail(user.getEmail());
+            user1.setBirth_date(user.getBirth_date());
+            return userRepository.update(user1);
+        } else {
+            // 사용자가 존재하지 않을 경우 예외 처리 또는 적절한 로직 추가
+            throw new RuntimeException("사용자를 찾을 수 없습니다.");
+        }
     }
 }
