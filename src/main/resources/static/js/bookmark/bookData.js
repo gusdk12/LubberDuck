@@ -127,31 +127,25 @@ function buildBook(result){
                     </div>
                 </div>
 
-                    <div class="info">
-                        <table>
-                            <tr>
-                                <td><div class="cocktail_name">${book.menu.name}</div></td>
-                            </tr>
-                            <tr>
-                                <td class="cocktail-con">
-                                    <div id="cocktailImg" style="background-image: url('${book.menu.imgUrl}')">
-                                        <div class="CII">
-                                            <img src="/img/bookmark/cartIn.png" alt="담기" id="cartIn">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="CI">
-                                    <p class="C1">${book.comment}</p>
-                                    <div class="I">
-                                        <img src="/img/bookmark/modify.png" alt="수정" id="modify">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                <div class="info">
+                    <div class="cocktail_name">${book.menu.name}</div>
+                    <div class="cocktail-con">
+                        <div id="cocktailImg" style="background-image: url('${book.menu.imgUrl}')"></div>
+                        <div class="CII">
+                            <img src="/img/bookmark/cartIn.png" alt="담기" id="cartIn">
+                        </div>
+                    </div>
+                    <div class="CI">
+                        <p class="C1"> ${book.comment}</p>
+                        <div class="I">
+                            <img src="/img/bookmark/modify.png" alt="수정" id="modify">
+                        </div>
+                        <textarea class="modifyBox"></textarea>
+                        <img src="/img/bookmark/check.png" id="commentCheck">
                     </div>
                 </div>
+            </div>
+         
         `)
 
     });
