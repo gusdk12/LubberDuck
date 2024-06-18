@@ -12,7 +12,8 @@ public interface BookmarkRepository {
 
     Bookmark findByUserAndMenu(Long user_id, Long menu_id);
 
-    int insert(Bookmark bookmark);
+    // 코맨트 작성
+    int insert(Bookmark comment);
 
     int delete(Long user_id, Long menu_id);
 }

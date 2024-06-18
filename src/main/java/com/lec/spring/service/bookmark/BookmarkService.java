@@ -14,7 +14,7 @@ public interface BookmarkService {
     // 특정 유저(id)와 음료(id) 찾기
     QryResult findByUserAndMenu(Long userId, Long menuId);
 
-    // 추가
+    // 특정 유저(id)와 음료(id)의 comment 작성 후 추가
     QryResult add(Long userId, Long menuId, String comment);
 
     // 삭제
