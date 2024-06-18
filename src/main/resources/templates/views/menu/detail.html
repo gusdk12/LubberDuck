@@ -38,6 +38,13 @@
         <div id="cocktailsection">
             <div id="cocktailImg">
                 <div id="img"></div>
+                <div id="heartImg">
+                    <div id="heart" class="heart1"></div>
+                </div>
+                <div class="comment-con">
+                    <textarea class="comment"></textarea>
+                    <img src="/img/bookmark/check.png" id="commentCheck">
+                </div>
             </div>
             <div id="cocktailInfo">
                 <div id="name"></div>
@@ -71,6 +78,8 @@
 
                 <script th:src="@{/js/common/chatCart.js}"></script>
                 <script th:src="@{/js/cart/cartData.js}"></script>
+                <script th:src="@{/js/bookmark/bookData.js}"></script>
+
             </th:block>
         </th:block>
     </div>

@@ -1,6 +1,6 @@
 
 // 추가하기
-async function addToBook(cocktail){
+async function addToBook(cocktail, comment){
 
     // 즐겨찾기에 이미 같은 상품이 담겨있는지 확인하기
     let findBook = null;
@@ -26,7 +26,7 @@ async function addToBook(cocktail){
         const data = {
             "userId" : logged_id,
             "cocktailId" : cocktail.id,
-            "comment" : "이부분 받아오는걸로 수정필요",
+            "comment" : comment,
         };
 
         $.ajax({
@@ -86,7 +86,6 @@ async function deleteFromBook(cocktail){
                         alert(data.status);
                         return;
                     }
-                    loadBookmark(logged_id);
                 }
             },
         });

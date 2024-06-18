@@ -27,7 +27,7 @@ public class BookmarkController {
         return bookmarkService.findByUserAndMenu(userId,cocktailId);
     }
 
-    // 추가하기
+    // 코맨트 작성 후 추가하기
     @PostMapping("/add")
     public QryResult add(
             @RequestParam("userId") Long userId,
