@@ -1,4 +1,10 @@
 
+window.addEventListener('load', () => {
+
+    customerButtonsSet();
+
+});
+
 function customerButtonsSet() {
     $('#board').click(function(){
         showCartBox();
