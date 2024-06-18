@@ -31,7 +31,7 @@ public class MyPageController {
     public String info(Model model,
                        @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
-            // UserDetails가 null일 경우에 대한 처리
+            // UserDetails가 null일 경우에 대한 처리jknklnm
             // 로그인 페이지로 리디렉션할 수 있습니다.
             return "redirect:/user/login";
         }
