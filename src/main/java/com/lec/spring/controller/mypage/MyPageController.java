@@ -5,6 +5,9 @@ import com.lec.spring.domain.mypage.MypageValidator;
 import com.lec.spring.service.UserService;
 import com.lec.spring.service.menu.MenuService;
 import jakarta.validation.Valid;
+import com.lec.spring.service.menu.MenuService;
+import com.lec.spring.service.order.OrderService;
+import com.lec.spring.service.order.Order_itemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDate;
 import java.util.List;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
@@ -29,11 +36,17 @@ public class MyPageController {
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private Order_itemService orderItemService;
+
     @GetMapping("/info")
     public String info(Model model,
                        @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
-            // UserDetails가 null일 경우에 대한 처리jknklnm
+            // UserDetails가 null일 경우에 대한 처리
             // 로그인 페이지로 리디렉션할 수 있습니다.
             return "redirect:/user/login";
         }
@@ -123,7 +136,7 @@ public class MyPageController {
     }
 
 
-@RequestMapping("/info")
+    @RequestMapping("/info")
     public void info(){}
     @RequestMapping("/order")
     public void order(){}

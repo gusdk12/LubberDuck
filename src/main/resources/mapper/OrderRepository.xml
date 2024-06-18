@@ -5,106 +5,18 @@
 
 <mapper namespace="com.lec.spring.repository.order.OrderRepository">
 
-    <resultMap id="mapUser" type="com.lec.spring.domain.User">
-        <result column="u_id" property="id"/>
-        <result column="u_authority_id" property="authority_id"/>
-        <result column="u_username" property="username"/>
-        <result column="u_password" property="password"/>
-        <result column="u_nickname" property="nickname"/>
-        <result column="u_email" property="email"/>
-        <result column="u_regdate" property="regDate"/>
-        <result column="u_birth_date" property="birth_date"/>
-    </resultMap>
-
-    <resultMap id="mapMenu" type="com.lec.spring.domain.menu.Menu">
-        <result column="m_id" property="id"/>
-        <result column="m_name" property="name"/>
-        <result column="m_img_url" property="imgUrl"/>
-        <result column="m_info" property="info"/>
-        <result column="m_price" property="price"/>
-        <result column="m_sequence" property="sequence"/>
-    </resultMap>
-
-    <resultMap id="mapCart" type="com.lec.spring.domain.cart.Cart">
-        <result column="c_user_id" property="user_id"/>
-        <result column="c_cocktail_id" property="menu_id"/>
-        <result column="c_quantity" property="quantity"/>
-        <collection property="user" resultMap="mapUser"/>
-        <collection property="menu" resultMap="mapMenu"/>
-    </resultMap>
-
-    <resultMap id="mapOrder" type="com.lec.spring.domain.order.Order">
-        <result column="o_id" property="id"/>
-        <result column="o_user_id" property="user_id"/>
-        <result column="o_number" property="number"/>
-        <result column="o_regdate" property="regdate"/>
-    </resultMap>
-
-    <resultMap id="mapOrder_item" type="com.lec.spring.domain.order.Order_item">
-        <result column="oi_id" property="id"/>
-        <result column="oi_order_id" property="order_id"/>
-        <result column="oi_cocktail_id" property="menu_id"/>
-        <result column="oi_quantity" property="quantity"/>
-        <result column="oi_price" property="price"/>
-    </resultMap>
-
     <sql id="SELECT_BASE">
         SELECT
-            c.user_id "c_user_id",
-            c.cocktail_id "c_cocktail_id",
-            c.quantity "c_quantity",
-            u.id "u_id",
-            u.authority_id "u_authority_id",
-            u.username "u_username",
-            u.password "u_password",
-            u.nickname "u_nickname",
-            u.email "u_email",
-            u.regdate "u_regdate",
-            u.birth_date "u_birth_date",
-            m.id "m_id",
-            m.name "m_name",
-            m.img_url "m_img_url",
-            m.info "m_info",
-            m.price "m_price",
-            m.sequence "m_sequence",
-            o.id "o_id",
-            o.user_id "o_user_id",
-            o.number "o_number",
-            o.regdate "o_regdate",
-            oi.id "oi.id",
-            oi.order_id "oi_order_id",
-            oi.cocktail_id "oi_cocktail_id",
-            oi.quantity "oi_quantity",
-            oi.price "oi_price"
-        FROM ctt_cart c, ctt_user u, ctt_menu m, ctt_order o, ctt_order_item oi
+            id "id"
+             , user_id "user_id"
+             , number "number"
+             , regdate "regdate"
+        FROM ctt_order
     </sql>
 
-    <select id="findByUser" resultMap="mapOrder">
+    <select id="findByUser" resultType="com.lec.spring.domain.order.Order">
         <include refid="SELECT_BASE"/>
-        WHERE o.user_id = u.id and o.uer_id = #{user_id}
-        ORDER BY o.regdate DESC
-    </select>
-
-    <select id="findByMenu" resultMap="mapOrder_item">
-        <include refid="SELECT_BASE"/>
-        WHERE oi.order_id = o.id AND oi.cocktail_id = menu.id
-        ORDER BY DESC
-    </select>
-
-    <insert id="insertOrder" flushCache="true" parameterType="com.lec.spring.domain.order.Order"
-            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO ctt_order(user_id, number, regdate)
-        VALUES(#{user_id}, #{number}, #{regdate})
-    </insert>
-
-    <insert id="insertOrderItem" flushCache="true" parameterType="com.lec.spring.domain.order.Order_item"
-            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO ctt_order_item(order_id, cocktail_id, quantity, price)
-        VALUES(#{order_id}, #{cocktail_id}, #{quantity}, #{price})
-    </insert>
-
-    <select id="findOrdersByUserId" resultMap="mapOrder">
-        SELECT * FROM ctt_order WHERE user_id = #{userId}
+        WHERE user_id = #{param1}
     </select>
 
 </mapper>
