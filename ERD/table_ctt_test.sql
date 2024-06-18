@@ -8,4 +8,4 @@ SELECT * FROM ctt_cart;
 SELECT * FROM ctt_bookmark;
 
 
-ALTER TABLE ctt_calender RENAME TO ctt_calendar;
+

@@ -4,8 +4,8 @@ var paperCount = 0;
 window.addEventListener('load', () => {
 
     preloadImages();
-    scrollToCenter();
     appendMenuToPlate();
+    scrollToCenter();
     addEventCustomerButtons();
 
 });
@@ -25,7 +25,10 @@ function preloadImages(){
 function scrollToCenter(){
     const menuBody = document.querySelector('#menuBody');
 
-    menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 150;
+    menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 300;
+    // const menuBody = document.querySelector('#menuscroll');
+    //
+    // menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 300;
 }
 
 function appendMenuToPlate(){
@@ -52,7 +55,7 @@ function appendMenuToPlate(){
                         <div class="cocktailinfo">${cocktail.info}</div>
                         <div class="cocktailprice">${cocktail.price}￦</div>
                         <div class="cocktailbutton">
-                            <div id="cocktailadd"></div>
+<!--                            <div id="cocktailadd"></div>-->
                             <div id="cocktaildetail" onClick="location.href ='/menu/detail/${cocktail.id}'"></div>
                         </div>
                     </div>
@@ -66,7 +69,7 @@ function appendMenuToPlate(){
                         <div class="cocktailinfo">${cocktail.info}</div>
                         <div class="cocktailprice">${cocktail.price}￦</div>
                         <div class="cocktailbutton">
-                            <div id="cocktailadd"></div>
+<!--                            <div id="cocktailadd"></div>-->
                             <div id="cocktaildetail" onClick="location.href ='/menu/detail/${cocktail.id}'"></div>
                         </div>
                     </div>
@@ -74,10 +77,19 @@ function appendMenuToPlate(){
                 </div>
             `);
         }
+
         count++;
     });
 
+    if(logged_id !== -1){
+        var parentDiv = document.getElementsByClassName('cocktailbutton');
 
+        for(let div of parentDiv){
+            var newChildDiv = document.createElement('div');
+            newChildDiv.id = 'cocktailadd';
+            div.appendChild(newChildDiv);
+        }
+    }
 
     for(cocktailpart of document.querySelectorAll(".cocktailpart")){
         cocktailpart.addEventListener("mouseenter", function(){
@@ -102,6 +114,8 @@ function appendMenuToPlate(){
     for(let i = 0; i < paperCount; i++)
         fr += "1fr ";
     $menuPlate.css({ 'grid-template-columns': `${fr.trim()}` });
+    $('#menuscroll').css({'width': `${((paperCount + 1) * 500) + 300}px`});
+
 }
 
 let isDragging = false;

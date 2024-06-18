@@ -18,11 +18,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
 
+    <script th:inline="javascript">
+        var logged_id = -1;
+    </script>
     <title>RubberBar</title>
-
-<style>
-
-</style>
 
 </head>
 <body>
@@ -64,15 +63,15 @@
      <th:block sec:authorize="hasRole('CUSTOMER')">
          <th:block th:with="logged_user=${#authentication.principal.user}">
             <script th:inline="javascript">
-                const logged_id = [[${logged_user.id}]]
+                logged_id = [[${logged_user.id}]]
             </script>
-             <script th:src="@{/js/common/chatCart.js}"></script>
         </th:block>
     </th:block>
 
     <script th:inline="javascript">
         var menuList = [[${menuList}]];
     </script>
+    <script th:src="@{/js/common/chatCart.js}"></script>
     <script th:src="@{/js/cart/cartData.js}"></script>
     <script th:src="@{/js/menu/list.js}"></script>
 </body>

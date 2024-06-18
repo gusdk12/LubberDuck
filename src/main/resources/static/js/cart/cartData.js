@@ -1,6 +1,11 @@
 
 async function addToCart(cocktail) {
 
+    if(cocktail == null || logged_id === -1){
+        // alert("칵테일의 값이 없습니다.")
+        return;
+    }
+
     // 카트에 이미 같은 아이디가 있는지 검색하기
     let findCart = null;
     // findItemInCart(cocktail.id);
