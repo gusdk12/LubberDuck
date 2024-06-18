@@ -13,7 +13,11 @@
 
 }
 body {
-    font-family: 'GmarketSansMedium';
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
     margin: 0;
     height: 100vh;
     background-color: #10573e;
@@ -103,7 +107,7 @@ body {
 }
 
 .id, .pw{
-    font-family: 'GmarketSansLight';
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 10px;
     color: lightgray;
     margin-bottom: 3px;
@@ -242,7 +246,7 @@ img{
     }
 
     .id, .pw{
-        font-family: 'GmarketSansLight';
+        font-family: "Noto Sans KR", sans-serif;
         font-size: 10px;
         color: lightgray;
         margin-bottom: 20px;
