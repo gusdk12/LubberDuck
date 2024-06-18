@@ -6,13 +6,24 @@
     font-style: normal;
 }
 body {
-    font-family: 'GmarketSansMedium';
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
     margin: 0;
     height: 100vh;
     background-color: #10573e;
     caret-color: transparent;
     overflow-x: hidden;
 }
+
+#menuLink {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 
 #mainContent{
     width: 100%;

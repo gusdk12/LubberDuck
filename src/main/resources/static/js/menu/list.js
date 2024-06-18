@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
     preloadImages();
     appendMenuToPlate();
     scrollToCenter();
-    addEventCustomerButtons();
+    customerButtonsSet();
 
 });
 
@@ -16,6 +16,10 @@ function preloadImages(){
         '/img/management/menu.jpg'
     ];
 
+    for(let menu of menuList){
+        images.push(menu.imgUrl);
+    }
+
     // 각 이미지 URL을 순회하며 로드
     $.each(images, function(index, url) {
         $('<img>').attr('src', url).addClass('hidden').appendTo('body');
@@ -24,11 +28,8 @@ function preloadImages(){
 
 function scrollToCenter(){
     const menuBody = document.querySelector('#menuBody');
-
     menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 300;
-    // const menuBody = document.querySelector('#menuscroll');
-    //
-    // menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 300;
+    document.getElementById("cutomerButtons") && $('#cutomerButtons').css({bottom: '-20%'});
 }
 
 function appendMenuToPlate(){
@@ -114,7 +115,7 @@ function appendMenuToPlate(){
     for(let i = 0; i < paperCount; i++)
         fr += "1fr ";
     $menuPlate.css({ 'grid-template-columns': `${fr.trim()}` });
-    $('#menuscroll').css({'width': `${((paperCount + 1) * 500) + 300}px`});
+    $('#menuscroll').css({'width': `${((paperCount + 1) * 500) + 1000}px`});
 
 }
 
@@ -131,28 +132,59 @@ function openMenu() {
         }
     );
 
+    // const viewport = document.querySelector('.viewport');
     const menuBody = document.querySelector('#menuBody');
+    const menuscroll = document.querySelector('#menuscroll');
+
+    const isLeftOver = () => {
+        const viewportWidth = menuBody.offsetWidth;
+        const viewportCenter = viewportWidth / 2;
+        const targetDivRect = menuscroll.getBoundingClientRect();
+        const targetLeftEdge = targetDivRect.left;
+
+        if (targetLeftEdge > viewportCenter)
+            return true;
+        return false;
+    };
+    const isRightOver = () => {
+        const viewportWidth = menuBody.offsetWidth;
+        const viewportCenter = viewportWidth / 2;
+        const targetDivRect = menuscroll.getBoundingClientRect();
+        const targetRightEdge = targetDivRect.right;
+
+        if (targetRightEdge < viewportCenter)
+            return true;
+        return false;
+    };
 
     menuBody.addEventListener('mousedown', (e) => {
         isDragging = true;
-        startX = e.pageX - menuBody.offsetLeft;
-        scrollLeft = menuBody.scrollLeft;
+        menuBody.style.cursor = 'grabbing';
+        startX = e.pageX;// - menuscroll.offsetLeft;
+        scrollLeft = menuscroll.offsetLeft;
     });
 
     menuBody.addEventListener('mouseleave', () => {
         isDragging = false;
+        menuBody.style.cursor = 'grab';
     });
 
     menuBody.addEventListener('mouseup', () => {
         isDragging = false;
+        menuBody.style.cursor = 'grab';
     });
 
     menuBody.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
+
         e.preventDefault();
-        const x = e.pageX - menuBody.offsetLeft;
-        const walk = x - startX;
-        menuBody.scrollLeft = scrollLeft - walk;
+        const x = e.pageX - startX;
+        let newPosition = scrollLeft + x;
+        const currentPosition = menuscroll.offsetLeft;
+        if(isLeftOver() && e.pageX > startX) return;
+        if(isRightOver() && e.pageX < startX) return;
+
+        menuscroll.style.left = `${newPosition}px`;
     });
 }
 
@@ -180,6 +212,7 @@ window.addEventListener('scroll', function() {
         rightdown.style.right = '-28%';
         if(cutomerButtons) {
             cutomerButtons.style.bottom = '5%';
+            // $('#cutomerButtons').animate({bottom: '5%'}, 100);
         }
     } else {
         leftup.style.left = '0%';
@@ -188,6 +221,7 @@ window.addEventListener('scroll', function() {
         rightdown.style.right = '0%';
         if(cutomerButtons) {
             cutomerButtons.style.bottom = '-20%';
+            // $('#cutomerButtons').animate({bottom: '-20%'}, 100);
             hideCartBox();
         }
     }

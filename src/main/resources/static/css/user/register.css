@@ -8,8 +8,11 @@
     font-style: normal;
 }
 body{
-    font-family: 'GmarketSansMedium';
-    font-size:14px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 13px;
     background-color: #10573e;
     line-height: 1.5em;
     color :  black;
@@ -63,7 +66,7 @@ body{
 
 
 .member input:not(input[type=radio]),.member select{
-    font-family: 'GmarketSansMedium';
+    font-family: "Noto Sans KR", sans-serif;
     border: 1px solid #dadada;
     padding: 15px;
     width: 100%;

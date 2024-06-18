@@ -92,24 +92,30 @@ body {
     /*max-width: 1300px;  !* 최대 폭 지정 *!*/
     margin-left: auto;
     margin-right: auto;
-    /*background-color: #9eb0c5;*/
     overflow-x: hidden;
     overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /*scroll-behavior: smooth; !* Enable smooth scrolling *!*/
-    background-color: rgba(27, 101, 75, 0);
+    /*background-color: rgba(27, 101, 75, 0);*/
+    /*background-color: #FFC107;*/
     /*box-shadow: inset -10px 0 10px -5px rgba(0, 0, 0, 0.5), !* 왼쪽 그림자 *!*/
     /*            inset 10px 0 10px -5px rgba(0, 0, 0, 0.5);  !* 오른쪽 그림자 *!*/
 }
 
 #menuscroll{
+    /*background-color: #e74c3c;*/
     display: flex;
     justify-content: center;
     align-items: center;
     height: 900px;
-    /*width: 2800px;*/
-    width: 300px;
-    position: relative;
+    width: 5000px;
+    position: absolute;
+    /*width: 300px;*/
+    /*position: relative;*/
     top: 60px;
+    /*overflow-x: scroll;*/
 }
 #menuscroll > div {
     flex-shrink: 0; /* Prevent child divs from shrinking */

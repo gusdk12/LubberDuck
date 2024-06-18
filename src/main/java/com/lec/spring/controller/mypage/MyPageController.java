@@ -1,6 +1,7 @@
 package com.lec.spring.controller.mypage;
 
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.mypage.MypageValidator;
 import com.lec.spring.service.UserService;
 import com.lec.spring.service.menu.MenuService;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,7 +33,7 @@ public class MyPageController {
     public String info(Model model,
                        @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
-            // UserDetails가 null일 경우에 대한 처리
+            // UserDetails가 null일 경우에 대한 처리jknklnm
             // 로그인 페이지로 리디렉션할 수 있습니다.
             return "redirect:/user/login";
         }
@@ -62,9 +64,11 @@ public class MyPageController {
         }
 
         LocalDate birthDate = user.getBirth_date(); // 예: "1995-05-05"
-        model.addAttribute("year", birthDate.getYear());
-        model.addAttribute("month", birthDate.getMonthValue());
-        model.addAttribute("day", birthDate.getDayOfMonth());
+        if(birthDate != null){
+            model.addAttribute("year", birthDate.getYear());
+            model.addAttribute("month", birthDate.getMonthValue());
+            model.addAttribute("day", birthDate.getDayOfMonth());
+        }
 
         model.addAttribute("user", user);
         return "mypage/myPageUpdate";
@@ -84,6 +88,9 @@ public class MyPageController {
         if (result.hasErrors()){
             redirectAttrs.addFlashAttribute("nickname", user.getNickname());
             redirectAttrs.addFlashAttribute("email", user.getEmail());
+            redirectAttrs.addFlashAttribute("year", year);
+            redirectAttrs.addFlashAttribute("month", month);
+            redirectAttrs.addFlashAttribute("day", day);
 
             List<FieldError> errList = result.getFieldErrors();
             for(FieldError err : errList){
@@ -95,14 +102,28 @@ public class MyPageController {
 
         user.setBirth_date(LocalDate.of(year, month, day));
 
-        model.addAttribute("result", userService.update(user));
+        int updateResult = userService.update(user);
+
+        if (updateResult > 0) {
+            model.addAttribute("success", true);
+        } else {
+            model.addAttribute("success", false);
+        }
+
         return "mypage/myPageUpdateOk";
     }
 
 
+    @Autowired
+    MypageValidator mypageValidator;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(mypageValidator);
+    }
 
 
-    @RequestMapping("/info")
+@RequestMapping("/info")
     public void info(){}
     @RequestMapping("/order")
     public void order(){}

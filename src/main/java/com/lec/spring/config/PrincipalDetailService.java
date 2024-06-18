@@ -36,11 +36,9 @@ public class PrincipalDetailService implements UserDetailsService {
             return userDetails;
         }
 
-        // 해당 username 의 user 가 없다면?
-        // UsernameNotFoundException 을 throw 해주어야 한다
+
         throw new UsernameNotFoundException(username);
 
-        // 주의!  여기서 null 리턴하면 예외 발생!
     }
 }
 
