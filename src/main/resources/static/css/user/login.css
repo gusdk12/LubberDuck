@@ -21,6 +21,12 @@ body {
     overflow-x: hidden;
 }
 
+#menuLink {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 #decoContent{
     right: -18%;
     top: 100px;
