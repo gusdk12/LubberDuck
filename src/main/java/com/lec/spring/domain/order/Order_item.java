@@ -16,5 +16,6 @@ public class Order_item {
     private int quantity; // 수량
     private Integer price; // 주문 당시 가격
 
+    @ToString.Exclude
     private Menu menu;  // Menu 객체 포함
 }

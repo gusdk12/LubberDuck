@@ -22,6 +22,7 @@
     gap: 20px;
     align-items: center; /* 자식 요소들을 가로 중앙에 배치 */
     margin-top: 180px;
+    margin-bottom: 130px;
 }
 
 .receipt {
@@ -45,12 +46,11 @@
     z-index: 1;
 }
 
-.background img {
+.background img{
     width: 100%;
     height: 100%;
     object-fit: fill;
 }
-
 .receipt .content {
     position: relative;
     z-index: 2;
@@ -133,7 +133,7 @@
 [name="reviewBtn"]:hover {
     background-color: rgb(177, 213, 177);
     color: black;
-    border: none;
+    /*border: none;*/
 }
 
 [name="reviewBtn"]:active {
