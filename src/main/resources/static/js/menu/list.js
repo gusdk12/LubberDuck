@@ -26,9 +26,6 @@ function scrollToCenter(){
     const menuBody = document.querySelector('#menuBody');
 
     menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 300;
-    // const menuBody = document.querySelector('#menuscroll');
-    //
-    // menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 300;
 }
 
 function appendMenuToPlate(){
@@ -114,7 +111,7 @@ function appendMenuToPlate(){
     for(let i = 0; i < paperCount; i++)
         fr += "1fr ";
     $menuPlate.css({ 'grid-template-columns': `${fr.trim()}` });
-    $('#menuscroll').css({'width': `${((paperCount + 1) * 500) + 300}px`});
+    $('#menuscroll').css({'width': `${((paperCount + 1) * 500) + 1000}px`});
 
 }
 
@@ -131,28 +128,61 @@ function openMenu() {
         }
     );
 
+    // const viewport = document.querySelector('.viewport');
     const menuBody = document.querySelector('#menuBody');
+    const menuscroll = document.querySelector('#menuscroll');
+
+    const isLeftOver = () => {
+        const viewportWidth = menuBody.offsetWidth;
+        const viewportCenter = viewportWidth / 2;
+        const targetDivRect = menuscroll.getBoundingClientRect();
+        const targetLeftEdge = targetDivRect.left;
+
+        if (targetLeftEdge > viewportCenter)
+            return true;
+        return false;
+    };
+    const isRightOver = () => {
+        const viewportWidth = menuBody.offsetWidth;
+        const viewportCenter = viewportWidth / 2;
+        const targetDivRect = menuscroll.getBoundingClientRect();
+        const targetRightEdge = targetDivRect.right;
+
+        if (targetRightEdge < viewportCenter)
+            return true;
+        return false;
+    };
 
     menuBody.addEventListener('mousedown', (e) => {
         isDragging = true;
-        startX = e.pageX - menuBody.offsetLeft;
-        scrollLeft = menuBody.scrollLeft;
+        menuBody.style.cursor = 'grabbing';
+        startX = e.pageX;// - menuscroll.offsetLeft;
+        scrollLeft = menuscroll.offsetLeft;
     });
 
     menuBody.addEventListener('mouseleave', () => {
         isDragging = false;
+        menuBody.style.cursor = 'grab';
     });
 
     menuBody.addEventListener('mouseup', () => {
         isDragging = false;
+        menuBody.style.cursor = 'grab';
     });
 
     menuBody.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
+
         e.preventDefault();
-        const x = e.pageX - menuBody.offsetLeft;
-        const walk = x - startX;
-        menuBody.scrollLeft = scrollLeft - walk;
+        const x = e.pageX - startX;
+        let newPosition = scrollLeft + x;
+        const currentPosition = menuscroll.offsetLeft;
+        console.log("start : " + startX);
+        console.log(e.pageX);
+        if(isLeftOver() && e.pageX > startX) return;
+        if(isRightOver() && e.pageX < startX) return;
+
+        menuscroll.style.left = `${newPosition}px`;
     });
 }
 
