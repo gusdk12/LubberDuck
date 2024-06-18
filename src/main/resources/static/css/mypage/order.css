@@ -1,16 +1,3 @@
-@font-face {
-    font-family: 'GmarketSansLight';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 
 .article {
     height: auto;
@@ -23,6 +10,12 @@
     align-items: center; /* 자식 요소들을 가로 중앙에 배치 */
     margin-top: 180px;
     margin-bottom: 130px;
+
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
 }
 
 .receipt {
