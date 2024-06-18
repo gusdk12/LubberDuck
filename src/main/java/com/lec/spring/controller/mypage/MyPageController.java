@@ -1,9 +1,11 @@
 package com.lec.spring.controller.mypage;
 
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.domain.order.Order;
 import com.lec.spring.domain.order.Order_item;
 import com.lec.spring.service.UserService;
+import com.lec.spring.service.menu.MenuService;
 import com.lec.spring.service.order.OrderService;
 import com.lec.spring.service.order.Order_itemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,9 @@ public class MyPageController {
 
     @Autowired
     private Order_itemService orderItemService;
+
+    @Autowired
+    private MenuService menuService;
 
     @GetMapping("/info")
     public String info(Model model,
@@ -74,26 +78,26 @@ public class MyPageController {
         }
 
         Long userId = user.getId();
+
         List<Order> orders = orderService.findByUser(userId);
 
         // 주문 항목들을 저장할 맵을 준비합니다.
-        Map<Long, List<Order_item>> orderItemsMap = new HashMap<>();
+        Map<Long, List<Order_item>> orderItemsByOrderId = new HashMap<>();
 
         // 각 주문에 대해 주문 항목을 조회하고 맵에 저장합니다.
         for (Order order : orders) {
-            List<Order_item> orderItems = orderItemService.findByOrder(order.getId());
-            orderItemsMap.put(order.getId(), orderItems);
+            List<Order_item> items = orderItemService.findByOrder(order.getId());
+            orderItemsByOrderId.put(order.getId(), items);
         }
 
-        // 모델에 주문 목록과 주문 항목 맵을 추가합니다.
+        // 모델에 주문 목록과 주문 항목 맵을0 추가합니다.
         model.addAttribute("orders", orders);
         model.addAttribute("user", user);
-        model.addAttribute("orderItemsMap", orderItemsMap);
+        model.addAttribute("orderItemsByOrderId", orderItemsByOrderId);
 
         // mypage/order 뷰를 반환합니다.
-        return "mypage/order";
+        return "/mypage/order";
     }
-
 
 
 

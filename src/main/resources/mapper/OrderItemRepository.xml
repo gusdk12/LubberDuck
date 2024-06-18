@@ -3,26 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- Order_ItemRepository.xml -->
 <mapper namespace="com.lec.spring.repository.order.Order_ItemRepository">
 
     <sql id="SELECT_BASE">
         SELECT
-            id "id"
-             , order_id "order_id"
-             , cocktail_id "cocktail_id"
-             , quantity "quantity"
-             , price "price"
-             , id "id"
-             , user_id "user_id"
-             , number "number"
-             , regdate "regdate"
-             , id "id"
-             , name "name"
-             , img_url "img_url"
-             , info "info"
-             , price "price"
-             , sequence "sequence"
-            FROM ctt_order_item oi, ctt_order o, ctt_menu m
+            oi.id "id",
+            oi.order_id "order_id",
+            oi.cocktail_id "cocktail_id",
+            oi.quantity "quantity",
+            oi.price "price",
+            m.id "menu.id",
+            m.name "menu.name"  -- 칵테일 이름 추가
+        FROM ctt_order_item oi
+                 LEFT JOIN dbduck.ctt_menu m ON oi.cocktail_id = m.id
     </sql>
 
     <select id="findByOrder" resultType="com.lec.spring.domain.order.Order_item">
