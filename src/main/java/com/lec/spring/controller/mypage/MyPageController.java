@@ -112,6 +112,7 @@ public class MyPageController {
 
     @GetMapping("/bookmark")
     public void bookmark(Model model){
+        model.addAttribute("allList",menuService.list());
         model.addAttribute("menuList", menuService.sequenceList());
     }
 }

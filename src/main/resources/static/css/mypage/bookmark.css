@@ -112,6 +112,7 @@ table {
     z-index: 4;
 
     display: none;
+    cursor: pointer;
 }
 
 .drop img {
@@ -152,6 +153,7 @@ table {
     background-color: rgba(255, 255, 255, 0.5);
 
     display: none;
+    cursor: pointer;
 }
 
 #cartIn {
@@ -174,6 +176,7 @@ table {
     position: absolute;
     right: 15px;
     bottom: 3px;
+    cursor: pointer;
 }
 
 #modify {
