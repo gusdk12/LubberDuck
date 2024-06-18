@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
     preloadImages();
     appendMenuToPlate();
     scrollToCenter();
-    addEventCustomerButtons();
+    customerButtonsSet();
 
 });
 
@@ -16,6 +16,10 @@ function preloadImages(){
         '/img/management/menu.jpg'
     ];
 
+    for(let menu of menuList){
+        images.push(menu.imgUrl);
+    }
+
     // 각 이미지 URL을 순회하며 로드
     $.each(images, function(index, url) {
         $('<img>').attr('src', url).addClass('hidden').appendTo('body');
@@ -24,8 +28,8 @@ function preloadImages(){
 
 function scrollToCenter(){
     const menuBody = document.querySelector('#menuBody');
-
     menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 300;
+    document.getElementById("cutomerButtons") && $('#cutomerButtons').css({bottom: '-20%'});
 }
 
 function appendMenuToPlate(){
@@ -177,8 +181,6 @@ function openMenu() {
         const x = e.pageX - startX;
         let newPosition = scrollLeft + x;
         const currentPosition = menuscroll.offsetLeft;
-        console.log("start : " + startX);
-        console.log(e.pageX);
         if(isLeftOver() && e.pageX > startX) return;
         if(isRightOver() && e.pageX < startX) return;
 
@@ -210,6 +212,7 @@ window.addEventListener('scroll', function() {
         rightdown.style.right = '-28%';
         if(cutomerButtons) {
             cutomerButtons.style.bottom = '5%';
+            // $('#cutomerButtons').animate({bottom: '5%'}, 100);
         }
     } else {
         leftup.style.left = '0%';
@@ -218,6 +221,7 @@ window.addEventListener('scroll', function() {
         rightdown.style.right = '0%';
         if(cutomerButtons) {
             cutomerButtons.style.bottom = '-20%';
+            // $('#cutomerButtons').animate({bottom: '-20%'}, 100);
             hideCartBox();
         }
     }

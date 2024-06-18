@@ -1,5 +1,5 @@
 
-function addEventCustomerButtons() {
+function customerButtonsSet() {
     $('#board').click(function(){
         showCartBox();
     });
@@ -14,7 +14,8 @@ function hideCartBox(){
     $('#exit').addClass("hidden");
     $('#cartcontent').addClass("hidden");
     $('#carttotal').addClass("hidden");
-    $('#cutomerButtons').css({'width': '170px', 'height': '80px'});
+    $('#cutomerButtons').stop().animate({'width': '170px', 'height': '80px'}, 100);
+    // $('#cutomerButtons').css({'width': '170px', 'height': '80px'});
     $('#buttonsbackground').css({'content': 'none'});
     $('#cartcontent').empty();
 }
@@ -23,7 +24,8 @@ function showCartBox(){
     $('#chat').addClass("hidden");
     $('#board').addClass("hidden");
     $('#exit').removeClass("hidden");
-    $('#cutomerButtons').css({'width': '400px', 'height': '500px'});
+    $('#cutomerButtons').stop().animate({'width': '400px', 'height': '500px'}, 100);
+    // $('#cutomerButtons').css({'width': '400px', 'height': '500px'});
     $('#buttonsbackground').css({'content': 'url("/img/management/menu.jpg")'});
     $('#cartcontent').removeClass("hidden");
     $('#carttotal').removeClass("hidden");
