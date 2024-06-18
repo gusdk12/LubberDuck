@@ -331,8 +331,8 @@ img {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('/img/management/rightdown.png');
-  left: 10px;
-  top: 860px;
+  left: 20px;
+  top: 825px;
   transform: rotate(30deg) translate(-50%, -50%);
   z-index: 101;
 }
@@ -357,8 +357,8 @@ img {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('/img/management/rose.png');
-  left: 0px;
-  bottom: 690px;
+  left: -10px;
+  bottom: 710px;
   transform: rotate(33deg);
   z-index: 101;
 }
@@ -371,7 +371,7 @@ img {
   background-position: center;
   background-image: url('/img/management/rosestick.png');
   left: 420px;
-  bottom: 690px;
+  bottom: 730px;
   transform: rotate(20deg) scaleY(-1);
   z-index: 101;
 }
@@ -406,9 +406,9 @@ img {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url('/img/management/rightdown.png');
-    transform: rotate(33deg) translate(-50%, -50%);
-    left: 20px;
-    top: 495px;
+    transform: rotate(32deg) translate(-50%, -50%);
+    left: 30px;
+    top: 473px;
     z-index: 101;
   }
   #middleUp{
@@ -419,7 +419,7 @@ img {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url('/img/management/rose.png');
-    left: 510px;
+    left: 520px;
     top: -260px;
     transform: rotate(33deg);
     z-index: 101;
@@ -432,8 +432,8 @@ img {
     background-repeat: no-repeat;
     background-position: center;
     background-image: url('/img/management/rosestick.png');
-    left: -50px;
-    top: -350px;
+    left: -30px;
+    top: -340px;
     transform: rotate(-20deg) scaleY(-1) scaleX(-1);
     z-index: 101;
   }
