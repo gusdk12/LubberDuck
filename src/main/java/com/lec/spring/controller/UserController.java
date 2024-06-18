@@ -1,12 +1,11 @@
 package com.lec.spring.controller;
 
+import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
 import com.lec.spring.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,17 +14,15 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     private UserService userService;
+
+//    private AuthorityService authorityService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -73,6 +70,7 @@ public class UserController {
                                      @RequestParam("day") int day,
                                      Model model,
                                      RedirectAttributes redirectAttrs) {
+
         if (result.hasErrors()) {
             // 유효성 검사 오류 처리
             redirectAttrs.addFlashAttribute("username", user.getUsername());
@@ -93,7 +91,49 @@ public class UserController {
 
         user.setBirth_date(LocalDate.of(year, month, day));
 
+//        Authority auth = authorityService.getAuthorityByName("ROLE_CUSTOMER");
+//        user.setAuthority_id(auth.getId());
+
         String page = "/user/registerCustomerOk";
+        int cnt = userService.register(user);
+        model.addAttribute("result", cnt);
+        return page;
+
+    }
+
+    @PostMapping("/registerManager")
+    public String registerManagerOk(@Valid User user,
+                                     BindingResult result,
+                                     @RequestParam("year") int year,
+                                     @RequestParam("month") int month,
+                                     @RequestParam("day") int day,
+                                     Model model,
+                                     RedirectAttributes redirectAttrs) {
+
+        if (result.hasErrors()) {
+            // 유효성 검사 오류 처리
+            redirectAttrs.addFlashAttribute("username", user.getUsername());
+            redirectAttrs.addFlashAttribute("nickname", user.getNickname());
+            redirectAttrs.addFlashAttribute("email", user.getEmail());
+            redirectAttrs.addFlashAttribute("year", year);
+            redirectAttrs.addFlashAttribute("month", month);
+            redirectAttrs.addFlashAttribute("day", day);
+
+            List<FieldError> errList = result.getFieldErrors();
+            for (FieldError err : errList) {
+                redirectAttrs.addFlashAttribute("error", err.getCode());
+                break;
+            }
+
+            return "redirect:/user/registerManager";
+        }
+
+        user.setBirth_date(LocalDate.of(year, month, day));
+
+//        Authority auth = authorityService.getAuthorityByName("ROLE_MANAGER");
+//        user.setAuthority_id(auth.getId());
+
+        String page = "/user/registerManagerOk";
         int cnt = userService.register(user);
         model.addAttribute("result", cnt);
         return page;
@@ -108,6 +148,7 @@ public class UserController {
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(userValidator);
     }
+
 }
 
 
