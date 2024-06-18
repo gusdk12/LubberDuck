@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface OrderRepository {
+public interface Order_ItemRepository {
 
-    List<Order> findByUser(Long user_id);
+    List<Order_item> findByOrder(Long order_id);
 
 }
 

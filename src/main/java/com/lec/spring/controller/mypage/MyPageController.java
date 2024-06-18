@@ -2,9 +2,14 @@ package com.lec.spring.controller.mypage;
 
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.mypage.MypageValidator;
+import com.lec.spring.domain.order.Order;
+import com.lec.spring.domain.order.Order_item;
 import com.lec.spring.service.UserService;
 import com.lec.spring.service.menu.MenuService;
 import jakarta.validation.Valid;
+import com.lec.spring.service.menu.MenuService;
+import com.lec.spring.service.order.OrderService;
+import com.lec.spring.service.order.Order_itemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +24,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDate;
 import java.util.List;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
@@ -29,11 +38,17 @@ public class MyPageController {
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private Order_itemService orderItemService;
+
     @GetMapping("/info")
     public String info(Model model,
                        @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
-            // UserDetails가 null일 경우에 대한 처리jknklnm
+            // UserDetails가 null일 경우에 대한 처리
             // 로그인 페이지로 리디렉션할 수 있습니다.
             return "redirect:/user/login";
         }
@@ -123,10 +138,45 @@ public class MyPageController {
     }
 
 
-@RequestMapping("/info")
+    @RequestMapping("/info")
     public void info(){}
     @RequestMapping("/order")
     public void order(){}
+
+    @GetMapping("/order")
+    public String order(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return "redirect:/user/login";
+        }
+
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username);
+
+        if (user == null) {
+            return "redirect:/error";
+        }
+
+        Long userId = user.getId();
+
+        List<Order> orders = orderService.findByUser(userId);
+
+        // 주문 항목들을 저장할 맵을 준비합니다.
+        Map<Long, List<Order_item>> orderItemsByOrderId = new HashMap<>();
+
+        // 각 주문에 대해 주문 항목을 조회하고 맵에 저장합니다.
+        for (Order order : orders) {
+            List<Order_item> items = orderItemService.findByOrder(order.getId());
+            orderItemsByOrderId.put(order.getId(), items);
+        }
+
+        // 모델에 주문 목록과 주문 항목 맵을0 추가합니다.
+        model.addAttribute("orders", orders);
+        model.addAttribute("user", user);
+        model.addAttribute("orderItemsByOrderId", orderItemsByOrderId);
+
+        // mypage/order 뷰를 반환합니다.
+        return "/mypage/order";
+    }
 
     @RequestMapping("/review")
     public void review(){}
