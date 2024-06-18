@@ -8,6 +8,8 @@
 }
 
 .article #favorite {
+    font-family: "Noto Sans KR", sans-serif;
+
     height: auto;
     margin-top: 10px;
 
@@ -49,9 +51,24 @@
     transform: rotate(-2deg);
 }
 
-.background1, .background2,
-.background3, .background4,
-.background5, .background6 {
+.drop {
+    width: 25px;
+    height: 25px;
+
+    z-index: 7;
+
+    display: none;
+    cursor: pointer;
+}
+
+.drop img {
+    width: 25px;
+    height: 25px;
+}
+
+.background1 #memoImg, .background2 #memoImg,
+.background3 #memoImg, .background4 #memoImg,
+.background5 #memoImg, .background6 #memoImg {
     content: url('/img/bookmark/memo1.png');
     background-size: cover;
     background-repeat: no-repeat;
@@ -66,25 +83,57 @@
     overflow: visible;
 }
 
-.background2 {
+.background2 #memoImg {
     content: url('/img/bookmark/memo2.png');
 }
-.background3 {
+.background3 #memoImg {
     content: url('/img/bookmark/memo3.png');
     height: 350px;
 }
-.background4 {
+.background4 #memoImg {
     content: url('/img/bookmark/memo4.png');
     top: -7%;
 }
-.background5 {
+.background5 #memoImg {
     content: url('/img/bookmark/memo5.png');
     left: -16%;
 }
-.background6 {
+.background6 #memoImg {
     content: url("/img/bookmark/memo6.png");
     height: 355px;
     top: -13%;
+}
+
+.background1 .drop{
+    position: absolute;
+    top: 7px;
+    left: 5px;
+}
+
+.background2 .drop{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+.background3 .drop{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+.background4 .drop{
+    position: absolute;
+    top: 9px;
+    left: 8px;
+}
+.background5 .drop{
+    position: absolute;
+    top: 7px;
+    left: 5px;
+}
+.background6 .drop{
+    position: absolute;
+    top: 7px;
+    right: 5px;
 }
 
 .info {
@@ -100,29 +149,9 @@ table {
     text-align: center;
 }
 
-
-.drop {
-    width: 25px;
-    height: 25px;
-
-    position: absolute;
-    top: 7px;
-    left: 34px;
-
-    z-index: 4;
-
-    display: none;
-    cursor: pointer;
-}
-
-.drop img {
-    width: 25px;
-    height: 25px;
-}
-
 .cocktail_name {
-    /*font-size: 20px;*/
-    /*font-weight: bold;*/
+    font-weight: bolder;
+    font-size: 20px;
 
     padding-bottom: -5px;
 }

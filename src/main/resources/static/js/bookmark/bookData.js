@@ -120,10 +120,13 @@ function buildBook(result){
 
         $('#favorite').append(`
             <div class="box" id="randomrotate${randomIndex1}">
-                    <img src="" class="background background${randomIndex2}">
+                <div class="background background${randomIndex2}">
+                    <img src="" id="memoImg">
                     <div class="drop">
                         <img src="/img/bookmark/drop.png" alt="삭제">
                     </div>
+                </div>
+
                     <div class="info">
                         <table>
                             <tr>
