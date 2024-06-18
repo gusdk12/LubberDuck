@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+
 </head>
 <body>
 <div class="container">
@@ -18,63 +19,47 @@
         <div class="deco" id="pen"></div>
     </section>
 
-
     <div class="member">
         <div class="logo">
             <h1>회원가입</h1>
         </div>
 
-        <form action="울라울라(메인페이지url)" method="post">
+        <div style="color: red" class="text-danger" th:text="${error }">
+            <!--/* 에러메세지 */-->
+        </div>
+
+        <form th:action="@{/user/registerManager}" method="post">
             <div class="field">
                 <b>아이디</b>
-                <span class="userid"><input type="text" required></span>
+                <span name="username" class="userid"><input type="text" name="username" th:value="${username}" required></span>
             </div>
             <div class="field">
                 <b>비밀번호</b>
-                <input class="userpw" type="password" required>
+                <input name="password" class="userpw" type="password" required>
             </div>
             <div class="field">
                 <b>비밀번호 재확인</b>
-                <input class="userpw-confirm" type="password" required>
+                <input name="re_password" class="userpw-confirm" type="password" required>
             </div>
 
             <div class="field">
                 <b>이름</b>
-                <input type="text" required>
+                <input name="nickname" type="text" th:value="${nickname}" required>
             </div>
 
             <div class="field">
                 <b>이메일</b>
-                <input type="email" placeholder="선택입력" required>
+                <input name="email" type="email" placeholder="선택입력" th:value="${email}" required>
             </div>
-
 
             <div class="field birth">
                 <b>생년월일</b>
                 <div>
-                    <input type="number" placeholder="년(yyyy)" required>
-                    <select>
-                        <option value="">월</option>
-                        <option value="">1월</option>
-                        <option value="">2월</option>
-                        <option value="">3월</option>
-                        <option value="">4월</option>
-                        <option value="">5월</option>
-                        <option value="">6월</option>
-                        <option value="">7월</option>
-                        <option value="">8월</option>
-                        <option value="">9월</option>
-                        <option value="">10월</option>
-                        <option value="">11월</option>
-                        <option value="">12월</option>
-                    </select>
-                    <input type="number" placeholder="일(dd)" required>
+                    <input name="year" type="number" placeholder="년(yyyy)" th:value="${year}" required>
+                    <input name="month" type="number" placeholder= "월(MM)" th:value="${month}" required>
+                    <input name="day" type="number" placeholder="일(dd)" th:value="${day}" required>
                 </div>
             </div>
-
-
-
-
 
             <input type="submit" value="가입하기">
         </form>
