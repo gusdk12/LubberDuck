@@ -1,9 +1,7 @@
 package com.lec.spring.controller;
 
-import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
-import com.lec.spring.service.AuthorityService;
 import com.lec.spring.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
