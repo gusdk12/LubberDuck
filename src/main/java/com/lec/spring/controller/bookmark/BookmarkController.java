@@ -1,5 +1,6 @@
 package com.lec.spring.controller.bookmark;
 
+import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.mypage.Bookmark;
 import com.lec.spring.domain.mypage.QryBookmarkList;
 import com.lec.spring.service.bookmark.BookmarkService;
@@ -15,8 +16,31 @@ public class BookmarkController {
     @Autowired
     private BookmarkService bookmarkService;
 
+    // userId에 해당하는 즐겨찾기 데이터 불러오기
     @GetMapping("/list/{userId}")
     public QryBookmarkList list(@PathVariable Long userId){
-        return bookmarkService.list(userId);
+        return bookmarkService.findByUser(userId);
     }
+
+    @GetMapping("/detail/{userId}/{cocktailId}")
+    public QryResult detail(@PathVariable Long userId, @PathVariable Long cocktailId){
+        return bookmarkService.findByUserAndMenu(userId,cocktailId);
+    }
+
+    // 추가하기
+    @PostMapping("/add")
+    public QryResult add(
+            @RequestParam("userId") Long userId,
+            @RequestParam("cocktailId") Long cocktailId,
+            String comment){
+        return bookmarkService.add(userId,cocktailId,comment);
+    }
+
+    // 삭제하기
+    @PostMapping("/delete/{userId}/{cocktailId}")
+    public QryResult delete(@PathVariable Long userId, @PathVariable Long cocktailId){
+        return bookmarkService.delete(userId,cocktailId);
+    }
+
+
 }

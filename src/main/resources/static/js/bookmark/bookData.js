@@ -1,3 +1,98 @@
+
+// 추가하기
+async function addToBook(cocktail){
+
+    // 즐겨찾기에 이미 같은 상품이 담겨있는지 확인하기
+    let findBook = null;
+
+    await $.ajax({
+        url: "/bookmark/detail/" + logged_id + "/" + cocktail.id,
+        type: "GET",
+        cache: false,
+        success: function (data, status) {
+            if (status === "success") {
+                if (data.status !== "OK") {
+                    alert(data.status);
+                    return;
+                }
+                findBook = data.data;
+            }
+        },
+    });
+
+    //  카트에 같은 칵테일이 없다면, 카트에 추가한다.
+    if(!findBook){
+        // 전달할 parameter 준비 (POST)
+        const data = {
+            "userId" : logged_id,
+            "cocktailId" : cocktail.id,
+            "comment" : "이부분 받아오는걸로 수정필요",
+        };
+
+        $.ajax({
+            url:"/bookmark/add",
+            type: "POST",
+            data: data,
+            cache: false,
+            success: function(data, status){
+                if(status === "success"){
+                    if(data.status !== "OK"){
+                        alert(data.status);
+                        return;
+                    }
+                    loadBookmark(logged_id);
+                }
+            },
+        });
+    }
+
+    // 즐겨찾기에 같은 칵테일이 있다면 이미 존재하는 음료 알림
+    else {
+        alert('이미 즐겨찾기 설정한 음료입니다.');
+    }
+}
+
+// 삭제하기
+async function deleteFromBook(cocktail){
+
+    // 즐겨찾기에 이미 같은 상품이 담겨있는지 확인하기
+    // let findBook = null;
+    //
+    // await $.ajax({
+    //     url: "/bookmark/detail/" + logged_id + "/" + cocktail.id,
+    //     type: "GET",
+    //     cache: false,
+    //     success: function (data, status) {
+    //         if (status === "success") {
+    //             if (data.status !== "OK") {
+    //                 alert(data.status);
+    //                 return;
+    //             }
+    //             findBook = data.data;
+    //         }
+    //     },
+    // });
+
+    // 존재한다면 아예 삭제
+    // if(findBook){
+        $.ajax({
+            url: "/bookmark/delete/" + logged_id + "/" + cocktail.id,
+            type: "POST",
+            cache: false,
+            success: function(data, status){
+                if(status === "success"){
+                    if(data.status !== "OK"){
+                        alert(cocktail.id);
+                        alert(data.status);
+                        return;
+                    }
+                    loadBookmark(logged_id);
+                }
+            },
+        });
+    // }
+}
+
 // 특정 user의 즐겨찾기목록 불러오기
 function loadBookmark(user_id) {
 
@@ -17,7 +112,6 @@ function loadBookmark(user_id) {
             }
         },
     });
-
 }
 
 function buildBook(result){
@@ -114,14 +208,23 @@ function buildBook(result){
     });
 
     // .drop 요소가 클릭되면 해당 box를 삭제
-    $('#favorite').on('click', '.drop', function() {
+    $('#favorite').on('click', '.drop', function(e) {
+        e.preventDefault();
+
+        // 클릭된 요소의 부모 요소를 찾아서 해당 칵테일 이름을 가져옵니다.
         var cocktailName = $(this).closest('.box').find('.cocktail_name').text();
+
+        // 칵테일 이름에 맞는 객체를 찾아서 deleteFromBook 함수에 전달합니다.
+        var menuItem = list.find(menu => menu.name === cocktailName);
+
+        if (menuItem){
+            deleteFromBook(menuItem);
+        }else {
+            console.error('Menu item not found for name:', cocktailName);
+        }
+
         alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.');
         $(this).closest('.box').remove();
     });
-
-
-
 }
-
 

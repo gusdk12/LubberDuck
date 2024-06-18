@@ -18,8 +18,7 @@
         <collection property="menu" resultMap="mapCocktail"/>
     </resultMap>
 
-    <!-- 특정 유저(id) 의 즐겨찾기 목록 -->
-    <select id="findByUser" resultMap="mapBookmark">
+    <sql id="SELECT_BASE">
         SELECT
             b.cocktail_id "b_menu_id",
             b.comment "b_comment",
@@ -29,7 +28,29 @@
             m.img_url "m_imgUrl",
             m.sequence "m_sequence"
         FROM ctt_bookmark b, ctt_menu m
+    </sql>
+
+    <!--/* 특정 유저(id) 의 즐겨찾기 목록 */-->
+    <select id="findByUser" resultMap="mapBookmark">
+        <include refid="SELECT_BASE"/>
         WHERE b.cocktail_id = m.id AND b.user_id = #{user_id}
     </select>
 
+    <!--/* 특정 유저(id)&음료(id) 의 즐겨찾기 목록 */-->
+    <select id="findByUserAndMenu" resultMap="mapBookmark">
+        <include refid="SELECT_BASE"/>
+        WHERE b.cocktail_id = m.id AND b.cocktail_id = #{menu_id} AND b.user_id = #{user_id}
+    </select>
+
+    <!--/* 추가하기 */-->
+    <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.mypage.Bookmark"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO ctt_bookmark(user_id, cocktail_id, comment)
+        VALUES (#{user_id}, #{menu_id}, #{comment})
+    </insert>
+
+    <!--/* 삭제하기 */-->
+    <delete id="delete" flushCache="true">
+        DELETE FROM ctt_bookmark WHERE user_id = #{user_id} AND cocktail_id = #{menu_id}
+    </delete>
 </mapper>
