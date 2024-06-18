@@ -27,6 +27,10 @@ public class User {
     private String email; // 이메일
     private LocalDate birth_date;
 
+    private int year;
+    private int month;
+    private int day;
+
     @JsonIgnore
     private LocalDateTime regDate;
 
