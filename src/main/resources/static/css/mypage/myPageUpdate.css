@@ -15,7 +15,11 @@ body{
     margin: 0;
 }
 .container{
-    font-family: 'GmarketSansMedium';
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 13px;
     margin-top: 20px;
     width: 550px;
 }
