@@ -1,6 +1,5 @@
 package com.lec.spring.controller;
 
-import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
 import com.lec.spring.service.UserService;
@@ -21,8 +20,6 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private UserService userService;
-
-//    private AuthorityService authorityService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -91,14 +88,11 @@ public class UserController {
 
         user.setBirth_date(LocalDate.of(year, month, day));
 
-//        Authority auth = authorityService.getAuthorityByName("ROLE_CUSTOMER");
-//        user.setAuthority_id(auth.getId());
 
-        String page = "/user/registerCustomerOk";
-        int cnt = userService.register(user);
+        user.setBirth_date(LocalDate.of(year, month, day));
+        int cnt = userService.register(user, "ROLE_CUSTOMER");
         model.addAttribute("result", cnt);
-        return page;
-
+        return "/user/registerCustomerOk";
     }
 
     @PostMapping("/registerManager")
@@ -129,15 +123,9 @@ public class UserController {
         }
 
         user.setBirth_date(LocalDate.of(year, month, day));
-
-//        Authority auth = authorityService.getAuthorityByName("ROLE_MANAGER");
-//        user.setAuthority_id(auth.getId());
-
-        String page = "/user/registerManagerOk";
-        int cnt = userService.register(user);
+        int cnt = userService.register(user, "ROLE_MANAGER");
         model.addAttribute("result", cnt);
-        return page;
-
+        return "/user/registerManagerOk";
     }
 
 
