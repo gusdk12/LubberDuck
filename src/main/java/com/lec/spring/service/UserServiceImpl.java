@@ -24,6 +24,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AuthorityService authorityService;
     private UserRepository userRepository;
     private AuthorityRepository authorityRepository;
 
@@ -51,17 +53,24 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-        public int register(User user) {
+        public int register(User user, String authorityName) {
             user.setUsername(user.getUsername().toUpperCase());
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRegDate(LocalDateTime.now());
 
-            Authority auth = authorityRepository.findByName("ROLE_CUSTOMER");
-            user.setAuthority_id(auth.getId());
-            userRepository.save(user);  // 데이터베이스에 저장 후 ID가 설정됨
-            Long userId = user.getId();  // 이 시점에서 ID 값을 가져올 수 있음
-//            authorityRepository.addAuthority(userId, auth.getId());  // userId를 사용하여 권한 추가
-            return 1;
+        Authority auth = authorityRepository.findByName(authorityName);
+        if (auth == null) {
+            throw new RuntimeException("해당 권한을 찾을 수 없습니다: " + authorityName);
+        }
+
+
+        user.setAuthority_id(auth.getId());
+        userRepository.save(user);  // 데이터베이스에 저장 후 ID가 설정됨
+        Long userId = user.getId();  // 이 시점에서 ID 값을 가져올 수 있음
+
+        authorityRepository.addAuthority(userId, auth.getId());
+
+        return 1;
         }
 
 
