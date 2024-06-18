@@ -2,6 +2,8 @@ package com.lec.spring.controller.mypage;
 
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.mypage.MypageValidator;
+import com.lec.spring.domain.order.Order;
+import com.lec.spring.domain.order.Order_item;
 import com.lec.spring.service.UserService;
 import com.lec.spring.service.menu.MenuService;
 import jakarta.validation.Valid;
@@ -140,6 +142,41 @@ public class MyPageController {
     public void info(){}
     @RequestMapping("/order")
     public void order(){}
+
+    @GetMapping("/order")
+    public String order(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) {
+            return "redirect:/user/login";
+        }
+
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username);
+
+        if (user == null) {
+            return "redirect:/error";
+        }
+
+        Long userId = user.getId();
+
+        List<Order> orders = orderService.findByUser(userId);
+
+        // 주문 항목들을 저장할 맵을 준비합니다.
+        Map<Long, List<Order_item>> orderItemsByOrderId = new HashMap<>();
+
+        // 각 주문에 대해 주문 항목을 조회하고 맵에 저장합니다.
+        for (Order order : orders) {
+            List<Order_item> items = orderItemService.findByOrder(order.getId());
+            orderItemsByOrderId.put(order.getId(), items);
+        }
+
+        // 모델에 주문 목록과 주문 항목 맵을0 추가합니다.
+        model.addAttribute("orders", orders);
+        model.addAttribute("user", user);
+        model.addAttribute("orderItemsByOrderId", orderItemsByOrderId);
+
+        // mypage/order 뷰를 반환합니다.
+        return "/mypage/order";
+    }
 
     @RequestMapping("/review")
     public void review(){}
