@@ -4,8 +4,10 @@ import com.lec.spring.domain.User;
 import com.lec.spring.domain.mypage.MypageValidator;
 import com.lec.spring.domain.order.Order;
 import com.lec.spring.domain.order.Order_item;
+import com.lec.spring.domain.review.Review;
 import com.lec.spring.service.UserService;
 import com.lec.spring.service.menu.MenuService;
+import com.lec.spring.service.review.ReviewService;
 import jakarta.validation.Valid;
 import com.lec.spring.service.menu.MenuService;
 import com.lec.spring.service.order.OrderService;
@@ -43,6 +45,9 @@ public class MyPageController {
 
     @Autowired
     private Order_itemService orderItemService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("/info")
     public String info(Model model,
@@ -169,13 +174,22 @@ public class MyPageController {
             orderItemsByOrderId.put(order.getId(), items);
         }
 
-        // 모델에 주문 목록과 주문 항목 맵을0 추가합니다.
+        // 모델에 주문 목록과 주문 항목 맵을 추가합니다.
         model.addAttribute("orders", orders);
-        model.addAttribute("user", user);
+//        model.addAttribute("user", user);
         model.addAttribute("orderItemsByOrderId", orderItemsByOrderId);
 
         // mypage/order 뷰를 반환합니다.
         return "/mypage/order";
+    }
+
+    @GetMapping("/review")
+    public String review(Model model) {
+
+        List<Review> reviews = reviewService.list();
+        model.addAttribute("review", reviews);
+
+        return "/mypage/review";
     }
 
     @RequestMapping("/review")

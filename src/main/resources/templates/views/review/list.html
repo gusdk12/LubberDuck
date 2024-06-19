@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/review/write.css}"> <!-- 해당 경로에 CSS 넣기 -->
+</head>
+<body>
+<section>
+    <div class="container">
+        <h2>목록</h2>
+        <hr>
+        <!-- 목록 -->
+        <table class="table table-hover">
+            <thead class="table-success">
+            <tr>
+                <th>#</th>
+                <th>메뉴이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="menu : ${list}">
+                <td th:text="${review.id}"></td>
+                <td><a th:href="@{'/review/detail/' +${review.id}}" th:text="${review.menu.name}"></a> </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 목록 -->
+
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-outline-dark" th:href="@{/menu/write}">작성</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

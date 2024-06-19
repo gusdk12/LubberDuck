@@ -8,17 +8,18 @@
 </head>
 <body>
 <section>
-    <div class="container">
-        <form id="consultation-form">
+            <div class="container">
+                <form id="consultation-form" th:action="@{/menu/write}" method="post">
             <h1>리뷰 작성하기</h1>
             <span class="form-group">
                     <label for="title" class="form-left">메뉴 이름</label>
-                    <input type="text" id="title" name="title" disabled value="마이코코"><br><br><hr>
+                    <input type="text" id="title" name="title"><br><br><hr>
                 </span>
             <div class="form-group">
                 <label for="name" class="form-left">주문 일시</label>
-                <input type="text" id="name" name="name" disabled value="2024-06-10 19:41:22"><br><hr>
+                <input type="text" id="name" name="name" disabled><br><hr>
             </div>
+
 
             <div class="form-group rating-group">
                 <label for="star5" class="form-left">별점</label>
@@ -34,13 +35,15 @@
 
             <div class="form-group">
                 <label for="content" class="form-left">내용</label>
-                <textarea name="content" id="content" cols="30" rows="10" required></textarea>
+                <textarea name="content" id="content" cols="30" rows="10" required th:value="${content}"></textarea>
             </div>
 
             <button type="submit" id="submit_btn">작성완료</button>
-        </form>
-    </div>
+            </form>
+            </div>
 </section>
 
+
+<script th:src="@{/js/review/write.js}"></script>
 </body>
 </html>
