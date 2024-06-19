@@ -112,7 +112,7 @@ INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
 
 -- 샘플 즐겨찾기
 INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
-    (2, 1, '어려워요'),
+    (2, 1, '아메리카노는 손님메뉴ㅔ없음'),
     (2, 8, 'test1'),
     (2, 10, 'test2'),
     (2, 21, 'test3'),
@@ -126,5 +126,5 @@ INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
 ;
 
 INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
-    (2, 17, 'Lemon')
+    (2, 1, '아메리카노는 손님메뉴ㅔ없음')
 ;

@@ -5,6 +5,7 @@
 
     overflow: auto;
     overflow-x: hidden;
+    position: relative;
 }
 
 .article #favorite {
@@ -28,6 +29,16 @@
     background: #289871;
     border-radius: 5px 0 0 5px;
 }
+
+/*.reload {*/
+/*    background-image: url('/img/bookmark/reload.png');*/
+/*    width: 30px;*/
+/*    height: 30px;*/
+/*    */
+/*    position: absolute;*/
+/*    left: 10px;*/
+/*    top: 10px;*/
+/*}*/
 
 .box {
     width: 250px;
@@ -97,12 +108,16 @@
     height: 25px;
     cursor: pointer;
     display: none;
+    z-index: 7;
 }
 
 .drop img {
     width: 25px;
     height: 25px;
-    z-index: 7;
+}
+
+.drop:hover {
+    filter: invert(32%) sepia(59%) saturate(3068%) hue-rotate(339deg) brightness(80%) contrast(100%);
 }
 
 /* 배경메모에 따른 삭제버튼 유동성 */
@@ -119,7 +134,7 @@
 .background3 .drop{
     position: absolute;
     top: 7px;
-    right: 12px;
+    right: 14px;
 }
 .background4 .drop{
     position: absolute;
@@ -133,7 +148,7 @@
 }
 .background6 .drop{
     position: absolute;
-    top: 13px;
+    top: 16px;
     right: 8px;
 }
 
@@ -155,9 +170,10 @@
     font-optical-sizing: auto;
     font-weight: bold;
     font-style: normal;
+    font-size: 15px;
 
     margin-top: 18px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .cocktail-con {
@@ -191,12 +207,16 @@
     display: none;
     cursor: pointer;
 
-    /*display: flex;*/
     flex-direction: column;
     align-items: center;
 }
 
-#cartIn {
+.cartIn, .cartNo {
+    background-image: url('/img/bookmark/cartIn.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -204,6 +224,10 @@
 
     width: 50px;
     height: 50px;
+}
+
+.cartNo {
+    background-image: url('/img/bookmark/soldout.png');
 }
 
 .CI {

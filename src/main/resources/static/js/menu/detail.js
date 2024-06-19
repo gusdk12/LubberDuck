@@ -14,7 +14,7 @@ async function loadMenu() {
     document.querySelector(`#name`).textContent = `${menu.name}`;
     document.querySelector(`#info`).textContent = `${menu.info}`;
     document.querySelector(`#price`).textContent = `${menu.price} ￦`;
-    var cocktailName = `${menu.name}`;
+    // var cocktailName = `${menu.name}`;
 
     // 로그인 상태일때만 불러오기
     if (logged_id !== -1) {

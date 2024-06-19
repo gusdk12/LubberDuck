@@ -1,3 +1,4 @@
+
 // 즐겨찾기에 존재하는지 확인하고 그에맞는 css
 async function checkBook(cocktail){
     let findBook = null;
@@ -18,7 +19,6 @@ async function checkBook(cocktail){
         console.error("Error fetching bookmark details:", error);
         return false;
     }
-
     return !!findBook;
 }
 
@@ -100,7 +100,6 @@ async function deleteFromBook(cocktail){
 // 특정 user의 즐겨찾기목록 불러오기
 function loadBookmark(user_id) {
 
-    // alert(user_id);
     $.ajax({
         url: "/bookmark/list/" + user_id,
         type: "GET",
@@ -123,7 +122,13 @@ function buildBook(result){
         var randomIndex1 = Math.floor(Math.random() * 4) + 1;
         var randomIndex2 = Math.floor(Math.random() * 6) + 1;
 
-        $('#favorite').append(`
+        // book.menu.sequance == -1 -> 이건 현재 판매 안하는거야
+
+        // menuList에서 book.menu.name을 찾기
+        var checkItem = menuList.find(menu => menu.name === book.menu.name);
+
+        // box 요소를 append
+        var $box = $(`
             <div class="box" id="randomrotate${randomIndex1}">
                 <div class="background background${randomIndex2}">
                     <img src="" id="memoImg">
@@ -137,7 +142,8 @@ function buildBook(result){
                     <div class="cocktail-con">
                         <div id="cocktailImg" style="background-image: url('${book.menu.imgUrl}')"></div>
                         <div class="CII">
-                            <img src="/img/bookmark/cartIn.png" alt="담기" id="cartIn">
+                            <div id="cartYesNo"></div>
+<!--                        <img src="/img/bookmark/cartIn.png" alt="담기" id="cartIn">-->
                         </div>
                     </div>
                     <div class="CI">
@@ -153,9 +159,17 @@ function buildBook(result){
                     </div>
                 </div>
             </div>
-         
-        `)
+        `);
 
+        // menuList에 존재하는 경우 switchToCartIn 적용, 아닌 경우 switchToCartNo 적용
+        if (checkItem) {
+            switchToCartIn($box);
+        } else {
+            switchToCartNo($box);
+        }
+
+        // #favorite 요소에 $box 추가
+        $('#favorite').append($box);
     });
 
     $(".box").hover(
@@ -241,3 +255,16 @@ function buildBook(result){
     });
 }
 
+function switchToCartIn(){
+    $('.box').find('#cartYesNo').removeClass('cartIn').removeClass('cartNo').addClass('cartIn');
+}
+
+function switchToCartNo() {
+    $('.box').find('#cartYesNo').removeClass('cartIn').removeClass('cartNo').addClass('cartNo');
+}
+
+function reloadData() {
+    // 기존의 #favorite 내용을 모두 지우고 새로운 데이터로 다시 buildBook 호출
+    $('#favorite').empty();
+    buildBook(newResult);
+}

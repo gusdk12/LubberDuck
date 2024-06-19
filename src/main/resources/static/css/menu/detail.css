@@ -124,7 +124,7 @@ body {
     height: 50px;
     background-image: url('/img/bookmark/emptyheart.png');
     background-size: cover;
-    filter: invert(32%) sepia(59%) saturate(3068%) hue-rotate(339deg) brightness(80%) contrast(100%);;
+    filter: invert(32%) sepia(59%) saturate(3068%) hue-rotate(339deg) brightness(80%) contrast(100%);
 }
 
 #heartImg .fullHeart {
@@ -132,7 +132,7 @@ body {
     height: 50px;
     background-image: url('/img/bookmark/fullheart.png');
     background-size: cover;
-    filter: invert(32%) sepia(59%) saturate(3068%) hue-rotate(339deg) brightness(80%) contrast(100%);;
+    filter: invert(32%) sepia(59%) saturate(3068%) hue-rotate(339deg) brightness(80%) contrast(100%);
 }
 
 .comment-con {
