@@ -1,33 +1,12 @@
 $(document).ready(function () {
+
     const init = {
         monList: [
-            "1월",
-            "2월",
-            "3월",
-            "4월",
-            "5월",
-            "6월",
-            "7월",
-            "8월",
-            "9월",
-            "10월",
-            "11월",
-            "12월",
-        ],
-        dayList: [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
+            "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월",
         ],
         today: new Date(),
         monForChange: new Date().getMonth(),
         activeDate: new Date(),
-        getFirstDay: (yy, mm) => new Date(yy, mm, 1),
-        getLastDay: (yy, mm) => new Date(yy, mm + 1, 0),
         nextMonth: function () {
             let d = new Date();
             d.setDate(1);
@@ -44,32 +23,10 @@ $(document).ready(function () {
         },
         addZero: (num) => (num < 10 ? "0" + num : num),
         activeDTag: null,
-        event: [
-            { date: "2024.06.05", memo: "오늘 바닥에 재료 쏟아서 청소해야합니다" },
-            { date: "2024.06.06", memo: "재고 확인하고 더 주문해주세요" },
-            { date: "2024.06.07", memo: "오늘 돈 안 맞아요" },
-        ],
-        menu: [
-            {
-                date: "2024.06.05",
-                imgSrc: "../img/MaiTai.png",
-                description:
-                    "이 칵테일은 메뉴에서 가장 인기 있는 칵테일 중 하나예요. 상쾌한 맛과 아름다운 푸른색이 특징이죠. 한 모금 마시면 하와이의 해변에 온 듯한 기분을 느끼실 수 있을 거예요.",
-            },
-        ]
-        // menuList: [
-        //     { imgSrc: "../img/MaiTai.png", name: "Mai Tai" },
-        //     { imgSrc: "../img/BlueHawaii.png", name: "Blue Hawaii" },
-        //     { imgSrc: "../img/Eggnog.png", name: "Eggnog" },
-        //     { imgSrc: "../img/HotTeddy.png", name: "Hot Teddy" },
-        //     { imgSrc: "../img/MulledWine.png", name: "Mulled Wine" },
-        // ],
     };
 
     $(".schedule-container").scroll(function () {
         var scrollTop = $(this).scrollTop();
-        var scrollHeight = $(this).prop("scrollHeight");
-        var clientHeight = $(this).prop("clientHeight");
 
         // 스크롤이 맨 위에 도달할 때
         if (scrollTop === 0) {
@@ -78,14 +35,6 @@ $(document).ready(function () {
                 $(".schedule-container").removeClass("scroll-top");
             }, 500);
         }
-
-        // // 스크롤이 맨 아래에 도달할 때
-        // if (scrollTop + clientHeight >= scrollHeight) {
-        //   $(this).addClass('scroll-bottom');
-        //   setTimeout(function() {
-        //     $('.schedule-container').removeClass('scroll-bottom');
-        //   }, 500);
-        // }
     });
 
     // 메모 입력 시 높이를 자동으로 조절하는 함수
@@ -108,6 +57,7 @@ $(document).ready(function () {
         newMemo.val("");
         newMemo.css("height", "90px"); // 기본 높이로 설정
         newMemo.show().focus();
+        $("#notification").hide();
     }
 
     // 탭 키 이벤트 처리
@@ -121,37 +71,92 @@ $(document).ready(function () {
     // 메모 입력 시 키보드 이벤트를 처리하는 함수
     function handleMemoKeyDown(e) {
         if (e.key === "Enter") {
+            const memoText = $("#new-memo").val();
+            const selectedDate = init.activeDate.toISOString().split("T")[0].replace(/-/g, ".");
+
             const newEvent = {
-                date: init.activeDate.toISOString().split("T")[0].replace(/-/g, "."),
-                memo: $("#new-memo").val(),
+                date: selectedDate,
+                memo: memoText,
             };
-            init.event.push(newEvent); // 새로운 이벤트를 추가
-            loadEvent(newEvent.date); // 해당 날짜의 이벤트를 로드
-            $("#new-memo").val("").hide();
+
+            let eventItems = `
+            <li>${newEvent.memo}
+                <button type="button" class="memo-delete">
+                    <span class="fa fa-xmark">X</span>
+                </button>
+            </li>`;
+            $(".event-list").html(eventItems);
+            $("#notification").hide();
+
+            console.log("Sending memo to server:", newEvent);
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/calendar/saveMemo",
+                contentType: "application/json",
+                data: JSON.stringify(newEvent),
+                success: function (response) {
+                    calendarlist.push(newEvent); // 서버에 저장된 메모를 로컬 데이터에도 추가
+                    loadEvent(selectedDate); // 저장 후 해당 날짜의 메모를 갱신
+                    $("#new-memo").val("").hide();
+                    highlightEventDates();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error saving memo:", error);
+                },
+                complete: function () {
+                    $("#new-memo").val("").hide();
+                }
+            });
         } else if (e.key === "Escape") {
             $("#new-memo").val("").hide();
         }
     }
 
-    // 오늘의 메뉴를 로드하는 함수
-    function loadTodayMenu(date) {
-        const menuData = init.menu.find((item) => item.date === date);
+    // 특정 날짜의 메모를 로드하는 함수
+    function loadEvent(date) {
+        $.ajax({
+            type: "GET",
+            url: `/admin/calendar/memos/${date}`,
+            contentType: "application/json",
+            success: function (events) {
 
-        if (menuData) {
-            $("#notification-menu").hide();
-            $(".today-menu-container").show();
-            $(".today-menu-container .menu-img").attr("src", menuData.imgSrc);
-            $(".today-menu-container .menu-text textarea").val(menuData.description);
+                let eventItems = events.map(event => `
+                    <li>${event.memo}
+                        <button type="button" class="memo-delete">
+                            <span class="fa fa-xmark">X</span>
+                        </button>
+                    </li>
+                `).join('<div class="memo-gap"></div>');
 
-            // 수정 및 삭제 버튼 활성화
-            $(
-                ".today-menu-container .btn-edit, .today-menu-container .btn-delete"
-            ).prop("disabled", false);
-        } else {
-            $("#notification-menu").show();
-            $(".today-menu-container").hide();
-        }
+                $(".event-list").html(eventItems);
+
+                $(".event-list li").hover(
+                    function () {
+                        $(this).find(".memo-delete").css("opacity", "1");
+                    },
+                    function () {
+                        $(this).find(".memo-delete").css("opacity", "0");
+                    }
+                );
+
+                // 일정이 있는 경우에만 알림창 노출
+                if (events.length > 0) {
+                    $("#notification").hide();
+                } else {
+                    $("#notification").show();
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error loading events:", error);
+            }
+        });
     }
+
+    $(".date").on("click", function () {
+        const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
+        loadEvent(selectedDate); // 해당 날짜의 메모 로드
+    });
 
     // 달력에 년도와 월을 로드하는 함수
     function loadYYMM(fullDate) {
@@ -182,23 +187,20 @@ $(document).ready(function () {
                 } else {
                     let fullDate =
                         yy + "." + init.addZero(mm + 1) + "." + init.addZero(countDay + 1);
-                    let eventClass = init.event.some((event) => event.date === fullDate)
-                        ? " event"
-                        : "";
-                    // let hashId = generateHash(fullDate);
+                    let eventClass = ""; // 이벤트 클래스는 DB와 연동하여 결정
 
                     trtd += `<td class="day${eventClass}`;
                     trtd += markToday && markToday === countDay + 1 ? ' today" ' : '"';
                     trtd += ` data-date="${countDay + 1}" data-fdate="${fullDate}">`;
-                    // trtd += `<a href="/calendar/${hashId}">`;
 
-                    const menuExists = init.menu.some((menu) => menu.date === fullDate);
+                    // 메뉴가 있는 경우 표시할 수 있도록 DB와 연동하여 처리
+                    const menuExists = false; // 예시로 false로 설정
                     if (menuExists) {
                         trtd += `<span style="border-bottom: 2px solid #000;"></span>`;
                     }
 
                 }
-              trtd += startCount ? ++countDay : "";
+                trtd += startCount ? ++countDay : "";
                 if (countDay === lastDay.getDate()) {
                     startCount = 0;
                 }
@@ -207,51 +209,30 @@ $(document).ready(function () {
             trtd += "</tr>";
         }
         $(".cal-body").html(trtd);
+
+        highlightEventDates();
+
     }
 
-    // 해시 값을 생성하는 함수
-    // function generateHash(fullDate) {
-    //     let hash = 0;
-    //     for (let i = 0; i < fullDate.length; i++) {
-    //         let char = fullDate.charCodeAt(i);
-    //         hash = ((hash << 5) - hash) + char;
-    //         hash = hash & hash;
-    //     }
-    //     return hash;
-    // }
+    // 캘린더 셀에 이벤트 클래스 추가하는 함수
+    function highlightEventDates() {
+        calendarlist.forEach(event => {
+            const dateParts = event.date.split("-");
+            const year = dateParts[0];
+            const month = dateParts[1];
+            let day = dateParts[2];
 
-    // 특정 날짜의 메모를 로드하는 함수
-    function loadEvent(date) {
-        const events = init.event.filter((event) => event.date === date);
-        const eventItems = events
-            .map(
-                (event) => `
-        <li>${event.memo}
-          <button type="button" class="memo-delete">
-            <span class="fa fa-xmark">X</span>
-          </button>
-        </li>`
-            )
-            .join('<div class="memo-gap"></div>');
-        $(".event-list").html(eventItems);
+            // day가 1~9 사이라면 앞에 "0"을 붙여서 포맷팅
+            // if (day >= 1 && day <= 9) {
+            //     day = "0" + day;
+            // }
+            console.log(`Processing date: ${year}.${month}.${day}`);
 
-        // 마우스 오버 이벤트 처리
-        $(".event-list li").hover(
-            function () {
-                $(this).find(".memo-delete").css("opacity", "1");
-            },
-            function () {
-                $(this).find(".memo-delete").css("opacity", "0");
-            }
-        );
+            $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`).addClass("event");
 
-        // 일정이 있는 경우에만 알림창 노출
-        if (events.length > 0) {
-            $("#notification").hide();
-        } else {
-            $("#notification").show();
-        }
+        });
     }
+
 
     // 날짜 클릭 시 이벤트를 처리하는 함수
     function handleDayClick(e) {
@@ -284,10 +265,9 @@ $(document).ready(function () {
 
     initCalendar();
 
-    // 버튼 클릭 시 알림창 숨기기
+    // 버튼 클릭 시 메모 입력 창 열기
     $("#btn-add-memo").on("click", function () {
         showInput();
-        $("#notification").hide();
     });
 
     // 닫기 버튼 클릭 시 알림창 숨기기
@@ -295,30 +275,18 @@ $(document).ready(function () {
         $("#notification").hide();
     });
 
-    const popupOverlay = $('<div class="popup-overlay"></div>');
+    // 오늘의 메뉴를 로드하는 함수 (DB와 연동되는 부분은 여기서 구현)
+    function loadTodayMenu(date) {
+        // DB에서 오늘의 메뉴를 로드하는 로직을 호출
+        console.log("Loading menu for date:", date);
+    }
 
-    // 메뉴 리스트 동적으로 추가
-    // function loadMenuList() {
-    //     $(".menu-list").empty();
-    //     init.menuList.forEach((menu) => {
-    //         const menuDiv = $(`
-    //     <div class="menu">
-    //       <img src="${menu.imgSrc}" alt="${menu.name}">
-    //       <p class="menu-name">${menu.name}</p>
-    //     </div>
-    //   `);
-    //         menuDiv.on("click", function () {
-    //             openPopup2(menu);
-    //         });
-    //         $(".menu-list").append(menuDiv);
-    //     });
-    // }
+    const popupOverlay = $('<div class="popup-overlay"></div>');
 
     // 메뉴 팝업 열기
     $("#btn-add-menu").on("click", function () {
         $("body").append(popupOverlay);
         $("#myForm").show();
-        // loadMenuList(); // 메뉴 리스트 로드
     });
 
     // 메뉴 팝업1 닫기
@@ -327,13 +295,43 @@ $(document).ready(function () {
         popupOverlay.remove();
     }
 
+    // 메뉴 클릭 시 팝업2 열기
+    $(".menu").on("click", function () {
+        const menuId = $(this).data("menu-id");
+        const menu = menuList.find(m => m.id === menuId);
+
+        if (menu) {
+            $("body").append(popupOverlay);
+            $("#myForm").hide();
+            openPopup2(menu);
+            console.log(menu);
+        } else {
+            console.error("Menu not found for id: " + menuId);
+        }
+    });
+
     // 메뉴 팝업2 열기
     function openPopup2(menu) {
-        $("#myForm").hide();
-        $(".select-menu img").attr("src", menu.imgSrc);
-        $(".select-menu img").attr("alt", menu.name);
+        $(".selected-menu-img").attr("src", menu.imgUrl);
+        $(".selected-menu-img").attr("alt", menu.name);
         $(".select-menu-name").text(menu.name);
         $("#myForm2").show();
+    }
+
+    // 메뉴 클릭 시 팝업2 열기
+    $(".menu").on("click", function () {
+
+        fetchMenuDetail(menuList.find(menu => menu.id === cocktailId));
+        openPopup2(menu);
+
+    });
+
+// 팝업2 열기 함수
+    function openPopup2(menu) {
+        $(".selected-menu-img").attr("src", menu.imgUrl); // 이미지 소스 설정
+        $(".selected-menu-img").attr("alt", menu.name); // 이미지 대체 텍스트 설정
+        $(".select-menu-name").text(menu.name); // 메뉴 이름 설정
+        $("#myForm2").show(); // 팝업2 보이기
     }
 
     // 메뉴 팝업2 닫기
@@ -355,3 +353,17 @@ $(document).ready(function () {
         closePopup2();
     });
 });
+
+async function fetchMenuDetail(cocktail) {
+    try {
+        const response = await $.ajax({
+            url: "/admin/calendar/menu/" + cocktail.id, // 실제 요청하는 URL
+            type: "GET",
+            cache: false,
+        });
+        console.log("Menu detail fetched successfully:", response);
+        // 서버에서 반환된 데이터를 처리하거나 화면에 표시할 수 있습니다.
+    } catch (error) {
+        console.error("Error fetching menu detail:", error);
+    }
+}

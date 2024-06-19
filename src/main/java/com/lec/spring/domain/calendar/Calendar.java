@@ -1,9 +1,7 @@
 package com.lec.spring.domain.calendar;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.lec.spring.domain.menu.Menu;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -11,6 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Calendar {
     private Long id;
+
+    @ToString.Exclude
+    private Menu menu;
+
     private String memo; // 일정 메모
     private String comment; // 관리자 코멘트
     private String date; // 날짜
