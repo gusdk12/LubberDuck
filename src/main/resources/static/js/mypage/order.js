@@ -7,20 +7,49 @@ $(document).ready(function(){
         'font-weight': 'bold'
     });
 
-    buildBody();
+    buildBody(); // buildBody를 호출하여 본문을 만듭니다.
+
+    // buildBody 이후에 정렬을 수행해야 합니다.
+    var ordersContainer = $('.container');
+    var orders = ordersContainer.find(".receipt");
+
+    orders.sort(function (a, b){
+        var dateA = $(a).find('.order-nm').text();
+        var dateB = $(b).find('.order-nm').text();
+        return new Date(dateB) - new Date(dateA); // 최신순 정렬
+    });
+
+    orders.detach().appendTo(ordersContainer); // 정렬된 주문을 다시 추가합니다.
 });
 
+function formatDateTime(dateTimeString) {
+    const date = new Date(dateTimeString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    // 두 자리 숫자를 맞추기 위해 padStart 사용
+    const formattedDate = `${year}년 ${month}월 ${day}일 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return formattedDate;
+}
+
 function buildBody(){
+    $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
+
     orderList.forEach(order => {
         let itemsHTML = "";
         let totalPrice = 0;
         orderItemMap[order.id].forEach(item => {
+            let formattedItemPrice = item.price.toLocaleString('ko-KR');
             itemsHTML += `
                 <div class="items">
                     <div class="item">
                         <span class="item-name">${item.menu.name}</span>
                         <span class="quantity">${item.quantity}</span>
-                        <span class="item-price" >${item.price}</span>
+                        <span class="item-price">${formattedItemPrice}</span>
                         <span>
                             <input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/review/write'">
                         </span>
@@ -29,16 +58,20 @@ function buildBody(){
             totalPrice += (item.price * item.quantity);
         });
 
+        let formattedTotalPrice = totalPrice.toLocaleString('ko-KR');
+
+        let formattedRegDate = formatDateTime(order.regdate);
+
         $('.container').append(`
             <div class="receipt">
-            <div class="background">
-                <img src="/img/mypage/receipt.png">
+                <div class="background">
+                    <img src="/img/mypage/receipt.png">
                 </div>
                 <div class="content">
                     <h2 class="shopname">LubberDuck</h2>
                     <div class="header-info">
                         <p class="name">${user.nickname}님</p>
-                        <p class="date-time">${order.regdate}</p>
+                        <p class="date-time">${formattedRegDate}</p>
                     </div>
                     <p class="order-nm">주문번호: ${order.id}</p>
                     <div class="dashed"></div>
@@ -54,7 +87,7 @@ function buildBody(){
                     <div class="totals">
                         <div class="total-item">
                             <span class="total-price"></span>
-                            <span>${totalPrice}</span>
+                            <span class="total-price">TOTAL : ${formattedTotalPrice}원</span>
                         </div>
                     </div>
                 </div>

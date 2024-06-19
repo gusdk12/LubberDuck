@@ -24,8 +24,12 @@ window.addEventListener('load', () => {
 
     loadMenu();
     addEvent();
-    customerButtonsSet();
 
+});
+window.addEventListener('popstate', function(event) {
+    // This code runs when the back button is clicked
+    alert('popstate event triggered');
+    location.reload(); // Refresh the page
 });
 
 function loadMenu(){

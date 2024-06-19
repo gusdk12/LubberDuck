@@ -12,5 +12,5 @@ $(document).ready(function(){
         'font-weight': 'bold'
     });
 
-    customerButtonsSet();
+    // customerButtonsSet();
 });

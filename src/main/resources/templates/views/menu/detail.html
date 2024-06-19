@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
 
     <script th:inline="javascript">
+        var logged_id = -1;
         var menu = [[${menu}]];
     </script>
     <title>[[${menu.name}]]</title>
@@ -72,7 +73,7 @@
         <th:block sec:authorize="hasRole('CUSTOMER')">
             <th:block th:with="logged_user=${#authentication.principal.user}">
                 <script th:inline="javascript">
-                    const logged_id = [[${logged_user.id}]]
+                    logged_id = [[${logged_user.id}]]
                 </script>
 
                 <script th:src="@{/js/common/chatCart.js}"></script>

@@ -1,21 +1,16 @@
+
 body {
     margin: 0;
     height: 100vh;
     background-color: #10573e;
     margin-bottom: 1000px;
     caret-color: transparent;
+    /*overflow-x: scroll;*/
     overflow-x: hidden;
-
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
-}
-@font-face {
-    font-family: 'GmarketSansBold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
 }
 
 /*------------------------------------------- main */

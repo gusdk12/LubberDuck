@@ -2,12 +2,10 @@
 var paperCount = 0;
 
 window.addEventListener('load', () => {
-
     preloadImages();
     appendMenuToPlate();
-    scrollToCenter();
+    showCustomerButtons();
     customerButtonsSet();
-
 });
 
 function preloadImages(){
@@ -26,9 +24,7 @@ function preloadImages(){
     });
 }
 
-function scrollToCenter(){
-    const menuBody = document.querySelector('#menuBody');
-    menuBody.scrollLeft = (menuBody.offsetWidth / 2) - 300;
+function showCustomerButtons(){
     document.getElementById("cutomerButtons") && $('#cutomerButtons').css({bottom: '-20%'});
 }
 
@@ -116,7 +112,8 @@ function appendMenuToPlate(){
         fr += "1fr ";
     $menuPlate.css({ 'grid-template-columns': `${fr.trim()}` });
     $('#menuscroll').css({'width': `${((paperCount + 1) * 500) + 1000}px`});
-
+    
+    document.querySelector('body').scrollLeft = 0;
 }
 
 let isDragging = false;
