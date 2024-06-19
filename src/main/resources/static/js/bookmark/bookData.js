@@ -2,24 +2,24 @@
 async function checkBook(cocktail){
     let findBook = null;
 
-    await $.ajax({
-        url: "/bookmark/detail/" + logged_id + "/" + cocktail.id,
-        type: "GET",
-        cache: false,
-        success: function (data, status) {
-            if (status === "success") {
-                if (data.status !== "OK") {
-                    alert(data.status);
-                    return;
-                }
-                findBook = data.data;
-            }
-        },
-    });
+    try {
+        const response = await $.ajax({
+            url: "/bookmark/detail/" + logged_id + "/" + cocktail.id,
+            type: "GET",
+            cache: false
+        });
 
-    if(findBook) {
-        return true;
+        if (response.status !== "OK") {
+            alert(response.status);
+            return false;
+        }
+        findBook = response.data;
+    } catch (error) {
+        console.error("Error fetching bookmark details:", error);
+        return false;
     }
+
+    return !!findBook;
 }
 
 // 추가하기

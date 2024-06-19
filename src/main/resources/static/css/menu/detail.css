@@ -116,6 +116,7 @@ body {
     bottom: 0;
 
     z-index: 3;
+    cursor: pointer;
 }
 
 #heartImg .heart1 {
@@ -158,6 +159,7 @@ body {
     bottom: 0;
 
     z-index: 7;
+    cursor: pointer;
 }
 /* 가연/ */
 
@@ -247,6 +249,8 @@ body {
     font-size: 30px;
     text-align: center;
     align-content: center;
+
+    cursor: pointer;
 }
 #cart #toCart:hover{
     background-color: #F3BD86;
