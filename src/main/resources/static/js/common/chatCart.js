@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
 });
 
 function customerButtonsSet() {
-    $('#board').click(function(){
+    $('#cartbuttonback').click(function(){
         showCartBox();
     });
     $('#exit').click(function(){
@@ -15,24 +15,17 @@ function customerButtonsSet() {
 }
 
 function hideCartBox(){
-    $('#chat').removeClass("hidden");
-    $('#board').removeClass("hidden");
     $('#exit').addClass("hidden");
+    $('#cartboard').css({'width': '0px', 'height': '0px'});
     $('#cartcontent').addClass("hidden");
     $('#carttotal').addClass("hidden");
-    $('#cutomerButtons').stop().animate({'width': '170px', 'height': '80px'}, 100);
-    // $('#cutomerButtons').css({'width': '170px', 'height': '80px'});
-    $('#buttonsbackground').css({'content': 'none'});
     $('#cartcontent').empty();
 }
 function showCartBox(){
     loadCart(logged_id);
-    $('#chat').addClass("hidden");
-    $('#board').addClass("hidden");
+
     $('#exit').removeClass("hidden");
-    $('#cutomerButtons').stop().animate({'width': '400px', 'height': '500px'}, 100);
-    // $('#cutomerButtons').css({'width': '400px', 'height': '500px'});
-    $('#buttonsbackground').css({'content': 'url("/img/management/menu.jpg")'});
+    $('#cartboard').css({'width': '400px', 'height': '500px'});
     $('#cartcontent').removeClass("hidden");
     $('#carttotal').removeClass("hidden");
 }

@@ -1,28 +1,86 @@
 /*----------------------------------- customer buttons*/
-#cutomerButtons{
+#rightsection{
     position: fixed;
     /*background-color: fuchsia;*/
-    width: 170px;
-    height: 80px;
-    left: 200px;
-    z-index: 10;
-    /*transition: 0.2s ease;*/
+    width: 80px;
+    height: 170px;
+    right: 100px;
+    z-index: 11;
+    /*!*transition: 0.2s ease;*!*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.19);*/
+    /*bottom: -20%;*/
+    bottom: 5%;
+    gap: 8px;
+}
+#chatbuttonback{
+    width: 60px;
+    height: 60px;
+    /*background-color: #c4eacd;*/
+    background: linear-gradient(to top, #F37472, #DD3F3D);
+    border-radius: 35%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.19);
-    /*bottom: -20%;*/
-    bottom: 5%;
 }
-#cutomerButtons #buttonsbackground{
+#chatbuttonback .buttonimg{
+    width: 60%;
+    height: 60%;
+    /*background-color: #fdd8df;*/
+    background-image: url('/img/maindeco/chat.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+}
+#cartbuttonback{
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(to top, #F37472, #DD3F3D);
+    /*background-color: #FFC107;*/
+    border-radius: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#cartbuttonback .buttonimg{
+    width: 70%;
+    height: 70%;
+    /*background-color: #468969;*/
+    background-image: url('/img/maindeco/cart.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+}
+
+#cartboard{
     position: absolute;
-    border-radius: 5px;
+    background-color: #FFFBF5;
+    border: 1px solid #F37472;
+    /*width: 400px;*/
+    /*height: 500px;*/
+    width: 0px;
+    height: 0px;
+    right: 10px;
+    bottom: 20px;
+    border-radius: 10px;
+    transition: 0.1s ease;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.11);
+    display: flex;
+    justify-content: center;
+}
+#cartboard #boardbackground{
+    position: absolute;
+    border-radius: 10px;
     width: 100%;
     height: 100%;
-    /*content: url("/img/management/menu.jpg");*/
-    background-color: #FEF9F3;
+    content: url("/img/management/menu.jpg");
 }
-#cutomerButtons #exit{
+#cartboard #exit{
     position: absolute;
     margin: 30px;
     width: 25px;
@@ -36,27 +94,7 @@
     top: 0px;
     z-index: 3;
 }
-#cutomerButtons #chat{
-    width: 48%;
-    height: 70%;
-    /*background-color: chartreuse;*/
-    background-image: url('/img/maindeco/chat.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: invert(35%) sepia(3%) saturate(2314%) hue-rotate(314deg) brightness(89%) contrast(98%);
-    color: #604c4c;
-}
-#cutomerButtons #board{
-    width: 48%;
-    height: 96%;
-    /*background-color: darkorange;*/
-    background-image: url('/img/maindeco/clipboard.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: invert(35%) sepia(3%) saturate(2314%) hue-rotate(314deg) brightness(89%) contrast(98%);
-}
+
 #cartcontent{
     position: absolute;
     width: 85%;

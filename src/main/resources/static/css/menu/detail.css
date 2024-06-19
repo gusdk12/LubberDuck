@@ -116,9 +116,10 @@ body {
     bottom: 0;
 
     z-index: 3;
+    cursor: pointer;
 }
 
-#heartImg .heart1 {
+#heartImg .emptyHeart {
     width: 50px;
     height: 50px;
     background-image: url('/img/bookmark/emptyheart.png');
@@ -126,7 +127,7 @@ body {
     filter: invert(32%) sepia(59%) saturate(3068%) hue-rotate(339deg) brightness(80%) contrast(100%);;
 }
 
-#heartImg .heart2 {
+#heartImg .fullHeart {
     width: 50px;
     height: 50px;
     background-image: url('/img/bookmark/fullheart.png');
@@ -139,8 +140,11 @@ body {
 }
 
 .comment {
+    resize: none;
+
     width: 100%;
-    height: 200px;
+    height: 0px;
+    transition: 0.2s ease;
 
     position: absolute;
     right: 0;
@@ -150,14 +154,21 @@ body {
 }
 
 #commentCheck {
-    width: 30px;
-    height: 30px;
+    background-image: url('/img/bookmark/check.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 8%;
+    height: 8%;
+    object-fit: contain;
 
     position: absolute;
     right: 20px;
     bottom: 0;
 
     z-index: 7;
+    cursor: pointer;
 }
 /* 가연/ */
 
@@ -174,14 +185,23 @@ body {
 }
 #cocktailInfo #name{
     /*background-color: #e74c3c;*/
-    height: 20%;
+    height: 25%;
     width: 95%;
-    font-family: "Meddon", cursive;
-    font-weight: 400;
+    /*font-family: "Noto Sans KR", sans-serif;*/
+    /*font-optical-sizing: auto;*/
+    /*font-weight: 700;*/
+    /*font-family: "Meddon", cursive;*/
+    /*font-weight: 400;*/
+    /*font-style: normal;*/
+    /*font-size: 40px;*/
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
     font-style: normal;
-    font-size: 45px;
+    font-size: 40px;
     align-content: center;
-    white-space: nowrap;
+    line-height: 60px;
+    /*white-space: nowrap;*/
 }
 #cocktailInfo #star{
     /*background-color: aqua;*/
@@ -247,6 +267,8 @@ body {
     font-size: 30px;
     text-align: center;
     align-content: center;
+
+    cursor: pointer;
 }
 #cart #toCart:hover{
     background-color: #F3BD86;

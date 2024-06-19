@@ -1,12 +1,13 @@
 
 body {
     margin: 0;
+    width: 100vw;
     height: 100vh;
     background-color: #10573e;
     margin-bottom: 1000px;
     caret-color: transparent;
-    /*overflow-x: scroll;*/
     overflow-x: hidden;
+    /*overflow-x: visible;*/
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
@@ -20,7 +21,7 @@ body {
     top: 200px;
     width: 100vw;
     height: 100vh;
-    z-index: 100;
+    z-index: 10;
     pointer-events: none; /* 부모의 이벤트 무시 */
 }
 
@@ -79,12 +80,13 @@ body {
 
 /*------------------------------------------- menu */
 #menuContent{
+    /*background-color: #e0d4c3;*/
     position: relative;
     top: 100px;
 }
 #menuBody{
     height: 1000px;
-    /*max-width: 1300px;  !* 최대 폭 지정 *!*/
+    width: 1300px;  /* 최대 폭 지정 */
     margin-left: auto;
     margin-right: auto;
     overflow-x: hidden;
@@ -105,9 +107,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 900px;
-    width: 5000px;
     position: absolute;
-    /*width: 300px;*/
+    width: 0px;
     /*position: relative;*/
     top: 60px;
     /*overflow-x: scroll;*/
@@ -258,6 +259,7 @@ body {
     justify-content: end;
 }
 #cocktailadd{
+    margin-left: 5px;
     width: 43%;
     height: 100%;
     /*background-color: #ffdcd9;*/

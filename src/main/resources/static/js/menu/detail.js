@@ -1,24 +1,12 @@
 
-$(document).ready(function() {
-    // 페이지 로드 시 로컬 스토리지에서 하트 상태를 불러오기
-    // if (localStorage.getItem('heartStatus') === 'heart2') {
-    //     $('#heart').removeClass('heart1').addClass('heart2');
-    // }
-
-    // Show the comment-con when heartImg is clicked
-    $('#heartImg').on('click', function(event) {
-        event.stopPropagation(); // Prevent the click event from propagating to the document
-        $('.comment-con').css('display', 'block');
-    });
-
-    // Hide the comment-con when clicking outside of it
-    $(document).on('click', function(event) {
-        if (!$(event.target).closest('.comment-con').length && !$(event.target).closest('#heartImg').length) {
-            $('.comment-con').css('display', 'none');
-        }
-    });
-
-});
+// $(document).ready(function() {
+//
+//     // Show the comment-con when heartImg is clicked
+//     $('#heartImg').on('click', function(event) {
+//         $('.comment-con').css('display', 'block');
+//         $('.comment').css('height','200px');
+//     });
+// });
 
 window.addEventListener('load', () => {
 
@@ -32,17 +20,54 @@ window.addEventListener('popstate', function(event) {
     location.reload(); // Refresh the page
 });
 
-function loadMenu(){
+async function loadMenu(){
     $('#img').css({'background-image': `url('${menu.imgUrl}')`});
     document.querySelector(`#name`).textContent = `${menu.name}`;
     document.querySelector(`#info`).textContent = `${menu.info}`;
     document.querySelector(`#price`).textContent = `${menu.price} ￦`;
+    var cocktailName = `${menu.name}`;
 
-    if(checkBook()){
-        $('#container').find('#heart').removeClass('heart1').addClass('heart2');
-    }else {
-        $('#container').find('#heart').removeClass('heart2').addClass('heart1');
+    // /가연
+    const isBookmarked = await checkBook(menu);
+
+    if (isBookmarked) {
+        $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('fullHeart');
+    } else {
+        $('#container').find('#heart').removeClass('fullHeart').removeClass('emptyHeart').addClass('emptyHeart');
     }
+
+    // Show the comment-con when heartImg is clicked
+    $('.emptyHeart').click(function(event) {
+        event.stopPropagation(); // Prevent the click event from propagating to the document
+        $('.comment-con').css('display', 'block');
+        $('.comment').css('height', '0px');
+        $('.comment').animate({
+            height: '200px'
+        }, 200);
+    });
+
+    // heart2 클릭 시 heart1으로 변경
+    $('.fullHeart').click(function(event) {
+        event.stopPropagation();
+        $(this).removeClass('fullHeart').addClass('emptyHeart');
+        deleteFromBook(menuList.find(menu => menu.name === cocktailName));
+        alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.')
+
+        // heart1 이벤트 다시 설정
+        $('.emptyHeart').click(function(event) {
+            event.stopPropagation();
+            $('.comment-con').css('display', 'block');
+        });
+    });
+
+    // Hide the comment-con when clicking outside of it
+    $(document).click(function(event) {
+        if (!$(event.target).closest('.comment-con').length && !$(event.target).closest('#heartImg').length) {
+            $('.comment-con').css('display', 'none');
+        }
+    });
+
+    // 가연/
 }
 function addEvent(){
     $('#toCart').click(function(){
@@ -56,6 +81,26 @@ function addEvent(){
         addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
         alert('즐겨찾기에 추가되었습니다');
 
+        $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('fullHeart');
         $('#container').find('.comment-con').css('display', 'none');
+
+        // heart2 클릭 시 heart1으로 변경
+        $('.fullHeart').click(function(event) {
+            event.stopPropagation();
+            $(this).removeClass('fullHeart').addClass('emptyHeart');
+            deleteFromBook(menuList.find(menu => menu.name === cocktailName));
+            alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.')
+            $('#container').find('.comment').val('');
+
+            // heart1 이벤트 다시 설정
+            $('.emptyHeart').click(function(event) {
+                event.stopPropagation();
+                $('.comment-con').css('display', 'block');
+                $('.comment').css('height', '0px');
+                $('.comment').animate({
+                    height: '200px'
+                }, 200);
+            });
+        });
     });
 }
