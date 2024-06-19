@@ -224,7 +224,7 @@ function buildBook(result){
     $('#favorite').on('click', '.drop', function(e) {
         e.preventDefault();
 
-        // 클릭된 요소의 부모 요소를 찾아서 해당 칵테일 이름을 가져옵니다.
+        // 선택한 요소를 기준으로 가장 가까운 조상 요소의 이름찾기
         var cocktailName = $(this).closest('.box').find('.cocktail_name').text();
 
         // 칵테일 이름에 맞는 객체를 찾아서 deleteFromBook 함수에 전달합니다.
