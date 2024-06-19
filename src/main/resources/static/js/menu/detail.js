@@ -6,6 +6,7 @@ $(document).ready(function() {
 
     $('#heartImg').on('click',function(){
         $('.comment-con').css('display','block');
+        $('.comment').css('height','200px');
     })
 });
 

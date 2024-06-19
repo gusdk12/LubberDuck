@@ -8,14 +8,20 @@
         <th:block sec:authorize="hasRole('CUSTOMER')">
 <!--/*            <th:block th:with="logged_user=${#authentication.principal.user}">*/-->
                 <section id="customer">
-                    <div id="cutomerButtons">
-                        <img id="buttonsbackground">
-                        <div id="exit" class="hidden"></div>
-                        <div id="chat"></div>
-                        <div id="board"></div>
+                    <div id="rightsection">
+                        <div id="chatbuttonback">
+                            <div class="buttonimg"></div>
+                        </div>
+                        <div id="cartbuttonback">
+                            <div class="buttonimg"></div>
+                        </div>
 
-                        <div id="cartcontent" class="hidden"></div>
-                        <div id="carttotal" class="hidden"></div>
+                        <div id="cartboard">
+                            <img id="boardbackground">
+                            <div id="exit" class="hidden"></div>
+                            <div id="cartcontent" class="hidden"></div>
+                            <div id="carttotal" class="hidden"></div>
+                        </div>
                     </div>
                 </section>
         </th:block>

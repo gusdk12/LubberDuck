@@ -140,7 +140,9 @@ body {
 
 .comment {
     width: 100%;
-    height: 200px;
+    /*height: 200px;*/
+    height: 0px;
+    transition: 0.2s ease;
 
     position: absolute;
     right: 0;
@@ -150,14 +152,19 @@ body {
 }
 
 #commentCheck {
-    width: 30px;
-    height: 30px;
+    width: 8%;
+    height: 8%;
+    object-fit: contain;
 
     position: absolute;
     right: 20px;
     bottom: 0;
 
     z-index: 7;
+    background-image: url('/img/bookmark/check.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 /* 가연/ */
 
@@ -174,14 +181,23 @@ body {
 }
 #cocktailInfo #name{
     /*background-color: #e74c3c;*/
-    height: 20%;
+    height: 25%;
     width: 95%;
-    font-family: "Meddon", cursive;
-    font-weight: 400;
+    /*font-family: "Noto Sans KR", sans-serif;*/
+    /*font-optical-sizing: auto;*/
+    /*font-weight: 700;*/
+    /*font-family: "Meddon", cursive;*/
+    /*font-weight: 400;*/
+    /*font-style: normal;*/
+    /*font-size: 40px;*/
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
     font-style: normal;
-    font-size: 45px;
+    font-size: 40px;
     align-content: center;
-    white-space: nowrap;
+    line-height: 60px;
+    /*white-space: nowrap;*/
 }
 #cocktailInfo #star{
     /*background-color: aqua;*/

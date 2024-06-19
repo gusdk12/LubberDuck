@@ -6,6 +6,8 @@ window.addEventListener('load', () => {
     appendMenuToPlate();
     showCustomerButtons();
     customerButtonsSet();
+
+    document.querySelector('body').scrollLeft = 0;
 });
 
 function preloadImages(){
@@ -25,7 +27,7 @@ function preloadImages(){
 }
 
 function showCustomerButtons(){
-    document.getElementById("cutomerButtons") && $('#cutomerButtons').css({bottom: '-20%'});
+    document.getElementById("rightsection") && $('#rightsection').css({bottom: '-40%'});
 }
 
 function appendMenuToPlate(){
@@ -112,8 +114,7 @@ function appendMenuToPlate(){
         fr += "1fr ";
     $menuPlate.css({ 'grid-template-columns': `${fr.trim()}` });
     $('#menuscroll').css({'width': `${((paperCount + 1) * 500) + 1000}px`});
-    
-    document.querySelector('body').scrollLeft = 0;
+
 }
 
 let isDragging = false;
@@ -191,7 +192,7 @@ window.addEventListener('scroll', function() {
     var rightup = document.getElementById("rightup");
     var leftdown = document.getElementById("leftdown");
     var rightdown = document.getElementById("rightdown");
-    var cutomerButtons = document.getElementById("cutomerButtons");
+    var cutomerButtons = document.getElementById("rightsection");
     const scrollPosition = window.scrollY;
 
     if (scrollPosition < 200) {
@@ -217,7 +218,7 @@ window.addEventListener('scroll', function() {
         leftdown.style.left = '0%';
         rightdown.style.right = '0%';
         if(cutomerButtons) {
-            cutomerButtons.style.bottom = '-20%';
+            cutomerButtons.style.bottom = '-40%';
             // $('#cutomerButtons').animate({bottom: '-20%'}, 100);
             hideCartBox();
         }
