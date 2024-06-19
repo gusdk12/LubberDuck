@@ -10,6 +10,8 @@ public interface CalendarRepository {
 
     List<Calendar> findByDate(String date);
 
+    int insertByMemo(Calendar calendar);
+
     void insertMemo(Calendar calendar);
 
     void updateMemo(Calendar calendar);
