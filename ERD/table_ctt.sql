@@ -102,7 +102,7 @@ CREATE TABLE ctt_user
     username     VARCHAR(100) NOT NULL,
     password     VARCHAR(200) NOT NULL,
     nickname     VARCHAR(80)  NOT NULL COMMENT '사용자닉네임',
-    email        VARCHAR(80)  NOT NULL,
+    email        VARCHAR(80)  NULL,
     regdate      DATETIME     NOT NULL DEFAULT now(),
     birth_date   DATE         NULL    ,
     PRIMARY KEY (id)

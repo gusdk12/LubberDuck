@@ -5,10 +5,12 @@ import com.lec.spring.domain.User;
 import com.lec.spring.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 //시큐리티가 /user/login (POST) 주소요청이 오면 낚아채서 로그인을 진행시킨다.
 //로그인(인증) 진행이 완료되면 '시큐리티 session' 에 넣어주게 된다.
@@ -23,7 +25,7 @@ import java.util.List;
 //Security Session 에서
 //   => Authentication 객체를 꺼내고, 그 안에서
 //        => UserDetails 정보를 꺼내면 된다.
-public class PrincipalDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private UserService userService;
 
@@ -38,6 +40,16 @@ public class PrincipalDetails implements UserDetails {
     public PrincipalDetails(User user){
         System.out.println("UserDetails(user) 생성: " + user);
         this.user = user;
+    }
+
+    public PrincipalDetails(User user, Map<String, Object> attributes){
+        System.out.println("""
+                UserDetails(user, oauth attributes) 생성:
+                user: %s
+                attributes: %s
+                """.formatted(user, attributes));
+        this.user = user;
+        this.attributes = attributes;
     }
 
     // 해당 User 의 '권한(들)'을 리턴
@@ -103,4 +115,19 @@ public class PrincipalDetails implements UserDetails {
         return true
                 ;
     }
+
+    private Map<String, Object> attributes;  //OAuth2User 의 getAttributes() 값
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+
+    @Override
+    public String getName() {
+        return null;     // 사용하지 않을 예정이라 .. null
+    }
+
+
 }

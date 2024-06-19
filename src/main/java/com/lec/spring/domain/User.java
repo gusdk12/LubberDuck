@@ -39,4 +39,9 @@ public class User {
     private Long authority_id;
     //@EqualsAndHashCode.Exclude
     //private Set<Authority> authorities = new HashSet<>(); // 권한 목록
+
+
+    private String provider;
+
+    private String providerId;
 }
