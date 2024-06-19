@@ -153,6 +153,11 @@ body {
 }
 
 #commentCheck {
+    background-image: url('/img/bookmark/check.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
     width: 8%;
     height: 8%;
     object-fit: contain;
@@ -163,10 +168,6 @@ body {
 
     z-index: 7;
     cursor: pointer;
-    /*background-image: url('/img/bookmark/check.png');*/
-    /*background-size: contain;*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: center;*/
 }
 /* 가연/ */
 
