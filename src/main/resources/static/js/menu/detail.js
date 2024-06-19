@@ -1,4 +1,13 @@
 
+$(document).ready(function() {
+
+    // Show the comment-con when heartImg is clicked
+    $('#heartImg').on('click', function(event) {
+        $('.comment-con').css('display', 'block');
+        $('.comment').css('height','200px');
+    });
+});
+
 window.addEventListener('load', () => {
 
     loadMenu();
