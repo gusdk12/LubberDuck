@@ -30,13 +30,12 @@
 }
 
 .box {
-    border: 1px solid red;
     width: 250px;
     height: 300px;
     margin-top: 35px;
-    position: relative;
-
     text-align: center;
+
+    position: relative;
 }
 
 #randomrotate1{
@@ -52,24 +51,11 @@
     transform: rotate(-2deg);
 }
 
-.drop {
-    border: 2px solid black;
-    width: 30px;
-    height: 40px;
-    border-radius: 8px 8px 0 0;
-    z-index: 7;
-    cursor: pointer;
-    position: absolute;
-    top: -10%;
-    left: 0;
-}
+.background {
+    width: 250px;
+    height: 300px;
 
-.drop img {
-    border: 1px solid red;
-    width: 25px;
-    height: 25px;
-    /*position: absolute;*/
-    /*bottom: 0;*/
+    position: relative;
 }
 
 .background1 #memoImg, .background2 #memoImg,
@@ -80,12 +66,13 @@
     background-repeat: no-repeat;
     background-position: center;
 
-    position: absolute;
-    width: 300px;
-    height: 340px;
-    left: -12%;
-    top: -10%;
+    width: 115%;
+    height: 115%;
 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     overflow: visible;
 }
 
@@ -94,63 +81,73 @@
 }
 .background3 #memoImg {
     content: url('/img/bookmark/memo3.png');
-    height: 350px;
 }
 .background4 #memoImg {
     content: url('/img/bookmark/memo4.png');
-    top: -7%;
 }
 .background5 #memoImg {
     content: url('/img/bookmark/memo5.png');
-    left: -16%;
 }
 .background6 #memoImg {
     content: url("/img/bookmark/memo6.png");
-    height: 355px;
-    top: -13%;
 }
 
-/*.background1 .drop, .background1 .drop img{*/
-/*    position: absolute;*/
-/*    top: 7px;*/
-/*    left: 5px;*/
-/*}*/
+.drop {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    display: none;
+}
 
-/*.background2 .drop, .background2 .drop img{*/
-/*    position: absolute;*/
-/*    top: 7px;*/
-/*    right: 10px;*/
-/*}*/
-/*.background3 .drop, .background3 .drop img{*/
-/*    position: absolute;*/
-/*    top: 7px;*/
-/*    right: 10px;*/
-/*}*/
-/*.background4 .drop, .background4 .drop img{*/
-/*    position: absolute;*/
-/*    top: 9px;*/
-/*    left: 10px;*/
-/*}*/
-/*.background5 .drop, .background5 .drop img{*/
-/*    position: absolute;*/
-/*    top: 7px;*/
-/*    left: 5px;*/
-/*}*/
-/*.background6 .drop, .background1 .drop img{*/
-/*    position: absolute;*/
-/*    top: 7px;*/
-/*    right: 5px;*/
-/*}*/
+.drop img {
+    width: 25px;
+    height: 25px;
+    z-index: 7;
+}
+
+/* 배경메모에 따른 삭제버튼 유동성 */
+.background1 .drop{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+.background2 .drop{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+.background3 .drop{
+    position: absolute;
+    top: 7px;
+    right: 12px;
+}
+.background4 .drop{
+    position: absolute;
+    top: 3px;
+    right: 10px;
+}
+.background5 .drop{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+.background6 .drop{
+    position: absolute;
+    top: 13px;
+    right: 8px;
+}
 
 .info {
+    position: absolute;
+    top: 15px;
+    left: 0;
     width: 100%;
     height: 100%;
+    z-index: 3;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    position: relative;
 }
 
 .cocktail_name {
