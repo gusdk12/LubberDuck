@@ -10,6 +10,7 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu/detail.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/management/menudetail.css}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +22,9 @@
             href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
             rel="stylesheet">
 
+    <script th:inline="javascript">
+        var menu = [[${menu}]];
+    </script>
     <title>Menu Update</title>
   </head>
 
@@ -30,9 +34,9 @@
   <section id="menudetail">
     <form th:action="@{/management/update}" method="post">
       <input type="hidden" name="id" th:value="${menu.id}"/>
-      <div class="container">
+      <div class="container_update">
         <div class="detail_container_update">
-          <div class="titleText">Menu Infomation</div>
+          <div class="titleText">Menu Information</div>
           <div class="info_update">
             <div class="info_A">
               <div class="ctt img">
@@ -45,13 +49,15 @@
             <div class="info_B_update">
               <div class="ctt price">
                 <div class="textbox_price">[판매 가격]</div>
-                <div class="ch_price"><input type="number" id="ch_price" placeholder="가격을 입력해주세요" name="price" th:value="${price} ? ${price} : ${menu.price}"></div>
+                <div class="ch_price"><input type="number" id="ch_price" placeholder="가격을 입력해주세요" name="price"
+                                             th:value="${price} ? ${price} : ${menu.price}"></div>
               </div>
               <div class="error_text er_price"><span class="errorMessage" th:if="${error_price}"
                                                      th:utext="${error_price}"></span></div>
-              <div class="ctt infomation_update">
+              <div class="ctt information_update">
                 <div class="textbox_info">[소개]</div>
-                <textarea id="ch_info" placeholder="내용을 입력해주세요" name="info" th:utext="${info} ? ${info} : ${menu.info}"></textarea>
+                <textarea id="ch_info" placeholder="내용을 입력해주세요" name="info"
+                          th:utext="${info} ? ${info} : ${menu.info}"></textarea>
               </div>
               <div class="error_text er_info"><span class="errorMessage" th:if="${error_info}"
                                                     th:utext="${error_info}"></span></div>
@@ -60,6 +66,9 @@
         </div>
 
         <div class="detail_btn">
+          <a class="btn_preview">
+            <img src="/img/management/preview.png" alt="btn_preview">
+          </a>
           <button class="btn_back" type="button" onclick="history.back()">
             <img class="update_btn" src="/img/management/back.png" alt="btn_back">
           </button>
@@ -71,8 +80,46 @@
           </button>
         </div>
       </div>
+
+      <div id="preview_box">
+        <div id="preview_container">
+          <span class="preview_close">&times;</span>
+          <div id="backgoundflower1"></div>
+          <div id="backgoundflower2"></div>
+          <img src='/img/menu/detailFrame1.png' id="backgoundframe1">
+          <img src='/img/menu/detailFrame1.png' id="backgoundframe2">
+          <div id="cocktailsection">
+            <div id="cocktailImg">
+              <img id="preview_img" th:src="${menu.imgUrl}" alt="ctt_img">
+              <div id="heartImg">
+                <div id="heart" class="heart1"></div>
+              </div>
+            </div>
+            <div id="cocktailInfo">
+              <div id="name" th:text="${menu.name}"></div>
+              <div id="star">
+                <div id="starRate">
+                  <div class="stars"></div> <!--임시-->
+                  <div class="stars"></div> <!--임시-->
+                  <div class="stars"></div> <!--임시-->
+                  <div class="stars"></div> <!--임시-->
+                  <div class="stars"></div> <!--임시-->
+                </div>
+                <div id="Rating">5.0</div> <!--임시-->
+              </div>
+              <div id="info" th:text="${menu.info}"></div>
+              <div id="price" th:text="${menu.price} + '￦'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </form>
   </section>
+
+  <script th:src="@{/js/management/detail.js}"></script>
+
   </body>
 </th:block>
 </html>
+

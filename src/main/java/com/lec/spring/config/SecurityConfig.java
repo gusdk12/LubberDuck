@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -29,18 +30,19 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth // TODO
+                        .requestMatchers("/mypage/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form  // TODO
                         .loginPage("/user/login")
-                        .loginProcessingUrl("/user/login").defaultSuccessUrl("/")
-                        .successHandler(new CustomLoginSuccessHandler("/home"))
+                        .loginProcessingUrl("/user/login")
+                        .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
                         .failureHandler(new CustomLoginFailureHandler())
 
                 )
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
                         .logoutUrl("/user/logout")
-                        .invalidateHttpSession(false)
+                        .invalidateHttpSession(true)
                         .logoutSuccessHandler(new CustomLogoutSuccessHandler())
                 )
                 .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer

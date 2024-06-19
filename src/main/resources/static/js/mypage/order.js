@@ -7,7 +7,19 @@ $(document).ready(function(){
         'font-weight': 'bold'
     });
 
-    buildBody();
+    buildBody(); // buildBody를 호출하여 본문을 만듭니다.
+
+    // buildBody 이후에 정렬을 수행해야 합니다.
+    var ordersContainer = $('.container');
+    var orders = ordersContainer.find(".receipt");
+
+    orders.sort(function (a, b){
+        var dateA = $(a).find('.order-nm').text();
+        var dateB = $(b).find('.order-nm').text();
+        return new Date(dateB) - new Date(dateA); // 최신순 정렬
+    });
+
+    orders.detach().appendTo(ordersContainer); // 정렬된 주문을 다시 추가합니다.
 });
 
 function formatDateTime(dateTimeString) {
@@ -24,8 +36,9 @@ function formatDateTime(dateTimeString) {
     return formattedDate;
 }
 
-
 function buildBody(){
+    $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
+
     orderList.forEach(order => {
         let itemsHTML = "";
         let totalPrice = 0;
@@ -36,7 +49,7 @@ function buildBody(){
                     <div class="item">
                         <span class="item-name">${item.menu.name}</span>
                         <span class="quantity">${item.quantity}</span>
-                        <span class="item-price" >${formattedItemPrice}</span>
+                        <span class="item-price">${formattedItemPrice}</span>
                         <span>
                             <input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/review/write'">
                         </span>
@@ -51,8 +64,8 @@ function buildBody(){
 
         $('.container').append(`
             <div class="receipt">
-            <div class="background">
-                <img src="/img/mypage/receipt.png">
+                <div class="background">
+                    <img src="/img/mypage/receipt.png">
                 </div>
                 <div class="content">
                     <h2 class="shopname">LubberDuck</h2>
@@ -74,7 +87,7 @@ function buildBody(){
                     <div class="totals">
                         <div class="total-item">
                             <span class="total-price"></span>
-                             <span class="total-price">TOTAL : ${formattedTotalPrice}원</span>
+                            <span class="total-price">TOTAL : ${formattedTotalPrice}원</span>
                         </div>
                     </div>
                 </div>

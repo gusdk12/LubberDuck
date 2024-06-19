@@ -1,3 +1,26 @@
+// 즐겨찾기에 존재하는지 확인하고 그에맞는 css
+async function checkBook(cocktail){
+    let findBook = null;
+
+    await $.ajax({
+        url: "/bookmark/detail/" + logged_id + "/" + cocktail.id,
+        type: "GET",
+        cache: false,
+        success: function (data, status) {
+            if (status === "success") {
+                if (data.status !== "OK") {
+                    alert(data.status);
+                    return;
+                }
+                findBook = data.data;
+            }
+        },
+    });
+
+    if(findBook) {
+        return true;
+    }
+}
 
 // 추가하기
 async function addToBook(cocktail, comment){
@@ -55,24 +78,6 @@ async function addToBook(cocktail, comment){
 // 삭제하기
 async function deleteFromBook(cocktail){
 
-    // 즐겨찾기에 이미 같은 상품이 담겨있는지 확인하기
-    // let findBook = null;
-    //
-    // await $.ajax({
-    //     url: "/bookmark/detail/" + logged_id + "/" + cocktail.id,
-    //     type: "GET",
-    //     cache: false,
-    //     success: function (data, status) {
-    //         if (status === "success") {
-    //             if (data.status !== "OK") {
-    //                 alert(data.status);
-    //                 return;
-    //             }
-    //             findBook = data.data;
-    //         }
-    //     },
-    // });
-
     // 존재한다면 아예 삭제
     // if(findBook){
         $.ajax({
@@ -120,35 +125,35 @@ function buildBook(result){
 
         $('#favorite').append(`
             <div class="box" id="randomrotate${randomIndex1}">
-                    <img src="" class="background background${randomIndex2}">
+                <div class="background background${randomIndex2}">
+                    <img src="" id="memoImg">
                     <div class="drop">
                         <img src="/img/bookmark/drop.png" alt="삭제">
                     </div>
-                    <div class="info">
-                        <table>
-                            <tr>
-                                <td><div class="cocktail_name">${book.menu.name}</div></td>
-                            </tr>
-                            <tr>
-                                <td class="cocktail-con">
-                                    <div id="cocktailImg" style="background-image: url('${book.menu.imgUrl}')">
-                                        <div class="CII">
-                                            <img src="/img/bookmark/cartIn.png" alt="담기" id="cartIn">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="CI">
-                                    <p class="C1">${book.comment}</p>
-                                    <div class="I">
-                                        <img src="/img/bookmark/modify.png" alt="수정" id="modify">
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                </div>
+
+                <div class="info">
+                    <div class="cocktail_name">${book.menu.name}</div>
+                    <div class="cocktail-con">
+                        <div id="cocktailImg" style="background-image: url('${book.menu.imgUrl}')"></div>
+                        <div class="CII">
+                            <img src="/img/bookmark/cartIn.png" alt="담기" id="cartIn">
+                        </div>
+                    </div>
+                    <div class="CI">
+                        <p class="C1"> ${book.comment}</p>
+                        <div class="I">
+                            <img src="/img/bookmark/modify.png" alt="수정" id="modify">
+                        </div>
+                        
+                        <div class="comment-con">
+                            <textarea class="modifyBox"></textarea>
+                            <img src="/img/bookmark/check.png" id="commentCheck">
+                        </div>
                     </div>
                 </div>
+            </div>
+         
         `)
 
     });
@@ -189,6 +194,15 @@ function buildBook(result){
         }
     );
 
+    $(".I").click(
+        function() {
+            $(this).closest('.box').find('.comment-con').css('display', 'block');
+        },
+        function() {
+            $(this).closest('.box').find('.comment-con').css('display', 'none');
+        }
+    )
+
     // 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러를 추가합니다.
     $('#favorite').on('click', '.CII', function(e) {
         e.preventDefault();
@@ -224,6 +238,10 @@ function buildBook(result){
 
         alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.');
         $(this).closest('.box').remove();
+    });
+
+    $('#favorite').on('click','#commentCheck', function(e){
+        alert('신지');
     });
 }
 

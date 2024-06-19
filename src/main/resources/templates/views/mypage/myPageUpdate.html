@@ -55,21 +55,21 @@
 
         <div class="field">
             <b>이름</b>
-            <input type="text" name="nickname" th:value="${user.nickname}" required>
+            <input type="text" name="nickname"  th:value="${nickname} ? ${nickname} : ${user.nickname}" required>
         </div>
 
         <div class="field">
             <b>이메일</b>
-            <input type="email" name="email" th:value="${user.email}" required>
+            <input type="email" name="email" th:value="${email} ? ${email} : ${user.email}" required>
         </div>
 
 
         <div class="field birth">
             <b>생년월일</b>
             <div>
-                <input type="number" name="year" th:value="${year}" required>
-                <input type="number" name="month" th:value="${month}" required>
-                <input type="number" name="day" th:value="${day}" required>
+                <input type="number" name="year" th:value="${year} ? ${year} : ${user.year}" required>
+                <input type="number" name="month" th:value="${month} ? ${month} : ${user.month}" required>
+                <input type="number" name="day" th:value="${day} ? ${day} : ${user.day}" required>
             </div>
         </div>
 
