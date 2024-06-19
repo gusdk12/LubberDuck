@@ -239,9 +239,5 @@ function buildBook(result){
         alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.');
         $(this).closest('.box').remove();
     });
-
-    $('#favorite').on('click','#commentCheck', function(e){
-        alert('신지');
-    });
 }
 
