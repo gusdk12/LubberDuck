@@ -1,12 +1,12 @@
 
-$(document).ready(function() {
-
-    // Show the comment-con when heartImg is clicked
-    $('#heartImg').on('click', function(event) {
-        $('.comment-con').css('display', 'block');
-        $('.comment').css('height','200px');
-    });
-});
+// $(document).ready(function() {
+//
+//     // Show the comment-con when heartImg is clicked
+//     $('#heartImg').on('click', function(event) {
+//         $('.comment-con').css('display', 'block');
+//         $('.comment').css('height','200px');
+//     });
+// });
 
 window.addEventListener('load', () => {
 
@@ -39,6 +39,7 @@ async function loadMenu(){
     $('.heart1').off('click').on('click', function(event) {
         event.stopPropagation(); // Prevent the click event from propagating to the document
         $('.comment-con').css('display', 'block');
+        $('.comment').css('height','200px');
     });
 
     $('.heart2').off('click').on('click', function(event) {
