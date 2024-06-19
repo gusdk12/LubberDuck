@@ -2,43 +2,87 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lec.spring.repository.calendar.CalendarRepository">
 
-    <!-- 특정 id에 해당하는 날짜(date)의 메모 조회 -->
-    <select id="findMemoById" resultType="com.lec.spring.domain.calendar.Calendar">
-        SELECT memo, comment, date
-        FROM ctt_calendar
-        WHERE id = #{id}
+
+    <resultMap id="mapMenu" type="com.lec.spring.domain.menu.Menu">
+        <result column="m_id" property="id"/>
+        <result column="m_name" property="name"/>
+        <result column="m_img_url" property="imgUrl"/>
+        <result column="m_info" property="info"/>
+        <result column="m_price" property="price"/>
+        <result column="m_sequence" property="sequence"/>
+    </resultMap>
+
+    <resultMap id="mapCalendar" type="com.lec.spring.domain.calendar.Calendar">
+        <result column="c_id" property="id"/>
+        <result column="c_memo" property="memo"/>
+        <result column="c_comment" property="comment"/>
+        <result column="c_date" property="date"/>
+        <collection property="menu" resultMap="mapMenu"/>
+    </resultMap>
+
+    <sql id="SELECT_BASE">
+        SELECT
+            c.id "c_id"
+            , c.memo "c_memo"
+            , c.comment "c_comment"
+            , c.date "c_date"
+            , m.id "m_id"
+            , m.name "m_name"
+            , m.img_url "m_img_url"
+            , m.info "m_info"
+            , m.price "m_price"
+            , m.sequence "m_sequence"
+        FROM ctt_calendar c, ctt_menu m
+        WHERE 1=1
+    </sql>
+
+    <select id="selectAll" resultMap="mapCalendar">
+        <include refid="SELECT_BASE"/>
     </select>
 
-    <!-- 특정 id에 해당하는 날짜(date)의 메모 삽입 -->
-    <insert id="insertMemoById" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <!-- 특정 날짜의 메모를 조회 -->
+    <select id="findByDate" resultMap="mapCalendar">
+        <include refid="SELECT_BASE"/>
+        AND c.date = #{date}
+    </select>
+
+    <!-- 메모 삽입 -->
+    <insert id="insertMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO ctt_calendar (memo, date)
         VALUES (#{memo}, #{date})
     </insert>
 
-    <!-- 특정 id에 해당하는 날짜(date)의 메모 삭제 -->
-    <delete id="deleteMemoById">
+    <!-- 메모 수정 -->
+    <update id="updateMemo" parameterType="com.lec.spring.domain.calendar.Calendar">
+        UPDATE ctt_calendar
+        SET memo = #{memo}
+        WHERE date = #{date}
+    </update>
+
+    <!-- 메모 삭제 -->
+    <delete id="deleteMemo">
         DELETE FROM ctt_calendar
-        WHERE id = #{id}
+        WHERE date = #{date} AND memo IS NOT NULL
     </delete>
 
-    <!-- 특정 id에 해당하는 날짜(date)의 관리자 코멘트 삽입 -->
-    <insert id="insertCommentById" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <!-- 관리자 코멘트 삽입 -->
+    <insert id="insertComment" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO ctt_calendar (comment, date)
         VALUES (#{comment}, #{date})
     </insert>
 
-    <!-- 특정 id에 해당하는 날짜(date)의 관리자 코멘트 수정 -->
-    <update id="updateCommentById" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true">
+    <!-- 관리자 코멘트 수정 -->
+    <update id="updateComment" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true">
         UPDATE ctt_calendar
         SET comment = #{comment}
-        WHERE id = #{id}
+        WHERE date = #{date} AND comment IS NOT NULL
     </update>
 
-    <!-- 특정 id에 해당하는 날짜(date)의 관리자 코멘트 삭제 -->
-    <update id="deleteCommentById" flushCache="true">
+    <!-- 관리자 코멘트 삭제 -->
+    <update id="deleteComment" flushCache="true">
         UPDATE ctt_calendar
         SET comment = NULL
-        WHERE id = #{id}
+        WHERE date = #{date}
     </update>
 
 </mapper>

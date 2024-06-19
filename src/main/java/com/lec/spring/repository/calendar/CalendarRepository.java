@@ -2,17 +2,23 @@ package com.lec.spring.repository.calendar;
 
 import com.lec.spring.domain.calendar.Calendar;
 
+import java.util.List;
+
 public interface CalendarRepository {
 
-    Calendar findMemoById(Long id);
+    List<Calendar> selectAll();
 
-    int insertMemoById(Calendar calendar);
+    List<Calendar> findByDate(String date);
 
-    int deleteMemoById(Long id);
+    void insertMemo(Calendar calendar);
 
-    int insertCommentById(Calendar calendar);
+    void updateMemo(Calendar calendar);
 
-    int updateCommentById(Calendar calendar);
+    void deleteMemo(Long id);
 
-    int deleteCommentById(Long id);
+    void insertComment(Calendar calendar);
+
+    void updateComment(Calendar calendar);
+
+    void deleteComment(String date);
 }
