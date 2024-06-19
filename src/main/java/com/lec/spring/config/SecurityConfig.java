@@ -59,6 +59,12 @@ public class SecurityConfig {
                 .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer
                         .accessDeniedHandler(new CustomAccessDeniedHandler())
                 )
+
+                .oauth2Login(httpSecurityOAuth2LoginConfigurer -> httpSecurityOAuth2LoginConfigurer
+                        .loginPage("/user/login")
+                        .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig.userService(principalOauth2UserService))
+                )
+
 //                .oauth2Login(httpSecurityOAuth2LoginConfigurer -> httpSecurityOAuth2LoginConfigurer
 //                .loginPage("/user/login")
 //
