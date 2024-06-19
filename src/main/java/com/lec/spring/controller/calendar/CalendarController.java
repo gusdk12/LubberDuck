@@ -1,8 +1,11 @@
 package com.lec.spring.controller.calendar;
 
+import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.UserValidator;
 import com.lec.spring.domain.calendar.Calendar;
 import com.lec.spring.domain.calendar.CalendarValidator;
+import com.lec.spring.domain.calendar.QryCalendarList;
+import com.lec.spring.domain.cart.QryCartList;
 import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.service.calendar.CalendarService;
 import com.lec.spring.service.menu.MenuService;
@@ -14,38 +17,50 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@Controller
-@RequestMapping("/admin")
+@RestController   // data 를 response 한다. ('View' 를 리턴하는게 아니다!)
+@RequestMapping("/calendar")
 public class CalendarController {
-
-    private MenuService menuService;
 
     private CalendarService calendarService;
 
-
-    @Autowired
-    CalendarValidator calendarValidator;
-
     @Autowired
     public CalendarController(MenuService menuService, CalendarService calendarService) {
-        this.menuService = menuService;
         this.calendarService = calendarService;
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.setValidator(new CalendarValidator());
+    @GetMapping("/list")
+    public QryCalendarList list(){
+
+        QryCalendarList result = calendarService.list();
+
+        return result;
     }
 
-    @GetMapping("/calendar")
-    public void calendar(Model model) {
-        List<Menu> menuList = menuService.list();
-        model.addAttribute("menuList", menuList);
-        List<Calendar> calendarList = calendarService.list();
-        model.addAttribute("calendarList", calendarList);
+    @PostMapping("/addByMemo")
+    public QryResult addByMemo(
+            @RequestParam("memo") String memo,
+            @RequestParam("date") String date){
+        QryResult test = calendarService.addByMemo(memo, date);
+
+        return test;
     }
 
-    @PostMapping("/calendar/saveMemo")
+    @PostMapping("/addByMenu")
+    public QryResult addByMenu(){
+        return null;
+    }
+
+    @PostMapping("/update/{calender_Id}")
+    public QryResult update(@PathVariable Long calender_Id){
+        return null;
+    }
+
+    @PostMapping("/delete/{calender_Id}")
+    public QryResult delete(@PathVariable Long calender_Id){
+        return null;
+    }
+
+    @PostMapping("/saveMemo")
     @ResponseBody
     public Calendar saveMemo(@RequestBody Calendar calendar) {
         System.out.println("Received memo to save: " + calendar);
@@ -56,17 +71,6 @@ public class CalendarController {
     @ResponseBody
     public List<Calendar> getMemosByDate(@PathVariable String date) {
         return calendarService.findByDate(date);
-    }
-
-    // 메뉴 ID로 메뉴 조회
-    @GetMapping("/calendar/{menuId}")
-    public ResponseEntity<Menu> getMenuById(@PathVariable Long menuId) {
-        Menu menu = menuService.selectById(menuId);
-        if (menu != null) {
-            return ResponseEntity.ok(menu);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
     }
 
 

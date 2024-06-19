@@ -1,12 +1,16 @@
 package com.lec.spring.service.calendar;
 
+import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.calendar.Calendar;
+import com.lec.spring.domain.calendar.QryCalendarList;
 
 import java.util.List;
 
 public interface CalendarService {
 
-    List<Calendar> list();
+    QryCalendarList list();
+
+    QryResult addByMemo(String memo, String date);
 
     List<Calendar> findByDate(String date);
 
