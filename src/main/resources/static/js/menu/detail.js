@@ -1,64 +1,32 @@
-
-// $(document).ready(function() {
-//
-//     // Show the comment-con when heartImg is clicked
-//     $('#heartImg').on('click', function(event) {
-//         $('.comment-con').css('display', 'block');
-//         $('.comment').css('height','200px');
-//     });
-// });
-
 window.addEventListener('load', () => {
-
     loadMenu();
     addEvent();
-
 });
+
 window.addEventListener('popstate', function(event) {
     // This code runs when the back button is clicked
     alert('popstate event triggered');
     location.reload(); // Refresh the page
 });
 
-async function loadMenu(){
+async function loadMenu() {
     $('#img').css({'background-image': `url('${menu.imgUrl}')`});
     document.querySelector(`#name`).textContent = `${menu.name}`;
     document.querySelector(`#info`).textContent = `${menu.info}`;
     document.querySelector(`#price`).textContent = `${menu.price} ￦`;
     var cocktailName = `${menu.name}`;
 
-    // /가연
-    const isBookmarked = await checkBook(menu);
+    // 로그인 상태일때만 불러오기
+    if (logged_id !== -1) {
+        const isBookmarked = await checkBook(menu);
 
-    if (isBookmarked) {
-        $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('fullHeart');
-    } else {
-        $('#container').find('#heart').removeClass('fullHeart').removeClass('emptyHeart').addClass('emptyHeart');
+        // 즐겨찾기 존재여부에 따른 클래스 설정
+        isBookmarked && switchToFullHeart(); // 참
+        isBookmarked || switchToEmptyHeart(); // 거짓
     }
+}
 
-    // Show the comment-con when heartImg is clicked
-    $('.emptyHeart').click(function(event) {
-        event.stopPropagation(); // Prevent the click event from propagating to the document
-        $('.comment-con').css('display', 'block');
-        $('.comment').css('height', '0px');
-        $('.comment').animate({
-            height: '200px'
-        }, 200);
-    });
-
-    // heart2 클릭 시 heart1으로 변경
-    $('.fullHeart').click(function(event) {
-        event.stopPropagation();
-        $(this).removeClass('fullHeart').addClass('emptyHeart');
-        deleteFromBook(menuList.find(menu => menu.name === cocktailName));
-        alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.')
-
-        // heart1 이벤트 다시 설정
-        $('.emptyHeart').click(function(event) {
-            event.stopPropagation();
-            $('.comment-con').css('display', 'block');
-        });
-    });
+function addEvent(){
 
     // Hide the comment-con when clicking outside of it
     $(document).click(function(event) {
@@ -67,12 +35,25 @@ async function loadMenu(){
         }
     });
 
-    // 가연/
-}
-function addEvent(){
+    // addToCart
     $('#toCart').click(function(){
         var cocktailName = $(this).parent().siblings("#name").text();
         addToCart(menuList.find(menu => menu.name === cocktailName));
+    });
+
+    // addToBook
+    $('#heart').click(function(event) {
+        if(event.target.className === "fullHeart"){
+            var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
+            event.stopPropagation();
+            deleteFromBook(menuList.find(menu => menu.name === cocktailName));
+            alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.')
+
+            switchToEmptyHeart();
+        } else if(event.target.className === "emptyHeart"){
+            event.stopPropagation();
+            openComment();
+        }
     });
 
     $('#commentCheck').click(function() {
@@ -81,26 +62,28 @@ function addEvent(){
         addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
         alert('즐겨찾기에 추가되었습니다');
 
-        $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('fullHeart');
-        $('#container').find('.comment-con').css('display', 'none');
-
-        // heart2 클릭 시 heart1으로 변경
-        $('.fullHeart').click(function(event) {
-            event.stopPropagation();
-            $(this).removeClass('fullHeart').addClass('emptyHeart');
-            deleteFromBook(menuList.find(menu => menu.name === cocktailName));
-            alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.')
-            $('#container').find('.comment').val('');
-
-            // heart1 이벤트 다시 설정
-            $('.emptyHeart').click(function(event) {
-                event.stopPropagation();
-                $('.comment-con').css('display', 'block');
-                $('.comment').css('height', '0px');
-                $('.comment').animate({
-                    height: '200px'
-                }, 200);
-            });
-        });
+        switchToFullHeart();
+        closeComment();
     });
+}
+
+function switchToFullHeart(){
+    $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('fullHeart');
+}
+
+function switchToEmptyHeart(){
+    $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('emptyHeart');
+}
+
+// 코맨트창 열기
+function openComment(){
+    $('.comment-con').css('display', 'block');
+    $('.comment').css('height', '200px');
+}
+
+// 코맨트창 닫기
+function closeComment(){
+    $('#container').find(".comment").val('');
+    $('.comment-con').css('display', 'none');
+    $('.comment').css('height', '0px');
 }
