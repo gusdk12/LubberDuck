@@ -1,8 +1,15 @@
 package com.lec.spring.controller.review;
 
+import com.lec.spring.domain.menu.Menu;
+import com.lec.spring.domain.order.Order_item;
 import com.lec.spring.domain.review.Review;
+import com.lec.spring.service.menu.MenuService;
+import com.lec.spring.service.order.OrderService;
+import com.lec.spring.service.order.Order_itemService;
 import com.lec.spring.service.review.ReviewService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,84 +26,38 @@ public class ReviewController {
 
     @Autowired
     private ReviewService reviewService;
+
+    @Autowired
+    private MenuService menuService;
+
+    @Autowired
+    private Order_itemService orderItemService;
+
+    @Autowired
+    private OrderService orderService;
+
     public ReviewController(){}
 
     @GetMapping("/write")
     public void write(){}
 
-    @PostMapping("/write")
-    public String writeOk(@Validated Review review
-            , BindingResult result
-            , Model model
-            , RedirectAttributes redirectAttrs){
-        if(result.hasErrors()){
-            redirectAttrs.addFlashAttribute("item_id", review.getItem_id());
-            redirectAttrs.addFlashAttribute("rate", review.getRate());
-            redirectAttrs.addFlashAttribute("content", review.getContent());
-            redirectAttrs.addFlashAttribute("regdate", review.getRegDate());
 
-            List<FieldError> errList = result.getFieldErrors();
-            for(FieldError err : errList){
-                redirectAttrs.addFlashAttribute("error_" + err.getField(), err.getCode());
-            }
+    @GetMapping("/update")
+    public void update(){}
 
-            return "redirect:/review/write";
-        }
-        model.addAttribute("result", reviewService.write(review));
-        return "review/writeOk";
-    }
+    @GetMapping("/delete/{id}")
+    public void delete(){}
 
-    @GetMapping("/detail/{id}")
-    public String detail(@PathVariable Long id, Model model){
-        model.addAttribute("review", reviewService.detail(id));
-        return "review/detail";
-    }
 
-    @GetMapping("/list")
-    public void list(Model model){
-        model.addAttribute("list", reviewService.list());
 
-    }
-
-    @GetMapping("/update/{id}")
-    public String update(@PathVariable Long id, Model model){
-        model.addAttribute("review", reviewService.selectById(id));
-        return "review/update";
-    }
-
-    @PostMapping("/update")
-    public String updateOk(@Validated Review review
-            , BindingResult result
-            , Model model
-            , RedirectAttributes redirectAttrs
-    ){
-
-        if(result.hasErrors()){
-            redirectAttrs.addFlashAttribute("item_id", review.getItem_id());
-            redirectAttrs.addFlashAttribute("rate", review.getRate());
-            redirectAttrs.addFlashAttribute("content", review.getContent());
-            redirectAttrs.addFlashAttribute("regdate", review.getRegDate());
-
-            List<FieldError> errList = result.getFieldErrors();
-            for(FieldError err : errList){
-                redirectAttrs.addFlashAttribute("error_" + err.getField(), err.getCode());
-            }
-
-            return "redirect:/review/update/" + review.getId();
-        }
-        model.addAttribute("result", reviewService.update(review));
-        return "review/updateOk";
-    }
-
-    @PostMapping("/delete")
-    public String deleteOk(Long id, Model model){
-        model.addAttribute("result", reviewService.deleteById(id));
-        return "review/deleteOk";
-    }
-
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder){
-//        System.out.println("ReviewController.initBinder() 호출");
-//        binder.setValidator(new ReviewValidator());
+//    @GetMapping("/item/{itemId}")
+//    public ResponseEntity<Review> getReviewByItemId(@PathVariable Long itemId) {
+//        Review review = reviewService.findByItemId(itemId);
+//        if (review != null) {
+//            return ResponseEntity.ok(review);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
 //    }
+
 }

@@ -1,26 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const reviewTexts = document.querySelectorAll('.review-text');
-
-    reviewTexts.forEach(text => {
-        text.addEventListener('click', () => {
-            const reviewContent = text.parentElement;
-            const extraButtons = reviewContent.querySelector('.extra-buttons');
-
-            // 다른 review-text들의 확장 상태를 초기화하고 추가 버튼을 숨깁니다.
-            reviewTexts.forEach(otherText => {
-                if (otherText !== text) {
-                    otherText.classList.remove('expanded');
-                    otherText.parentElement.querySelector('.extra-buttons').classList.remove('show');
-                }
-            });
-
-            // 현재 클릭한 review-text와 해당하는 추가 버튼의 상태를 toggle합니다.
-            text.classList.toggle('expanded');
-            extraButtons.classList.toggle('show');
-        });
-    });
-});
-
 $(document).ready(function() {
 
     // 사이드바 메뉴 클릭시 css 변경 => 가연 추가!
@@ -30,6 +7,7 @@ $(document).ready(function() {
         'color' : '#54320f',
         'font-weight': 'bold'
     });
+
 
     // 페이지 로드 시 최신순으로 정렬되도록 설정
     var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
@@ -67,5 +45,42 @@ $(document).ready(function() {
 
         // 정렬된 리뷰 목록을 다시 컨테이너에 추가
         reviews.detach().appendTo(reviewsContainer);
+    });
+});
+
+function formatDateTime(dateTimeString) {
+    const date = new Date(dateTimeString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    // 두 자리 숫자를 맞추기 위해 padStart 사용
+    const formattedDate = `${year}년 ${month}월 ${day}일 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return formattedDate;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const reviewTexts = document.querySelectorAll('.review-text');
+
+    reviewTexts.forEach(text => {
+        text.addEventListener('click', () => {
+            const reviewContent = text.parentElement;
+            const extraButtons = reviewContent.querySelector('.extra-buttons');
+
+            // 다른 review-text들의 확장 상태를 초기화하고 추가 버튼을 숨깁니다.
+            reviewTexts.forEach(otherText => {
+                if (otherText !== text) {
+                    otherText.classList.remove('expanded');
+                    otherText.parentElement.querySelector('.extra-buttons').classList.remove('show');
+                }
+            });
+
+            // 현재 클릭한 review-text와 해당하는 추가 버튼의 상태를 toggle합니다.
+            text.classList.toggle('expanded');
+            extraButtons.classList.toggle('show');
+        });
     });
 });
