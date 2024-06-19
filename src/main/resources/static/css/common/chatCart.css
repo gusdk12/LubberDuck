@@ -5,7 +5,7 @@
     width: 80px;
     height: 170px;
     right: 100px;
-    z-index: 10;
+    z-index: 11;
     /*!*transition: 0.2s ease;*!*/
     display: flex;
     flex-direction: column;
@@ -60,6 +60,7 @@
 #cartboard{
     position: absolute;
     background-color: #FFFBF5;
+    border: 1px solid #F37472;
     /*width: 400px;*/
     /*height: 500px;*/
     width: 0px;

@@ -7,7 +7,13 @@ window.addEventListener('load', () => {
     showCustomerButtons();
     customerButtonsSet();
 
-    document.querySelector('body').scrollLeft = 0;
+});
+window.addEventListener('unload', function(e){
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+    });
 });
 
 function preloadImages(){
@@ -54,7 +60,6 @@ function appendMenuToPlate(){
                         <div class="cocktailinfo">${cocktail.info}</div>
                         <div class="cocktailprice">${cocktail.price}￦</div>
                         <div class="cocktailbutton">
-<!--                            <div id="cocktailadd"></div>-->
                             <div id="cocktaildetail" onClick="location.href ='/menu/detail/${cocktail.id}'"></div>
                         </div>
                     </div>
@@ -68,7 +73,6 @@ function appendMenuToPlate(){
                         <div class="cocktailinfo">${cocktail.info}</div>
                         <div class="cocktailprice">${cocktail.price}￦</div>
                         <div class="cocktailbutton">
-<!--                            <div id="cocktailadd"></div>-->
                             <div id="cocktaildetail" onClick="location.href ='/menu/detail/${cocktail.id}'"></div>
                         </div>
                     </div>
@@ -83,14 +87,14 @@ function appendMenuToPlate(){
     if(logged_id !== -1){
         var parentDiv = document.getElementsByClassName('cocktailbutton');
 
-        for(let div of parentDiv){
-            var newChildDiv = document.createElement('div');
-            newChildDiv.id = 'cocktailadd';
-            div.appendChild(newChildDiv);
+        for(let div of parentDiv) {
+            var newChildAddDiv = document.createElement('div');
+            newChildAddDiv.id = 'cocktailadd';
+            div.appendChild(newChildAddDiv);
         }
     }
 
-    for(cocktailpart of document.querySelectorAll(".cocktailpart")){
+    for (cocktailpart of document.querySelectorAll(".cocktailpart")) {
         cocktailpart.addEventListener("mouseenter", function(){
             this.style.backgroundColor = 'white';
             $(this).find(".cocktailbutton").css({ 'display': `flex` });
@@ -107,7 +111,12 @@ function appendMenuToPlate(){
             addToCart(menuList.find(menu => menu.name === cocktailName));
         });
     }
-
+    // for(cocktaildetail of document.querySelectorAll("#cocktaildetail")){
+    //     cocktaildetail.addEventListener("click", function(e){
+    //         e.preventDefault();
+    //         window.scrollTo(0, 0);
+    //     });
+    // }
 
     let fr = "";
     for(let i = 0; i < paperCount; i++)
@@ -121,6 +130,7 @@ let isDragging = false;
 let startX;
 let scrollLeft;
 function openMenu() {
+
     var menu = document.getElementById("menu");
     menu.animate({ width: `${paperCount * 500}px` },
         {
