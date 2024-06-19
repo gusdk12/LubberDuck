@@ -176,7 +176,7 @@ public class MyPageController {
 
         // 모델에 주문 목록과 주문 항목 맵을 추가합니다.
         model.addAttribute("orders", orders);
-//        model.addAttribute("user", user);
+        model.addAttribute("user", user);
         model.addAttribute("orderItemsByOrderId", orderItemsByOrderId);
 
         // mypage/order 뷰를 반환합니다.

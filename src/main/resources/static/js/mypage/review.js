@@ -8,7 +8,6 @@ $(document).ready(function() {
         'font-weight': 'bold'
     });
 
-    buildBody();
 
     // 페이지 로드 시 최신순으로 정렬되도록 설정
     var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
@@ -62,90 +61,6 @@ function formatDateTime(dateTimeString) {
     const formattedDate = `${year}년 ${month}월 ${day}일 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     return formattedDate;
 }
-
-function buildBody(){
-    $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
-
-    orderItemMap[review.id].forEach(item => {
-        let itemsHTML = "";
-        reviewList.forEach(review => {
-            itemsHTML += `
-                
-                 <div class="reviews-container">
-                        <div class="review">
-                            <img th:src="${item.menu.imgUrl}">
-                            <div>
-                                <div class="review-content">
-                                    <div class="review-header">
-                                        <p>CloverClub</p>
-                                        <div class="review-rating">
-                                            <span class="star">★★★★★</span>
-                                            <span class="star_score" th:value="${review.rate}">5</span>
-                                        </div>
-                                    </div>
-                                    <div class="review-text" th:value="${review.content}">고단한 삶 속에서...</div>
-                                    <div class="extra-buttons">
-                                        <div class="review-date" th:value="${formattedRegDate}">2024-06-10</div>
-                                        <button class="btn-update">수정</button>
-                                        <button class="btn-delete">삭제</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>';
-                    });
-                    
-        //          <div class="items">
-        //             <div class="item">
-        //                 <span class="item-name">${item.menu.name}</span>
-        //                 <span class="quantity">${item.quantity}</span>
-        //                 <span class="item-price">${formattedItemPrice}</span>
-        //                 <span>
-        //                     <input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/review/write'">
-        //                 </span>
-        //             </div>
-        //        </div>`;
-        //     totalPrice += (item.price * item.quantity);
-        // });
-
-        let formattedTotalPrice = totalPrice.toLocaleString('ko-KR');
-
-        let formattedRegDate = formatDateTime(order.regdate);
-
-        $('.container').append(`
-            <div class="receipt">
-                <div class="background">
-                    <img src="/img/mypage/receipt.png">
-                </div>
-                <div class="content">
-                    <h2 class="shopname">LubberDuck</h2>
-                    <div class="header-info">
-                        <p class="name">${user.nickname}님</p>
-                        <p class="date-time">${formattedRegDate}</p>
-                    </div>
-                    <p class="order-nm">주문번호: ${order.id}</p>
-                    <div class="dashed"></div>
-                    <div class="item-header">
-                        <span class="menuName">&lt;메뉴이름&gt;</span>
-                        <span class="quantity">&lt;주문수량&gt;</span>
-                        <span class="menuPrice">&lt;메뉴가격&gt;</span>
-                        <span class="review">&lt;리뷰작성&gt;</span>
-                    </div>
-                    <div class="dashed"></div>
-                    ${itemsHTML}
-                    <div class="dashed"></div>
-                    <div class="totals">
-                        <div class="total-item">
-                            <span class="total-price"></span>
-                            <span class="total-price">TOTAL : ${formattedTotalPrice}원</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `);
-    });
-}
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const reviewTexts = document.querySelectorAll('.review-text');
