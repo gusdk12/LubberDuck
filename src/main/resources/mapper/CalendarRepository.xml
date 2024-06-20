@@ -17,6 +17,7 @@
         <result column="c_memo" property="memo"/>
         <result column="c_comment" property="comment"/>
         <result column="c_date" property="date"/>
+        <result column="c_cocktail_id" property="menu_id"/>
         <collection property="menu" resultMap="mapMenu"/>
     </resultMap>
 
@@ -26,19 +27,26 @@
             , c.memo "c_memo"
             , c.comment "c_comment"
             , c.date "c_date"
+            , c.cocktail_id "c_cocktail_id"
             , m.id "m_id"
             , m.name "m_name"
             , m.img_url "m_img_url"
             , m.info "m_info"
             , m.price "m_price"
             , m.sequence "m_sequence"
-        FROM ctt_calendar c, ctt_menu m
+        FROM ctt_calendar c
+        LEFT OUTER JOIN ctt_menu m ON c.cocktail_id = m.id
         WHERE 1=1
     </sql>
 
     <select id="selectAll" resultMap="mapCalendar">
         <include refid="SELECT_BASE"/>
     </select>
+
+    <insert id="insertByMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO ctt_calendar (memo, date)
+        VALUES (#{memo}, #{date})
+    </insert>
 
     <!-- 특정 날짜의 메모를 조회 -->
     <select id="findByDate" resultMap="mapCalendar">

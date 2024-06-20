@@ -10,6 +10,8 @@ import lombok.*;
 public class Calendar {
     private Long id;
 
+    private Long menu_id; // FK
+
     @ToString.Exclude
     private Menu menu;
 
