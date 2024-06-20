@@ -254,7 +254,9 @@ function buildBook(result){
     });
 
     // updateFromBook
-    $("#commentCheck").click(function() {
+    $('#favorite').on('click', '#commentCheck', function (e) {
+        e.preventDefault();
+
         var cocktailName = $(this).closest('.info').find('.cocktail_name').text();
         var commentValue = $(this).closest('.comment-con').find('.modifyBox').val();
 
