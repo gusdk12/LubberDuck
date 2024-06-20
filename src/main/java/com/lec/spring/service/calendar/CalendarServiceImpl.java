@@ -1,12 +1,8 @@
 package com.lec.spring.service.calendar;
 
 import com.lec.spring.domain.QryResult;
-import com.lec.spring.domain.User;
 import com.lec.spring.domain.calendar.Calendar;
 import com.lec.spring.domain.calendar.QryCalendarList;
-import com.lec.spring.domain.cart.Cart;
-import com.lec.spring.domain.cart.QryCartList;
-import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.repository.calendar.CalendarRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +20,7 @@ public class CalendarServiceImpl implements CalendarService {
         calendarRepository = sqlSession.getMapper(CalendarRepository.class);
     }
 
+    // 모든 일정 불러오기
     @Override
     public QryCalendarList list() {
         QryCalendarList list = new QryCalendarList();
@@ -37,6 +34,13 @@ public class CalendarServiceImpl implements CalendarService {
         return list;
     }
 
+    // 특정 날짜의 메모 조회
+    public Calendar findByDate(String date) {
+        Calendar calendar = calendarRepository.findByDate(date);
+        return calendar;
+    }
+
+    // 특정 날짜에 메모 추가
     @Override
     public QryResult addByMemo(String memo, String date) {
         Calendar calendar = Calendar.builder()
@@ -54,41 +58,21 @@ public class CalendarServiceImpl implements CalendarService {
         return result;
     }
 
-    public List<Calendar> findByDate(String date) {
-        List<Calendar> temp = calendarRepository.findByDate(date);
-        return temp;
-    }
-
+    // 캘린더 데이터(메모, 오늘의 메뉴) 수정
     @Override
-    public Calendar saveMemo(Calendar calendar) {
-        calendarRepository.insertMemo(calendar);
-        return calendar;
-    }
+    public QryResult update(Long calendarId, String memo) {
+        Calendar calendar = Calendar.builder()
+                .id(calendarId)
+                .memo(memo)
+                .build();
 
-    @Override
-    public void updateMemo(Calendar calendar) {
-        calendarRepository.updateMemo(calendar);
-    }
+        int cnt = calendarRepository.updateCalendar(calendar);
 
-    @Override
-    public void deleteMemo(Long id) {
-        calendarRepository.deleteMemo(id);
-    }
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
 
-    @Override
-    public Calendar saveComment(Calendar calendar) {
-        calendarRepository.insertComment(calendar);
-        return calendar;
+        return result;
     }
-
-    @Override
-    public void updateComment(Calendar calendar) {
-        calendarRepository.updateComment(calendar);
-    }
-
-    @Override
-    public void deleteComment(String date) {
-        calendarRepository.deleteComment(date);
-    }
-
 }

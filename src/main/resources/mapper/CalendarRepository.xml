@@ -39,14 +39,10 @@
         WHERE 1=1
     </sql>
 
+    <!-- 모든 일정 불러오기 -->
     <select id="selectAll" resultMap="mapCalendar">
         <include refid="SELECT_BASE"/>
     </select>
-
-    <insert id="insertByMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO ctt_calendar (memo, date)
-        VALUES (#{memo}, #{date})
-    </insert>
 
     <!-- 특정 날짜의 메모를 조회 -->
     <select id="findByDate" resultMap="mapCalendar">
@@ -54,43 +50,18 @@
         AND c.date = #{date}
     </select>
 
-    <!-- 메모 삽입 -->
-    <insert id="insertMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <!-- 특정 날짜에 메모 추가 -->
+    <insert id="insertByMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO ctt_calendar (memo, date)
         VALUES (#{memo}, #{date})
     </insert>
 
-    <!-- 메모 수정 -->
-    <update id="updateMemo" parameterType="com.lec.spring.domain.calendar.Calendar">
+    <!-- 캘린더 데이터(메모) 수정 -->
+    <update id="updateCalendar" parameterType="com.lec.spring.domain.calendar.Calendar">
         UPDATE ctt_calendar
-        SET memo = #{memo}
-        WHERE date = #{date}
-    </update>
-
-    <!-- 메모 삭제 -->
-    <delete id="deleteMemo">
-        DELETE FROM ctt_calendar
-        WHERE date = #{date} AND memo IS NOT NULL
-    </delete>
-
-    <!-- 관리자 코멘트 삽입 -->
-    <insert id="insertComment" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO ctt_calendar (comment, date)
-        VALUES (#{comment}, #{date})
-    </insert>
-
-    <!-- 관리자 코멘트 수정 -->
-    <update id="updateComment" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true">
-        UPDATE ctt_calendar
-        SET comment = #{comment}
-        WHERE date = #{date} AND comment IS NOT NULL
-    </update>
-
-    <!-- 관리자 코멘트 삭제 -->
-    <update id="deleteComment" flushCache="true">
-        UPDATE ctt_calendar
-        SET comment = NULL
-        WHERE date = #{date}
+        SET memo = #{memo},
+            comment = #{comment}
+        WHERE id = #{id}
     </update>
 
 </mapper>
