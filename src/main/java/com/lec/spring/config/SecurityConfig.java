@@ -41,7 +41,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth // TODO
                         .requestMatchers("/mypage/**").authenticated()
-                        .requestMatchers("/menu/detail/**").authenticated()
+//                        .requestMatchers("/menu/detail/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
