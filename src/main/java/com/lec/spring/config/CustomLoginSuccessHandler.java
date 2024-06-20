@@ -24,12 +24,16 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
 
+
+        String prevPage = (String) request.getSession().getAttribute("prevPage");
         // 이전 페이지가 존재하는 경우에만 그 페이지로 리다이렉트
-        if (request.getSession(false) != null && request.getSession(false).getAttribute("SPRING_SECURITY_SAVED_REQUEST") != null) {
-            super.onAuthenticationSuccess(request, response, authentication);
+
+        if (prevPage != null && !prevPage.isEmpty()) {
+            // 이전 페이지로 리다이렉트
+            getRedirectStrategy().sendRedirect(request, response, prevPage);
         } else {
-            // 이전 페이지가 없으면 기본 URL로 리다이렉트
-            getRedirectStrategy().sendRedirect(request, response, "/");
+            // 기본 URL로 리다이렉트
+            super.onAuthenticationSuccess(request, response, authentication);
         }
 
         System.out.println("### 로그인 성공: onAuthenticationSuccess() 호출 ###");
