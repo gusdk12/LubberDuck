@@ -1,10 +1,10 @@
 package com.lec.spring.domain.review;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.lec.spring.domain.menu.Menu;
+import com.lec.spring.domain.order.Order;
+import com.lec.spring.domain.order.Order_item;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -20,4 +20,12 @@ public class Review {
     private String content;        // 후기 내용
     private LocalDateTime regDate; //후기 등록일
 
+    @ToString.Exclude
+    private Menu menu;  // Menu 객체 포함
+
+    @ToString.Exclude
+    private Order order; // Order 객체 포함
+
+    @ToString.Exclude
+    private Order_item order_item; // Order_item 객체 포함
 }
