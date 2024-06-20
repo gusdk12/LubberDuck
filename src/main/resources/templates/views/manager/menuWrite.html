@@ -31,7 +31,7 @@
     <div class="deco" id="leftDown"></div>
   </div>
 
-  <form th:action="@{/management/write}" method="post">
+  <form th:action="@{/manager/menuwrite}" method="post">
     <div id="container">
       <!-- 메뉴 모음집 -->
       <div class="menu_container">
@@ -81,7 +81,7 @@
           <tbody class="table-content">
           <tr th:each="list : ${menuList}">
             <td class="sequence" th:text="${list.sequence}" th:value="${list.sequence}"></td>
-            <td class="item"><a class="itemName" th:href="@{'/management/detail/' + ${list.id}}" th:text="${list.name}"></a></td>
+            <td class="item"><a class="itemName" th:href="@{'/manager/management/menudetail/' + ${list.id}}" th:text="${list.name}"></a></td>
             <td class="checkbox chg">
               <input type="checkbox" th:id="${list.sequence}" class="menu_checkbox custom-checkbox"
                      th:value="${list.sequence}">
@@ -111,7 +111,6 @@
   </form>
 
 </section>
-
 </body>
 
 </html>

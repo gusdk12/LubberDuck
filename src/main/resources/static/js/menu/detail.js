@@ -1,6 +1,8 @@
 window.addEventListener('load', () => {
+
     loadMenu();
     addEvent();
+
 });
 
 window.addEventListener('popstate', function(event) {
@@ -88,3 +90,66 @@ function closeComment(){
     $('.comment-con').css('display', 'none');
     $('.comment').css('height', '0px');
 }
+
+
+//다혜
+document.addEventListener('DOMContentLoaded', function() {
+    const reviewTexts = document.querySelectorAll('.review-text');
+
+    reviewTexts.forEach(text => {
+        text.addEventListener('click', () => {
+            const reviewContent = text.parentElement;
+
+            // 다른 review-text들의 확장 상태를 초기화하고 추가 버튼을 숨깁니다.
+            reviewTexts.forEach(otherText => {
+                if (otherText !== text) {
+                    otherText.classList.remove('expanded');
+                }
+            });
+
+            // 현재 클릭한 review-text와 해당하는 추가 버튼의 상태를 toggle합니다.
+            text.classList.toggle('expanded');
+            extraButtons.classList.toggle('show');
+        });
+    });
+});
+
+$(document).ready(function() {
+    // 페이지 로드 시 최신순으로 정렬되도록 설정
+    var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
+    var reviews = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들
+
+    reviews.sort(function(a, b) {
+        var dateA = $(a).find('.review-regdate').text(); // 리뷰 날짜 가져오기
+        var dateB = $(b).find('.review-regdate').text();
+        return new Date(dateB) - new Date(dateA); // 최신순 정렬
+    });
+
+    // 정렬된 리뷰 목록을 다시 컨테이너에 추가
+    reviews.detach().appendTo(reviewsContainer);
+
+    // 최신순, 별점순 라디오 버튼 클릭 시 처리
+    $('input[name="sort"]').change(function() {
+        var sortType = $(this).val(); // 선택된 정렬 타입 (최신순 또는 별점순)
+
+        // 최신순으로 정렬
+        if (sortType === '최신순') {
+            reviews.sort(function(a, b) {
+                var dateA = $(a).find('.review-regdate').text(); // 리뷰 날짜 가져오기
+                var dateB = $(b).find('.review-regdate').text();
+                return new Date(dateB) - new Date(dateA); // 최신순 정렬
+            });
+        }
+        // 별점순으로 정렬
+        else if (sortType === '별점순') {
+            reviews.sort(function(a, b) {
+                var ratingA = $(a).find('.star_score').text(); // 리뷰 별점 가져오기
+                var ratingB = $(b).find('.star_score').text();
+                return ratingB - ratingA; // 별점순 정렬
+            });
+        }
+
+        // 정렬된 리뷰 목록을 다시 컨테이너에 추가
+        reviews.detach().appendTo(reviewsContainer);
+    });
+});

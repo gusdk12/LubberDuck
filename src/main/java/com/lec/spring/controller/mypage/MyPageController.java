@@ -184,10 +184,12 @@ public class MyPageController {
     }
 
     @GetMapping("/review")
-    public String review(Model model) {
-
+    public String review(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username);
         List<Review> reviews = reviewService.list();
-        model.addAttribute("review", reviews);
+        model.addAttribute("user", user);
+        model.addAttribute("reviews", reviews);
 
         return "/mypage/review";
     }

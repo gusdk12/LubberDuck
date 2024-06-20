@@ -275,12 +275,159 @@ body {
 }
 
 /*-----------------------------------*/
+
+#footer{
+    height: 200px;
+}
+
 #reviewsection{
     height: 40%;
     width: 90%;
     /*background-color: #c4eacd;*/
 }
-#footer{
-    height: 200px;
+
+.containerD {
+    max-width: 1300px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 100px;
+    margin-top: 40px;
 }
 
+.list {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    padding: 15px;
+    background-color: rgb(244, 244, 244);
+}
+
+.list > hr {
+    border-width: 1px 0 0 0;
+    border-style: dotted;
+    border-color: #979797;
+}
+
+.tag_btn > input {
+    display: none;
+}
+
+.tag_btn > label {
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-weight: 100;
+    font-size: 12px;
+    display: inline-flex;
+    margin-right: 7px;
+}
+
+.tag_btn > label:hover {
+    font-weight: 800;
+}
+
+.tag_btn > input:checked + label {
+    font-weight: 800;
+    text-underline-offset: 4px;
+}
+
+.reviews-container {
+    display: flex;
+    flex-direction: column; /* 각 리뷰가 세로로 쌓이도록 설정 */
+}
+
+.review-header {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    align-items: center;
+    padding: 2px;
+}
+
+.review-title {
+    display: flex;
+    align-items: center;
+}
+
+.review-title > p {
+    font-weight: 700;
+    font-size: 15px;
+    margin: 0;
+    font-family: 'GmarketSansMedium';
+}
+
+.review-title > h6 {
+    margin: 0 0 0 8px;
+    font-weight: normal;
+}
+
+.review-rating {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    color: red;
+    margin-right: 5px;
+}
+
+.review-regdate{
+    float: right;
+    right: 0;
+    font-size: 10px;
+    color: rgb(183, 183, 183);
+}
+
+.review-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.review-text {
+    font-size: 11.5px;
+    text-align: justify;
+    margin-top: 5px;
+    padding: 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    max-height: calc(5 * 1.5em);
+    min-height: 100px;
+    cursor: pointer;
+}
+
+.review-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1.5em;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 80%);
+}
+
+.review-text.expanded {
+    -webkit-line-clamp: initial;
+    max-height: none;
+}
+
+.extra-buttons.show {
+    display: block;
+    width: 100%;
+}
+
+.btn-update:hover, .btn-delete:hover {
+    background-color: #468969;
+}
