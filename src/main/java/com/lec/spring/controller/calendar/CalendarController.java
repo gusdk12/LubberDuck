@@ -61,9 +61,13 @@ public class CalendarController {
         return result;
     }
 
-    // 캘린더 데이터(메모, 오늘의 메뉴) 삭제
-    @PostMapping("/delete/{calender_Id}")
-    public QryResult delete(@PathVariable Long calender_Id){
-        return null;
+    // 캘린더 데이터가 비어있지 않을 때 메모만 삭제
+    @PostMapping("/updateToDeleteMemo")
+    public QryResult updateToDeleteMemo(
+            @RequestParam("id") Long calendarId,
+            @RequestParam("memo") String memo) {
+        QryResult result = calendarService.updateToDeleteMemo(calendarId, memo);
+
+        return result;
     }
 }
