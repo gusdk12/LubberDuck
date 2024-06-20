@@ -23,6 +23,15 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     // 로그인 성공 직후 수행할 동작
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+
+        // 이전 페이지가 존재하는 경우에만 그 페이지로 리다이렉트
+        if (request.getSession(false) != null && request.getSession(false).getAttribute("SPRING_SECURITY_SAVED_REQUEST") != null) {
+            super.onAuthenticationSuccess(request, response, authentication);
+        } else {
+            // 이전 페이지가 없으면 기본 URL로 리다이렉트
+            getRedirectStrategy().sendRedirect(request, response, "/");
+        }
+
         System.out.println("### 로그인 성공: onAuthenticationSuccess() 호출 ###");
 
         System.out.println("접속IP: " + getClientIp(request));
@@ -40,8 +49,7 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         System.out.println("로그인 시간: " + loginTime);
         request.getSession().setAttribute("loginTime", loginTime);
 
-        // 로그인 직전 url 로 redirect 하기
-        super.onAuthenticationSuccess(request, response, authentication);
+
 
     }
 
