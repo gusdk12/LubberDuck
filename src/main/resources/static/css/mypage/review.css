@@ -69,7 +69,7 @@
 
 }
 
-.review img{
+.review img:not(.star-img){
     width: fit-content;
     height: 100px;
     object-fit: contain;
@@ -212,4 +212,9 @@
 
 .btn-delete:hover {
     background-color: #c0392b;
+}
+
+.star-img {
+    width: 25px;
+    height: 25px;
 }
