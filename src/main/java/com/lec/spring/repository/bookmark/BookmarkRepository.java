@@ -1,4 +1,4 @@
-package com.lec.spring.repository.mypage;
+package com.lec.spring.repository.bookmark;
 
 import com.lec.spring.domain.mypage.Bookmark;
 
@@ -12,8 +12,11 @@ public interface BookmarkRepository {
 
     Bookmark findByUserAndMenu(Long user_id, Long menu_id);
 
-    // 코맨트 작성
+    // 코멘트 작성
     int insert(Bookmark comment);
+
+    // 코멘트 수정
+    int update(Bookmark comment);
 
     int delete(Long user_id, Long menu_id);
 }

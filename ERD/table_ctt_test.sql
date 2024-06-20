@@ -14,3 +14,8 @@ UPDATE ctt_menu
 SET sequence=-1
 WHERE  name='Mojito'
 ;
+
+UPDATE ctt_bookmark
+SET comment = '하하'
+WHERE user_id = 2 AND cocktail_id = 1
+;

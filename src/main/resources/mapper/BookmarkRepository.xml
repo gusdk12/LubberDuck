@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lec.spring.repository.mypage.BookmarkRepository">
+<mapper namespace="com.lec.spring.repository.bookmark.BookmarkRepository">
 
     <resultMap id="mapCocktail" type="com.lec.spring.domain.menu.Menu">
         <result column="m_id" property="id"/>
@@ -48,6 +48,14 @@
         INSERT INTO ctt_bookmark(user_id, cocktail_id, comment)
         VALUES (#{user_id}, #{menu_id}, #{comment})
     </insert>
+
+    <!--/* 수정하기 */-->
+    <update id="update" flushCache="true" parameterType="com.lec.spring.domain.mypage.Bookmark"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        UPDATE ctt_bookmark
+        SET comment = #{comment}
+        WHERE user_id = #{user_id} AND cocktail_id = #{menu_id}
+    </update>
 
     <!--/* 삭제하기 */-->
     <delete id="delete" flushCache="true">

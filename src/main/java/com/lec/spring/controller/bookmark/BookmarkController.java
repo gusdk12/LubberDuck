@@ -27,13 +27,22 @@ public class BookmarkController {
         return bookmarkService.findByUserAndMenu(userId,cocktailId);
     }
 
-    // 코맨트 작성 후 추가하기
+    // 코멘트 작성 후 추가하기
     @PostMapping("/add")
     public QryResult add(
             @RequestParam("userId") Long userId,
             @RequestParam("cocktailId") Long cocktailId,
             String comment){
-        return bookmarkService.add(userId,cocktailId,comment);
+        return bookmarkService.add(userId, cocktailId, comment);
+    }
+
+    // 코멘트 수정하기
+    @PostMapping("/update/{userId}/{cocktailId}")
+    public QryResult update(
+            @RequestParam("userId") Long userId,
+            @RequestParam("cocktailId") Long cocktailId,
+            String comment) {
+        return bookmarkService.update(userId, cocktailId, comment);
     }
 
     // 삭제하기

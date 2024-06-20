@@ -8,14 +8,12 @@ import com.lec.spring.domain.mypage.QryBookmark;
 import com.lec.spring.domain.mypage.QryBookmarkList;
 import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.menu.MenuRepository;
-import com.lec.spring.repository.mypage.BookmarkRepository;
+import com.lec.spring.repository.bookmark.BookmarkRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
 import java.util.List;
-import java.util.Queue;
 
 @Service
 public class BookmarkServiceImpl implements BookmarkService {
@@ -69,6 +67,28 @@ public class BookmarkServiceImpl implements BookmarkService {
                 .build();
 
         int cnt = bookmarkRepository.insert(bookmark);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
+
+    @Override
+    public QryResult update(Long userId, Long menuId, String comment) {
+        User user = userRepository.findById(userId);
+        Menu menu = menuRepository.findById(menuId);
+
+        Bookmark bookmark = Bookmark.builder()
+                .user_id(user.getId())
+                .menu_id(menu.getId())
+                .menu(menu)
+                .comment(comment)
+                .build();
+
+        int cnt = bookmarkRepository.update(bookmark);
 
         QryResult result = QryResult.builder()
                 .count(cnt)

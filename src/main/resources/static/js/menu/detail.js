@@ -41,11 +41,11 @@ function addEvent(){
         addToCart(menuList.find(menu => menu.name === cocktailName));
     });
 
-    // addToBook
+   // swtichHeartIcon
     $('#heart').click(function(event) {
         if(event.target.className === "fullHeart"){
-            var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
             event.stopPropagation();
+            var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
             deleteFromBook(menuList.find(menu => menu.name === cocktailName));
             alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.')
 
@@ -56,6 +56,7 @@ function addEvent(){
         }
     });
 
+    // addToBook
     $('#commentCheck').click(function() {
         var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
         var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
@@ -75,13 +76,13 @@ function switchToEmptyHeart(){
     $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('emptyHeart');
 }
 
-// 코맨트창 열기
+// 코멘트창 열기
 function openComment(){
     $('.comment-con').css('display', 'block');
     $('.comment').css('height', '200px');
 }
 
-// 코맨트창 닫기
+// 코멘트창 닫기
 function closeComment(){
     $('#container').find(".comment").val('');
     $('.comment-con').css('display', 'none');

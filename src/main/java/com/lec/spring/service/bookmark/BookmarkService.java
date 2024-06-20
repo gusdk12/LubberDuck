@@ -17,6 +17,9 @@ public interface BookmarkService {
     // 특정 유저(id)와 음료(id)의 comment 작성 후 추가
     QryResult add(Long userId, Long menuId, String comment);
 
+    // 특정 유저(id)와 음료(id)의 comment 수정
+    QryResult update(Long userId, Long menuId, String comment);
+
     // 삭제
     QryResult delete(Long userId, Long menuId);
 }

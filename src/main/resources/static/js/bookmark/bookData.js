@@ -75,26 +75,59 @@ async function addToBook(cocktail, comment){
     }
 }
 
+// 수정하기
+async function updateFromBook(cocktail, comment) {
+
+   // 전달할 parameter 준비 (POST)
+    const data = {
+        "userId" : logged_id,
+        "cocktailId" : cocktail.id,
+        "comment" : comment,
+    };
+
+    $.ajax({
+        url: `/bookmark/update/${logged_id}/${cocktail.id}`,
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if (status === "success") {
+                if (data.status === "OK") {
+                    // 업데이트 성공 시 화면에서 바로 코멘트 업데이트
+                    $(`#favorite .cocktail_name:contains("${cocktail.name}")`)
+                        .siblings('.CI').find('.C1').text(comment);
+                    alert('코멘트가 수정 성공.');
+                } else {
+                    alert(data.status);
+                }
+            } else {
+                alert("코멘트 수정 실패");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error updating comment:", error);
+            alert("Failed to update comment.");
+        }
+    });
+}
+
 // 삭제하기
 async function deleteFromBook(cocktail){
 
-    // 존재한다면 아예 삭제
-    // if(findBook){
-        $.ajax({
-            url: "/bookmark/delete/" + logged_id + "/" + cocktail.id,
-            type: "POST",
-            cache: false,
-            success: function(data, status){
-                if(status === "success"){
-                    if(data.status !== "OK"){
-                        alert(cocktail.id);
-                        alert(data.status);
-                        return;
-                    }
+    $.ajax({
+        url: "/bookmark/delete/" + logged_id + "/" + cocktail.id,
+        type: "POST",
+        cache: false,
+        success: function(data, status){
+            if(status === "success"){
+                if(data.status !== "OK"){
+                    alert(cocktail.id);
+                    alert(data.status);
                 }
-            },
-        });
-    // }
+            }
+        },
+    });
+
 }
 
 // 특정 user의 즐겨찾기목록 불러오기
@@ -147,7 +180,7 @@ function buildBook(result){
                         </div>
                         
                         <div class="comment-con">
-                            <textarea class="modifyBox"></textarea>
+                            <textarea class="modifyBox"> ${book.comment} </textarea>
                             <img src="/img/bookmark/check.png" id="commentCheck">
                         </div>
                     </div>
@@ -177,6 +210,7 @@ function buildBook(result){
         }
     });
 
+    // 박스 hover 시 삭제 아이콘 등장
     $(".box").hover(
         function() {
             $(this).find(".drop").css('display', 'block');
@@ -186,15 +220,17 @@ function buildBook(result){
         }
     );
 
+    // 댓글창에 hover 시 수정 아이콘 등장
     $(".CI").hover(
         function() {
-            $(this).find("#modify").css('display', 'block');
+            $(this).find(".I").css('display', 'block');
         },
         function() {
-            $(this).find("#modify").css('display', 'none');
+            $(this).find(".I").css('display', 'none');
         }
     );
 
+    // 칵테일 이미지 hover 시 담기/판매종료 아이콘 등장
     $(".cocktail-con").hover(
         function() {
             $(this).closest('.box').find('.CII').css('display', 'block');
@@ -204,25 +240,32 @@ function buildBook(result){
         }
     );
 
-    $(".CII").hover(
-        function() {
-            $(this).css('display', 'block');
-        },
-        function() {
-            $(this).css('display', 'none');
-        }
-    );
+    // 이벤트 위임을 사용하여 동적으로 생성된 #modify 요소에 이벤트 핸들러를 추가합니다.
+    $('#favorite').on('click', '#modify', function(e) {
+        e.stopPropagation(); // 이벤트 전파를 중지하여 document 클릭 이벤트가 바로 발생하지 않도록 함
+        $(this).closest('.box').find('.comment-con').css('display', 'block');
+    });
 
-    $(".I").click(
-        function() {
-            $(this).closest('.box').find('.comment-con').css('display', 'block');
-        },
-        function() {
-            $(this).closest('.box').find('.comment-con').css('display', 'none');
+    // 문서 전체에 클릭 이벤트를 등록하여 다른 곳 클릭 시 .comment-con 숨기기
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.comment-con, #modify').length) {
+            $('.comment-con').css('display', 'none');
         }
-    )
+    });
 
-    // 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러를 추가합니다.
+    // updateFromBook
+    $("#commentCheck").click(function() {
+        var cocktailName = $(this).closest('.info').find('.cocktail_name').text();
+        var commentValue = $(this).closest('.comment-con').find('.modifyBox').val();
+
+        updateFromBook(list.find(menu => menu.name === cocktailName), commentValue);
+
+        $(this).closest('.box').find('.comment-con').css('display', 'none');
+    });
+
+
+    // 이벤트 위임을 사용하여 동적으로 생성된 .CII 요소에 이벤트 핸들러를 추가합니다.
+    // 칵테일 이미지 위의 이미지 클릭시 그에맞는 동작 작동
     $('#favorite').on('click', '.CII', function(e) {
         e.preventDefault();
 
