@@ -22,7 +22,8 @@
     <script th:inline="javascript">
         let orderList = [[${orders}]];
         let orderItemMap = [[${orderItemsByOrderId}]];
-        let reviewList = [[${review}]];
+        let user = [[${user}]];
+        let reviews = [[${reviews}]];
 
     </script>
 </head>
@@ -37,51 +38,11 @@
         <div class="article">
             <div class="container">
 
-                <div class="list">
-                    <h2>유유신님</h2>
-                    <h5>REVIEW | (3)</h5>
-                    <hr>
-                    <div class="tag_btn">
-                        <input type="radio" name="sort" id="latest" value="최신순" checked>
-                        <label for="latest">최신순</label>
-                        <input type="radio" name="sort" id="rating" value="별점순">
-                        <label for="rating">별점순</label>
-                    </div>
-                    <hr>
-
-                    <!-- 리뷰목록 header -->
-
-                    <!-- 목록 -->
-                    <div class="reviews-container">
-                        <div class="review">
-                            <img th:src="@{/img/menu/CloverClub.png}">
-                            <div>
-                                <div class="review-content">
-                                    <div class="review-header">
-                                        <p>CloverClub</p>
-                                        <div class="review-rating">
-                                            <span class="star">★★★★★</span>
-                                            <span class="star_score">5</span>
-                                        </div>
-                                    </div>
-                                    <div class="review-text">고단한 삶 속에서...</div>
-                                    <div class="extra-buttons">
-                                        <div class="review-date">2024-06-10</div>
-                                        <button class="btn-update">수정</button>
-                                        <button class="btn-delete">삭제</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<!--    <script th:src="@{/js/sidebar/sidebar.js}"></script>-->
     <script th:src="@{/js/mypage/review.js}"></script>
 </body>
 </html>
