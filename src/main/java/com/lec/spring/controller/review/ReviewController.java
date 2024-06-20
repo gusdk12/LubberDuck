@@ -38,9 +38,23 @@ public class ReviewController {
 
     public ReviewController(){}
 
-    @GetMapping("/write")
-    public void write(){}
+    @GetMapping("/write/{item_id}")
+    public String write(@PathVariable("item_id") Long item_id, Model model){
+        Review review = reviewService.selectById(item_id);
+        model.addAttribute("review", review);
+        model.addAttribute("reviewList", reviewService.list());
+        return "review/write";
+    }
 
+    @PostMapping("/review/write")
+    public String submitReview(@RequestParam("item_id") Long item_id,
+                               @RequestParam("rate") int rate,
+                               @RequestParam("comment") String comment,
+                               Model model) {
+
+
+        return "redirect:/review/writeOk"; // 리뷰 작성 성공 페이지로 이동
+    }
 
     @GetMapping("/update")
     public void update(){}
