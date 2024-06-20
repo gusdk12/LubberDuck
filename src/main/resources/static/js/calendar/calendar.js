@@ -1,5 +1,4 @@
-
-
+// 변수 설정
 const init = {
     monList: [
         "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월",
@@ -59,20 +58,18 @@ function highlightEventDates(calendarDatas) {
         const year = dateParts[0];
         const month = dateParts[1];
         let day = dateParts[2];
-
-        // day가 1~9 사이라면 앞에 "0"을 붙여서 포맷팅
-        // if (day >= 1 && day <= 9) {
-        //     day = "0" + day;
-        // }
         console.log(`Processing date: ${year}.${month}.${day}`);
 
         $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`).addClass("event");
-
     });
 }
 
 function addEvents() {
 
+// --------------------------------------------------------
+// 일정 관련 Event
+
+    // 일정 부분 스크롤
     $(".schedule-container").scroll(function () {
         var scrollTop = $(this).scrollTop();
 
@@ -92,36 +89,85 @@ function addEvents() {
         $(this).val("").hide();
     });
 
-    // 탭 키 이벤트 처리
-    $(".schedule-container").on("keydown", function (e) {
-        if (e.key === "Tab") {
-            showInput();
-            e.preventDefault(); // 기본 탭 이벤트 제거
+    // 메모 입력창에서 엔터키 누를 때 처리
+    $("#new-memo").on("keydown", function (e) {
+        if (e.key === "Enter") {
+            handleMemoSubmit();
+            $(this).val("").hide();
+        } else if (e.key === "Escape") {
+            $(this).val("").hide();
         }
     });
 
-    $(".date").on("click", function () {
-        const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
-        findCalendarByDate(selectedDate); // 해당 날짜의 메모 로드
-    });
-    $("#new-memo").on("keydown", handleMemoKeyDown);
-
     // 버튼 클릭 시 메모 입력 창 열기
     $("#btn-add-memo").on("click", function () {
-        showInput();
+        const newMemo = $("#new-memo");
+        const eventItems = $(".event-list li");
+
+        // 기존 메모가 없는 경우에만 추가 모드로 설정하여 보여줌
+        if (eventItems.length === 0) {
+            newMemo.val("");
+            newMemo.css("height", "90px"); // 기본 높이로 설정
+            newMemo.data("mode", "add").show().focus();
+            $("#notification").hide();
+        } else {
+            // 기존 메모가 있는 경우, 첫 번째 li를 textarea로 변환하여 수정할 수 있도록 함
+            const firstMemo = $(eventItems[0]);
+            const memoText = firstMemo.text().trim();
+
+            firstMemo.find(".memo-delete").remove();
+
+            // 첫 번째 li를 textarea로 변경
+            newMemo.val(memoText).data("mode", "edit").show().focus();
+
+            // 기존의 첫 번째 li를 숨기거나 제거할 수도 있음
+            firstMemo.hide();
+        }
     });
 
-    // 닫기 버튼 클릭 시 알림창 숨기기
+    // $("#new-memo").on("focusout", function () {
+    //     const newMemoVal = newMemo.val().trim();
+    //     if (newMemoVal !== "") {
+    //         // li의 내용 업데이트
+    //         const eventItems = $(".event-list li");
+    //         if (eventItems.length > 0) {
+    //             const firstMemo = $(eventItems[0]);
+    //             firstMemo.text(newMemoVal).show(); // 첫 번째 li에 내용 적용 및 보이기 처리
+    //
+    //             // X 버튼 다시 추가
+    //             const deleteButton = $("<button>")
+    //                 .addClass("memo-delete")
+    //                 .attr("type", "button")
+    //                 .html('<span class="fa fa-xmark">X</span>');
+    //             firstMemo.append(deleteButton);
+    //         }
+    //     }
+    //     newMemo.hide(); // textarea 숨기기
+    // });
+
+    // 알림 메시지 지우기
     $("#notification").on("click", function () {
         $("#notification").hide();
     });
 
-    // 메뉴 팝업 열기
+// --------------------------------------------------------
+// 캘린더 관련 Event
+
+    // 날짜 클릭
+    $(".date").on("click", function () {
+        const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
+        findCalendarByDate(selectedDate); // 해당 날짜의 메모 로드
+    });
+
+// --------------------------------------------------------
+// 오늘의 메뉴 관련 Event
+
+    // 메뉴 리스트 팝업 열기
     $("#btn-add-menu").on("click", function () {
         openMenuPopup();
     });
 
-    // 메뉴 클릭 시 팝업2 열기
+    // 메뉴 클릭 시 오늘의 메뉴 디테일 팝업 열기
     $(".menu").on("click", function () {
         const menuId = $(this).data("menu-id");
         const menu = menuList.find(m => m.id === menuId);
@@ -152,6 +198,7 @@ function openMenuPopup(menu) {
     $("body").append(popupOverlay);
     $("#myForm").show();
 }
+
 // 작성 팝업 열기
 function openWritePopup(menu) {
     $("body").append(popupOverlay);
@@ -161,11 +208,13 @@ function openWritePopup(menu) {
     $(".select-menu-name").text(menu.name);
     $("#myForm2").show();
 }
+
 // 메뉴 팝업 닫기
 function closeMenuPopup() {
     $("#myForm").hide();
     popupOverlay.remove();
 }
+
 // 작성 팝업 닫기
 function closeWritePopup() {
     $("#myForm2").hide();
@@ -179,22 +228,14 @@ function adjustHeight() {
     newMemo.css("height", newMemo[0].scrollHeight + "px");
 }
 
-// 메모 입력 창을 보여주는 함수
-function showInput() {
+// 메모 추가 또는 수정 처리 함수
+function handleMemoSubmit() {
     const newMemo = $("#new-memo");
-    newMemo.val("");
-    newMemo.css("height", "90px"); // 기본 높이로 설정
-    newMemo.show().focus();
-    $("#notification").hide();
-}
+    const memoText = newMemo.val();
 
-// 메모 입력 시 키보드 이벤트를 처리하는 함수
-function handleMemoKeyDown(e) {
-    if (e.key === "Enter") {
-        const memoText = $("#new-memo").val();
+    if (newMemo.data("mode") === "edit") {
+        updateCalendar(memoText);
+    } else {
         addCalendarByMemo(memoText);
-
-    } else if (e.key === "Escape") {
-        $("#new-memo").val("").hide();
     }
 }
