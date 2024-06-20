@@ -35,19 +35,19 @@ public class SecurityConfig {
 
     // ↓ SecurityFilterChain 을 Bean 으로 등록해서 사용
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth // TODO
                         .requestMatchers("/mypage/**").authenticated()
-                        //todo 상세페이지
+//                        .requestMatchers("/menu/detail/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/user/login")
                         .loginProcessingUrl("/user/login")
-                        .successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
+                        .successHandler(new CustomLoginSuccessHandler("/"))
                         .failureHandler(new CustomLoginFailureHandler())
 
                 )
