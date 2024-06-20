@@ -122,11 +122,6 @@ function buildBook(result){
         var randomIndex1 = Math.floor(Math.random() * 4) + 1;
         var randomIndex2 = Math.floor(Math.random() * 6) + 1;
 
-        // book.menu.sequance == -1 -> 이건 현재 판매 안하는거야
-
-        // menuList에서 book.menu.name을 찾기
-        var checkItem = menuList.find(menu => menu.name === book.menu.name);
-
         // box 요소를 append
         var $box = $(`
             <div class="box" id="randomrotate${randomIndex1}">
@@ -142,8 +137,7 @@ function buildBook(result){
                     <div class="cocktail-con">
                         <div id="cocktailImg" style="background-image: url('${book.menu.imgUrl}')"></div>
                         <div class="CII">
-                            <div id="cartYesNo"></div>
-<!--                        <img src="/img/bookmark/cartIn.png" alt="담기" id="cartIn">-->
+                            <div id="cartYesNo" class="cartIn cartNo"></div>
                         </div>
                     </div>
                     <div class="CI">
@@ -161,8 +155,11 @@ function buildBook(result){
             </div>
         `);
 
-        // menuList에 존재하는 경우 switchToCartIn 적용, 아닌 경우 switchToCartNo 적용
-        if (checkItem) {
+        // book.menu.sequence == -1 -> 판매 X
+        var checkItem = book.menu.sequence;
+
+        // menuList에 존재하는 경우 즉 sequence가 -1이 아니면 switchToCartIn 적용, 아닌 경우 switchToCartNo 적용
+        if (checkItem !== -1) {
             switchToCartIn($box);
         } else {
             switchToCartNo($box);
@@ -170,6 +167,14 @@ function buildBook(result){
 
         // #favorite 요소에 $box 추가
         $('#favorite').append($box);
+
+        function switchToCartIn(){
+            $box.find('#cartYesNo').removeClass('cartIn cartNo').addClass('cartIn');
+        }
+
+        function switchToCartNo() {
+            $box.find('#cartYesNo').removeClass('cartIn cartNo').addClass('cartNo');
+        }
     });
 
     $(".box").hover(
@@ -222,15 +227,23 @@ function buildBook(result){
         e.preventDefault();
 
         // 클릭된 요소의 부모 요소를 찾아서 해당 칵테일 이름을 가져옵니다.
-        var cocktailName = $(this).closest('.box').find('.cocktail_name').text();
+        var $box = $(this).closest('.box');
+        var cocktailName = $box.find('.cocktail_name').text();
 
-        // 칵테일 이름에 맞는 객체를 찾아서 addToCart 함수에 전달합니다.
-        var menuItem = menuList.find(menu => menu.name === cocktailName);
+        // #cartYesNo의 class 이름 추출
+        var cartStatus = $box.find('#cartYesNo').attr('class');
 
-        if (menuItem) {
-            addToCart(menuItem);
-        } else {
-            console.error('Menu item not found for name:', cocktailName);
+        if (cartStatus.includes('cartIn')) {
+            // 칵테일 이름에 맞는 객체를 찾아서 addToCart 함수에 전달합니다.
+            var menuItem = menuList.find(menu => menu.name === cocktailName);
+
+            if (menuItem) {
+                addToCart(menuItem);
+            } else {
+                console.error('Menu item not found for name:', cocktailName);
+            }
+        } else if (cartStatus.includes('cartNo')) {
+            alert('판매중단된상품입니다');
         }
     });
 
@@ -255,16 +268,3 @@ function buildBook(result){
     });
 }
 
-function switchToCartIn(){
-    $('.box').find('#cartYesNo').removeClass('cartIn').removeClass('cartNo').addClass('cartIn');
-}
-
-function switchToCartNo() {
-    $('.box').find('#cartYesNo').removeClass('cartIn').removeClass('cartNo').addClass('cartNo');
-}
-
-function reloadData() {
-    // 기존의 #favorite 내용을 모두 지우고 새로운 데이터로 다시 buildBook 호출
-    $('#favorite').empty();
-    buildBook(newResult);
-}

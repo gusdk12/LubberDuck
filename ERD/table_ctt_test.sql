@@ -10,4 +10,7 @@ SELECT * FROM ctt_order;
 SELECT * FROM ctt_order_item;
 
 
-
+UPDATE ctt_menu
+SET sequence=-1
+WHERE  name='Mojito'
+;
