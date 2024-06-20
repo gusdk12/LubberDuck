@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<!--<script th:unless="${menu}">-->
-<!--    alert("해당 정보가 삭제되거나 없습니다");-->
-<!--    history.back(); // 페이지 뒤로 가기-->
-<!--</script>-->
+<script th:unless="${menu}">
+    alert("해당 정보가 삭제되거나 없습니다");
+    history.back(); // 페이지 뒤로 가기
+</script>
 
 <th:block th:if="${menu}">  <!-- 넘겨온 post 의 값이 있을 때만 렌더링 될 수 있게 설정 -->
 <head>
@@ -54,10 +54,10 @@
     </div>
 
     <div class="detail_btn">
-      <a class="btn_list" th:href="@{/management/write}">
+      <a class="btn_list" th:href="@{/manager/management/write}">
         <img src="/img/management/list.png" alt="btn_list">
       </a>
-      <a class="btn_update" th:href="@{'/management/update/' + ${menu.id}}">
+      <a class="btn_update" th:href="@{'/manager/management/update/' + ${menu.id}}">
         <img src="/img/management/update.png" alt="btn_update">
       </a>
     </div>

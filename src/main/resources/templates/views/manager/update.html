@@ -22,9 +22,6 @@
             href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
             rel="stylesheet">
 
-    <script th:inline="javascript">
-        var menu = [[${menu}]];
-    </script>
     <title>Menu Update</title>
   </head>
 
@@ -32,7 +29,7 @@
   <th:block th:insert="~{common/header::header}"></th:block>
 
   <section id="menudetail">
-    <form th:action="@{/management/update}" method="post">
+    <form th:action="@{manager/management/update}" method="post">
       <input type="hidden" name="id" th:value="${menu.id}"/>
       <div class="container_update">
         <div class="detail_container_update">
@@ -72,7 +69,7 @@
           <button class="btn_back" type="button" onclick="history.back()">
             <img class="update_btn" src="/img/management/back.png" alt="btn_back">
           </button>
-          <a class="btn_list_update" th:href="@{/management/write}">
+          <a class="btn_list_update" th:href="@{/manager/management/write}">
             <img class="update_btn" src="/img/management/list.png" alt="btn_list">
           </a>
           <button class="btn_savebtn" type="submit">
