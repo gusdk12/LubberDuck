@@ -231,6 +231,7 @@ window.addEventListener('scroll', function() {
             cutomerButtons.style.bottom = '-40%';
             // $('#cutomerButtons').animate({bottom: '-20%'}, 100);
             hideCartBox();
+            hideChatBox();
         }
     }
 });
