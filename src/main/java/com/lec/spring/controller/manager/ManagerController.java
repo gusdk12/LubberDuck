@@ -48,27 +48,27 @@ public class ManagerController {
     }
 
     // 모음집 및 손님용 메뉴판 칵테일 조회
-    @GetMapping("/management/write")
-    public void list(Model model, Menu menu) {
+    @GetMapping("/menuWrite")
+    public void list(Model model) {
         model.addAttribute("allList", menuService.list());
         model.addAttribute("menuList", menuService.sequenceList());
     }
 
     // 메뉴 상세정보
-    @GetMapping("/management/detail/{id}")
+    @GetMapping("/menuDetail/{id}")
     public String detail(@PathVariable Long id, Model model) {
         model.addAttribute("menu", menuService.detail(id));
-        return "manager/management/detail";
+        return "manager/menuDetail";
     }
 
     // 메뉴 상세조회 수정
-    @GetMapping("/management/update/{id}")
+    @GetMapping("/menuUpdate/{id}")
     public String change(@PathVariable Long id, Model model) {
         model.addAttribute("menu", menuService.selectById(id));
-        return "manager/management/update";
+        return "manager/menuUpdate";
     }
 
-    @PostMapping("/management/update")
+    @PostMapping("/menuUpdate")
     public String changeOk(@Valid Menu menu,
                            BindingResult result,
                            Model model,
@@ -82,9 +82,9 @@ public class ManagerController {
             for (FieldError err : errList) {
                 redirectAttrs.addFlashAttribute("error_" + err.getField(), err.getCode());
             }
-            return "redirect:/manager/management/update/" + menu.getId();
+            return "redirect:/manager/menuUpdate/" + menu.getId();
         }
         model.addAttribute("result", menuService.update(menu));
-        return "manager/management/updateOk";
+        return "manager/menuUpdateOk";
     }
 }
