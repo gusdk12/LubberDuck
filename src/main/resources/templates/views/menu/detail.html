@@ -71,54 +71,6 @@
 
         <div id="reviewsection">
 
-            <section>
-                <div class="containerD">
-                    <div class="list">
-                        <div class="review-header">
-                            <span><h3>리뷰</h3></span>
-                            <span><p>4.8 / 5.0 (123) </p></span>
-                        </div>
-                        <hr>
-                        <div class="tag_btn">
-                            <input type="radio" name="sort" id="latest" value="최신순" checked>
-                            <label for="latest">최신순</label>
-                            <input type="radio" name="sort" id="rating" value="별점순">
-                            <label for="rating">별점순</label>
-                        </div>
-                        <hr>
-
-
-                        <div class="reviews-container">
-                            <div th:each="review : ${reviews}" class="review">
-                                <div>
-                                    <div class="review-content">
-                                        <div class="review-header">
-                                            <div class="review-title">
-                                                <span th:text="${'★'.repeat(review.rating)}" class="star">★★★</span>
-                                                <span th:text="${review.rating}" class="star_score">3</span>
-                                                <h6>이**</h6>
-                                            </div>
-                                            <span class="review-regdate">2020-04-27</span>
-                                        </div>
-                                        <div class="review-text" th:text="${review.text}">oh my god 타이밍이 참 얄미워
-                                            오늘 같은 날 마주쳐 이게 뭐야
-                                            머리는 엉망인 데다
-                                            상태가 말이 아니야
-                                            모른 척 지나가 줘
-                                            내 맘이 방심할 때마다 불쑥 나타난 뒤
-                                            헤엄치듯 멀어지는 너
-                                            또 물보라를 일으켜
-                                            da da da da da da da da da da
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
         </div>
 
         <th:block sec:authorize="hasRole('CUSTOMER')">
