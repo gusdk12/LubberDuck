@@ -68,7 +68,7 @@
     background-position: center;
 
     width: 115%;
-    height: 115%;
+    height: 116%;
 
     position: absolute;
     top: 50%;
@@ -82,15 +82,19 @@
 }
 .background3 #memoImg {
     content: url('/img/bookmark/memo3.png');
+    height: 117%;
+    top: 52%;
 }
 .background4 #memoImg {
     content: url('/img/bookmark/memo4.png');
 }
 .background5 #memoImg {
     content: url('/img/bookmark/memo5.png');
+    left: 47%;
 }
 .background6 #memoImg {
     content: url("/img/bookmark/memo6.png");
+    top: 47%;
 }
 
 .drop {
@@ -123,7 +127,7 @@
 }
 .background3 .drop{
     position: absolute;
-    top: 7px;
+    top: 5px;
     right: 14px;
 }
 .background4 .drop{
@@ -221,19 +225,19 @@
 }
 
 .CI {
-    width: 100%;
+    width: 80%;
     height: 70px;
 
     position: relative;
 }
 
 .I {
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
 
     position: absolute;
-    right: 15px;
-    bottom: 3px;
+    right: 3px;
+    bottom: 8px;
     cursor: pointer;
     z-index: 2;
 
@@ -263,19 +267,30 @@
 }
 
 .modifyBox {
+    background-color: rgba(255, 255, 255, 0.5);
     resize: none;
-    width: 90%;
+    border: none;
+    width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 #commentCheck {
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
 
     position: absolute;
-    right: 35px;
-    bottom: 6px;
+    right: 2px;
+    bottom: 2px;
 
     z-index: 5;
+}
+
+.error-message {
+    text-align: center;
+    display: none;
+    color: red;
+    font-size: 13px;
+    margin-top: -5px;
 }
