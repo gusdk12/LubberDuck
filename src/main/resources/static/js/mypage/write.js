@@ -8,7 +8,8 @@ $(document).ready(function () {
     $('#submit_btn').click(function (event) {
         event.preventDefault(); // 기본 제출 동작 방지
 
-        var itemId = $('#itemId').val();
+        // var itemId = $('#itemId').val();
+        var itemId = item.id;
         var selectedRating = $('.rating input:checked').val(); // 선택된 별점 값 가져오기
         var content = $('#content').val();
 

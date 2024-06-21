@@ -12,15 +12,4 @@ SELECT * FROM ctt_recent;
 SELECT * FROM ctt_aichat;
 
 
-UPDATE ctt_menu
-SET sequence=-1
-WHERE  name='Mojito'
-;
 
-UPDATE ctt_bookmark
-SET comment = '하하'
-WHERE user_id = 2 AND cocktail_id = 1
-;
-
-DELETE FROM ctt_aichat
-WHERE user_id = 5;

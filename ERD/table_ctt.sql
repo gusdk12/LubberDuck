@@ -1,12 +1,11 @@
-
-CREATE TABLE ctt_AIchat
+CREATE TABLE ctt_aichat
 (
     id      INT               NOT NULL AUTO_INCREMENT,
+    user_id INT               NOT NULL COMMENT '유저아이디',
     role    ENUM('바텐더', '손님') NOT NULL COMMENT '채팅의 주체',
     content LONGTEXT          NOT NULL COMMENT '채팅내용',
-    user_id INT               NOT NULL COMMENT '유저아이디',
     PRIMARY KEY (id)
-) COMMENT 'AI채팅테이블';
+) COMMENT '유저ai채팅테이블';
 
 CREATE TABLE ctt_authority
 (
@@ -41,9 +40,6 @@ CREATE TABLE ctt_calendar
 
 ALTER TABLE ctt_calendar
     ADD CONSTRAINT UQ_id UNIQUE (id);
-
-ALTER TABLE ctt_calendar
-    ADD CONSTRAINT UQ_date UNIQUE (date);
 
 CREATE TABLE ctt_cart
 (
@@ -97,11 +93,11 @@ ALTER TABLE ctt_order_item
 
 CREATE TABLE ctt_recent
 (
-    cocktail_id INT      NOT NULL COMMENT '칵테일아이디',
+    saw_date    DATETIME NOT NULL DEFAULT now() COMMENT '상품 본 날짜',
     user_id     INT      NOT NULL COMMENT '유저아이디',
-    saw_date    DATETIME NOT NULL DEFAULT now() COMMENT '상품 본 날짜시간',
-    PRIMARY KEY (cocktail_id, user_id)
-) COMMENT '최근 본 상품';
+    cocktail_id INT      NOT NULL COMMENT '칵테일아이디',
+    PRIMARY KEY (user_id, cocktail_id)
+) COMMENT '최근 본 상품 테이블';
 
 CREATE TABLE ctt_review
 (
@@ -170,6 +166,16 @@ ALTER TABLE ctt_order
         FOREIGN KEY (user_id)
             REFERENCES ctt_user (id);
 
+ALTER TABLE ctt_recent
+    ADD CONSTRAINT FK_ctt_menu_TO_ctt_recent
+        FOREIGN KEY (cocktail_id)
+            REFERENCES ctt_menu (id);
+
+ALTER TABLE ctt_recent
+    ADD CONSTRAINT FK_ctt_user_TO_ctt_recent
+        FOREIGN KEY (user_id)
+            REFERENCES ctt_user (id);
+
 ALTER TABLE ctt_order_item
     ADD CONSTRAINT FK_ctt_order_TO_ctt_order_item
         FOREIGN KEY (order_id)
@@ -185,17 +191,7 @@ ALTER TABLE ctt_review
         FOREIGN KEY (item_id)
             REFERENCES ctt_order_item (id);
 
-ALTER TABLE ctt_AIchat
-    ADD CONSTRAINT FK_ctt_user_TO_ctt_AIchat
-        FOREIGN KEY (user_id)
-            REFERENCES ctt_user (id);
-
-ALTER TABLE ctt_recent
-    ADD CONSTRAINT FK_ctt_menu_TO_ctt_recent
-        FOREIGN KEY (cocktail_id)
-            REFERENCES ctt_menu (id);
-
-ALTER TABLE ctt_recent
-    ADD CONSTRAINT FK_ctt_user_TO_ctt_recent
+ALTER TABLE ctt_aichat
+    ADD CONSTRAINT FK_ctt_user_TO_ctt_aichat
         FOREIGN KEY (user_id)
             REFERENCES ctt_user (id);

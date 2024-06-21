@@ -22,8 +22,6 @@ public class ChatController {
     public ChatController(ChatServiceImpl chatServiceImpl, MenuService menuService) {
         this.chatServiceImpl = chatServiceImpl;
         this.menuService = menuService;
-
-        createInitPrompt();
     }
 
     @GetMapping("/list/{userId}")
@@ -44,6 +42,7 @@ public class ChatController {
     public QryResult request(
             @RequestParam("user_Id") Long user_Id,
             @RequestParam("role") String role){
+        createInitPrompt();
         String fullPrompt = ChatManager.getInstance().getHistory();
         String response = chatServiceImpl.getResponse(fullPrompt).replace("\n", "\\n").replace("\"", "\\\"");
         response = response.replace("바텐더: ", "");
@@ -62,8 +61,14 @@ public class ChatController {
             menus.add(menu.getName());
         }
 
-        String initProm =  "지금 당신은 'Rubber Bar'의 바텐더이자 훌륭한 상담가입니다., 손님의 대답에 따라 적절한 칵테일을 하나 추천할 수 있습니다. 반드시 추천할 필요는 없습니다." +
-                "칵테일은 메뉴에 있는 것 중 하나만 추천해야만 합니다. 현재 메뉴에 있는 칵테일의 종류는 모두, " + String.join(", ", menus) + "입니다. 이 중에 하나를 반드시 랜덤으로 추천하세요." +
+        String menuProm = "";
+        if(!menuList.isEmpty()) menuProm = "칵테일은 메뉴에 있는 것 중 하나만 추천해야만 합니다. 손님의 대답에 따라 적절한 칵테일을 하나 추천할 수 있습니다. 반드시 추천할 필요는 없습니다." +
+                "현재 메뉴판에 있는 메뉴는 " + menuList.size() + "개 입니다. 현재 메뉴에 있는 칵테일의 종류는 모두, " + String.join(", ", menus) + "입니다." +
+                "이 중에 하나를 반드시 랜덤으로 추천하세요. ";
+        else menuProm = "현재 아쉽게도 메뉴판에는 메뉴가 하나도 없습니다. 손님에게 메뉴가 비어있다고 양해를 구하세요.";
+
+        String initProm =  "당신은 'Rubber Bar'의 바텐더이자 훌륭한 상담가입니다. " +
+                menuProm + "칵테일 이름을 한국어로 번역하지 마세요!!" +
                 "손님의 기분을 좋아지게 해주기 위한 대화를 하세요. 손님 대신 대답하지 마세요!!! 손님을 사칭하지 마세요!!! 손님과 적절한 대화를 이어나가세요. 손님이 칵테일 추천을 더이상 바라지 않는다면, 추천하지 마세요. 절대 말을 반복하지 마!!!";
         String exampleProm = "바텐더 답장 예시입니다. : '오, 그건 'Old Fashioned'입니다. 올드 패션드는 가장 고전적인 칵테일 중 하나로, 위스키의 풍미와 비터의 조화가 훌륭한 균형을 이룹니다. 간단한 재료로 만들어지지만, 세심한 기술과 정성이 필요한 칵테일이기도 하죠.'" +
                 ", '저는 바텐더이지만, 상담가이기도 합니다. 오늘은 어떤 기분이 드시나요?'" +
