@@ -24,4 +24,9 @@ public class Order_itemServiceImpl implements Order_itemService {
     public List<Order_item> findByOrder(Long order_id) {
         return orderItemRepository.findByOrder(order_id);
     }
+
+    @Override
+    public Order_item findById(Long item_id) {
+        return orderItemRepository.findById(item_id);
+    }
 }

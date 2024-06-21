@@ -42,6 +42,9 @@ CREATE TABLE ctt_calendar
 ALTER TABLE ctt_calendar
     ADD CONSTRAINT UQ_id UNIQUE (id);
 
+ALTER TABLE ctt_calendar
+    ADD CONSTRAINT UQ_date UNIQUE (date);
+
 CREATE TABLE ctt_cart
 (
     user_id     INT NOT NULL COMMENT '유저아이디',

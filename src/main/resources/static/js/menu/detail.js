@@ -59,9 +59,33 @@ function addEvent(){
     });
 
     // addToBook
+    // $('#commentCheck').click(function() {
+    //     var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
+    //     var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
+    //     addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
+    //     alert('즐겨찾기에 추가되었습니다');
+    //
+    //     switchToFullHeart();
+    //     closeComment();
+    // });
+
     $('#commentCheck').click(function() {
         var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
         var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
+        var errorMessage = $(this).closest('#cocktailsection').find('.comment-error-message');
+
+        // 글자 수 체크
+        var maxLength = 30;
+        if (commentValue.length > maxLength) {
+            var currentLength = commentValue.length;
+            var message = '코멘트는 30자까지 작성 가능합니다. (현재 ' + currentLength + '글자)';
+            errorMessage.text(message);
+            errorMessage.css('display','block');
+            return; // 글자 수가 넘어가면 함수 종료
+        }else {
+            errorMessage.css('display', 'none');
+        }
+
         addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
         alert('즐겨찾기에 추가되었습니다');
 

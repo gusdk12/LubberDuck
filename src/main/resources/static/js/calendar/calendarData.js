@@ -1,11 +1,62 @@
-
-// 오늘의 메뉴를 로드하는 함수 (DB와 연동되는 부분은 여기서 구현)
-function loadTodayMenu(date) {
-    // DB에서 오늘의 메뉴를 로드하는 로직을 호출
-    console.log("Loading menu for date:", date);
+// 모든 일정 불러오기
+function loadCalendars(){
+    $.ajax({
+        type: "GET",
+        url: `/calendar/list`,
+        cache: false,
+        success: function (data, status) {
+            if (status === "success") {
+                if (data.status !== "OK") {
+                    alert(data.status);
+                    return;
+                }
+                calendarlist = data.data;
+                buildCalendar(data.data);
+            }
+        },
+    });
 }
 
-// 비어있던 일정에 메모가 추가된 경우, 캘린더 데이터 자체가 추가되어야함
+// 특정 날짜의 메모 불러오기
+function findCalendarByDate(date) {
+    $.ajax({
+        type: "GET",
+        url: `/calendar/detail/${date}`,
+        contentType: "application/json",
+        success: function (event) {
+
+            if (event && event.memo) {
+                let eventItem = `
+                    <li>${event.memo}
+                        <button type="button" class="memo-delete">
+                            <span class="fa fa-xmark">X</span>
+                        </button>
+                    </li>`;
+
+                $(".event-list").html(eventItem);
+
+                $(".event-list li").hover(
+                    function () {
+                        $(this).find(".memo-delete").css("opacity", "1");
+                    },
+                    function () {
+                        $(this).find(".memo-delete").css("opacity", "0");
+                    }
+                );
+
+                $("#notification").hide();
+            } else {
+                $(".event-list").html("");  // 메모가 없는 경우 리스트를 비움
+                $("#notification").show();
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error loading events:", error);
+        }
+    });
+}
+
+// 특정 날짜에 메모 추가
 function addCalendarByMemo(memo){
     if(!memo)
         return;
@@ -17,13 +68,13 @@ function addCalendarByMemo(memo){
         memo: memo,
     };
 
-    let eventItems = `
-            <li>${newEvent.memo}
-                <button type="button" class="memo-delete">
-                    <span class="fa fa-xmark">X</span>
-                </button>
-            </li>`;
-    $(".event-list").html(eventItems);
+    let eventItem = `
+        <li>${newEvent.memo}
+            <button type="button" class="memo-delete">
+                <span class="fa fa-xmark">X</span>
+            </button>
+        </li>`;
+    $(".event-list").html(eventItem);
     $("#notification").hide();
 
     const data = {
@@ -37,107 +88,72 @@ function addCalendarByMemo(memo){
         data: data,
         cache: false,
         success: function(data, status){
-            if(status === "success"){
-                if(data.status !== "OK"){
-                    alert(data.status);
-                    return;
-                }
+            if (status === "success" && data.status === "OK") {
                 $("#new-memo").val("").hide();
-                alert("add성공")
+                alert("메모가 추가되었습니다.");
                 loadCalendars();
             }
         },
     });
-
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/calendar/saveMemo",
-    //     contentType: "application/json",
-    //     data: JSON.stringify(newEvent),
-    //     success: function (response) {
-    //         // calendarlist.push(newEvent); // 서버에 저장된 메모를 로컬 데이터에도 추가
-    //         // findCalendarByDate(selectedDate); // 저장 후 해당 날짜의 메모를 갱신
-    //         $("#new-memo").val("").hide();
-    //         loadCalendars();
-    //         // highlightEventDates();
-    //     },
-    //     error: function (xhr, status, error) {
-    //         console.error("Error saving memo:", error);
-    //     },
-    //     complete: function () {
-    //         $("#new-memo").val("").hide();
-    //     }
-    // });
 }
 
+// TODO: 특정 날짜에 오늘의 메뉴 추가
 // 비어있던 일정에 오늘의 메뉴가 추가된 경우, 캘린더 데이터 자체가 추가되어야함
 function addCalendarByMenu(menu){}
 
 // 이미 오늘의 메뉴가 있는 일정에 메모 추가된 경우 이거나,
 // 이미 메모가 있는 일정에 오늘의 메뉴가 추가된 경우,
+// 또한, 오늘의 메뉴와 메모가 모두 있는 일정에서 둘 중 하나를 삭제한 경우,
 // 이미 있는 캘린더 데이터를 수정해야한다.
-function updateCalendar(calendar){}
+function updateCalendar(calendarId, memo) {
 
-// 오늘의 메뉴만 있던 일정에, 오늘의 메뉴를 삭제한 경우 이거나,
-// 메모만 있던 일정에, 메모를 삭제한 경우,
-// 이미 있던, 해당 캘린더 데이터가 삭제되어야한다.
-function deleteCalendar(calendar){}
+    if (!memo) return;
+    const data = { "memo": memo, "id": calendarId };
 
-// 모든 일정 불러오기
-function loadCalendars(){
+    // TODO: 지금은 메모만 수정됨 오늘의 메뉴 수정
     $.ajax({
-        type: "GET",
-        url: `/calendar/list`,
+        url: `/calendar/update`,
+        type: "POST",
+        data: data,
         cache: false,
         success: function (data, status) {
-            if (status === "success") {
-                if (data.status !== "OK") {
-                    alert(data.status);
-                    return;
-                }
-                buildCalendar(data.data);
-            }
-        },
-    });
-}
+            if (status === "success" && data.status === "OK") {
+                $("#new-memo").val("").hide();
+                alert("메모가 수정되었습니다.");
 
-// 특정 날짜의 메모를 로드하는 함수
-function findCalendarByDate(date) {
-    $.ajax({
-        type: "GET",
-        url: `/admin/calendar/memos/${date}`,
-        contentType: "application/json",
-        success: function (events) {
-
-            let eventItems = events.map(event => `
-                    <li>${event.memo}
-                        <button type="button" class="memo-delete">
-                            <span class="fa fa-xmark">X</span>
-                        </button>
-                    </li>
-                `).join('<div class="memo-gap"></div>');
-
-            $(".event-list").html(eventItems);
-
-            $(".event-list li").hover(
-                function () {
-                    $(this).find(".memo-delete").css("opacity", "1");
-                },
-                function () {
-                    $(this).find(".memo-delete").css("opacity", "0");
-                }
-            );
-
-            // 일정이 있는 경우에만 알림창 노출
-            if (events.length > 0) {
-                $("#notification").hide();
-            } else {
-                $("#notification").show();
+                const selectedDate = init.activeDate.toISOString().split("T")[0].replace(/-/g, ".");
+                findCalendarByDate(selectedDate);
             }
         },
         error: function (xhr, status, error) {
-            console.error("Error loading events:", error);
+            console.error("Error updating memo:", error);
+        }
+    });
+}
+
+function deleteCalendar(calendarId, memo) {
+    const data = {
+        "id": calendarId,
+        "memo": memo
+    };
+    // TODO: 특정 날짜에 메모만 있거나, 오늘의 메뉴만 있을 경우 해당 id 삭제
+
+    // 특정 날짜의 데이터는 남겨두고 메모만 NULL 로 수정
+    $.ajax({
+        url: "/calendar/updateToDeleteMemo",
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function (data, status) {
+            if (status === "success" && data.status === "OK") {
+                alert("메모가 삭제되었습니다.");
+                const selectedDate = init.activeDate.toISOString().split("T")[0].replace(/-/g, ".");
+                findCalendarByDate(selectedDate);
+                $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error deleting memo:", error);
         }
     });
 }

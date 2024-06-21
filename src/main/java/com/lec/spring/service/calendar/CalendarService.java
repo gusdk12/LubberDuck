@@ -8,21 +8,25 @@ import java.util.List;
 
 public interface CalendarService {
 
+    // 모든 일정 불러오기
     QryCalendarList list();
 
+    // 특정 날짜의 메모 조회
+    Calendar findByDate(String date);
+
+    // 특정 날짜에 메모 추가
     QryResult addByMemo(String memo, String date);
 
-    List<Calendar> findByDate(String date);
+    // 캘린더 데이터(메모, 오늘의 메뉴) 수정
+    QryResult update(Long calendarId, String memo);
 
-    Calendar saveMemo(Calendar calendar);
+    // 캘린더 데이터가 비어있지 않을 때 메모만 삭제
+    QryResult updateToDeleteMemo(Long calendarId, String memo);
 
-    void updateMemo(Calendar calendar);
+    // 캘린더 데이터가 비어있지 않을 때 오늘의 메뉴 코멘트만 삭제
+    QryResult updateToDeleteMenu(Long calendarId, String comment);
 
-    void deleteMemo(Long id);
+    // 캘린더 데이터 삭제 (전체 삭제)
+    QryResult deleteById(Long calendarId);
 
-    Calendar saveComment(Calendar calendar);
-
-    void updateComment(Calendar calendar);
-
-    void deleteComment(String date);
 }

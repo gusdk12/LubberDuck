@@ -24,6 +24,9 @@ public class ManagerController {
     private CalendarService calendarService;
 
     @Autowired
+    private ManagerValidator managerValidator;
+
+    @Autowired
     public ManagerController(MenuService menuService, CalendarService calendarService) {
         this.menuService = menuService;
         this.calendarService = calendarService;
@@ -45,7 +48,7 @@ public class ManagerController {
     // 메뉴 상세정보
     @GetMapping("/menudetail/{id}")
     public String detail(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("menu", menuService.detail(id));
+        model.addAttribute("menu", menuService.selectById(id));
         return "manager/menudetail";
     }
 
@@ -60,9 +63,9 @@ public class ManagerController {
     public String changeOk(@Valid Menu menu,
                            BindingResult result,
                            Model model,
-                           RedirectAttributes redirectAttrs){
+                           RedirectAttributes redirectAttrs) {
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             redirectAttrs.addFlashAttribute("price", menu.getPrice());
             redirectAttrs.addFlashAttribute("info", menu.getInfo());
 
@@ -78,6 +81,6 @@ public class ManagerController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.setValidator(new ManagerValidator());
+        binder.setValidator(managerValidator);
     }
 }

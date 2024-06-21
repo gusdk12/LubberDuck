@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/write.css}"> <!-- 해당 경로에 CSS 넣기 -->
+    <script th:inline="javascript">
+        let item = [[${item}]];
+    </script>
+</head>
+<body>
+<section>
+            <div class="container">
+            </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script th:src="@{/js/mypage/write.js}"></script>
+</body>
+</html>

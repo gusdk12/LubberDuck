@@ -18,4 +18,5 @@ public class Order {
     private Long user_id; // 유저 아이디
     private int number; // 주문 묶는 번호
     private LocalDateTime regdate; // 주문 일시
+
 }

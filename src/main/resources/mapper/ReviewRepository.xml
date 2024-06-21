@@ -15,51 +15,49 @@
 
     <sql id="SELECT_BASE">
         SELECT
-            r.id "id",
-            r.item_id "item_id",
-            r.content "content",
-            r.rate "rate",
-            r.regdate "regdate",
-            oi.id "order_item.id",
-            oi.order_id "order_item.order_id",
-            oi.cocktail_id "order_item.cocktail_id",
-            oi.quantity "order_item.quantity",
-            oi.price "order_item.price",
-            m.id "menu.id",
-            m.name "menu.name",  -- 칵테일 이름 추가
-            m.img_url "menu.imgUrl",
-            o.regdate "order.regdate",
-            o.id "order.id",
-            o.number "order.number",
-            o.user_id "order.user_id"
+            r.id AS "id",
+            r.item_id AS "item_id",
+            r.content AS "content",
+            r.rate AS "rate",
+            r.regdate AS "regdate",
+            oi.id AS "order_item.id",
+            oi.order_id AS "order_item.order_id",
+            oi.cocktail_id AS "order_item.cocktail_id",
+            oi.quantity AS "order_item.quantity",
+            oi.price AS "order_item.price",
+            m.id AS "menu.id",
+            m.name AS "menu.name",  -- 칵테일 이름 추가
+            m.img_url AS "menu.imgUrl",
+            o.regdate AS "order.regdate",
+            o.id AS "order.id",
+            o.number AS "order.number",
+            o.user_id AS "order.user_id"
         FROM
-            ctt_review r, ctt_order_item oi, ctt_menu m, ctt_order o
-        WHERE
-            r.item_id = oi.id
-          AND oi.cocktail_id = m.id
-          AND oi.order_id = o.id
-
+            ctt_review r
+                JOIN ctt_order_item oi ON r.item_id = oi.id
+                JOIN ctt_menu m ON oi.cocktail_id = m.id
+                JOIN ctt_order o ON oi.order_id = o.id
     </sql>
 
     <select id="findAll" resultType="com.lec.spring.domain.review.Review">
         <include refid="SELECT_BASE"/>
-        ORDER BY id DESC
+        ORDER BY r.id DESC
     </select>
 
     <select id="findById" resultType="com.lec.spring.domain.review.Review">
         <include refid="SELECT_BASE"/>
-        AND id = #{id}
+        WHERE r.id = #{id}
     </select>
 
     <select id="findByItemId" resultType="com.lec.spring.domain.review.Review">
         <include refid="SELECT_BASE"/>
-        AND item_id = #{item_id}
+        WHERE r.item_id = #{item_id}
     </select>
 
     <update id="update" flushCache="true" parameterType="com.lec.spring.domain.review.Review">
         UPDATE ctt_review
-        SET item_id = #{item_id}, content=#{content} ,rate=#{rate}, regdate=#{regdate}
-        WHERE id=#{id}
+        SET item_id = #{item_id}, content = #{content}, rate = #{rate}, regdate = #{regdate}
+        WHERE id = #{id}
     </update>
 
     <delete id="delete" flushCache="true"

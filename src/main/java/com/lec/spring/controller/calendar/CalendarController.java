@@ -1,20 +1,13 @@
 package com.lec.spring.controller.calendar;
 
 import com.lec.spring.domain.QryResult;
-import com.lec.spring.domain.UserValidator;
 import com.lec.spring.domain.calendar.Calendar;
 import com.lec.spring.domain.calendar.QryCalendarList;
-import com.lec.spring.domain.cart.QryCartList;
-import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.service.calendar.CalendarService;
 import com.lec.spring.service.menu.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController   // data 를 response 한다. ('View' 를 리턴하는게 아니다!)
 @RequestMapping("/calendar")
@@ -27,50 +20,54 @@ public class CalendarController {
         this.calendarService = calendarService;
     }
 
+    // 모든 일정 불러오기
     @GetMapping("/list")
-    public QryCalendarList list(){
+    public QryCalendarList list(Model model){
+        QryCalendarList calendarList = calendarService.list();
+        model.addAttribute("calendarList", calendarList);
 
-        QryCalendarList result = calendarService.list();
-
-        return result;
+        return calendarList;
     }
 
+    // 특정 날짜의 메모 불러오기
+    @GetMapping("/detail/{date}")
+    @ResponseBody
+    public Calendar getMemosByDate(@PathVariable String date) {
+        return calendarService.findByDate(date);
+    }
+
+    // 특정 날짜에 메모 추가
     @PostMapping("/addByMemo")
     public QryResult addByMemo(
             @RequestParam("memo") String memo,
             @RequestParam("date") String date){
-        QryResult test = calendarService.addByMemo(memo, date);
+        QryResult result = calendarService.addByMemo(memo, date);
 
-        return test;
+        return result;
     }
 
+    // 특정 날짜에 오늘의 메뉴 추가
     @PostMapping("/addByMenu")
     public QryResult addByMenu(){
         return null;
     }
 
-    @PostMapping("/update/{calender_Id}")
-    public QryResult update(@PathVariable Long calender_Id){
-        return null;
+    // 캘린더 데이터(메모, 오늘의 메뉴) 수정
+    @PostMapping("/update")
+    public QryResult update(
+            @RequestParam("id") Long calendarId,
+            @RequestParam("memo") String memo) {
+        QryResult result = calendarService.update(calendarId, memo);
+        return result;
     }
 
-    @PostMapping("/delete/{calender_Id}")
-    public QryResult delete(@PathVariable Long calender_Id){
-        return null;
+    // 캘린더 데이터가 비어있지 않을 때 메모만 삭제
+    @PostMapping("/updateToDeleteMemo")
+    public QryResult updateToDeleteMemo(
+            @RequestParam("id") Long calendarId,
+            @RequestParam("memo") String memo) {
+        QryResult result = calendarService.updateToDeleteMemo(calendarId, memo);
+
+        return result;
     }
-
-    @PostMapping("/saveMemo")
-    @ResponseBody
-    public Calendar saveMemo(@RequestBody Calendar calendar) {
-        System.out.println("Received memo to save: " + calendar);
-        return calendarService.saveMemo(calendar);
-    }
-
-    @GetMapping("/calendar/memos/{date}")
-    @ResponseBody
-    public List<Calendar> getMemosByDate(@PathVariable String date) {
-        return calendarService.findByDate(date);
-    }
-
-
 }

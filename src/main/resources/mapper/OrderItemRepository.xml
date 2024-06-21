@@ -13,15 +13,25 @@
             oi.cocktail_id "cocktail_id",
             oi.quantity "quantity",
             oi.price "price",
+            o.regdate AS "order.regdate",
+            o.id AS "order.id",
+            o.number AS "order.number",
+            o.user_id AS "order.user_id",
             m.id "menu.id",
             m.name "menu.name"  -- 칵테일 이름 추가
         FROM ctt_order_item oi
                  LEFT JOIN dbduck.ctt_menu m ON oi.cocktail_id = m.id
+                 JOIN ctt_order o ON oi.order_id = o.id
     </sql>
 
     <select id="findByOrder" resultType="com.lec.spring.domain.order.Order_item">
         <include refid="SELECT_BASE"/>
         WHERE oi.order_id = #{param1}
+    </select>
+
+    <select id="findById" resultType="com.lec.spring.domain.order.Order_item">
+        <include refid="SELECT_BASE"/>
+        WHERE oi.id = #{param1}
     </select>
 
 </mapper>

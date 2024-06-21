@@ -14,12 +14,11 @@ public interface MenuService {
 
   Menu findByCocktailName(String name);
 
-  // 특정 id 칵테일 조회
-  Menu detail(Long id);
-
   // 특정 id 칵테일 정보 수정(가격, 소개글)
   int update(Menu menu);
 
-  // 특정 id 칵테일 정보 호출
+  // 특정 id 칵테일 정보 조회
   Menu selectById(Long id);
+
+  int updateMenu(Menu menu);
 }

@@ -39,14 +39,10 @@
         WHERE 1=1
     </sql>
 
+    <!-- 모든 일정 불러오기 -->
     <select id="selectAll" resultMap="mapCalendar">
         <include refid="SELECT_BASE"/>
     </select>
-
-    <insert id="insertByMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO ctt_calendar (memo, date)
-        VALUES (#{memo}, #{date})
-    </insert>
 
     <!-- 특정 날짜의 메모를 조회 -->
     <select id="findByDate" resultMap="mapCalendar">
@@ -54,43 +50,48 @@
         AND c.date = #{date}
     </select>
 
-    <!-- 메모 삽입 -->
-    <insert id="insertMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <!-- 특정 날짜에 메모 추가 -->
+    <insert id="insertByMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO ctt_calendar (memo, date)
         VALUES (#{memo}, #{date})
+        ON DUPLICATE KEY UPDATE
+            memo = VALUES(memo);
     </insert>
 
-    <!-- 메모 수정 -->
-    <update id="updateMemo" parameterType="com.lec.spring.domain.calendar.Calendar">
-        UPDATE ctt_calendar
-        SET memo = #{memo}
-        WHERE date = #{date}
-    </update>
-
-    <!-- 메모 삭제 -->
-    <delete id="deleteMemo">
-        DELETE FROM ctt_calendar
-        WHERE date = #{date} AND memo IS NOT NULL
-    </delete>
-
-    <!-- 관리자 코멘트 삽입 -->
-    <insert id="insertComment" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <!-- 특정 날짜에 오늘의 메뉴 추가 -->
+    <insert id="insertByMenu" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO ctt_calendar (comment, date)
         VALUES (#{comment}, #{date})
+        ON DUPLICATE KEY UPDATE
+            comment = VALUES(comment);
     </insert>
 
-    <!-- 관리자 코멘트 수정 -->
-    <update id="updateComment" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true">
+    <!-- 캘린더 데이터(메모, 오늘의 메뉴) 수정 -->
+    <update id="updateCalendar" parameterType="com.lec.spring.domain.calendar.Calendar">
         UPDATE ctt_calendar
-        SET comment = #{comment}
-        WHERE date = #{date} AND comment IS NOT NULL
+        SET memo = #{memo},
+            comment = #{comment}
+        WHERE id = #{id}
     </update>
 
-    <!-- 관리자 코멘트 삭제 -->
-    <update id="deleteComment" flushCache="true">
+    <!-- 특정 id의 메모 삭제 -->
+    <update id="updateToDeleteMemo" parameterType="com.lec.spring.domain.calendar.Calendar">
         UPDATE ctt_calendar
-        SET comment = NULL
-        WHERE date = #{date}
+        SET memo = null
+        WHERE id = #{calendarId} AND memo IS NOT NULL;
     </update>
+
+    <!-- 특정 id의 오늘의 메뉴 삭제 -->
+    <update id="updateToDeleteMenu" parameterType="com.lec.spring.domain.calendar.Calendar">
+        UPDATE ctt_calendar
+        SET comment = null
+        WHERE id = #{calendarId} AND comment IS NOT NULL;
+    </update>
+
+    <!-- 특정 id 삭제 -->
+    <delete id="deleteById" parameterType="com.lec.spring.domain.calendar.Calendar">
+        DELETE FROM ctt_calendar
+        WHERE id = #{id};
+    </delete>
 
 </mapper>
