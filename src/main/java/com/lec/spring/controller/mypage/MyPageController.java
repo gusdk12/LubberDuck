@@ -132,18 +132,7 @@ public class MyPageController {
 
         return "mypage/myPageUpdateOk";
     }
-
-
-    @Autowired
-    MypageValidator mypageValidator;
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.setValidator(mypageValidator);
-    }
-
-
-    @RequestMapping("/info")
+        @RequestMapping("/info")
     public void info(){}
     @RequestMapping("/order")
     public void order(){}
@@ -194,12 +183,22 @@ public class MyPageController {
         return "/mypage/review";
     }
 
-    @RequestMapping("/review")
-    public void review(){}
+    @GetMapping("review/write/{item_id}")
+    public String write(Model model, @PathVariable("item_id") Long item_id){
+        Order_item item = orderItemService.findById(item_id);
+        model.addAttribute("item", item);
+        return "mypage/review/write";
+    }
 
     @GetMapping("/bookmark")
     public void bookmark(Model model){
         model.addAttribute("allList",menuService.list());
         model.addAttribute("menuList", menuService.sequenceList());
     }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(new MypageValidator());
+    }
 }
+
