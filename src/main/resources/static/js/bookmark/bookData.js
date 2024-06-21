@@ -25,54 +25,28 @@ async function checkBook(cocktail){
 // 추가하기
 async function addToBook(cocktail, comment){
 
-    // 즐겨찾기에 이미 같은 상품이 담겨있는지 확인하기
-    let findBook = null;
+    // 전달할 parameter 준비 (POST)
+    const data = {
+        "userId" : logged_id,
+        "cocktailId" : cocktail.id,
+        "comment" : comment,
+    };
 
-    await $.ajax({
-        url: "/bookmark/detail/" + logged_id + "/" + cocktail.id,
-        type: "GET",
+    $.ajax({
+        url:"/bookmark/add",
+        type: "POST",
+        data: data,
         cache: false,
-        success: function (data, status) {
-            if (status === "success") {
-                if (data.status !== "OK") {
+        success: function(data, status){
+            if(status === "success"){
+                if(data.status !== "OK"){
                     alert(data.status);
                     return;
                 }
-                findBook = data.data;
+                loadBookmark(logged_id);
             }
         },
     });
-
-    //  카트에 같은 칵테일이 없다면, 카트에 추가한다.
-    if(!findBook){
-        // 전달할 parameter 준비 (POST)
-        const data = {
-            "userId" : logged_id,
-            "cocktailId" : cocktail.id,
-            "comment" : comment,
-        };
-
-        $.ajax({
-            url:"/bookmark/add",
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status){
-                if(status === "success"){
-                    if(data.status !== "OK"){
-                        alert(data.status);
-                        return;
-                    }
-                    loadBookmark(logged_id);
-                }
-            },
-        });
-    }
-
-    // 즐겨찾기에 같은 칵테일이 있다면 이미 존재하는 음료 알림
-    else {
-        alert('이미 즐겨찾기 설정한 음료입니다.');
-    }
 }
 
 // 수정하기
@@ -96,12 +70,13 @@ async function updateFromBook(cocktail, comment) {
                     // 업데이트 성공 시 화면에서 바로 코멘트 업데이트
                     $(`#favorite .cocktail_name:contains("${cocktail.name}")`)
                         .siblings('.CI').find('.C1').text(comment);
-                    alert('코멘트가 수정 성공.');
+                    swal("SUCCESS","코멘트 수정 완료","success");
+
                 } else {
                     alert(data.status);
                 }
             } else {
-                alert("코멘트 수정 실패");
+                swal("WARNING","코멘트 수정 실패","warning");
             }
         },
         error: function(xhr, status, error) {
@@ -113,7 +88,6 @@ async function updateFromBook(cocktail, comment) {
 
 // 삭제하기
 async function deleteFromBook(cocktail){
-
     $.ajax({
         url: "/bookmark/delete/" + logged_id + "/" + cocktail.id,
         type: "POST",
@@ -127,12 +101,10 @@ async function deleteFromBook(cocktail){
             }
         },
     });
-
 }
 
 // 특정 user의 즐겨찾기목록 불러오기
 function loadBookmark(user_id) {
-
     $.ajax({
         url: "/bookmark/list/" + user_id,
         type: "GET",
@@ -182,6 +154,7 @@ function buildBook(result){
                         <div class="comment-con">
                             <textarea class="modifyBox"> ${book.comment} </textarea>
                             <img src="/img/bookmark/check.png" id="commentCheck">
+                            <div class="error-message">코멘트는 최대 30글자입니다.</div>
                         </div>
                     </div>
                 </div>
@@ -220,16 +193,6 @@ function buildBook(result){
         }
     );
 
-    // 댓글창에 hover 시 수정 아이콘 등장
-    $(".CI").hover(
-        function() {
-            $(this).find(".I").css('display', 'block');
-        },
-        function() {
-            $(this).find(".I").css('display', 'none');
-        }
-    );
-
     // 칵테일 이미지 hover 시 담기/판매종료 아이콘 등장
     $(".cocktail-con").hover(
         function() {
@@ -240,9 +203,20 @@ function buildBook(result){
         }
     );
 
+    // 댓글창에 hover 시 수정 아이콘 등장
+    $(".CI").hover(
+        function() {
+            $(this).find(".I").css('display', 'block');
+        },
+        function() {
+            $(this).find(".I").css('display', 'none');
+        }
+    );
+
     // 이벤트 위임을 사용하여 동적으로 생성된 #modify 요소에 이벤트 핸들러를 추가합니다.
     $('#favorite').on('click', '#modify', function(e) {
         e.stopPropagation(); // 이벤트 전파를 중지하여 document 클릭 이벤트가 바로 발생하지 않도록 함
+        $(this).closest('.box').find('.C1').css('display', 'none');
         $(this).closest('.box').find('.comment-con').css('display', 'block');
     });
 
@@ -250,17 +224,28 @@ function buildBook(result){
     $(document).on('click', function(e) {
         if (!$(e.target).closest('.comment-con, #modify').length) {
             $('.comment-con').css('display', 'none');
+            $('.C1').css('display', 'block');
         }
     });
 
     // updateFromBook
-    $("#commentCheck").click(function() {
-        var cocktailName = $(this).closest('.info').find('.cocktail_name').text();
-        var commentValue = $(this).closest('.comment-con').find('.modifyBox').val();
+    $('#favorite').on('click', '#commentCheck', function() {
+        var $commentCon = $(this).closest('.comment-con');
+        var commentValue = $commentCon.find('.modifyBox').val();
 
-        updateFromBook(list.find(menu => menu.name === cocktailName), commentValue);
+        if (commentValue.length > 30) {
+            $commentCon.find('.error-message').show();
+        } else {
+            $commentCon.find('.error-message').hide();
 
-        $(this).closest('.box').find('.comment-con').css('display', 'none');
+            var cocktailName = $(this).closest('.info').find('.cocktail_name').text();
+            var menuItem = list.find(menu => menu.name === cocktailName);
+
+            updateFromBook(menuItem, commentValue);
+
+            $(this).closest('.box').find('.C1').css('display', 'block');
+            $(this).closest('.box').find('.comment-con').css('display', 'none');
+        }
     });
 
 
@@ -282,20 +267,22 @@ function buildBook(result){
 
             if (menuItem) {
                 addToCart(menuItem);
+                swal("SUCCESS",cocktailName+' 담기 완료',"success");
             } else {
                 console.error('Menu item not found for name:', cocktailName);
             }
         } else if (cartStatus.includes('cartNo')) {
-            alert('판매중단된상품입니다');
+            swal("Error","판매 중단된 상품입니다","error");
         }
     });
 
     // .drop 요소가 클릭되면 해당 box를 삭제
     $('#favorite').on('click', '.drop', function(e) {
+        var $box = $(this).closest('.box');
         e.preventDefault();
 
         // 선택한 요소를 기준으로 가장 가까운 조상 요소의 이름찾기
-        var cocktailName = $(this).closest('.box').find('.cocktail_name').text();
+        var cocktailName = $box.find('.cocktail_name').text();
 
         // 칵테일 이름에 맞는 객체를 찾아서 deleteFromBook 함수에 전달합니다.
         var menuItem = list.find(menu => menu.name === cocktailName);
@@ -306,8 +293,8 @@ function buildBook(result){
             console.error('Menu item not found for name:', cocktailName);
         }
 
-        alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.');
-        $(this).closest('.box').remove();
+        swal("DELETE",cocktailName+'가 즐겨찾기에서 삭제되었습니다.',"success");
+        $box.remove();
     });
 }
 

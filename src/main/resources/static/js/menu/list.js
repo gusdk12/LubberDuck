@@ -5,8 +5,6 @@ window.addEventListener('load', () => {
     preloadImages();
     appendMenuToPlate();
     showCustomerButtons();
-    customerButtonsSet();
-
 });
 window.addEventListener('unload', function(e){
     window.scrollTo({

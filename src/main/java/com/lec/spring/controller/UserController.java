@@ -105,7 +105,7 @@ public class UserController {
         user.setBirth_date(LocalDate.of(year, month, day));
         int cnt = userService.register(user, "ROLE_CUSTOMER");
         model.addAttribute("result", cnt);
-        return "/user/registerCustomerOk";
+        return "/user/registerCustomer";
     }
 
     @PostMapping("/registerManager")
@@ -138,7 +138,7 @@ public class UserController {
         user.setBirth_date(LocalDate.of(year, month, day));
         int cnt = userService.register(user, "ROLE_MANAGER");
         model.addAttribute("result", cnt);
-        return "/user/registerManagerOk";
+        return "/user/registerManager";
     }
 
 

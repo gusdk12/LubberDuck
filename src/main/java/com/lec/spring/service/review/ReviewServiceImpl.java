@@ -1,33 +1,16 @@
 package com.lec.spring.service.review;
 
-import com.lec.spring.domain.QryResult;
-import com.lec.spring.domain.User;
-import com.lec.spring.domain.menu.Menu;
-import com.lec.spring.domain.mypage.Bookmark;
-import com.lec.spring.domain.order.Order_item;
-import com.lec.spring.domain.review.QryReviewList;
 import com.lec.spring.domain.review.Review;
-import com.lec.spring.repository.menu.MenuRepository;
-import com.lec.spring.repository.order.OrderRepository;
-import com.lec.spring.repository.order.Order_ItemRepository;
 import com.lec.spring.repository.review.ReviewRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
     private ReviewRepository reviewRepository;
-
-    private MenuRepository menuRepository;
-
-    private OrderRepository orderRepository;
-
-    private Order_ItemRepository orderItemRepository;
-
 
     @Autowired
     public ReviewServiceImpl(SqlSession sqlSession){
@@ -87,25 +70,10 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository.findByItemId(item_id);
     }
 
-//    @Override
-//    public QryResult write(Long itemId, int rate, String content, LocalDateTime regdate) {
-//
-//        Order_item order_item = orderItemRepository.findById(itemId);
-//
-//        Review review=Review.builder()
-//                .item_id(order_item.getId())
-//                .rate(rate)
-//                .content(content)
-//                .regdate(LocalDateTime.now())
-//                .build();
-//
-//        int cnt = reviewRepository.save(review);
-//
-//        QryResult result = QryResult.builder()
-//                .count(cnt)
-//                .status("OK")
-//                .build();
-//
-//        return result;
-//    }
+    @Override
+    public List<Review> findByItemMenu(Long menu_id) {
+        return reviewRepository.findByItemMenu(menu_id);
+    }
+
+
 }

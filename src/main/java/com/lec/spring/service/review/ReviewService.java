@@ -1,9 +1,7 @@
 package com.lec.spring.service.review;
 
-import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.review.Review;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReviewService {
@@ -21,6 +19,6 @@ public interface ReviewService {
     int deleteById(Long id);
 
     List<Review> findByItemId(Long item_id);
-//
-//    QryResult write(Long itemId, int rate, String content, LocalDateTime regdate);
+
+    List<Review> findByItemMenu(Long menu_id);
 }
