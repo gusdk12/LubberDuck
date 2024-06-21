@@ -31,40 +31,40 @@
 
     <!-- 오늘의 메뉴 리스트 팝업 -->
     <div class="form-popup1" id="myForm">
-        <form action="/action_page.php" class="form-container form-text-style">
+        <div class="form-container form-text-style">
             <button type="button" class="menu-close">
                 <span class="fa fa-xmark">X</span>
             </button>
             <h2 class="title-text">오늘의 메뉴</h2>
             <hr class="line">
             <div class="menu-list">
-                <div th:each="menu : ${menuList}" class="menu" th:data="${menu.id}">
+                <div th:each="menu : ${menuList}" class="menu" th:data-menu-id="${menu.id}">
                     <img class="menu-img-list" th:src="${menu.imgUrl}" th:alt="${menu.name}">
                     <p class="menu-name" th:text="${menu.name}"></p>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
     <!-- 오늘의 메뉴 작성 및 수정 팝업 -->
     <div class="form-popup2" id="myForm2">
-        <form action="/action_page.php" class="form-container form-text-style">
+        <div class="form-container form-text-style">
             <button type="button" class="menu-close menu-close2">
                 <span class="fa fa-xmark">X</span>
             </button>
             <h2 class="title-text">오늘의 메뉴</h2>
             <div class="select-menu">
-                <img src="" alt="">
+                <img class="select-menu-img" src="" alt="">
                 <p class="select-menu-name"></p>
             </div>
             <div class="select-menu-text">
-                <textarea name=""></textarea>
+                <textarea id="select-menu-text"></textarea>
             </div>
             <div class="select-menu-buttons">
-                <button class="btn-cancle">취소</button>
-                <button class="btn-save">저장</button>
+                <button type="button" class="btn-cancel">취소</button>
+                <button type="button" class="btn-save">저장</button>
             </div>
-        </form>
+        </div>
     </div>
 
     <!-- 메인 화면 -->
@@ -129,8 +129,9 @@
 
                 <div class="menu-container today-menu-container">
                     <img class="menu-img" alt="Menu Image">
+                    <p class="today-menu-name"></p>
                     <div class="menu-text">
-                        <textarea name="" id="" readonly></textarea>
+                        <textarea name="" id="today-menu-text" readonly></textarea>
                     </div>
                     <div class="menu-buttons">
                         <button class="btn-edit">수정</button>

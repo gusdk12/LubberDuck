@@ -36,7 +36,7 @@ public class CalendarController {
         return calendarService.findByDate(date);
     }
 
-    // 특정 날짜에 메모 추가
+    // 특정 날짜에 아무 데이터도 없을 때 메모 추가
     @PostMapping("/addByMemo")
     public QryResult addByMemo(
             @RequestParam("memo") String memo,
@@ -46,10 +46,15 @@ public class CalendarController {
         return result;
     }
 
-    // 특정 날짜에 오늘의 메뉴 추가
+    // 특정 날짜에 아무 데이터도 없을 때 오늘의 메뉴 추가
     @PostMapping("/addByMenu")
-    public QryResult addByMenu(){
-        return null;
+    public QryResult addByMenu(
+            @RequestParam("menu_id") Long menu_id,
+            @RequestParam("comment") String comment,
+            @RequestParam("date") String date){
+        QryResult result = calendarService.addByMenu(menu_id, comment, date);
+
+        return result;
     }
 
     // 캘린더 데이터(메모, 오늘의 메뉴) 수정
