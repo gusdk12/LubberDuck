@@ -238,6 +238,7 @@ $(document).ready(function () {
             }
         });
 
+        $('#menu_selectAll, .menu_checkbox').prop('checked', false); // 생성 후, 체크박스 해제
         // 저장 후 정보조회 링크 이벤트 해제
         $('#menuList .item a.itemName').off('click');
     }); // end $('.btn_save).click()
