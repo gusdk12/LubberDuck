@@ -136,7 +136,4 @@ INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (2, 4, '제가 생각한 맛이에요 ! 그런데 가게 분위기가 조금 시끄러워서 아쉽네요. 별점 1개 깎겠습니다!', 20240619095004);
 
 INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
-    (2, 5, '맛있습니다. 맛있습니다. 맛있습니다. 맛있습니다.', 20240619112431);
-
-INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (3, 2, '흑흑 이걸 마신다고 해도 그녀가 잊혀지지 않아!!!!!!!!!!!', 20240620151320);
