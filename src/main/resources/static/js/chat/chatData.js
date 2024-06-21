@@ -31,7 +31,7 @@ function buildChat(data, menudata){
 
             $('#historycontainer').append(`
                 <div class="bartenderChat">
-                    ${chat.content}
+                    ${chat.content.replaceAll("\\n", "<br>")}
                     ${menuData}
                 </div>
             `);
