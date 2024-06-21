@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
-
     <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
 </head>
 <body>
@@ -70,7 +69,7 @@
 <script th:if="${result != null}" th:inline="javascript">
     if ([[${result}]] > 0) {
         swal("Success", "가입 성공", "success").then(() => {
-            location.href = "/user/login";
+            location.href = "/home";
         });
     } else {
         swal("Error", "가입 실패", "error").then(() => {

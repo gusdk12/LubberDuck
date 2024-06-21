@@ -17,23 +17,24 @@ function loadCalendars(){
     });
 }
 
-// 특정 날짜의 메모 불러오기
+// 특정 날짜의 메모, 오늘의 메뉴 불러오기
 function findCalendarByDate(date) {
     $.ajax({
         type: "GET",
         url: `/calendar/detail/${date}`,
         contentType: "application/json",
-        success: function (event) {
+        success: function (data) {
 
-            if (event && event.memo) {
-                let eventItem = `
-                    <li>${event.memo}
+            // 메모 표시
+            if (data && data.memo) {
+                let memoItem = `
+                    <li>${data.memo}
                         <button type="button" class="memo-delete">
                             <span class="fa fa-xmark">X</span>
                         </button>
                     </li>`;
 
-                $(".event-list").html(eventItem);
+                $(".event-list").html(memoItem);
 
                 $(".event-list li").hover(
                     function () {
@@ -43,11 +44,23 @@ function findCalendarByDate(date) {
                         $(this).find(".memo-delete").css("opacity", "0");
                     }
                 );
-
                 $("#notification").hide();
             } else {
                 $(".event-list").html("");  // 메모가 없는 경우 리스트를 비움
                 $("#notification").show();
+            }
+
+            // 오늘의 메뉴 표시
+            if (data && data.menu_id) {
+                $(".menu-img").attr("src", data.menu.imgUrl);
+                $(".menu-img").attr("alt", "Menu Image");
+                $(".today-menu-name").text(data.menu.name);
+                $("#today-menu-text").val(data.comment);
+                $(".today-menu-container").show();
+                $("#notification-menu").hide();
+            } else {
+                $(".today-menu-container").hide();
+                $("#notification-menu").show();
             }
         },
         error: function (xhr, status, error) {
@@ -56,7 +69,7 @@ function findCalendarByDate(date) {
     });
 }
 
-// 특정 날짜에 메모 추가
+// 특정 날짜에 아무 데이터도 없을 때 메모 추가
 function addCalendarByMemo(memo){
     if(!memo)
         return;
@@ -97,9 +110,84 @@ function addCalendarByMemo(memo){
     });
 }
 
-// TODO: 특정 날짜에 오늘의 메뉴 추가
-// 비어있던 일정에 오늘의 메뉴가 추가된 경우, 캘린더 데이터 자체가 추가되어야함
-function addCalendarByMenu(menu){}
+// 만약, 데이터가 있다면, update
+// 없다면, insert
+
+// 특정 날짜에 아무 데이터도 없을 때 오늘의 메뉴 추가
+function addCalendarByMenu(menuId, comment) {
+    const selectedDate = init.activeDate.toISOString().split("T")[0];
+
+    const data = {
+        "menu_id": menuId,
+        "comment": comment,
+        "date": selectedDate
+    };
+
+    $.ajax({
+        url: "/calendar/addByMenu",
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if (status === "success" && data.status === "OK") {
+                alert("오늘의 메뉴가 추가되었습니다.");
+                loadCalendars();
+                $("#myForm2").hide();
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(menuId, selectedDate, comment);
+            console.error("Error adding today's menu:", error);
+        }
+    });
+}
+
+
+/*
+// 특정 날짜에 아무 데이터도 없을 때 오늘의 메뉴 추가
+function addCalendarByMenu(menuId, comment, selectedDate) {
+    // 서버에서 해당 날짜의 데이터를 확인
+    $.ajax({
+        type: "GET",
+        url: `/calendar/detail/${selectedDate}`,
+        contentType: "application/json",
+        success: function (data) {
+            // 데이터가 없으면 추가
+            if (!data || (!data.memo && !data.menu_id)) {
+                const dataToAdd = {
+                    "menu_id": menuId,
+                    "comment": comment,
+                    "date": selectedDate
+                };
+
+                $.ajax({
+                    url: "/calendar/addByMenu",
+                    type: "POST",
+                    data: dataToAdd,
+                    cache: false,
+                    success: function(data, status) {
+                        if (status === "success" && data.status === "OK") {
+                            alert("오늘의 메뉴가 추가되었습니다.");
+                            loadCalendars(); // 캘린더 다시 로드
+                            $("#myForm2").hide(); // 팝업 닫기
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error adding today's menu:", error);
+                    }
+                });
+            } else {
+                alert("이미 데이터가 존재합니다.");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error checking calendar detail:", error);
+        }
+    });
+}
+
+ */
+
 
 // 이미 오늘의 메뉴가 있는 일정에 메모 추가된 경우 이거나,
 // 이미 메모가 있는 일정에 오늘의 메뉴가 추가된 경우,

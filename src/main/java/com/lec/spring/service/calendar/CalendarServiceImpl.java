@@ -40,7 +40,7 @@ public class CalendarServiceImpl implements CalendarService {
         return calendar;
     }
 
-    // 특정 날짜에 메모 추가
+    // 특정 날짜에 아무 데이터도 없을 때 메모 추가
     @Override
     public QryResult addByMemo(String memo, String date) {
         Calendar calendar = Calendar.builder()
@@ -49,6 +49,25 @@ public class CalendarServiceImpl implements CalendarService {
                 .build();
 
         int cnt = calendarRepository.insertByMemo(calendar);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
+
+    // 특정 날짜에 아무 데이터도 없을 때 오늘의 메뉴 추가
+    @Override
+    public QryResult addByMenu(Long menu_id, String comment, String date) {
+        Calendar calendar = Calendar.builder()
+                .menu_id(menu_id)
+                .comment(comment)
+                .date(date)
+                .build();
+
+        int cnt = calendarRepository.insertByMenu(calendar);
 
         QryResult result = QryResult.builder()
                 .count(cnt)

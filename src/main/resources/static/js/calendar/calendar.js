@@ -47,7 +47,6 @@ function handleDayClick(e) {
         init.activeDTag = $target;
         init.activeDate.setDate(day);
         findCalendarByDate(date);
-        loadTodayMenu(date); // 오늘의 메뉴 로드
     }
 }
 
@@ -101,22 +100,20 @@ function addEvents() {
 
     // 버튼 클릭 시 메모 입력 창을 열고 이미 메모가 있는 경우 메모 수정하는 창 열기
     $("#btn-add-memo").on("click", function () {
-        const newMemo = $("#new-memo");
-        const eventItem = $(".event-list li");
 
         // 기존 메모가 없는 경우에만 추가 모드로 설정하여 보여줌
-        if (eventItem.length === 0) {
-            newMemo.val("");
-            newMemo.css("height", "90px"); // 기본 높이로 설정
-            newMemo.data("mode", "add").show().focus();
+        if ($(".event-list li").length === 0) {
+            $("#new-memo").val("");
+            $("#new-memo").css("height", "90px"); // 기본 높이로 설정
+            $("#new-memo").data("mode", "add").show().focus();
             $("#notification").hide();
         } else {
-            eventItem.find(".memo-delete").remove();
+            $(".event-list li").find(".memo-delete").remove();
 
-            const memoText = eventItem.text().trim();
+            const memoText = $(".event-list li").text().trim();
 
-            newMemo.val(memoText).data("mode", "edit").show().focus();
-            eventItem.hide();
+            $("#new-memo").val(memoText).data("mode", "edit").show().focus();
+            $(".event-list li").hide();
         }
     });
 
@@ -130,8 +127,8 @@ function addEvents() {
     $(document).on("click", ".memo-delete", function () {
         // 삭제 확인 대화상자 표시
         if (confirm("메모를 삭제하시겠습니까?")) {
-            const $li = $(this).closest("li");  // 클릭된 버튼의 부모 <li> 요소를 찾음
-            const memoText = $li.text().trim(); // 메모 텍스트를 가져옴 (memoText 변수를 추출하는 코드 추가)
+            const $li = $(this).closest("li");
+            const memoText = $li.text().trim();
             const selectedDate = init.activeDate.toISOString().split("T")[0];
 
             // 캘린더 리스트에서 해당 날짜의 일정 찾기
@@ -160,61 +157,51 @@ function addEvents() {
 
     // 메뉴 리스트 팝업 열기
     $("#btn-add-menu").on("click", function () {
-        openMenuPopup();
+        $("body").append(popupOverlay);
+        $("#myForm").show();
     });
 
     // 메뉴 클릭 시 오늘의 메뉴 디테일 팝업 열기
     $(".menu").on("click", function () {
         const menuId = $(this).data("menu-id");
         const menu = menuList.find(m => m.id === menuId);
+
         if (menu) {
-            openWritePopup(menu);
-            console.log(menu);
-        } else {
-            console.error("Menu not found for id: " + menuId);
+            $("body").append(popupOverlay);
+            $("#myForm").hide();
+            $("#myForm2").show();
+            $(".select-menu-img").attr("src", menu.imgUrl);
+            $(".select-menu-img").attr("alt", menu.name);
+            $(".select-menu-name").text(menu.name);
         }
+
+        $(".btn-save").on("click", function() {
+            const comment = $("#select-menu-text").val();
+            if (!comment) {
+                alert("코멘트를 입력하세요.");
+                return;
+            }
+            addCalendarByMenu(menuId, comment);
+        });
     });
 
+
+
     $(".menu-close").on("click", function () {
-        closeMenuPopup();
+        $("#myForm").hide();
+        popupOverlay.remove();
     });
 
     $(".menu-close2").on("click", function () {
-        closeWritePopup();
+        $("#myForm2").hide();
+        popupOverlay.remove();
     });
 
     popupOverlay.on("click", function () {
-        closeMenuPopup();
-        closeWritePopup();
+        $("#myForm").hide();
+        $("#myForm2").hide();
+        popupOverlay.remove();
     });
-}
-
-// 메뉴 팝업 열기
-function openMenuPopup(menu) {
-    $("body").append(popupOverlay);
-    $("#myForm").show();
-}
-
-// 작성 팝업 열기
-function openWritePopup(menu) {
-    $("body").append(popupOverlay);
-    $("#myForm").hide();
-    $(".selected-menu-img").attr("src", menu.imgUrl);
-    $(".selected-menu-img").attr("alt", menu.name);
-    $(".select-menu-name").text(menu.name);
-    $("#myForm2").show();
-}
-
-// 메뉴 팝업 닫기
-function closeMenuPopup() {
-    $("#myForm").hide();
-    popupOverlay.remove();
-}
-
-// 작성 팝업 닫기
-function closeWritePopup() {
-    $("#myForm2").hide();
-    popupOverlay.remove();
 }
 
 // 메모 입력 시 높이를 자동으로 조절하는 함수

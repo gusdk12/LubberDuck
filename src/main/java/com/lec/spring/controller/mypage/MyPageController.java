@@ -49,6 +49,9 @@ public class MyPageController {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private MypageValidator mypageValidator;
+
     @GetMapping("/info")
     public String info(Model model,
                        @AuthenticationPrincipal UserDetails userDetails) {
@@ -67,6 +70,7 @@ public class MyPageController {
         }
 
         model.addAttribute("user", user);
+        model.addAttribute("menuList", menuService.sequenceList());
         return "mypage/info";
     }
 
@@ -130,9 +134,9 @@ public class MyPageController {
             model.addAttribute("success", false);
         }
 
-        return "mypage/myPageUpdate";
+        return "mypage/myPageUpdateOk";
     }
-    @RequestMapping("/info")
+        @RequestMapping("/info")
     public void info(){}
     @RequestMapping("/order")
     public void order(){}
@@ -189,6 +193,30 @@ public class MyPageController {
         model.addAttribute("item", item);
         return "mypage/review/write";
     }
+
+//    @PostMapping("review/write/{item_id}")
+//    public String writeOk(@Validated Review review
+//            , BindingResult result
+//            , Model model
+//            , RedirectAttributes redirectAttributes) {
+//        if (result.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("item_id", review.getItem_id());
+//            redirectAttributes.addFlashAttribute("rate", review.getRate());
+//            redirectAttributes.addFlashAttribute("content", review.getContent());
+//            redirectAttributes.addFlashAttribute("regdate", review.getRegdate());
+//
+//            List<FieldError> errList = result.getFieldErrors();
+//            for (FieldError err : errList) {
+//                redirectAttributes.addFlashAttribute("error_" + err.getField(), err.getCode());
+//            }
+//
+//            return "redirect:/review/write/{item_id}";
+//        }
+//        model.addAttribute("result", reviewService.write(review));
+//        return "mypage/review/writeOk";
+//
+//    }
+
 
     @GetMapping("/bookmark")
     public void bookmark(Model model){
