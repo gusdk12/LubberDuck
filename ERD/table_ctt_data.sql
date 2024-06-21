@@ -137,8 +137,5 @@ INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
 INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (3, 2, '흑흑 이걸 마신다고 해도 그녀가 잊혀지지 않아!!!!!!!!!!!', 20240620151320);
 
-INSERT INTO ctt_aichat (role, content, user_id) VALUES
-    ('바텐더', '안녕하세요 손님, 오늘은 기분이 어떠세요?', 5);
 
-INSERT INTO ctt_aichat (role, content, user_id) VALUES
-    ('손님', '별론데', 5);
+
