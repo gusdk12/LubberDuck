@@ -18,4 +18,7 @@ public class Order_item {
 
     @ToString.Exclude
     private Menu menu;  // Menu 객체 포함
+
+    @ToString.Exclude
+    private Order order;  // Menu 객체 포함
 }
