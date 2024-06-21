@@ -5,6 +5,7 @@ import com.lec.spring.repository.menu.MenuRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,21 +39,21 @@ public class MenuServiceImpl implements MenuService {
     return menuRepository.findByName(name);
     }
 
-    // 특정 id 칵테일 조회
-    @Override
-    public Menu detail(Long id) {
-    return menuRepository.findInfoById(id);
-    }
-
-    // 특정 id 칵테일 정보 수정(가격, 소개글)
+    // 특정  id 칵테일 정보 수정(가격, 소개글)
     @Override
     public int update(Menu menu) {
     return menuRepository.change(menu);
     }
-    // 특정 id 칵테일 정보 호출
+
+    // 손님 메뉴판 정보 id 칵테일 정보 조회
     @Override
     public Menu selectById(Long id) {
-    return menuRepository.findById(id);
+    return menuRepository.findMenuById(id);
   }
 
+    @Override
+    @Transactional
+    public int updateMenu(Menu menu) {
+        return menuRepository.updateSequence(menu);
+    }
 }

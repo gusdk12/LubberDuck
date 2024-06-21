@@ -23,4 +23,5 @@ public interface ReviewRepository {
 //     특정 id 글 삭제하기 (DELETE) <= Post(id)
     int delete(Review review);
 
+    List<Review> findByItemMenu(Long menu_id);
 }

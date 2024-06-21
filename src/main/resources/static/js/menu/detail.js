@@ -49,26 +49,17 @@ function addEvent(){
             event.stopPropagation();
             var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
             deleteFromBook(menuList.find(menu => menu.name === cocktailName));
-            alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.')
+            swal("DELETE",cocktailName+'가 즐겨찾기에서 삭제되었습니다.',"success");
 
             switchToEmptyHeart();
         } else if(event.target.className === "emptyHeart"){
             event.stopPropagation();
             openComment();
+            $("#heart").css('display','none');
         }
     });
 
     // addToBook
-    // $('#commentCheck').click(function() {
-    //     var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
-    //     var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
-    //     addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
-    //     alert('즐겨찾기에 추가되었습니다');
-    //
-    //     switchToFullHeart();
-    //     closeComment();
-    // });
-
     $('#commentCheck').click(function() {
         var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
         var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
@@ -87,7 +78,8 @@ function addEvent(){
         }
 
         addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
-        alert('즐겨찾기에 추가되었습니다');
+        swal("SUCCESS","즐겨찾기에 추가되었습니다","success");
+        $("#heart").css('display','block');
 
         switchToFullHeart();
         closeComment();

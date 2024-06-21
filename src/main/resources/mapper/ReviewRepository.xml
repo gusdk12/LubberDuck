@@ -65,4 +65,9 @@
         DELETE FROM ctt_review WHERE id = #{id}
     </delete>
 
+    <select id="findByItemMenu" resultType="com.lec.spring.domain.review.Review">
+        <include refid="SELECT_BASE"/>
+        WHERE oi.cocktail_id = #{menu_id}
+    </select>
+
 </mapper>

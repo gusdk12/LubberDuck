@@ -18,8 +18,18 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public int write(Review review) {
-        return reviewRepository.save(review);
+    public int write(Long item_id, Integer rate, String comment) {
+        Review newReview = Review.builder()
+                .item_id(item_id)
+                .rate(rate)
+                .content(comment)
+                .regdate(LocalDateTime.now())
+                .build();
+
+//        review.setRegdate(LocalDateTime.now());
+        reviewRepository.save(newReview);
+//        Long id = review.getId();
+        return 1;
     }
 
     @Override
@@ -59,4 +69,11 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> findByItemId(Long item_id) {
         return reviewRepository.findByItemId(item_id);
     }
+
+    @Override
+    public List<Review> findByItemMenu(Long menu_id) {
+        return reviewRepository.findByItemMenu(menu_id);
+    }
+
+
 }

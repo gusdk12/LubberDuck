@@ -110,24 +110,7 @@ INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
 
 
 
--- 샘플 즐겨찾기
-INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
-    (2, 1, '아메리카노는 손님메뉴ㅔ없음'),
-    (2, 8, 'test1'),
-    (2, 10, 'test2'),
-    (2, 21, 'test3'),
-    (2, 32, 'test4'),
-    (2, 3, 'test5'),
-    (3, 5, '강사님 제 시험은 복붙 그자체인걸요'),
-    (3, 32, '생각을 시작하기 어려워요'),
-    (2, 6, 'test1'),
-    (2, 12, 'test2'),
-    (2, 16, 'test3')
-;
-
-INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
-    (2, 1, '아메리카노는 손님메뉴ㅔ없음')
-;
+-- 샘플 리뷰
 
 INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (1, 5, '정말 맛있어요 최고예요. 달콤한 맛이 계속 기억에 남네요!', 20240619094950);
@@ -136,7 +119,10 @@ INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (2, 4, '제가 생각한 맛이에요 ! 그런데 가게 분위기가 조금 시끄러워서 아쉽네요. 별점 1개 깎겠습니다!', 20240619095004);
 
 INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
-    (2, 5, '맛있습니다. 맛있습니다. 맛있습니다. 맛있습니다.', 20240619112431);
-
-INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (3, 2, '흑흑 이걸 마신다고 해도 그녀가 잊혀지지 않아!!!!!!!!!!!', 20240620151320);
+
+-- 샘플 최근
+INSERT INTO ctt_recent (user_id, cocktail_id) VALUES
+    (2,2)
+;
+

@@ -8,6 +8,7 @@
     font-style: normal;
 }
 body{
+    overflow: hidden;
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;

@@ -7,6 +7,7 @@ import com.lec.spring.domain.oauth.KakaoOAuthToken;
 import com.lec.spring.domain.oauth.KakaoProfile;
 import com.lec.spring.service.UserService;
 import com.lec.spring.util.U;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,43 +52,40 @@ public class OAuth2Controller {
 
 
     @GetMapping("/kakao/callback")
-    public String kakaoCallback(String code) { // Kakao 가 보내준 code 값 받아오기
+    public String kakaoCallback(String code, HttpServletRequest request) { // Kakao 가 보내준 code 값 받아오기
         //------------------------------------------------------------------
         // ■ code 값 확인
         //   code 값을 받았다는 것은 인증 완료 되었다는 뜻..
         System.out.println("\n<<카카오 인증 완료>>\ncode: " + code);
 
-
-        //----------------------------------------------------------------------
         // ■ Access token 받아오기 <= code 값 사용
         // 이 Access token 을 사용하여  Kakao resource server 에 있는 사용자 정보를 받아오기 위함.
         KakaoOAuthToken token = kakaoAccessToken(code);
 
 
-        //------------------------------------------------------------------
         // ■ 사용자 정보 요청 <= Access Token 사용
         KakaoProfile profile = kakaoUserInfo(token.getAccess_token());
 
 
-        //---------------------------------------------------
         // ■ 회원가입 시키기  <= KakaoProfile (사용자 정보) 사용
         User kakaoUser = registerKakaoUser(profile);
 
 
-        //---------------------------------------------------
         // ■ 로그인 처리
         loginKakaoUser(kakaoUser);
-
-
-
-
-
-        //-------------------------------------------------
+        String prevPage = (String) request.getSession().getAttribute("prevPage");
+        if(prevPage != null){
+            request.getSession().removeAttribute("prevPage");
+            return "redirect:" + prevPage;
+        }
         return "redirect:/";
+
+
+//        return "redirect:/";
 
     }
 
-    //---------------------------------------------------
+
     // Kakao Access Token 받아오기
     public KakaoOAuthToken kakaoAccessToken(String code){
         RestTemplate rt = new RestTemplate(); // 카카오서버쪽으로 POST 방식 요청
@@ -137,7 +135,6 @@ public class OAuth2Controller {
     }
 
 
-    //-----------------------------------------------------------------------------------------------
     // Kakao 사용자 정보 요청
     public KakaoProfile kakaoUserInfo(String accessToken){
         RestTemplate rt = new RestTemplate();
@@ -165,9 +162,6 @@ public class OAuth2Controller {
         System.out.println("카카오 사용자 profile 응답 body : " + response.getBody());
 
 
-
-
-        //----------------------------------------------------------------------------------------------
         //사용자 정보(JSON) -> Java로 받아내기
         ObjectMapper mapper = new ObjectMapper();
         KakaoProfile profile = null;
@@ -189,7 +183,6 @@ public class OAuth2Controller {
     }
 
 
-    //-----------------------------------------------------------------------------
     // 회원가입 시키기  (username, password, email, name 필요)
     // Kakao 로그인 한 회원을 User 에 등록하기
     public User registerKakaoUser(KakaoProfile profile){
@@ -236,7 +229,7 @@ public class OAuth2Controller {
 
     }
 
-    //---------------------------------------------------------------------
+
     // 로그인 시키기
     public void loginKakaoUser(User kakaoUser){
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

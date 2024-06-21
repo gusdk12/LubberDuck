@@ -12,12 +12,13 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/common/sidebar.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/info.css}"> <!-- 해당 경로에 CSS 넣기 -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common/chatCart.css}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
 
 </head>
 
@@ -28,6 +29,9 @@
     <div class="all">
         <!-- sidebar -->
         <th:block th:insert="~{common/sidebar::sidebar}"></th:block>
+
+        <!-- chat&cart -->
+        <th:block th:insert="~{common/chatCart::chatCart}"></th:block>
 
         <div class="article">
 
@@ -73,6 +77,18 @@
             </form>
             </div>
         </div>
+
+        <th:block th:with="logged_user=${#authentication.principal.user}">
+            <!-- user 정보 받기 -->
+            <script th:inline="javascript">
+                const logged_id = [[${logged_user.id}]]
+                const menuList = [[${menuList}]];
+            </script>
+
+            <script th:src="@{/js/common/chatCart.js}"></script>
+            <script th:src="@{/js/cart/cartData.js}"></script>
+            <script th:src="@{/js/chat/chatData.js}"></script>
+        </th:block>
     </div>
 
     <!-- JS -->

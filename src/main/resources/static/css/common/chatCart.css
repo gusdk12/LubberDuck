@@ -35,6 +35,8 @@
     background-repeat: no-repeat;
     background-position: center;
     filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+
+    cursor: pointer;
 }
 #cartbuttonback{
     width: 60px;
@@ -55,6 +57,8 @@
     background-repeat: no-repeat;
     background-position: center;
     filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+
+    cursor: pointer;
 }
 
 #chatboard{
@@ -78,6 +82,19 @@
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
+    overflow: hidden;
+}
+#chatboard #chatclear{
+    position: absolute;
+    margin: 5px;
+    width: 25px;
+    height: 25px;
+    filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+    left: 10px;
+    top: 0px;
+    z-index: 3;
+    font-weight: 700;
+    font-size: 18px;
 }
 #chatboard #chatexit{
     position: absolute;
@@ -99,7 +116,7 @@
     height: 80%;
     /*background-color: #fdd8df;*/
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 10px;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -133,6 +150,7 @@
     margin-left: 15px;
     padding: 10px;
     border-radius: 10px;
+    word-break: break-word;
 }
 .bartenderChat:after {
     content:"";
@@ -142,6 +160,19 @@
     border-right: 15px solid #fff8ea;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
+}
+.chatMenuInfo{
+    width: 80px;
+    height: 80px;
+    position: relative;
+    float: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+}
+.chatMenuInfo:hover{
+    background-color: #f5e2be;
 }
 .customerChat{
     background-color: #84c2b5;
@@ -156,6 +187,7 @@
     margin-right: 15px;
     padding: 10px;
     border-radius: 10px;
+    word-break: break-word;
 }
 .customerChat:after {
     content:"";
@@ -205,26 +237,49 @@
     color: white;
     cursor: pointer;
     outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #chat-input button:hover {
     background-color: #307264;
+}
+#sendImg{
+    background-image: url('/img/maindeco/chatSend.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 60%;
+    height: 60%;
+    filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+}
+.rotateLoading {
+    animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 #cartboard{
     position: absolute;
     background-color: #FFFBF5;
-    border: 1px solid #F37472;
     /*width: 400px;*/
     /*height: 500px;*/
     width: 0px;
     height: 0px;
     left: 10px;
     bottom: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
     transition: 0.1s ease;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.11);
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 #cartboard #boardbackground{
     position: absolute;

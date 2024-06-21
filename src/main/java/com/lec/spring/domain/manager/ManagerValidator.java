@@ -7,14 +7,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+
 @Component
 public class ManagerValidator implements Validator {
-
     @Override
     public boolean supports(Class<?> clazz) {
-        boolean result = Menu.class.isAssignableFrom(clazz);
         // Menu, Calender 클래스 각각지원
-        return result || Calendar.class.isAssignableFrom(clazz);
+        return Menu.class.isAssignableFrom(clazz) || Calendar.class.isAssignableFrom(clazz);
     }
 
     @Override
@@ -27,9 +26,9 @@ public class ManagerValidator implements Validator {
         }
     }
 
-    private void validateMenu(Menu menu, Errors errors){
+    private void validateMenu(Menu menu, Errors errors) {
         System.out.println("validate() 호출" + menu);
-
+        // update 유효성 검사
         try {
             int price = menu.getPrice();
             if (price < 0) {
@@ -42,7 +41,7 @@ public class ManagerValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "info", "칵테일 소개 내용은 필수입니다");
     }
 
-    private void validateCalendar(Calendar calendar, Errors errors){
+    private void validateCalendar(Calendar calendar, Errors errors) {
         // date 필수 검증
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date", "date.required", "날짜는 필수입니다.");
 

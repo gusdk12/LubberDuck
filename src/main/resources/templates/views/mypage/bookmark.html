@@ -19,6 +19,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
 
+    <!--/* alert 꾸미기 */-->
+    <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
+
 </head>
 <body>
     <!--/* 헤더 */-->
@@ -35,7 +38,6 @@
         <th:block th:with="logged_user=${#authentication.principal.user}">
             <!-- 즐겨찾기 모음집 -->
             <div class="article" id="custom-scrollbar">
-<!--                <div class="reload"></div>-->
                 <div id="favorite">
                 </div>
             </div>
@@ -49,6 +51,7 @@
 
             <script th:src="@{/js/common/chatCart.js}"></script>
             <script th:src="@{/js/cart/cartData.js}"></script>
+            <script th:src="@{/js/chat/chatData.js}"></script>
 
         </th:block>
     </div>
