@@ -55,20 +55,11 @@ function addEvent(){
         } else if(event.target.className === "emptyHeart"){
             event.stopPropagation();
             openComment();
+            $("#heart").css('display','none');
         }
     });
 
     // addToBook
-    // $('#commentCheck').click(function() {
-    //     var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
-    //     var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
-    //     addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
-    //     alert('즐겨찾기에 추가되었습니다');
-    //
-    //     switchToFullHeart();
-    //     closeComment();
-    // });
-
     $('#commentCheck').click(function() {
         var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
         var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
@@ -88,6 +79,7 @@ function addEvent(){
 
         addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
         alert('즐겨찾기에 추가되었습니다');
+        $("#heart").css('display','block');
 
         switchToFullHeart();
         closeComment();
