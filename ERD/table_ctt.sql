@@ -1,3 +1,13 @@
+
+CREATE TABLE ctt_AIchat
+(
+    id      INT               NOT NULL AUTO_INCREMENT,
+    role    ENUM('바텐더', '손님') NOT NULL COMMENT '채팅의 주체',
+    content LONGTEXT          NOT NULL COMMENT '채팅내용',
+    user_id INT               NOT NULL COMMENT '유저아이디',
+    PRIMARY KEY (id)
+) COMMENT 'AI채팅테이블';
+
 CREATE TABLE ctt_authority
 (
     id   INT         NOT NULL AUTO_INCREMENT COMMENT '권한아이디',
@@ -36,7 +46,7 @@ CREATE TABLE ctt_cart
 (
     user_id     INT NOT NULL COMMENT '유저아이디',
     cocktail_id INT NOT NULL COMMENT '칵테일아이디',
-    quantity    INT CHECK (quantity > 0) NOT NULL DEFAULT 1 COMMENT '수량',
+    quantity    INT NOT NULL DEFAULT 1 COMMENT '수량',
     PRIMARY KEY (user_id, cocktail_id)
 ) COMMENT '카트 테이블';
 
@@ -46,7 +56,7 @@ CREATE TABLE ctt_menu
     name     VARCHAR(100) NOT NULL COMMENT '칵테일이름',
     img_url  VARCHAR(500) NOT NULL COMMENT '이미지url',
     info     LONGTEXT     NOT NULL,
-    price    INT CHECK (price >= 0) NULL DEFAULT 0 COMMENT '칵테일가격',
+    price    INT          NULL     DEFAULT 0 COMMENT '칵테일가격',
     sequence INT          NOT NULL DEFAULT -1 COMMENT '등록x:-1/등록:1이상',
     PRIMARY KEY (id)
 ) COMMENT '칵테일메뉴';
@@ -74,8 +84,8 @@ CREATE TABLE ctt_order_item
     id          INT NOT NULL AUTO_INCREMENT COMMENT '주문아이템아이디',
     order_id    INT NOT NULL COMMENT '주문아이디',
     cocktail_id INT NOT NULL COMMENT '칵테일아이디',
-    quantity    INT CHECK (quantity > 0) NOT NULL DEFAULT 1 COMMENT '수량',
-    price       INT CHECK (price >= 0) NOT NULL DEFAULT 0 COMMENT '주문당시가격',
+    quantity    INT NOT NULL DEFAULT 1 COMMENT '수량',
+    price       INT NOT NULL DEFAULT 0 COMMENT '주문당시가격',
     PRIMARY KEY (id)
 ) COMMENT '주문아이템';
 
@@ -86,7 +96,7 @@ CREATE TABLE ctt_review
 (
     id      INT          NOT NULL AUTO_INCREMENT COMMENT '후기아이디',
     item_id INT          NOT NULL COMMENT '주문아이템아이디',
-    rate    INT CHECK (rate >= 0) NOT NULL DEFAULT 0 COMMENT '별점',
+    rate    INT          NOT NULL DEFAULT 0 COMMENT '별점',
     content VARCHAR(500) NOT NULL COMMENT '후기내용',
     regdate DATETIME     NOT NULL DEFAULT now() COMMENT '둥록일시',
     PRIMARY KEY (id)
@@ -102,7 +112,7 @@ CREATE TABLE ctt_user
     username     VARCHAR(100) NOT NULL,
     password     VARCHAR(200) NOT NULL,
     nickname     VARCHAR(80)  NOT NULL COMMENT '사용자닉네임',
-    email        VARCHAR(80)  NULL,
+    email        VARCHAR(80)  NULL    ,
     regdate      DATETIME     NOT NULL DEFAULT now(),
     birth_date   DATE         NULL    ,
     PRIMARY KEY (id)
@@ -163,3 +173,8 @@ ALTER TABLE ctt_review
     ADD CONSTRAINT FK_ctt_order_item_TO_ctt_review
         FOREIGN KEY (item_id)
             REFERENCES ctt_order_item (id);
+
+ALTER TABLE ctt_AIchat
+    ADD CONSTRAINT FK_ctt_user_TO_ctt_AIchat
+        FOREIGN KEY (user_id)
+            REFERENCES ctt_user (id);

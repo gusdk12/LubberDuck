@@ -19,3 +19,8 @@ UPDATE ctt_bookmark
 SET comment = '하하'
 WHERE user_id = 2 AND cocktail_id = 1
 ;
+
+SELECT * FROM ctt_aichat;
+
+DELETE FROM ctt_aichat
+WHERE user_id = 5;

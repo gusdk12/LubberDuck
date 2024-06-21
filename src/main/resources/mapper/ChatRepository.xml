@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.spring.repository.chat.ChatRepository">
+
+    <sql id="SELECT_BASE">
+        SELECT
+            id "id"
+             , user_id "user_id"
+             , role "role"
+             , content "content"
+        FROM ctt_aichat
+    </sql>
+
+    <select id="findByUser" resultType="com.lec.spring.domain.chat.Chat">
+        <include refid="SELECT_BASE"/>
+        WHERE user_id = #{user_id}
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.chat.Chat"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO ctt_aichat(user_id, role, content)
+        VALUES(#{user_id}, #{role}, #{content})
+    </insert>
+
+    <delete id="deleteByUser" flushCache="true">
+        DELETE FROM ctt_aichat
+        WHERE user_id = #{user_id}
+    </delete>
+
+</mapper>
+
+
+
+
+
+
+
