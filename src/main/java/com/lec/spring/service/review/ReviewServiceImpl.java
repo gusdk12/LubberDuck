@@ -59,4 +59,11 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> findByItemId(Long item_id) {
         return reviewRepository.findByItemId(item_id);
     }
+
+    @Override
+    public List<Review> findByItemMenu(Long menu_id) {
+        return reviewRepository.findByItemMenu(menu_id);
+    }
+
+
 }

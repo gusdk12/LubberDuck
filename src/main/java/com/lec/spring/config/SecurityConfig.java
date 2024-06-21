@@ -32,6 +32,10 @@ public class SecurityConfig {
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
 
+    @Autowired
+    private CustomOAuth2LoginSuccessHandler customOAuth2LoginSuccessHandler;
+
+
 
     // ↓ SecurityFilterChain 을 Bean 으로 등록해서 사용
     @Bean
@@ -62,18 +66,12 @@ public class SecurityConfig {
 
                 .oauth2Login(httpSecurityOAuth2LoginConfigurer -> httpSecurityOAuth2LoginConfigurer
                         .loginPage("/user/login")
+//                        .loginProcessingUrl("/user/login")
                         .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig.userService(principalOauth2UserService))
+                        .successHandler(customOAuth2LoginSuccessHandler)
                 )
 
-//                .oauth2Login(httpSecurityOAuth2LoginConfigurer -> httpSecurityOAuth2LoginConfigurer
-//                .loginPage("/user/login")
-//
-//                .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
-//                        // 인증서버의 userinfo endpoint 설정
-//                        .userService(principalOauth2UserService)
-//                )
-//
-//                )
+
                 .build();
     }
 

@@ -19,4 +19,6 @@ public interface ReviewService {
     int deleteById(Long id);
 
     List<Review> findByItemId(Long item_id);
+
+    List<Review> findByItemMenu(Long menu_id);
 }
