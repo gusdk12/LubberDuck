@@ -75,4 +75,57 @@ public class CalendarServiceImpl implements CalendarService {
 
         return result;
     }
+
+    // 캘린더 데이터가 비어있지 않을 때 메모만 삭제
+    @Override
+    public QryResult updateToDeleteMemo(Long calendarId, String memo) {
+        Calendar calendar = Calendar.builder()
+                .id(calendarId)
+                .memo(memo)
+                .build();
+
+        int cnt = calendarRepository.updateToDeleteMemo(calendarId, memo);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
+
+    // 캘린더 데이터가 비어있지 않을 때 오늘의 메뉴 코멘트만 삭제
+    @Override
+    public QryResult updateToDeleteMenu(Long calendarId, String comment) {
+        Calendar calendar = Calendar.builder()
+                .id(calendarId)
+                .comment(comment)
+                .build();
+
+        int cnt = calendarRepository.updateToDeleteMenu(calendarId, comment);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
+
+    // 캘린더 데이터 삭제 (전체 삭제)
+    @Override
+    public QryResult deleteById(Long calendarId) {
+        Calendar calendar = Calendar.builder()
+                .id(calendarId)
+                .build();
+
+        int cnt = calendarRepository.deleteById(calendarId);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
 }

@@ -99,55 +99,51 @@ function addEvents() {
         }
     });
 
-    // 버튼 클릭 시 메모 입력 창 열기
+    // 버튼 클릭 시 메모 입력 창을 열고 이미 메모가 있는 경우 메모 수정하는 창 열기
     $("#btn-add-memo").on("click", function () {
         const newMemo = $("#new-memo");
-        const eventItems = $(".event-list li");
+        const eventItem = $(".event-list li");
 
         // 기존 메모가 없는 경우에만 추가 모드로 설정하여 보여줌
-        if (eventItems.length === 0) {
+        if (eventItem.length === 0) {
             newMemo.val("");
             newMemo.css("height", "90px"); // 기본 높이로 설정
             newMemo.data("mode", "add").show().focus();
             $("#notification").hide();
         } else {
-            // 기존 메모가 있는 경우, 첫 번째 li를 textarea로 변환하여 수정할 수 있도록 함
-            const firstMemo = $(eventItems[0]);
-            const memoText = firstMemo.text().trim();
+            eventItem.find(".memo-delete").remove();
 
-            firstMemo.find(".memo-delete").remove();
+            const memoText = eventItem.text().trim();
 
-            // 첫 번째 li를 textarea로 변경
             newMemo.val(memoText).data("mode", "edit").show().focus();
-
-            // 기존의 첫 번째 li를 숨기거나 제거할 수도 있음
-            firstMemo.hide();
+            eventItem.hide();
         }
     });
-
-    // $("#new-memo").on("focusout", function () {
-    //     const newMemoVal = newMemo.val().trim();
-    //     if (newMemoVal !== "") {
-    //         // li의 내용 업데이트
-    //         const eventItems = $(".event-list li");
-    //         if (eventItems.length > 0) {
-    //             const firstMemo = $(eventItems[0]);
-    //             firstMemo.text(newMemoVal).show(); // 첫 번째 li에 내용 적용 및 보이기 처리
-    //
-    //             // X 버튼 다시 추가
-    //             const deleteButton = $("<button>")
-    //                 .addClass("memo-delete")
-    //                 .attr("type", "button")
-    //                 .html('<span class="fa fa-xmark">X</span>');
-    //             firstMemo.append(deleteButton);
-    //         }
-    //     }
-    //     newMemo.hide(); // textarea 숨기기
-    // });
 
     // 알림 메시지 지우기
     $("#notification").on("click", function () {
         $("#notification").hide();
+    });
+
+    // 메모 삭제
+    // 캘린더 데이터에서 메모만 null 로 설정하기
+    $(document).on("click", ".memo-delete", function () {
+        // 삭제 확인 대화상자 표시
+        if (confirm("메모를 삭제하시겠습니까?")) {
+            const $li = $(this).closest("li");  // 클릭된 버튼의 부모 <li> 요소를 찾음
+            const memoText = $li.text().trim(); // 메모 텍스트를 가져옴 (memoText 변수를 추출하는 코드 추가)
+            const selectedDate = init.activeDate.toISOString().split("T")[0];
+
+            // 캘린더 리스트에서 해당 날짜의 일정 찾기
+            let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
+
+            if (findSchedule) {
+                // 삭제 API 호출
+                deleteCalendar(findSchedule.id, memoText);
+            } else {
+                console.error("No schedule found for the selected date");
+            }
+        }
     });
 
 // --------------------------------------------------------
@@ -223,18 +219,18 @@ function closeWritePopup() {
 
 // 메모 입력 시 높이를 자동으로 조절하는 함수
 function adjustHeight() {
-    const newMemo = $("#new-memo");
-    newMemo.css("height", "auto");
-    newMemo.css("height", newMemo[0].scrollHeight + "px");
+    $("#new-memo").css("height", "auto");
+    $("#new-memo").css("height", newMemo[0].scrollHeight + "px");
 }
 
 // 메모 추가 또는 수정 처리 함수
 function handleMemoSubmit() {
-    const newMemo = $("#new-memo");
-    const memoText = newMemo.val();
+    const memoText = $("#new-memo").val();
 
-    if (newMemo.data("mode") === "edit") {
-        updateCalendar(memoText);
+    if ($("#new-memo").data("mode") === "edit") {
+        const selectedDate = init.activeDate.toISOString().split("T")[0];
+        let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
+        updateCalendar(findSchedule.id, memoText);
     } else {
         addCalendarByMemo(memoText);
     }

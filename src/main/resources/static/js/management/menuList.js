@@ -1,8 +1,8 @@
 $(document).ready(function () {
+    // 메뉴 모음집 체크박스 옵션
     $('#selectAll').change(function () {
         $('.list_checkbox').prop('checked', $(this).prop('checked'));
     });
-
     $('.list_checkbox').change(function () {
         // 모든 체크박스가 체크된 상태인지 확인
         if ($('.list_checkbox:checked').length === $('.list_checkbox').length) {
@@ -12,10 +12,10 @@ $(document).ready(function () {
         }
     });
 
+    // 손님용 메뉴판 체크박스 옵션
     $('#menu_selectAll').change(function () {
         $('.menu_checkbox').prop('checked', $(this).prop('checked'));
     });
-
     $('.menu_checkbox').change(function () {
         // 모든 체크박스가 체크된 상태인지 확인
         if ($('.menu_checkbox:checked').length === $('.menu_checkbox').length) {
@@ -39,7 +39,7 @@ $(document).ready(function () {
         // 최대 sequence 값을 찾기 위해 손님용 메뉴판의 모든 sequence 값 가져오기
         let maxSequence = 0;
         $('.menuTable .sequence').each(function () {
-            var sequence = parseInt($(this).text().trim());
+            let sequence = parseInt($(this).text().trim());
             if (!isNaN(sequence) && sequence > maxSequence) {
                 maxSequence = sequence;
             }
@@ -57,9 +57,6 @@ $(document).ready(function () {
                 $('#selectAll').prop('checked', false); // 생성 후, 체크박스 해제
             } else {
                 nonDuplicateDetected = true;
-                $(this).prop('checked', false); // 생성 후, 체크박스 해제
-                $('#selectAll').prop('checked', false); // 생성 후, 체크박스 해제
-
                 if (!isNaN(menuSequence)) {
                     // 최대값보다 1 증가한 값으로 변경
                     menuSequence = maxSequence + 1;
@@ -69,9 +66,10 @@ $(document).ready(function () {
 
                     // 손님용 메뉴판에 새 메뉴 목록 추가
                     const itemName = $(this).closest('tr').find('.ctt_name').text().trim(); // 칵테일 이름 가져오기
+                    const menuId = parseInt($(this).closest('tr').find('.ctt_name').attr('value')); // 칵테일 id 가져오기
                     let newRow = '<tr>' +
                         '<td class="sequence">' + menuSequence + '</td>' +
-                        '<td class="item"><a href="/management/detail/' + menuSequence + '">' + itemName + '</a></td>' +
+                        '<td class="item"><a class="itemName" href="/manager/menudetail/' + menuId + '">' + itemName + '</a></td>' +
                         '<td class="checkbox chg">' +
                         '<input type="checkbox" id="' + menuSequence + '" class="menu_checkbox custom-checkbox" value="' + menuSequence + '">' +
                         '<label for="' + menuSequence + '" class="custom-label"></label>' +
@@ -81,10 +79,15 @@ $(document).ready(function () {
                     $('#menuList tbody').append(newRow); // #menuList 테이블에 새로운 행 추가
                     addedMenuNames.add(itemName); // 추가된 메뉴 이름을 Set에 추가
                     $(this).prop('checked', false); // 생성 후, 체크박스 해제
+                    $('#selectAll').prop('checked', false); // 생성 후, 체크박스 해제
+
+                    // 변경 중 정보조회 링크 이벤트 방지
+                    $('#menuList .item a.itemName').off('click').on('click', function (event) {
+                        event.preventDefault();
+                    });
                 }
             }
         });
-
         // 알림 표시
         if (nonDuplicateDetected && duplicateDetected) {
             alert('메뉴가 생성되었습니다\n중복된 메뉴는 생성되지 않습니다');
@@ -94,31 +97,6 @@ $(document).ready(function () {
             alert('중복된 메뉴는 생성되지 않습니다');
         }
     }); // end $('.btn_add').click()
-
-// 손님용 메뉴판에서 메뉴 삭제
-    $('.btn_del').click(function () {
-        // 체크된 .menu_checkbox 의 sequence 값을 -1로 변경
-        $('.menu_checkbox:checked').each(function () {
-            let currentSequence = parseInt($(this).attr('value'));
-            if (!isNaN(currentSequence)) {
-                // sequence -1로 변경
-                $(this).attr('value', -1);
-                // -1로 변한 sequence 행 삭제
-                $(this).closest('tr').remove();
-
-                // -1로 변경된 sequence 이후의 다른 항목들의 sequence 를 1씩 감소
-                $('.menu_checkbox').each(function () {
-                    let otherSequence = parseInt($(this).attr('value'));
-                    if (!isNaN(otherSequence) && otherSequence > currentSequence) {
-                        $(this).attr('value', otherSequence - 1);
-                        // 테이블에서 보이는 순서 변경
-                        let sequenceText = $(this).closest('tr').find('.sequence');
-                        sequenceText.text(otherSequence - 1);
-                    }
-                });
-            }
-        });
-    }); // end $('.btn_del').click()
 
     // 화살표 버튼으로 순서 바꾸기
     $('.btn_down').click(function () {
@@ -154,8 +132,12 @@ $(document).ready(function () {
         $('#menuList tbody').empty();
         $.each(rows, function (index, row) {
             $('#menuList tbody').append(row);
+            // 변경 중 정보조회 링크 이벤트 방지
+            $('#menuList .item a.itemName').off('click').on('click', function (event) {
+                event.preventDefault();
+            });
         });
-    }); // end $('.btn_up').click()
+    }); // end $('.btn_down').click()
 
     $('.btn_up').click(function () {
         // 체크된 체크박스들을 배열로 수집
@@ -190,9 +172,75 @@ $(document).ready(function () {
         $('#menuList tbody').empty();
         $.each(rows, function (index, row) {
             $('#menuList tbody').append(row);
+            // 변경 중 정보조회 링크 이벤트 방지
+            $('#menuList .item a.itemName').off('click').on('click', function (event) {
+                event.preventDefault();
+            });
         });
-    }); // end $('btn_down').click()
+    }); // end $('btn_up').click()
 
+    // 손님용 메뉴판에서 메뉴 삭제
+    let saveMenu = [];  // 변경되는 메뉴 id의 sequence 담기
+    $('.btn_del').click(function () {
+        // 체크된 .menu_checkbox 의 sequence 값을 -1로 변경
+        $('.menu_checkbox:checked').each(function () {
+            let currentSequence = parseInt($(this).attr('value'));
+            let href = $(this).closest('tr').find('.itemName').attr('href');
+            let menuId = parseInt(href.substring(href.lastIndexOf('/') + 1));
+            if (!isNaN(currentSequence)) {
+                // sequence -1로 변경
+                $(this).attr('value', -1);
+                saveMenu.push({id: menuId, sequence: -1});  // 배열에 id, sequence 값 담기
+                // -1로 변한 sequence 행 삭제
+                $(this).closest('tr').remove();
+                $('#menu_selectAll').prop('checked', false); // 생성 후, 체크박스 해제
+
+                // -1로 변경된 sequence 이후의 다른 항목들의 sequence 를 1씩 감소
+                $('.menu_checkbox').each(function () {
+                    let otherSequence = parseInt($(this).attr('value'));
+                    if (!isNaN(otherSequence) && otherSequence > currentSequence) {
+                        $(this).attr('value', otherSequence - 1);
+                        // 테이블에서 보이는 순서 변경
+                        let sequenceText = $(this).closest('tr').find('.sequence');
+                        sequenceText.text(otherSequence - 1);
+                    }
+                });
+                // 변경 중 정보조회 링크 이벤트 방지
+                $('#menuList .item a.itemName').off('click').on('click', function (event) {
+                    event.preventDefault();
+                });
+            }
+        });
+    }); // end $('.btn_del').click()
+
+    // 모든 메뉴 데이터 저장
+    $('.btn_save').click(function (event) {
+        // 메뉴판에서 각 id의 sequence 모두 모으기
+        $('.menu_checkbox').each(function () {
+            let saveSequence = parseInt($(this).attr('value'));
+            let href = $(this).closest('tr').find('.itemName').attr('href');
+            let menuId = parseInt(href.substring(href.lastIndexOf('/') + 1));
+            saveMenu.push({id: menuId, sequence: saveSequence});
+        });
+
+        // 변경된 sequence 서버에 보내기
+        $.ajax({
+            url: '/menumanager/updateAll',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(saveMenu),
+            success: function (response) {
+                alert('메뉴가 새롭게 생성되었습니다');
+            },
+            error: function (error) {
+                alert('메뉴 저장이 실패되었습니다');
+            }
+        });
+
+        $('#menu_selectAll, .menu_checkbox').prop('checked', false); // 생성 후, 체크박스 해제
+        // 저장 후 정보조회 링크 이벤트 해제
+        $('#menuList .item a.itemName').off('click');
+    }); // end $('.btn_save).click()
 
 });  // end ready()
 

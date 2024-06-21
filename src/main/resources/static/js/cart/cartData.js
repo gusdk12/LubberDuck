@@ -133,7 +133,6 @@ function loadCart(user_id) {
             if (status === "success") {
                 // 서버쪽 에러 메세지 있는경우
                 if (data.status !== "OK") {
-                    alert("실패");
                     alert(data.status);
                     return;
                 }

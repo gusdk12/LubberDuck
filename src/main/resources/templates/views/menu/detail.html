@@ -45,7 +45,8 @@
                     <div id="heart"></div>
                 </div>
                 <div class="comment-con">
-                    <textarea class="comment"></textarea>
+                    <textarea class="comment" placeholder="코멘트를 작성해보세요"></textarea>
+                    <div class="comment-error-message"></div>
                     <div id="commentCheck"></div>
                 </div>
             </div>
@@ -120,6 +121,7 @@
 
                 <script th:src="@{/js/common/chatCart.js}"></script>
                 <script th:src="@{/js/cart/cartData.js}"></script>
+                <script th:src="@{/js/chat/chatData.js}"></script>
                 <script th:src="@{/js/bookmark/bookData.js}"></script>
 
             </th:block>

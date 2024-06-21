@@ -4,17 +4,17 @@ $(document).ready(function () {
 
 function buildBody() {
     $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
-    reviewList.forEach(reviewList => {
+       const formattedDate = formatDate(item.order.regdate); // Format the date
     $('.container').append(`
 <form id="consultation-form" th:action="@{/review/write}" method="post">
     <h1>리뷰 작성하기</h1>
     <span class="form-group">
                     <label for="title" class="form-left">메뉴 이름</label>
-                    <input type="text" id="title" name="title" value="${reviewList.menu.name}"><br><br><hr>
+                    <input type="text" id="title" name="title" value="${item.menu.name}" disabled><br><br><hr>
                 </span>
     <div class="form-group">
         <label for="name" class="form-left">주문 일시</label>
-        <input type="text" id="name" name="name" disabled><br><hr>
+        <input type="text" id="name" name="name" value="${formattedDate}" disabled><br><hr>
     </div>
 
 
@@ -32,11 +32,16 @@ function buildBody() {
 
         <div class="form-group">
             <label for="content" class="form-left">내용</label>
-            <textarea name="content" id="content" cols="30" rows="10" required value="잇뇽"></textarea>
+            <textarea name="content" id="content" cols="30" rows="10" required></textarea>
         </div>
 
         <button type="submit" id="submit_btn">작성완료</button>
 </form>`
-    )})}
+    )}
+
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    return new Date(dateString).toLocaleDateString('ko-KR', options);
+}
 
 

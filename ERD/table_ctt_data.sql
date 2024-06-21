@@ -125,10 +125,6 @@ INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
     (2, 16, 'test3')
 ;
 
-INSERT INTO ctt_bookmark (user_id, cocktail_id, comment) VALUES
-    (2, 1, '아메리카노는 손님메뉴ㅔ없음')
-;
-
 INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (1, 5, '정말 맛있어요 최고예요. 달콤한 맛이 계속 기억에 남네요!', 20240619094950);
 
@@ -140,3 +136,6 @@ INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
 
 INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (3, 2, '흑흑 이걸 마신다고 해도 그녀가 잊혀지지 않아!!!!!!!!!!!', 20240620151320);
+
+
+

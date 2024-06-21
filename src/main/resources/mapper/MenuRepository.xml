@@ -37,15 +37,22 @@
         ORDER BY sequence ASC
     </select>
 
-    <select id="findInfoById" resultType="com.lec.spring.domain.menu.Menu">
+    <select id="findMenuById" resultType="com.lec.spring.domain.menu.Menu">
         <include refid="SELECT_BASE"/>
         AND id = #{id}
+        AND sequence NOT IN(-1)
     </select>
 
     <update id="change" flushCache="true" parameterType="com.lec.spring.domain.menu.Menu">
         UPDATE ctt_menu
         SET price = #{price},
             info = #{info}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateSequence" flushCache="true" parameterType="com.lec.spring.domain.menu.Menu">
+        UPDATE ctt_menu
+        SET sequence = #{sequence}
         WHERE id = #{id}
     </update>
 
