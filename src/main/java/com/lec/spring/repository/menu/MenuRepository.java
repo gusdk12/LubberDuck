@@ -14,7 +14,9 @@ public interface MenuRepository {
 
   List<Menu> findAllSequenceMenu();
 
-  Menu findInfoById(Long id);
+  Menu findMenuById(Long id);
 
   int change(Menu menu);
+
+  int updateSequence(Menu menu);
 }

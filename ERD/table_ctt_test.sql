@@ -8,3 +8,19 @@ SELECT * FROM ctt_cart;
 SELECT * FROM ctt_bookmark;
 SELECT * FROM ctt_order;
 SELECT * FROM ctt_order_item;
+
+
+UPDATE ctt_menu
+SET sequence=-1
+WHERE  name='Mojito'
+;
+
+UPDATE ctt_bookmark
+SET comment = '하하'
+WHERE user_id = 2 AND cocktail_id = 1
+;
+
+SELECT * FROM ctt_aichat;
+
+DELETE FROM ctt_aichat
+WHERE user_id = 5;

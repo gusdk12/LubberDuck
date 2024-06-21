@@ -1,28 +1,19 @@
 package com.lec.spring.domain.chat;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Chat {
-    private String bartendarSetting = new String();
-    private List<String> history = new ArrayList<>();
+    private Long id; // PK
 
-    public void addInitSetting(String setting) {
-        bartendarSetting = setting;
-    }
-    public void addMessage(String role, String message) {
-        history.add(role + ": " + message);
-        if(history.size() > 30){
-            history.remove(0);
-        }
-    }
+    private Long user_id; // FK
 
-    public String getHistory() {
-        String result = bartendarSetting + String.join("", history);
-        return result;
-    }
-
-    public void clearHistory() {
-        history.clear();
-    }
+    private String role;
+    private String content;
 }

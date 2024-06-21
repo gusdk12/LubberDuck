@@ -2,7 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-
 <body>
     <th:block th:fragment="chatCart">
         <th:block sec:authorize="hasRole('CUSTOMER')">
@@ -17,20 +16,15 @@
                         </div>
 
                         <div id="chatboard">
+                            <div id="chatclear" class="hidden">clear</div>
                             <div id="chatexit" class="hidden"></div>
-                            <div id="historycontainer" class="hidden">
-<!--                                    <div class="pull">말풍선1</div>-->
-                                <div class="bartenderChat">안녕하세요? 오늘의 기분이 어떠세요?</div>
-                                <div class="customerChat">별루야. 별꼴이야.</div>
-                                <div class="bartenderChat">정말요? 너무 슬퍼요. 이건 어때요? 아비에이션!! 아니면 이건 어때요? 싱가로프 슬링! 사실 저는 올드 패션드를 제일 좋아하긴 해요!</div>
-                                <div class="customerChat">음..................... 다른건 없어? 좀 별로다 얘.</div>
-                                <div class="bartenderChat">추천해달라는거에요 말라는거에요?</div>
-                                <div class="customerChat">뭐? 사장불러!</div>
-                            </div>
+                            <div id="historycontainer" class="hidden"></div>
                             <div id="sendcontainer" class="hidden">
                                 <div id="chat-input">
                                     <input type="text" id="chatInput" placeholder="안녕, AI 바텐더!" />
-                                    <button id="sendButton">Send</button>
+                                    <button id="sendButton">
+                                        <div id="sendImg"></div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
