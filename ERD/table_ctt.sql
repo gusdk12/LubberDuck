@@ -190,7 +190,6 @@ ALTER TABLE ctt_AIchat
         FOREIGN KEY (user_id)
             REFERENCES ctt_user (id);
 
-
 ALTER TABLE ctt_recent
     ADD CONSTRAINT FK_ctt_menu_TO_ctt_recent
         FOREIGN KEY (cocktail_id)

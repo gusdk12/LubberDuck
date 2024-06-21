@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
 
+    <!--/* alert 꾸미기 */-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <title>myPage</title>
 </head>
 <body>
@@ -81,6 +84,19 @@
 </div>
     </div>
 </div>
+
+<script th:if="${success != null}" th:inline="javascript">
+    if ([[${success}]]) {
+        swal("Success", "수정 성공", "success").then(() => {
+            location.href = "/mypage/info";
+        });
+    } else {
+        swal("Error", "수정 실패", "error").then(() => {
+            history.back();
+        });
+    }
+</script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <!--    <script th:src="@{/js/sidebar/sidebar.js}"></script>-->
 <script th:src="@{/js/mypage/info.js}"></script>

@@ -130,9 +130,9 @@ public class MyPageController {
             model.addAttribute("success", false);
         }
 
-        return "mypage/myPageUpdateOk";
+        return "mypage/myPageUpdate";
     }
-        @RequestMapping("/info")
+    @RequestMapping("/info")
     public void info(){}
     @RequestMapping("/order")
     public void order(){}
