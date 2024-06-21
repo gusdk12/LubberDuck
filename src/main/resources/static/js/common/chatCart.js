@@ -43,6 +43,7 @@ function sendCustomerChat(){
 }
 function hideCartBox(){
     $('#cartexit').addClass("hidden");
+    $('#toPay').addClass("hidden");
     $('#cartboard').css({'width': '0px', 'height': '0px'});
     $('#cartcontent').addClass("hidden");
     $('#carttotal').addClass("hidden");
@@ -53,6 +54,7 @@ function showCartBox(){
     loadCart(logged_id);
 
     $('#cartexit').removeClass("hidden");
+    $('#toPay').removeClass("hidden");
     $('#cartboard').css({'width': '400px', 'height': '500px'});
     $('#cartcontent').removeClass("hidden");
     $('#carttotal').removeClass("hidden");

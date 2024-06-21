@@ -14,7 +14,7 @@ body {
 #container{
     background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
     height: 1700px;
-    max-width: 1100px;  /* 최대 폭 지정 */
+    max-width: 900px;  /* 최대 폭 지정 */
     border-radius: 20px;
     margin: auto;
     display: flex;

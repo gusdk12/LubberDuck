@@ -421,8 +421,9 @@
 }
 #carttotal{
     /*background-color: darkkhaki;*/
+    left: 40px;
     bottom: 50px;
-    width: 85%;
+    width: 60%;
     height: 13%;
     position: absolute;
     z-index: 1;
@@ -435,6 +436,27 @@
     font-style: normal;
     font-size: 30px;
     padding-right: 20px;
+}
+#toPay{
+    background-color: #422626;
+    border-radius: 10px;
+    position: absolute;
+    right: 40px;
+    bottom: 55px;
+    width: 20%;
+    height: 10%;
+    color: #FFFBF5;
+    text-align: center;
+    align-content: center;
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    cursor: pointer;
+}
+#toPay:hover{
+    background-color: #1e0a0a;
 }
 .hidden{
     display: none;
