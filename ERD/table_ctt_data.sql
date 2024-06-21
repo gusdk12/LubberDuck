@@ -123,3 +123,9 @@ INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
 
 INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (3, 2, '흑흑 이걸 마신다고 해도 그녀가 잊혀지지 않아!!!!!!!!!!!', 20240620151320);
+
+-- 샘플 최근
+INSERT INTO ctt_recent (user_id, cocktail_id) VALUES
+    (2,2)
+;
+
