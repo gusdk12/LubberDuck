@@ -49,7 +49,7 @@ function addEvent(){
             event.stopPropagation();
             var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
             deleteFromBook(menuList.find(menu => menu.name === cocktailName));
-            alert(cocktailName+'가 즐겨찾기에서 삭제되었습니다.')
+            swal("DELETE",cocktailName+'가 즐겨찾기에서 삭제되었습니다.',"success");
 
             switchToEmptyHeart();
         } else if(event.target.className === "emptyHeart"){
@@ -78,7 +78,7 @@ function addEvent(){
         }
 
         addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
-        alert('즐겨찾기에 추가되었습니다');
+        swal("SUCCESS","즐겨찾기에 추가되었습니다","success");
         $("#heart").css('display','block');
 
         switchToFullHeart();
