@@ -88,7 +88,6 @@ async function updateFromBook(cocktail, comment) {
 
 // 삭제하기
 async function deleteFromBook(cocktail){
-
     $.ajax({
         url: "/bookmark/delete/" + logged_id + "/" + cocktail.id,
         type: "POST",
@@ -102,12 +101,10 @@ async function deleteFromBook(cocktail){
             }
         },
     });
-
 }
 
 // 특정 user의 즐겨찾기목록 불러오기
 function loadBookmark(user_id) {
-
     $.ajax({
         url: "/bookmark/list/" + user_id,
         type: "GET",
