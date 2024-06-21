@@ -95,6 +95,14 @@ CREATE TABLE ctt_order_item
 ALTER TABLE ctt_order_item
     ADD CONSTRAINT UQ_id UNIQUE (id);
 
+CREATE TABLE ctt_recent
+(
+    cocktail_id INT      NOT NULL COMMENT '칵테일아이디',
+    user_id     INT      NOT NULL COMMENT '유저아이디',
+    saw_date    DATETIME NOT NULL DEFAULT now() COMMENT '상품 본 날짜시간',
+    PRIMARY KEY (cocktail_id, user_id)
+) COMMENT '최근 본 상품';
+
 CREATE TABLE ctt_review
 (
     id      INT          NOT NULL AUTO_INCREMENT COMMENT '후기아이디',
@@ -179,5 +187,16 @@ ALTER TABLE ctt_review
 
 ALTER TABLE ctt_AIchat
     ADD CONSTRAINT FK_ctt_user_TO_ctt_AIchat
+        FOREIGN KEY (user_id)
+            REFERENCES ctt_user (id);
+
+
+ALTER TABLE ctt_recent
+    ADD CONSTRAINT FK_ctt_menu_TO_ctt_recent
+        FOREIGN KEY (cocktail_id)
+            REFERENCES ctt_menu (id);
+
+ALTER TABLE ctt_recent
+    ADD CONSTRAINT FK_ctt_user_TO_ctt_recent
         FOREIGN KEY (user_id)
             REFERENCES ctt_user (id);

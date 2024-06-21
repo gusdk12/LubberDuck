@@ -35,6 +35,8 @@
     background-repeat: no-repeat;
     background-position: center;
     filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+
+    cursor: pointer;
 }
 #cartbuttonback{
     width: 60px;
@@ -55,6 +57,8 @@
     background-repeat: no-repeat;
     background-position: center;
     filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+
+    cursor: pointer;
 }
 
 #chatboard{

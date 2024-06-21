@@ -6,8 +6,10 @@ DROP TABLE IF EXISTS ctt_order;
 DROP TABLE IF EXISTS ctt_AIchat;
 DROP TABLE IF EXISTS ctt_user;
 DROP TABLE IF EXISTS ctt_calendar;
-DROP TABLE IF EXISTS ctt_menu;
 DROP TABLE IF EXISTS ctt_authority;
+DROP TABLE IF EXISTS ctt_menu;
+DROP TABLE IF EXISTS ctt_recent;
+
 
 
 DELETE FROM ctt_menu;
