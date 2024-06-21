@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -48,6 +49,11 @@ public class MyPageController {
 
     @Autowired
     private ReviewService reviewService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(new MypageValidator());
+    }
 
     @GetMapping("/info")
     public String info(Model model,
@@ -132,10 +138,6 @@ public class MyPageController {
 
         return "mypage/myPageUpdateOk";
     }
-        @RequestMapping("/info")
-    public void info(){}
-    @RequestMapping("/order")
-    public void order(){}
 
     @GetMapping("/order")
     public String order(Model model, @AuthenticationPrincipal UserDetails userDetails) {
@@ -190,15 +192,34 @@ public class MyPageController {
         return "mypage/review/write";
     }
 
+//    @PostMapping("review/write/{item_id}")
+//    public String writeOk(@Validated Review review
+//            , BindingResult result
+//            , Model model
+//            , RedirectAttributes redirectAttributes) {
+//        if (result.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("item_id", review.getItem_id());
+//            redirectAttributes.addFlashAttribute("rate", review.getRate());
+//            redirectAttributes.addFlashAttribute("content", review.getContent());
+//            redirectAttributes.addFlashAttribute("regdate", review.getRegdate());
+//
+//            List<FieldError> errList = result.getFieldErrors();
+//            for (FieldError err : errList) {
+//                redirectAttributes.addFlashAttribute("error_" + err.getField(), err.getCode());
+//            }
+//
+//            return "redirect:/review/write/{item_id}";
+//        }
+//        model.addAttribute("result", reviewService.write(review));
+//        return "mypage/review/writeOk";
+//
+//    }
+
+
     @GetMapping("/bookmark")
     public void bookmark(Model model){
         model.addAttribute("allList",menuService.list());
         model.addAttribute("menuList", menuService.sequenceList());
-    }
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.setValidator(new MypageValidator());
     }
 }
 

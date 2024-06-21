@@ -4,8 +4,8 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -650.4638,
-    "scrollLeft": -800,
+    "scrollTop": -809.4638,
+    "scrollLeft": 0,
     "zoomLevel": 0.9,
     "show": 511,
     "database": 4,
@@ -212,7 +212,7 @@
       },
       "f29Vkzn7shqomCW9FIilK": {
         "id": "f29Vkzn7shqomCW9FIilK",
-        "name": "ctt_calender",
+        "name": "ctt_calendar",
         "comment": "관리자캘린더테이블",
         "columnIds": [
           "2Dswozc7bLo7v4KgK14ev",
@@ -237,7 +237,7 @@
           "color": ""
         },
         "meta": {
-          "updateAt": 1718064574454,
+          "updateAt": 1718864813362,
           "createAt": 1718064324238
         }
       },
@@ -423,7 +423,7 @@
         "comment": "",
         "dataType": "VARCHAR(80)",
         "default": "",
-        "options": 8,
+        "options": 0,
         "ui": {
           "keys": 0,
           "widthName": 60,
@@ -432,7 +432,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1717112566945,
+          "updateAt": 1718775335716,
           "createAt": 1717112560053
         }
       },
@@ -912,7 +912,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1718064561083,
+          "updateAt": 1718864772347,
           "createAt": 1718064535774
         }
       },
@@ -1606,7 +1606,7 @@
       {
         "name": 1717112562776,
         "dataType": 1717112566165,
-        "options(notNull)": 1717112566944
+        "options(notNull)": 1718775335715
       }
     ],
     "Jdl2z-hl9AY72u7Fdp0xA": [
@@ -1899,7 +1899,7 @@
       1718064324237,
       -1,
       {
-        "name": 1718064331309,
+        "name": 1718864813361,
         "comment": 1718064339634
       }
     ],
@@ -1962,7 +1962,8 @@
         "name": 1718064538943,
         "dataType": 1718064544042,
         "options(notNull)": 1718064555132,
-        "comment": 1718064561083
+        "comment": 1718064561083,
+        "options(unique)": 1718864772346
       }
     ],
     "ekhFKVCkQV8H52TYjzcaF": [

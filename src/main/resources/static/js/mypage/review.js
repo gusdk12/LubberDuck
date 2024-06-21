@@ -54,7 +54,7 @@ function buildBody() {
 
     reviews.forEach(review => {
         const stars = generateStars(review.rate); // Generate stars based on rating
-        const formattedDate = formatDate(review.regDate); // Format the date
+        const formattedDate = formatDate(review.regdate); // Format the date
         itemsHTML += `
             <div class="reviews-container">
                 <div class="review">
