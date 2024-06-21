@@ -41,7 +41,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth // TODO
                         .requestMatchers("/mypage/**").authenticated()
-//                        .requestMatchers("/menu/detail/**").authenticated()
+                        .requestMatchers("/manager/**").hasAnyRole("MEMBER", "MANAGER")
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form

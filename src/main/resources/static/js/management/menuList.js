@@ -25,7 +25,6 @@ $(document).ready(function () {
         }
     });
 
-    let saveMenu = [];  // 변경되는 메뉴 id의 sequence 담기
     // 메뉴 모음집에서 손님용 메뉴판에 생성 버튼 기능
     $('.btn_add').click(function () {
         let addedMenuNames = new Set();
@@ -181,7 +180,7 @@ $(document).ready(function () {
     }); // end $('btn_up').click()
 
     // 손님용 메뉴판에서 메뉴 삭제
-
+    let saveMenu = [];  // 변경되는 메뉴 id의 sequence 담기
     $('.btn_del').click(function () {
         // 체크된 .menu_checkbox 의 sequence 값을 -1로 변경
         $('.menu_checkbox:checked').each(function () {
