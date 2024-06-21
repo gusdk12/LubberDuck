@@ -4,8 +4,8 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -261.9638,
-    "scrollLeft": -705,
+    "scrollTop": -809.4638,
+    "scrollLeft": 0,
     "zoomLevel": 0.9,
     "show": 511,
     "database": 4,
@@ -903,7 +903,7 @@
         "comment": "날짜",
         "dataType": "DATE",
         "default": "",
-        "options": 12,
+        "options": 8,
         "ui": {
           "keys": 0,
           "widthName": 60,

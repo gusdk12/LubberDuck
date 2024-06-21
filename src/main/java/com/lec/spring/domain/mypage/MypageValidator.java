@@ -2,6 +2,7 @@ package com.lec.spring.domain.mypage;
 
 
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.order.Order_item;
 import com.lec.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,64 +22,58 @@ public class MypageValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return User.class.isAssignableFrom(clazz);
+        boolean assignableFrom = User.class.isAssignableFrom(clazz)
+                || Order_item.class.isAssignableFrom(clazz);
+        return assignableFrom;
     }
+
 
     @Override
     public void validate(Object target, Errors errors) {
+        if(Order_item.class.isAssignableFrom(target.getClass())) return;
 
-        User user = (User)target;
-
-
-        // email
-        String email = user.getEmail();
-        if (email != null && !email.trim().isEmpty()) {
-            if (!isValidEmail(email)) {
-                errors.rejectValue("email", "유효한 이메일 주소를 입력해주세요.");
-            }
-        }
-
-
-        // 생년월일 유효성 검사
-        try {
-            LocalDate birthDate = LocalDate.of(user.getYear(), user.getMonth(), user.getDay());
-
-            if(!isValidDate(user.getYear(), user.getMonth(), user.getDay())){
-                errors.rejectValue("year", "올바른 날짜를 입력해세요");
-            } else if (!isOver18(birthDate)) {
-                errors.rejectValue("year", "만 19세 이상으로만 수정 가능합니다.");
-            }
-        } catch (Exception e) {
-            errors.rejectValue("year", "올바른 생년월일을 입력해주세요.");
-        }
-
+        validateUser((User) target, errors);
     }
 
+    private void validateUser(User user, Errors errors) {
+        // 이메일 유효성 검사
+        String email = user.getEmail();
+        if (email == null || email.trim().isEmpty() || !isValidEmail(email)) {
+            errors.rejectValue("email", "유효한 이메일 주소를 입력해주세요.");
+        }
 
+        // 생년월일 유효성 검사
+        if (!isValidDate(user.getYear(), user.getMonth(), user.getDay())) {
+            errors.rejectValue("year", "올바른 날짜를 입력해세요");
+        } else if (!isOver18(user)) {
+            errors.rejectValue("year", "만 19세 이상으로만 수정 가능합니다.");
+        }
+    }
 
-    // 이메일 유효성 검사 메서드
     private boolean isValidEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
-            return false;
         return pat.matcher(email).matches();
     }
 
-
-    private boolean isValidDate(int year, int month, int day){
+    private boolean isValidDate(int year, int month, int day) {
         try {
             LocalDate.of(year, month, day);
             return true;
-        } catch (DateTimeException e){
+        } catch (DateTimeException e) {
             return false;
         }
     }
 
-    // 생년월일 유효성 검사 메서드 (만 19세 이상 여부 확인)
-    private boolean isOver18(LocalDate birthDate) {
+    private boolean isOver18(User user) {
+        LocalDate birthDate = LocalDate.of(user.getYear(), user.getMonth(), user.getDay());
+        if (birthDate == null) {
+            return false;
+        }
         LocalDate today = LocalDate.now();
-        return birthDate.plusYears(19).isBefore(today);
+        return birthDate.plusYears(19).isBefore(today) || birthDate.plusYears(19).isEqual(today);
     }
-
 }

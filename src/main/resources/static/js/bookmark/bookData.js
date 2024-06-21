@@ -182,6 +182,7 @@ function buildBook(result){
                         <div class="comment-con">
                             <textarea class="modifyBox"> ${book.comment} </textarea>
                             <img src="/img/bookmark/check.png" id="commentCheck">
+                            <div class="error-message">코멘트는 최대 30글자입니다.</div>
                         </div>
                     </div>
                 </div>
@@ -243,6 +244,7 @@ function buildBook(result){
     // 이벤트 위임을 사용하여 동적으로 생성된 #modify 요소에 이벤트 핸들러를 추가합니다.
     $('#favorite').on('click', '#modify', function(e) {
         e.stopPropagation(); // 이벤트 전파를 중지하여 document 클릭 이벤트가 바로 발생하지 않도록 함
+        $(this).closest('.box').find('.C1').css('display', 'none');
         $(this).closest('.box').find('.comment-con').css('display', 'block');
     });
 
@@ -250,17 +252,28 @@ function buildBook(result){
     $(document).on('click', function(e) {
         if (!$(e.target).closest('.comment-con, #modify').length) {
             $('.comment-con').css('display', 'none');
+            $('.C1').css('display', 'block');
         }
     });
 
     // updateFromBook
-    $("#commentCheck").click(function() {
-        var cocktailName = $(this).closest('.info').find('.cocktail_name').text();
-        var commentValue = $(this).closest('.comment-con').find('.modifyBox').val();
+    $('#favorite').on('click', '#commentCheck', function() {
+        var $commentCon = $(this).closest('.comment-con');
+        var commentValue = $commentCon.find('.modifyBox').val();
 
-        updateFromBook(list.find(menu => menu.name === cocktailName), commentValue);
+        if (commentValue.length > 30) {
+            $commentCon.find('.error-message').show();
+        } else {
+            $commentCon.find('.error-message').hide();
 
-        $(this).closest('.box').find('.comment-con').css('display', 'none');
+            var cocktailName = $(this).closest('.info').find('.cocktail_name').text();
+            var menuItem = list.find(menu => menu.name === cocktailName);
+
+            updateFromBook(menuItem, commentValue);
+
+            $(this).closest('.box').find('.C1').css('display', 'block');
+            $(this).closest('.box').find('.comment-con').css('display', 'none');
+        }
     });
 
 

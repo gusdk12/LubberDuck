@@ -51,7 +51,7 @@ function buildBody(){
                         <span class="quantity">${item.quantity}</span>
                         <span class="item-price">${formattedItemPrice}</span>
                         <span>
-                            <input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/review/write'">
+                            <input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/mypage/review/write/${item.id}'">
                         </span>
                     </div>
                 </div>`;
