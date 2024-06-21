@@ -49,6 +49,9 @@ public class MyPageController {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private MypageValidator mypageValidator;
+
     @GetMapping("/info")
     public String info(Model model,
                        @AuthenticationPrincipal UserDetails userDetails) {
