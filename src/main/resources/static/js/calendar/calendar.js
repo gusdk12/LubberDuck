@@ -115,7 +115,6 @@ function addEvents() {
 
             const memoText = eventItem.text().trim();
 
-            // li를 textarea로 변경
             newMemo.val(memoText).data("mode", "edit").show().focus();
             eventItem.hide();
         }
@@ -124,6 +123,27 @@ function addEvents() {
     // 알림 메시지 지우기
     $("#notification").on("click", function () {
         $("#notification").hide();
+    });
+
+    // 메모 삭제
+    // 캘린더 데이터에서 메모만 null 로 설정하기
+    $(document).on("click", ".memo-delete", function () {
+        // 삭제 확인 대화상자 표시
+        if (confirm("메모를 삭제하시겠습니까?")) {
+            const $li = $(this).closest("li");  // 클릭된 버튼의 부모 <li> 요소를 찾음
+            const memoText = $li.text().trim(); // 메모 텍스트를 가져옴 (memoText 변수를 추출하는 코드 추가)
+            const selectedDate = init.activeDate.toISOString().split("T")[0];
+
+            // 캘린더 리스트에서 해당 날짜의 일정 찾기
+            let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
+
+            if (findSchedule) {
+                // 삭제 API 호출
+                deleteCalendar(findSchedule.id, memoText);
+            } else {
+                console.error("No schedule found for the selected date");
+            }
+        }
     });
 
 // --------------------------------------------------------
@@ -199,17 +219,15 @@ function closeWritePopup() {
 
 // 메모 입력 시 높이를 자동으로 조절하는 함수
 function adjustHeight() {
-    const newMemo = $("#new-memo");
-    newMemo.css("height", "auto");
-    newMemo.css("height", newMemo[0].scrollHeight + "px");
+    $("#new-memo").css("height", "auto");
+    $("#new-memo").css("height", newMemo[0].scrollHeight + "px");
 }
 
 // 메모 추가 또는 수정 처리 함수
 function handleMemoSubmit() {
-    const newMemo = $("#new-memo");
-    const memoText = newMemo.val();
+    const memoText = $("#new-memo").val();
 
-    if (newMemo.data("mode") === "edit") {
+    if ($("#new-memo").data("mode") === "edit") {
         const selectedDate = init.activeDate.toISOString().split("T")[0];
         let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
         updateCalendar(findSchedule.id, memoText);
