@@ -4,8 +4,8 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -686.4638,
-    "scrollLeft": -80,
+    "scrollTop": -667.4638,
+    "scrollLeft": -60,
     "zoomLevel": 0.9,
     "show": 511,
     "database": 4,
@@ -87,7 +87,7 @@
           "bZmgmUK7Ub9D66RJlDuUF"
         ],
         "ui": {
-          "x": 730.2223,
+          "x": 731.3334,
           "y": 1157.3889,
           "zIndex": 2,
           "widthName": 60,
@@ -95,7 +95,7 @@
           "color": ""
         },
         "meta": {
-          "updateAt": 1718937029717,
+          "updateAt": 1718946052506,
           "createAt": 1717112438189
         }
       },
@@ -342,13 +342,13 @@
         "name": "ctt_recent",
         "comment": "최근 본 상품",
         "columnIds": [
-          "WOZMDggl6mM1sUkVJr-2_",
           "V_kNkoht_QHNqRVOwOtHO",
+          "WOZMDggl6mM1sUkVJr-2_",
           "U8uGViOxK3CfgleKXdg7a"
         ],
         "seqColumnIds": [
-          "WOZMDggl6mM1sUkVJr-2_",
           "V_kNkoht_QHNqRVOwOtHO",
+          "WOZMDggl6mM1sUkVJr-2_",
           "U8uGViOxK3CfgleKXdg7a"
         ],
         "ui": {
@@ -360,7 +360,7 @@
           "color": ""
         },
         "meta": {
-          "updateAt": 1718937599910,
+          "updateAt": 1718947135567,
           "createAt": 1718936645027
         }
       }
@@ -1367,7 +1367,7 @@
           "columnIds": [
             "f2FI8zZuV5fukRI96nZyv"
           ],
-          "x": 959.2223,
+          "x": 960.3334,
           "y": 1405.3889,
           "direction": 8
         },
@@ -1386,7 +1386,7 @@
           "columnIds": [
             "ky9tId4rA5A0fDCFUesfJ"
           ],
-          "x": 959.2223,
+          "x": 960.3334,
           "y": 1157.3889,
           "direction": 4
         },
@@ -1442,7 +1442,7 @@
           "columnIds": [
             "ky9tId4rA5A0fDCFUesfJ"
           ],
-          "x": 730.2223,
+          "x": 731.3334,
           "y": 1219.3889,
           "direction": 1
         },
@@ -1526,7 +1526,7 @@
           "columnIds": [
             "ky9tId4rA5A0fDCFUesfJ"
           ],
-          "x": 1188.2223,
+          "x": 1189.3334,
           "y": 1281.3889,
           "direction": 2
         },
@@ -1666,7 +1666,7 @@
           "columnIds": [
             "ky9tId4rA5A0fDCFUesfJ"
           ],
-          "x": 730.2223,
+          "x": 731.3334,
           "y": 1343.3889,
           "direction": 1
         },
