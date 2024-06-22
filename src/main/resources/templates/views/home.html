@@ -13,9 +13,12 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
+          rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
 
     <script th:inline="javascript">
@@ -31,50 +34,51 @@
 <!-- chat&cart -->
 <th:block th:insert="~{common/chatCart::chatCart}"></th:block>
 
-    <section id="decoContent">
-        <div class="deco" id="leftup"></div>
-        <div class="deco" id="rightup"></div>
-        <div class="deco" id="leftdown"></div>
-        <div class="deco" id="rightdown"></div>
-    </section>
+<section id="decoContent">
+    <div class="deco" id="leftup"></div>
+    <div class="deco" id="rightup"></div>
+    <div class="deco" id="leftdown"></div>
+    <div class="deco" id="rightdown"></div>
+</section>
 
-    <section id="mainContent">
-<!--        <div id="headerline"></div>-->
-        <div id="menuText">Rubber<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bar</div>
-    </section>
+<section id="mainContent">
+    <!--        <div id="headerline"></div>-->
+    <div id="menuText">Rubber<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bar</div>
+</section>
 
-    <section id="menuContent">
-        <div id="menuBody">
-            <div id="menuscroll">
-                <div class="menuTitle" onclick="openMenu()">
-                    <div id="label"></div>
-                    <div id="labelText">Rubber</div>
-                </div>
-                <div class="menu" id="menu"></div>
+<section id="menuContent">
+    <div id="menuBody">
+        <div id="menuscroll">
+            <div class="menuTitle" onclick="openMenu()">
+                <div id="label"></div>
+                <div id="labelText">Rubber</div>
             </div>
+            <div class="menu" id="menu"></div>
         </div>
-    </section>
+    </div>
+</section>
 
 
-    <section id="footer">
+<section id="footer">
 
-    </section>
+</section>
 
-     <th:block sec:authorize="hasRole('CUSTOMER')">
-         <th:block th:with="logged_user=${#authentication.principal.user}">
-            <script th:inline="javascript">
-                logged_id = [[${logged_user.id}]]
-            </script>
-        </th:block>
+<th:block sec:authorize="hasRole('CUSTOMER')">
+    <th:block th:with="logged_user=${#authentication.principal.user}">
+        <script th:inline="javascript">
+            logged_id = [[${logged_user.id}]]
+        </script>
     </th:block>
+</th:block>
 
-    <script th:inline="javascript">
-        var menuList = [[${menuList}]];
-    </script>
-    <script th:src="@{/js/common/chatCart.js}"></script>
-    <script th:src="@{/js/cart/cartData.js}"></script>
-    <script th:src="@{/js/chat/chatData.js}"></script>
-    <script th:src="@{/js/menu/list.js}"></script>
+<script th:inline="javascript">
+    var menuList = [[${menuList}]];
+</script>
+<script th:src="@{/js/common/chatCart.js}"></script>
+<script th:src="@{/js/cart/cartData.js}"></script>
+<script th:src="@{/js/chat/chatData.js}"></script>
+<script th:src="@{/js/menu/list.js}"></script>
+<script th:src="@{/js/common/header.js}"></script>
 </body>
 </html>
 
