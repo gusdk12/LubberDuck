@@ -8,7 +8,7 @@ public interface ReviewRepository {
 
     int save(Review review);
 
-    List<Review> findByItemId(Long item_id);
+    Review findByItemId(Long item_id);
 
 //     특정 id 글 내용 읽끼 (SELECT) => Post
 //     만약 해당 id 의 글 없으면 null 리턴
