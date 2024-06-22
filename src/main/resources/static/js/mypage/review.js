@@ -14,9 +14,9 @@ $(document).ready(function() {
     var reviewsElements = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들
 
     reviewsElements.sort(function(a, b) {
-        var dateA = $(a).find('.review-date').text(); // 리뷰 날짜 가져오기
-        var dateB = $(b).find('.review-date').text();
-        return new Date(dateB) - new Date(dateA); // 최신순 정렬
+        let dataparsA = new Date($(a).find('.review-date').attr('value'));
+        let dataparsB = new Date($(b).find('.review-date').attr('value'));
+        return dataparsB - dataparsA; // 최신순 정렬
     });
 
     // 정렬된 리뷰 목록을 다시 컨테이너에 추가
@@ -29,9 +29,9 @@ $(document).ready(function() {
         // 최신순으로 정렬
         if (sortType === '최신순') {
             reviewsElements.sort(function(a, b) {
-                var dateA = $(a).find('.review-date').text(); // 리뷰 날짜 가져오기
-                var dateB = $(b).find('.review-date').text();
-                return new Date(dateB) - new Date(dateA); // 최신순 정렬
+                let dataparsA = new Date($(a).find('.review-date').attr('value'));
+                let dataparsB = new Date($(b).find('.review-date').attr('value'));
+                return dataparsB - dataparsA; // 최신순 정렬
             });
         }
         // 별점순으로 정렬
@@ -70,7 +70,7 @@ function buildBody() {
                             </div>
                             <div class="review-text">${review.content}</div>
                             <div class="extra-buttons">
-                                <div class="review-date">${formattedDate}</div>
+                                <div class="review-date" value="${review.regdate}">${formattedDate}</div>
                                 <button class="btn-update">수정</button>
                                 <button class="btn-delete">삭제</button>
                             </div>
