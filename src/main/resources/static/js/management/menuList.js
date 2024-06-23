@@ -92,11 +92,11 @@ $(document).ready(function () {
         });
         // 알림 표시
         if (nonDuplicateDetected && duplicateDetected) {
-            alert('메뉴가 생성되었습니다\n중복된 메뉴는 생성되지 않습니다');
+            swal("새로운 메뉴 생성!", "중복된 메뉴는 생성되지 않습니다", "success");
         } else if (nonDuplicateDetected) {
-            alert('메뉴가 생성되었습니다');
+            swal("새로운 메뉴 생성!", "메뉴가 생성되었습니다", "success");
         } else if (duplicateDetected) {
-            alert('중복된 메뉴는 생성되지 않습니다');
+            swal("메뉴 생성 실패!", "중복된 메뉴는 생성되지 않습니다", "error");
         }
     }); // end $('.btn_add').click()
 
@@ -232,10 +232,10 @@ $(document).ready(function () {
             contentType: 'application/json',
             data: JSON.stringify(saveMenu),
             success: function (response) {
-                alert('메뉴가 새롭게 생성되었습니다');
+                swal("메뉴 구성 완료!", "메뉴가 새롭게 구성되었습니다", "success");
             },
             error: function (error) {
-                alert('메뉴 저장이 실패되었습니다');
+                swal("메뉴 구성 실패!", "메뉴 저장이 실패되었습니다", "error");
             }
         });
 
