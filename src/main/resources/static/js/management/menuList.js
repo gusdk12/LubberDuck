@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $("#manunav").show();
+
     // 메뉴 모음집 체크박스 옵션
     $('#selectAll').change(function () {
         $('.list_checkbox').prop('checked', $(this).prop('checked'));

@@ -7,116 +7,117 @@
 </script>
 
 <th:block th:if="${menu}">  <!-- 넘겨온 menu 의 값이 있을 때만 렌더링 될 수 있게 설정 -->
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/menu/detail.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/management/menudetail.css}">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/menu/detail.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/management/menudetail.css}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <link
-            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
-            rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
-    <title>Menu Update</title>
-  </head>
+        <script th:src="@{/js/common/header.js}"></script>
+        <script th:src="@{/js/management/update.js}"></script>
 
-  <body>
-  <th:block th:insert="~{common/header::header}"></th:block>
+        <title>Menu Update</title>
+    </head>
 
-  <section id="menudetail">
-    <form th:action="@{/manager/update}" method="post">
-      <input type="hidden" name="id" th:value="${menu.id}"/>
-      <div class="container_update">
-        <div class="detail_container_update">
-          <div class="titleText">Menu Information</div>
-          <div class="info_update">
-            <div class="info_A">
-              <div class="ctt img">
-                <img th:src="${menu.imgUrl}" class="ctt_img">
-              </div>
-              <div class="ctt name">
-                <div class="textbox_name" th:text="${menu.name}"></div>
-              </div>
-            </div>
-            <div class="info_B_update">
-              <div class="ctt price">
-                <div class="textbox_price">[판매 가격]</div>
-                <div class="ch_price"><input type="number" id="ch_price" placeholder="가격을 입력해주세요" name="price"
-                                             th:value="${price} ? ${price} : ${menu.price}"></div>
-              </div>
-              <div class="error_text er_price"><span class="errorMessage" th:if="${error_price}"
-                                                     th:utext="${error_price}"></span></div>
-              <div class="ctt information_update">
-                <div class="textbox_info">[소개]</div>
-                <textarea id="ch_info" placeholder="내용을 입력해주세요" name="info"
-                          th:utext="${info} ? ${info} : ${menu.info}"></textarea>
-              </div>
-              <div class="error_text er_info"><span class="errorMessage" th:if="${error_info}"
-                                                    th:utext="${error_info}"></span></div>
-            </div>
-          </div>
-        </div>
+    <body>
+    <th:block th:insert="~{common/header::header}"></th:block>
 
-        <div class="detail_btn">
-          <a class="btn_preview">
-            <img src="/img/management/preview.png" alt="btn_preview">
-          </a>
-          <button class="btn_back" type="button" onclick="history.back()">
-            <img class="update_btn" src="/img/management/back.png" alt="btn_back">
-          </button>
-          <a class="btn_list_update" th:href="@{/manager/menuwrite}">
-            <img class="update_btn" src="/img/management/list.png" alt="btn_list">
-          </a>
-          <button class="btn_savebtn" type="submit">
-            <img class="update_btn" src="/img/management/savebtn.png" alt="btn_save">
-          </button>
-        </div>
-      </div>
-
-      <div id="preview_box">
-        <div id="preview_container">
-          <span class="preview_close">&times;</span>
-          <div id="backgoundflower1"></div>
-          <div id="backgoundflower2"></div>
-          <img src='/img/menu/detailFrame1.png' id="backgoundframe1">
-          <img src='/img/menu/detailFrame1.png' id="backgoundframe2">
-          <div id="cocktailsection">
-            <div id="cocktailImg">
-              <img id="preview_img" th:src="${menu.imgUrl}" alt="ctt_img">
-              <div id="heartImg">
-                <div id="heart" class="emptyHeart"></div>
-              </div>
-            </div>
-            <div id="cocktailInfo">
-              <div id="name" th:text="${menu.name}"></div>
-              <div id="star">
-                <div id="starRate">
-                  <div class="stars"></div> <!--임시-->
-                  <div class="stars"></div> <!--임시-->
-                  <div class="stars"></div> <!--임시-->
-                  <div class="stars"></div> <!--임시-->
-                  <div class="stars"></div> <!--임시-->
+    <section id="menudetail">
+        <form th:action="@{/manager/update}" method="post">
+            <input type="hidden" name="id" th:value="${menu.id}"/>
+            <div class="container_update">
+                <div class="detail_container_update">
+                    <div class="titleText_update">Menu Information</div>
+                    <div class="info_update">
+                        <div class="info_A">
+                            <div class="ctt img">
+                                <img th:src="${menu.imgUrl}" class="ctt_img">
+                            </div>
+                            <div class="ctt name">
+                                <div class="textbox_name" th:text="${menu.name}"></div>
+                            </div>
+                        </div>
+                        <div class="info_B_update">
+                            <div class="ctt price">
+                                <div class="textbox_price">[판매 가격]</div>
+                                <div class="ch_price"><input type="number" id="ch_price" placeholder="가격을 입력해주세요"
+                                                             name="price"
+                                                             th:value="${price} ? ${price} : ${menu.price}"></div>
+                            </div>
+                            <div class="error_text er_price"><span class="errorMessage" th:if="${error_price}"
+                                                                   th:utext="${error_price}"></span></div>
+                            <div class="ctt information_update">
+                                <div class="textbox_info">[소개]</div>
+                                <textarea id="ch_info" placeholder="내용을 입력해주세요" name="info"
+                                          th:utext="${info} ? ${info} : ${menu.info}"></textarea>
+                            </div>
+                            <div class="error_text er_info"><span class="errorMessage" th:if="${error_info}"
+                                                                  th:utext="${error_info}"></span></div>
+                        </div>
+                    </div>
                 </div>
-                <div id="Rating">5.0</div> <!--임시-->
-              </div>
-              <div id="info" th:text="${menu.info}"></div>
-              <div id="price" th:text="${menu.price} + '￦'"></div>
+
+                <div class="detail_btn">
+                    <a class="btn_preview">
+                        <img src="/img/management/preview.png" alt="btn_preview">
+                    </a>
+                    <button class="btn_back" type="button" onclick="history.back()">
+                        <img class="update_btn" src="/img/management/back.png" alt="btn_back">
+                    </button>
+                    <a class="btn_list_update" th:href="@{/manager/menuwrite}">
+                        <img class="update_btn" src="/img/management/list.png" alt="btn_list">
+                    </a>
+                    <button class="btn_savebtn" type="submit">
+                        <img class="update_btn" src="/img/management/savebtn.png" alt="btn_save">
+                    </button>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-    </form>
-  </section>
+            <div id="preview_box">
+                <div id="preview_container">
+                    <span class="preview_close">&times;</span>
+                    <div id="backgoundflower1"></div>
+                    <div id="backgoundflower2"></div>
+                    <img src='/img/menu/detailFrame1.png' id="backgoundframe1">
+                    <img src='/img/menu/detailFrame1.png' id="backgoundframe2">
+                    <div id="cocktailsection">
+                        <div id="cocktailImg">
+                            <img id="preview_img" th:src="${menu.imgUrl}" alt="ctt_img">
+                            <div id="heartImg">
+                                <div id="heart" class="emptyHeart"></div>
+                            </div>
+                        </div>
+                        <div id="cocktailInfo">
+                            <div id="name" th:text="${menu.name}"></div>
+                            <div id="star">
+                                <div id="starRate">
+                                    <div class="stars"></div> <!--임시-->
+                                    <div class="stars"></div> <!--임시-->
+                                    <div class="stars"></div> <!--임시-->
+                                    <div class="stars"></div> <!--임시-->
+                                    <div class="stars"></div> <!--임시-->
+                                </div>
+                                <div id="Rating">5.0</div> <!--임시-->
+                            </div>
+                            <div id="info" th:text="${menu.info}"></div>
+                            <div id="price" th:text="${menu.price} + '￦'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <script th:src="@{/js/management/detail.js}"></script>
+        </form>
+    </section>
 
-  </body>
+    </body>
 </th:block>
 </html>
 

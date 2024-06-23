@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $("#manunav").show();
+
     var preview_box = $("#preview_box");
     var btn_preview = $(".btn_preview");
     var close_btn = $(".preview_close");

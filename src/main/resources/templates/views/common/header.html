@@ -8,10 +8,10 @@
     <div id="topnav_container">
         <div class="topnav" id="myTopnav">
             <section id="headermenu">
-                <button type="button" class="headermenu">
+                <div class="headermenu">
                     <!-- 관리자용 메뉴 -->
                     <div sec:authorize="hasRole('MANAGER')" id="menuIcon"></div>
-                </button>
+                </div>
             </section>
 
             <section id="headerlogo">
