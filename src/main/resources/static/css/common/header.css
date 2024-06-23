@@ -1,3 +1,9 @@
+#topnav_container {
+    max-width: 1300px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 .topnav {
     /*padding-top: 10px;*/
@@ -23,7 +29,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    outline: 2px solid red;
     /*border-bottom: 1px solid #f8e9d7;*/
     margin-bottom: 30px;
 }
@@ -52,7 +57,6 @@ section {
     filter: invert(100%) sepia(5%) saturate(4714%) hue-rotate(305deg) brightness(95%) contrast(108%);
 }
 .headeruser{
-    /*outline: 2px solid red;*/
     width: 60px;
     height: 60px;
     padding: 5px;
@@ -88,7 +92,6 @@ section {
     background-repeat: no-repeat;
 }
 a {
-    /*outline: 2px solid red;*/
     color: #f8e9d7;
     text-align: center;
     text-decoration: none;
@@ -134,7 +137,6 @@ a {
 }
 
 #manunav {
-    /*outline: 2px solid red;*/
     width: 1300px;
     margin-left: auto;
     margin-right: auto;
@@ -143,6 +145,8 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /*outline: 2px solid red;*/
+
 }
 
 .nav_list {
