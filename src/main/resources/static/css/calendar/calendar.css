@@ -45,10 +45,12 @@ body {
 /*********************************************/
 /* 일정 */
 .schedule-container {
+    border: 1px solid red;
+
     width: 100%;
     min-width: 270px;
-    max-height: 600px;
-    margin-top: 30px;
+    max-height: 100%;
+    /* margin-top: 30px; */
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
@@ -107,13 +109,15 @@ body {
 }
 
 .memo-container {
-    margin-top: -30px;
+    border: 1px solid chartreuse;
     position: relative;
+
+    margin-top: 40px;
 }
 
 .event-text {
     display: inline-block;
-    margin-top: 45px;
+    /* margin-top: 45px; */
     font-size: 19px;
     font-weight: 600;
     text-align: center;
@@ -123,9 +127,11 @@ body {
     width: 25px;
     height: 25px;
     display: inline-block;
+
     position: absolute;
-    bottom: 18px;
+    bottom: 19px;
     right: 95px;
+
     border: none;
     border-radius: 50%;
     font-size: 15px;
@@ -224,7 +230,7 @@ body {
     height: 100%;
     min-width: 650px;
     min-height: 650px;
-    margin-left: 8px;
+    /* margin-left: 8px; */
     padding: 20px 0;
     text-align: center;
 }
@@ -361,23 +367,24 @@ body {
 .add-menu-container {
     min-width: 310px;
     width: 100%;
-    padding: 0 10px;
-}
-
-.today-menu-container {
-    display: none;
+    /* padding: 0 10px; */
 }
 
 .menu-text-container {
+    border: 1px solid chartreuse;
     position: relative;
+
+    margin-top: 40px;
 }
 
 #btn-add-menu {
     width: 25px;
     height: 25px;
+
     position: absolute;
-    top: 48px;
-    right: 60px;
+    bottom: 19px;
+    right: 50px;
+
     border: none;
     border-radius: 50%;
     font-size: 15px;
@@ -388,15 +395,27 @@ body {
     opacity: 80%;
 }
 
-.menu-img {
-    width: 130px;
+.today-menu-container {
+    border: 2px solid cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .today-menu-name {
-    margin: 0;
-    font-weight: 500;
-    font-size: 17px;
-    color:#033734;
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+    color : #033734;
+}
+
+.menu-img {
+    border: 1px solid navy;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .menu-text {
@@ -472,13 +491,13 @@ body {
 /*********************************************/
 /* 오늘의 메뉴 알림 텍스트 */
 
-.notification-menu-container:hover {
-    opacity: 80%;
-}
+/*.notification-menu-container:hover {*/
+/*    opacity: 80%;*/
+/*}*/
 
-.notification-menu-container {
-    display: block;
-}
+/*.notification-menu-container {*/
+/*    display: block;*/
+/*}*/
 
 .notification-menu-content {
     margin-top: 10px;
@@ -496,9 +515,9 @@ body {
     vertical-align: middle;
 }
 
-.notification-menu-container:hover {
-    opacity: 80%;
-}
+/*.notification-menu-container:hover {*/
+/*    opacity: 80%;*/
+/*}*/
 
 /*********************************************/
 /* 오늘의 메뉴 리스트 팝업 */

@@ -46,7 +46,18 @@ function handleDayClick(e) {
         $target.addClass("day-active");
         init.activeDTag = $target;
         init.activeDate.setDate(day);
-        findCalendarByDate(date);
+        // findCalendarByDate(date);
+
+        // 가연
+        // String 타입인 date를 int 타입으로 바꾸기
+        if (date) {
+            let dateStr = date.replace(/\./g, ''); // Replace all dots with an empty string
+            let dateInt = Number(dateStr); // Convert the resulting string to a number
+
+            loadTodayMenu(dateInt);
+        } else {
+            console.error("date 값이 없습니다.");
+        }
     }
 }
 
@@ -149,7 +160,8 @@ function addEvents() {
     // 날짜 클릭
     $(".date").on("click", function () {
         const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
-        findCalendarByDate(selectedDate); // 해당 날짜의 메모 로드
+        alert(selectedDate);
+        // findCalendarByDate(selectedDate); // 해당 날짜의 메모 로드
     });
 
 // --------------------------------------------------------
