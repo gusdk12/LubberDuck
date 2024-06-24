@@ -48,6 +48,14 @@
         VALUES (#{user_id}, #{menu_id})
     </insert>
 
+    <!-- 오래된 데이터 삭제 -->
+    <delete id="limitedDelete" parameterType="int">
+        DELETE FROM ctt_recent
+        WHERE user_id = #{user_id}
+          AND cocktail_id = (SELECT cocktail_id FROM ctt_recent WHERE user_id = #{user_id} ORDER BY saw_date ASC LIMIT 1)
+          AND (SELECT COUNT(*) FROM ctt_recent WHERE user_id = #{user_id}) > 4
+    </delete>
+
     <!--/* 삭제하기 */-->
     <delete id="delete" flushCache="true">
         DELETE FROM ctt_recent WHERE user_id = #{user_id} AND cocktail_id = #{menu_id}

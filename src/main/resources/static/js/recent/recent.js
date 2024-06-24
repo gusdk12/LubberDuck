@@ -27,12 +27,30 @@ async function checkToRecent(cocktail) {
     // 최근 본 목록에 없다면 카트 추가
     if(!findRecent) {
         await addToRecent(cocktail);
+        await deleteLimited()
     } else {
         await deleteToRecent(cocktail);
         await addToRecent(cocktail);
     }
 }
 
+async function deleteLimited() {
+    // 전달할 parameter 준비 (POST)
+    const data = {
+        "userId": logged_id
+    };
+
+    await $.ajax({
+        url: "/deleteLimit/" + logged_id, // 5개 초과 시 오래된 항목 삭제
+        type: "POST",
+        cache: false,
+        success: function (data, status) {
+            if (status !== "success" || data.status !== "OK") {
+                alert(data.status);
+            }
+        },
+    });
+}
 async function addToRecent(cocktail) {
     // 전달할 parameter 준비 (POST)
     const data = {
@@ -96,18 +114,14 @@ function loadRecent(user_id){
 }
 
 function buildRecent(result) {
-    result.data.forEach(recent => {
+    result.data.slice(0, 4).forEach(recent => { // 배열의 처음 4개 항목만 처리
         $('#recentSection').append($(`
-            <table class="recentTable">
-                <tr>
-                    <td class="cttName">${recent.menu.name}</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div style="background-image: url('${recent.menu.imgUrl}')" class="cttImg"></div>
-                    </td>
-                </tr>
-            </table>
+            <div class="recent-con">
+                <div class="cttName"> ${recent.menu.name} </div>
+                <div class="cttImg" 
+                    style="background-image: url('${recent.menu.imgUrl}')"
+                    onclick="location.href = '/menu/detail/${recent.menu.id}'"></div>
+            </div>
         `))
     })
 }

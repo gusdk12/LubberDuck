@@ -17,6 +17,9 @@ public interface RecentService {
     // 추가
     QryResult add(Long user_id, Long menu_id);
 
+    // 제한 삭제
+    QryResult deleteLimit(Long userId);
+
     // 삭제
     QryResult delete(Long userId, Long menuId);
 }
