@@ -51,17 +51,28 @@ public class ReviewController {
 
     @PostMapping("/insert")
     public String insert(@RequestParam("item_id") Long item_id,
-                       @RequestParam("rate") Integer rate,
-                       @RequestParam("comment") String comment) {
+                         @RequestParam("rate") Integer rate,
+                         @RequestParam("comment") String comment) {
 
         reviewService.write(item_id, rate, comment);
 
         return "";
     }
 
-    @GetMapping("/update")
-    public void update(){}
+    @PostMapping("/modify")
+    public ResponseEntity<Void> modify(@RequestParam("id") Long id,
+                                       @RequestParam("rate") Integer rate,
+                                       @RequestParam("comment") String comment) {
+        Review existingReview = reviewService.selectById(id);
+        existingReview.setRate(rate);
+        existingReview.setContent(comment);
+        reviewService.update(existingReview);
+        return ResponseEntity.ok().build();
+    }
 
-    @GetMapping("/delete/{id}")
-    public void delete(){}
+    @PostMapping("/deleteOk")
+    public String deleteOk(Long id, Model model){
+        model.addAttribute("result", reviewService.deleteById(id));
+        return "review/deleteOk";
+    }
 }

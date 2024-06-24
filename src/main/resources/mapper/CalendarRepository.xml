@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lec.spring.repository.calendar.CalendarRepository">
 
 
@@ -23,17 +23,17 @@
 
     <sql id="SELECT_BASE">
         SELECT
-            c.id "c_id"
-            , c.memo "c_memo"
-            , c.comment "c_comment"
-            , c.date "c_date"
-            , c.cocktail_id "c_cocktail_id"
-            , m.id "m_id"
-            , m.name "m_name"
-            , m.img_url "m_img_url"
-            , m.info "m_info"
-            , m.price "m_price"
-            , m.sequence "m_sequence"
+        c.id "c_id"
+        , c.memo "c_memo"
+        , c.comment "c_comment"
+        , c.date "c_date"
+        , c.cocktail_id "c_cocktail_id"
+        , m.id "m_id"
+        , m.name "m_name"
+        , m.img_url "m_img_url"
+        , m.info "m_info"
+        , m.price "m_price"
+        , m.sequence "m_sequence"
         FROM ctt_calendar c
         LEFT OUTER JOIN ctt_menu m ON c.cocktail_id = m.id
         WHERE 1=1
@@ -45,43 +45,34 @@
     </select>
 
     <!-- 특정 날짜의 메모를 조회 -->
-    <select id="findByDate" resultMap="mapCalendar">
+    <select id="findById" resultMap="mapCalendar">
         <include refid="SELECT_BASE"/>
-        AND c.date = #{date}
+        AND c.id = #{id}
     </select>
 
     <!-- 특정 날짜에 아무 데이터도 없을 때 메모 추가 -->
     <insert id="insertByMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO ctt_calendar (memo, date)
-        VALUES (#{memo}, #{date});
+        INSERT INTO ctt_calendar (memo, date, id)
+        VALUES (#{memo}, #{date}, #{id});
     </insert>
 
     <!-- 특정 날짜에 아무 데이터도 없을 때 오늘의 메뉴 추가 -->
     <insert id="insertByMenu" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO ctt_calendar (cocktail_id, comment, date)
-        VALUES (#{c_cocktail_id}, #{comment}, #{date});
+        INSERT INTO ctt_calendar (cocktail_id, comment, date, id)
+        VALUES (#{menu_id}, #{comment}, #{date}, #{id});
     </insert>
 
     <!-- 캘린더 데이터(메모, 오늘의 메뉴) 수정 혹은 특정 날짜에 데이터가 있을 때 오늘의 메뉴, 메모 추가 -->
+    <!--
+        COALESCE 함수는 인자로 주어진 값들 중에서 null이 아닌 첫 번째 값을 반환합니다.
+        #{memo}가 null이 아니면 #{memo}의 값을 사용하고, null이면 기존의 memo 값을 유지합니다.
+     -->
     <update id="updateCalendar" parameterType="com.lec.spring.domain.calendar.Calendar">
         UPDATE ctt_calendar
-        SET memo = #{memo},
-            comment = #{comment}
+        SET cocktail_id = COALESCE(#{menu_id}, cocktail_id),
+        comment = COALESCE(#{comment}, comment),
+        memo = COALESCE(#{memo}, memo)
         WHERE id = #{id}
-    </update>
-
-    <!-- 특정 id의 메모 삭제 -->
-    <update id="updateToDeleteMemo" parameterType="com.lec.spring.domain.calendar.Calendar">
-        UPDATE ctt_calendar
-        SET memo = null
-        WHERE id = #{calendarId} AND memo IS NOT NULL;
-    </update>
-
-    <!-- 특정 id의 오늘의 메뉴 삭제 -->
-    <update id="updateToDeleteMenu" parameterType="com.lec.spring.domain.calendar.Calendar">
-        UPDATE ctt_calendar
-        SET comment = null
-        WHERE id = #{calendarId} AND comment IS NOT NULL;
     </update>
 
     <!-- 특정 id 삭제 -->

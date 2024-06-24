@@ -13,10 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script th:src="@{/js/calendar/calendarData.js}"></script>
-    <script th:src="@{/js/calendar/calendar.js}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
 
     <script th:inline="javascript">
         var menuList = [[${menuList}]];
@@ -71,76 +68,76 @@
     <div class="main-view">
         <div class="container-fluid my-calendar clearfix">
 
-            <!-- 일정 -->
-            <div class="schedule-container">
-                <div class="memo-container">
-                    <p class="event-text">일정</p>
-                    <button id="btn-add-memo">+</button>
-                </div>
-                <div class="clicked-date">
-                    <ul class="event-list"></ul>
-                    <textarea id="new-memo"></textarea>
-                </div>
-                <div id="notification" class="notification-container">
-                    <div class="notification-content">
-                        <p class="notification-text">일정 추가 버튼을 클릭해 일정을 <br>저장하시려면 ENTER 버튼, 취소하시려면<br> ESC 버튼을 누르세요.</p>
-                    </div>
-                </div>
+        <!-- 일정 -->
+        <div class="schedule-container">
+            <div class="memo-container">
+                <p class="event-text">일정</p>
+                <button id="btn-add-memo">+</button>
             </div>
 
-            <!-- 캘린더-->
-            <div class="calendar-box">
-                <div class="ctr-box clearfix">
-                    <div class="cal-controls">
-                        <button type="button" title="prev" class="btn-cal prev"></button>
-                        <span class="cal-year"></span>
-                        <span class="cal-month"></span>
-                        <button type="button" title="next" class="btn-cal next"></button>
-                    </div>
-                </div>
-                <table class="cal-table">
-                    <thead>
-                    <tr>
-                        <th>일</th>
-                        <th>월</th>
-                        <th>화</th>
-                        <th>수</th>
-                        <th>목</th>
-                        <th>금</th>
-                        <th>토</th>
-                    </tr>
-                    </thead>
-                    <tbody class="cal-body"></tbody>
-                </table>
+            <!-- 추가될 메모 부분 -->
+            <div class="clicked-date">
+                <ul class="event-list"></ul>
+                <textarea id="new-memo"></textarea>
             </div>
 
-            <!-- 오늘의 메뉴 -->
-            <div class="add-menu-container">
-                <div class="menu-text-container">
-                    <p class="event-text">오늘의 메뉴</p>
-                    <button id="btn-add-menu">+</button>
-                </div>
-
-                <div id="notification-menu" class="notification-menu-container">
-                    <div class="notification-menu-content">
-                        <p class="notification-menu-text">등록한 오늘의 메뉴가 없습니다.</p>
-                    </div>
-                </div>
-
-                <div class="menu-container today-menu-container">
-                    <img class="menu-img" alt="Menu Image">
-                    <p class="today-menu-name"></p>
-                    <div class="menu-text">
-                        <textarea name="" id="today-menu-text" readonly></textarea>
-                    </div>
-                    <div class="menu-buttons">
-                        <button class="btn-edit">수정</button>
-                        <button class="btn-delete">삭제</button>
-                    </div>
+            <div id="notification" class="notification-container">
+                <div class="notification-content">
+                    <p class="notification-text">일정 추가 버튼을 클릭해 일정을 <br>저장하시려면 ENTER 버튼, 취소하시려면<br> ESC 버튼을 누르세요.</p>
                 </div>
             </div>
         </div>
+
+        <!-- 캘린더-->
+        <div class="calendar-box">
+            <div class="ctr-box clearfix">
+                <div class="cal-controls">
+                    <button type="button" title="prev" class="btn-cal prev"></button>
+                    <span class="cal-year"></span>
+                    <span class="cal-month"></span>
+                    <button type="button" title="next" class="btn-cal next"></button>
+                </div>
+            </div>
+            <table class="cal-table">
+                <thead>
+                <tr>
+                    <th>일</th>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                    <th>토</th>
+                </tr>
+                </thead>
+                <tbody class="cal-body"></tbody>
+            </table>
+        </div>
+
+        <!-- 오늘의 메뉴 -->
+        <div class="add-menu-container">
+            <div class="menu-text-container">
+                <p class="event-text">오늘의 메뉴</p>
+                <button id="btn-add-menu">+</button>
+            </div>
+
+            <div id="notification-menu" class="notification-menu-container">
+                <div class="notification-menu-content">
+                    <p class="notification-menu-text">등록한 오늘의 메뉴가 없습니다.</p>
+                </div>
+            </div>
+
+            <!-- 오늘의 메뉴 추가될 부분 -->
+            <div class="menu-container today-menu-container"></div>
+        </div>
+        </div>
     </div>
 </body>
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script th:src="@{/js/calendar/calendarData.js}"></script>
+    <script th:src="@{/js/calendar/calendar.js}"></script>
+    <script th:src="@{/js/common/header.js}"></script>
 
 </html>
