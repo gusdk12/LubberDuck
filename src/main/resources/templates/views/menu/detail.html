@@ -23,6 +23,7 @@
     <script th:inline="javascript">
         var logged_id = -1;
         var menu = [[${menu}]];
+
     </script>
     <title>[[${menu.name}]]</title>
 
@@ -74,44 +75,32 @@
 
         <div id="reviewsection">
 
-<!--            <section>-->
-<!--                <div class="containerD">-->
-<!--                    <div class="list">-->
-<!--                        <div class="review-header">-->
-<!--                            <span><h3>리뷰</h3></span>-->
-<!--                            <span><p>4.8 / 5.0 (123) </p></span>-->
-<!--                        </div>-->
-<!--                        <hr>-->
-<!--                        <div class="tag_btn">-->
-<!--                            <input type="radio" name="sort" id="latest" value="최신순" checked>-->
-<!--                            <label for="latest">최신순</label>-->
-<!--                            <input type="radio" name="sort" id="rating" value="별점순">-->
-<!--                            <label for="rating">별점순</label>-->
-<!--                        </div>-->
-<!--                        <hr>-->
+            <section>
+                <div class="containerD">
+                    <div class="list">
+                        <div class="review-header">
+                            <span><h3>리뷰</h3></span>
+                            <span><p>4.8 / 5.0 (123) </p></span>
+                        </div>
+                        <hr>
+                        <div class="tag_btn">
+                            <input type="radio" name="sort" id="latest" value="최신순" checked>
+                            <label for="latest">최신순</label>
+                            <input type="radio" name="sort" id="rating" value="별점순">
+                            <label for="rating">별점순</label>
+                        </div>
+                        <hr>
 
 
-<!--                        <div class="reviews-container">-->
-<!--                            <div th:each="review : ${reviews}" class="review">-->
-<!--                                <div>-->
-<!--                                    <div class="review-content">-->
-<!--                                        <div class="review-header">-->
-<!--                                            <div class="review-title">-->
-<!--                                                <span th:text="${'★'.repeat(review.rating)}" class="star">★★★</span>-->
-<!--                                                <span th:text="${review.rating}" class="star_score">3</span>-->
-<!--                                                <h6>이**</h6>-->
-<!--                                            </div>-->
-<!--                                            <span class="review-regdate">2020-04-27</span>-->
-<!--                                        </div>-->
-<!--                                        <div class="review-text" th:text="${review.text}">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </section>-->
+                        <div class="reviews-container">
+                            <div id="review">
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         </div>
 
@@ -132,6 +121,7 @@
 
     <script th:inline="javascript">
         const menuList = [[${menuList}]];
+        var reviews = [[${reviews}]];
     </script>
     <section id="footer"></section>
 
