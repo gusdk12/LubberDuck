@@ -76,5 +76,10 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository.findByItemMenu(menu_id);
     }
 
+    @Override
+    public int countAll(Long menu_id) {
+        return reviewRepository.countAll(menu_id);
+    }
+
 
 }

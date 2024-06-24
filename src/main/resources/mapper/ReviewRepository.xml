@@ -72,4 +72,14 @@
         WHERE oi.cocktail_id = #{menu_id}
     </select>
 
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM ctt_review r
+                 JOIN ctt_order_item oi ON r.item_id = oi.id
+                 JOIN ctt_menu m ON oi.cocktail_id = m.id
+                 JOIN ctt_order o ON oi.order_id = o.id
+        WHERE oi.cocktail_id = #{menu_id}
+    </select>
+
+
 </mapper>
