@@ -109,6 +109,16 @@ INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
     (3, 3, 2, 7600);
 
 
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (4, 6, 1, 8800);
+
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (4, 15, 2, 9800);
+
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (4, 20, 3, 5800);
+
+
 
 -- 샘플 리뷰
 

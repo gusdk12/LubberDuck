@@ -133,6 +133,10 @@
     background-color: rgb(141, 185, 141);
 }
 
+[value="리뷰확인"]{
+    background-color: lightgray;
+}
+
 #view {
     background-color: #e1e1e1;;
 

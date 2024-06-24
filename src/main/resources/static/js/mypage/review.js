@@ -1,13 +1,38 @@
 $(document).ready(function() {
-    // 사이드바 메뉴 클릭시 css 변경 => 가연 추가!
+    // 사이드바 메뉴 클릭시 css 변경
     $('.sm').eq(2).css({
-        'background-color':'#FBF5ED',
-        'border-radius' : "10px 0 0 10px",
-        'color' : '#54320f',
+        'background-color': '#FBF5ED',
+        'border-radius': '10px 0 0 10px',
+        'color': '#54320f',
         'font-weight': 'bold'
     });
 
     buildBody();
+
+    // 리뷰 삭제 버튼 클릭 시
+    $(document).on('click', '.btn-delete', function() {
+        var reviewId = $(this).closest('.reviews-container').find('.review-id').val(); // 리뷰 ID 가져오기
+        var $reviewContainer = $(this).closest('.reviews-container'); // 리뷰 컨테이너 jQuery 객체로 저장
+
+        // AJAX를 통해 삭제 요청 보내기
+        $.ajax({
+            url: '/review/deleteOk',
+            type: 'POST',
+            data: {
+                id: reviewId
+            },
+            success: function(response) {
+                // 성공 시 화면에서 리뷰 요소 삭제
+                $reviewContainer.remove();
+                alert('리뷰가 삭제되었습니다.');
+                window.location.href = '/mypage/review'; // 리뷰 목록 페이지로 리디렉션
+            },
+            error: function(xhr, status, error) {
+                console.error('Error deleting review:', error);
+                // 실패 시 처리
+            }
+        });
+    });
 
     // 페이지 로드 시 최신순으로 정렬되도록 설정
     var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
@@ -57,6 +82,7 @@ function buildBody() {
         const formattedDate = formatDate(review.regdate); // Format the date
         itemsHTML += `
             <div class="reviews-container">
+                <input type="hidden" class="review-id" value="${review.id}">
                 <div class="review">
                     <img src="${review.menu.imgUrl}">
                     <div>

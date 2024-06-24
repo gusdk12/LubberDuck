@@ -70,9 +70,9 @@ public class ReviewController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/update")
-    public void update(){}
-
-    @GetMapping("/delete/{id}")
-    public void delete(){}
+    @PostMapping("/deleteOk")
+    public String deleteOk(Long id, Model model){
+        model.addAttribute("result", reviewService.deleteById(id));
+        return "review/deleteOk";
+    }
 }
