@@ -49,25 +49,21 @@ public class CalendarController {
         return result;
     }
 
-
     // 캘린더 데이터(메모, 오늘의 메뉴) 수정
-    // 가연
     @PostMapping("/update/{id}")
     public QryResult update(
             @PathVariable Long id,
             @RequestParam("menu_id") Long menu_id,
             @RequestParam("comment") String comment,
             @RequestParam("memo") String memo
-            ) {
+    ) {
         QryResult result = calendarService.update(id, menu_id, comment, memo);
         return result;
     }
 
-    // 캘린더 데이터가 비어있지 않을 때 메모만 삭제
-    @PostMapping("/updateToDeleteMemo/{id}")
+    @PostMapping("/deleteById/{id}")
     public QryResult deleteById(@PathVariable Long id) {
         QryResult result = calendarService.deleteById(id);
-
         return result;
     }
 }

@@ -4,13 +4,13 @@
   "settings": {
     "width": 3000,
     "height": 3000,
-    "scrollTop": -569,
-    "scrollLeft": -1329.5228,
-    "zoomLevel": 0.9,
+    "scrollTop": -1242.821,
+    "scrollLeft": -586.8429,
+    "zoomLevel": 0.5,
     "show": 511,
     "database": 4,
     "databaseName": "",
-    "canvasType": "ERD",
+    "canvasType": "@dineug/erd-editor/builtin-schema-sql",
     "language": 1,
     "tableNameCase": 4,
     "columnNameCase": 2,
@@ -186,7 +186,7 @@
           "color": ""
         },
         "meta": {
-          "updateAt": 1718985259827,
+          "updateAt": 1718064009755,
           "createAt": 1718063913346
         }
       },
@@ -947,7 +947,7 @@
         "comment": "캘린더아이디",
         "dataType": "INT",
         "default": "",
-        "options": 14,
+        "options": 15,
         "ui": {
           "keys": 1,
           "widthName": 60,
@@ -956,7 +956,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1718987526326,
+          "updateAt": 1718064705360,
           "createAt": 1718064340300
         }
       },
@@ -2563,7 +2563,7 @@
         "name": 1718064343920,
         "dataType": 1718064347064,
         "options(primaryKey)": 1718064348773,
-        "options(autoIncrement)": 1718987526324,
+        "options(autoIncrement)": 1718064355026,
         "comment": 1718064362340,
         "options(unique)": 1718064705359
       }

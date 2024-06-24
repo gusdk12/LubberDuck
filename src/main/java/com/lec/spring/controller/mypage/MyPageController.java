@@ -76,7 +76,7 @@ public class MyPageController {
 
     @GetMapping("/myPageUpdate")
     public String myPageUpdate(Model model,
-                             @AuthenticationPrincipal UserDetails userDetails) {
+                               @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
             return "redirect:/user/login";
         }
@@ -134,9 +134,9 @@ public class MyPageController {
             model.addAttribute("success", false);
         }
 
-        return "mypage/myPageUpdateOk";
+        return "mypage/myPageUpdate";
     }
-        @RequestMapping("/info")
+    @RequestMapping("/info")
     public void info(){}
     @RequestMapping("/order")
     public void order(){}
@@ -160,17 +160,27 @@ public class MyPageController {
 
         // 주문 항목들을 저장할 맵을 준비합니다.
         Map<Long, List<Order_item>> orderItemsByOrderId = new HashMap<>();
+        // 리뷰 항목들을 저장할 맵을 준비합니다.
+        Map<Long, Review> reviewByOrderItemId = new HashMap<>();
+
 
         // 각 주문에 대해 주문 항목을 조회하고 맵에 저장합니다.
         for (Order order : orders) {
             List<Order_item> items = orderItemService.findByOrder(order.getId());
             orderItemsByOrderId.put(order.getId(), items);
+
+            // 각 아이템에 대해 리뷰 항목을 조회하고 맵에 저장합니다.
+            for (Order_item item : items) {
+                Review review = reviewService.findByItemId(item.getId());
+                reviewByOrderItemId.put(item.getId(), review);
+            }
         }
 
         // 모델에 주문 목록과 주문 항목 맵을 추가합니다.
         model.addAttribute("orders", orders);
         model.addAttribute("user", user);
         model.addAttribute("orderItemsByOrderId", orderItemsByOrderId);
+        model.addAttribute("reviewByOrderItemId", reviewByOrderItemId);
 
         // mypage/order 뷰를 반환합니다.
         return "/mypage/order";
@@ -180,7 +190,9 @@ public class MyPageController {
     public String review(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         String username = userDetails.getUsername();
         User user = userService.findByUsername(username);
-        List<Review> reviews = reviewService.list();
+
+        List<Review> reviews = reviewService.findByUserId(user.getId());
+
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
 
@@ -194,29 +206,12 @@ public class MyPageController {
         return "mypage/review/write";
     }
 
-//    @PostMapping("review/write/{item_id}")
-//    public String writeOk(@Validated Review review
-//            , BindingResult result
-//            , Model model
-//            , RedirectAttributes redirectAttributes) {
-//        if (result.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("item_id", review.getItem_id());
-//            redirectAttributes.addFlashAttribute("rate", review.getRate());
-//            redirectAttributes.addFlashAttribute("content", review.getContent());
-//            redirectAttributes.addFlashAttribute("regdate", review.getRegdate());
-//
-//            List<FieldError> errList = result.getFieldErrors();
-//            for (FieldError err : errList) {
-//                redirectAttributes.addFlashAttribute("error_" + err.getField(), err.getCode());
-//            }
-//
-//            return "redirect:/review/write/{item_id}";
-//        }
-//        model.addAttribute("result", reviewService.write(review));
-//        return "mypage/review/writeOk";
-//
-//    }
-
+    @GetMapping("review/update/{id}")
+    public String update(Model model, @PathVariable("id") Long id) {
+        Review review = reviewService.selectById(id);
+        model.addAttribute("review", review);
+        return "mypage/review/update";
+    }
 
     @GetMapping("/bookmark")
     public void bookmark(Model model){

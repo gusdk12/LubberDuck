@@ -7,63 +7,65 @@
 </script>
 
 <th:block th:if="${menu}">  <!-- 넘겨온 post 의 값이 있을 때만 렌더링 될 수 있게 설정 -->
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/management/menudetail.css}">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/manager/menudetail.css}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <link
-            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
-            rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
-    <title>Menu Detail</title>
-  </head>
+        <script th:src="@{/js/common/header.js}"></script>
+        <script th:src="@{/js/manager/update.js}"></script>
 
-  <body>
-  <th:block th:insert="~{common/header::header}"></th:block>
+        <title>Menu Detail</title>
+    </head>
 
-  <section id="menudetail">
-    <div class="container">
-      <div class="detail_container">
-        <div class="titleText">Menu Information</div>
-        <div class="info">
-          <div class="info_A">
-            <div class="ctt img">
-              <img th:src="${menu.imgUrl}" class="ctt_img">
+    <body>
+    <th:block th:insert="~{common/header::header}"></th:block>
+
+    <section id="menudetail">
+        <div class="container">
+            <div class="detail_container">
+                <div class="titleText">Menu Information</div>
+                <div class="info">
+                    <div class="info_A">
+                        <div class="ctt img">
+                            <img th:src="${menu.imgUrl}" class="ctt_img">
+                        </div>
+                        <div class="ctt name">
+                            <div class="textbox_name" th:text="${menu.name}"></div>
+                        </div>
+                    </div>
+                    <div class="info_B">
+                        <div class="ctt price">
+                            <div class="textbox_price">[판매 가격]</div>
+                            <span id="show_price" th:text="${menu.price} + '￦'"></span>
+                        </div>
+                        <div class="ctt information">
+                            <div class="textbox_info">[소개]</div>
+                            <span id="show_info" th:text="${menu.info}"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="ctt name">
-              <div class="textbox_name" th:text="${menu.name}"></div>
+
+            <div class="detail_btn">
+                <a class="btn_list" th:href="@{/manager/menuwrite}">
+                    <img src="/img/manager/list.png" alt="btn_list">
+                </a>
+                <a class="btn_update" th:href="@{'/manager/update/' + ${menu.id}}">
+                    <img src="/img/manager/update.png" alt="btn_update">
+                </a>
             </div>
-          </div>
-          <div class="info_B">
-            <div class="ctt price">
-              <div class="textbox_price">[판매 가격]</div>
-              <span id="show_price" th:text="${menu.price} + '￦'"></span>
-            </div>
-            <div class="ctt information">
-              <div class="textbox_info">[소개]</div>
-              <span id="show_info" th:text="${menu.info}"></span>
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div class="detail_btn">
-        <a class="btn_list" th:href="@{/manager/menuwrite}">
-          <img src="/img/management/list.png" alt="btn_list">
-        </a>
-        <a class="btn_update" th:href="@{'/manager/update/' + ${menu.id}}">
-          <img src="/img/management/update.png" alt="btn_update">
-        </a>
-      </div>
-    </div>
-
-  </section>
-  </body>
+    </section>
+    </body>
 </th:block>
 </html>

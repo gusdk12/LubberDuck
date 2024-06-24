@@ -21,13 +21,6 @@ public interface CalendarRepository {
     // 캘린더 데이터(메모, 오늘의 메뉴) 수정
     int updateCalendar(Calendar calendar);
 
-
-    // 캘린더 데이터가 비어있지 않을 때 메모만 삭제
-//    int updateToDeleteMemo(Long calendarId, String memo);
-
-    // 캘린더 데이터가 비어있지 않을 때 오늘의 메뉴 코멘트만 삭제
-//    int updateToDeleteMenu(Long calendarId, String comment);
-
     // 캘린더 데이터 삭제 (전체 삭제)
     int deleteById(Long calendarId);
 }

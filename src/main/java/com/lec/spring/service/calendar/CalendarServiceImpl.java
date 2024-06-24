@@ -4,7 +4,6 @@ import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.calendar.Calendar;
 import com.lec.spring.domain.calendar.QryCalendarList;
 import com.lec.spring.domain.menu.Menu;
-import com.lec.spring.repository.UserRepository;
 import com.lec.spring.repository.calendar.CalendarRepository;
 import com.lec.spring.repository.menu.MenuRepository;
 import org.apache.ibatis.session.SqlSession;
