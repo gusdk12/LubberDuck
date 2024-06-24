@@ -33,8 +33,6 @@
             o.number AS "order.number",
             o.user_id AS "order.user_id",
             u.username AS "user.username",
-            o.user_id AS "order.user_id",
-            u.username AS "user.username",
             u.nickname AS "user.nickname",
             u.id AS "user.id"
         FROM
@@ -76,6 +74,11 @@
         WHERE oi.cocktail_id = #{menu_id}
     </select>
 
+    <select id="findByUserId" resultType="com.lec.spring.domain.review.Review">
+        <include refid="SELECT_BASE"/>
+        WHERE u.id = #{user_id}
+    </select>
+
     <select id="countAll" resultType="int">
         SELECT COUNT(*)
         FROM ctt_review r
@@ -85,11 +88,13 @@
         WHERE oi.cocktail_id = #{menu_id}
     </select>
 
-
-    <select id="findByUserId" resultType="com.lec.spring.domain.review.Review">
-        <include refid="SELECT_BASE"/>
-        WHERE u.id = #{user_id}
-    </select>
+    <!-- 페이징 용 쿼리 -->
+<!--    <select id="selectFromRow" resultMap="mapReview">-->
+<!--        <include refid="SELECT_BASE"/>-->
+<!--        WHERE oi.cocktail_id = #{menu_id}-->
+<!--        ORDER BY r.id DESC-->
+<!--        LIMIT #{param1}, #{param2}-->
+<!--    </select>-->
 
 
 </mapper>

@@ -46,7 +46,7 @@ $(document).ready(function() {
     reviewsElements.sort(function(a, b) {
         let dataparsA = new Date($(a).find('.review-date').attr('value'));
         let dataparsB = new Date($(b).find('.review-date').attr('value'));
-        return dataparsB - dataparsA; // 최신순 정렬
+        return dataparsA - dataparsB; // 최신순 정렬
     });
 
     // 정렬된 리뷰 목록을 다시 컨테이너에 추가
