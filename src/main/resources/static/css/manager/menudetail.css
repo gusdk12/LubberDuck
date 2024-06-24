@@ -33,7 +33,7 @@ body {
 .detail_container {
     width: 1000px;
     height: 800px;
-    background-image: url('/img/management/detail.jpg');
+    background-image: url('/img/manager/detail.jpg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center; /* 이미지 위치 중앙 */
@@ -80,7 +80,7 @@ body {
 }
 
 .name {
-    background-image: url('/img/management/menutitle.png');
+    background-image: url('/img/manager/menutitle.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center; /* 이미지 위치 중앙 */
@@ -101,7 +101,7 @@ body {
 .price {
     height: 150px;
     width: 460px;
-    background-image: url('/img/management/price2.png');
+    background-image: url('/img/manager/price2.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center; /* 이미지 위치 중앙 */
@@ -136,7 +136,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-image: url('/img/management/memo1.png');
+    background-image: url('/img/manager/memo1.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center; /* 이미지 위치 중앙 */
@@ -267,7 +267,7 @@ img:hover:not(.ctt_img, #preview_img, #backgoundframe1, #backgoundframe2) {
 .detail_container_update {
     width: 1000px;
     height: 800px;
-    background-image: url('/img/management/detail.jpg');
+    background-image: url('/img/manager/detail.jpg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center; /* 이미지 위치 중앙 */
@@ -361,7 +361,7 @@ img:hover:not(.ctt_img, #preview_img, #backgoundframe1, #backgoundframe2) {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-image: url('/img/management/memo1.png');
+    background-image: url('/img/manager/memo1.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center; /* 이미지 위치 중앙 */

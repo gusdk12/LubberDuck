@@ -25,7 +25,7 @@ body {
     height: 700px;
     margin: 30px;
     padding: 10px;
-    background-image: url('/img/management/menu.jpg');
+    background-image: url('/img/manager/menu.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -320,7 +320,7 @@ img {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('/img/management/rightdown.png');
+    background-image: url('/img/manager/rightdown.png');
     left: 30px;
     top: 760px;
     transform: rotate(30deg) translate(-50%, -50%);
@@ -334,7 +334,7 @@ img {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('/img/management/butterfly.png');
+    background-image: url('/img/manager/butterfly.png');
     left: 345px;
     top: -20px;
     transform: rotate(40deg);
@@ -348,7 +348,7 @@ img {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('/img/management/rose.png');
+    background-image: url('/img/manager/rose.png');
     left: -30px;
     bottom: 700px;
     transform: rotate(33deg);
@@ -362,7 +362,7 @@ img {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('/img/management/rosestick.png');
+    background-image: url('/img/manager/rosestick.png');
     left: 380px;
     bottom: 700px;
     transform: rotate(20deg) scaleY(-1);
@@ -399,7 +399,7 @@ img {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        background-image: url('/img/management/rightdown.png');
+        background-image: url('/img/manager/rightdown.png');
         transform: rotate(32deg) translate(-50%, -50%);
         left: 40px;
         top: 473px;
@@ -412,7 +412,7 @@ img {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        background-image: url('/img/management/rose.png');
+        background-image: url('/img/manager/rose.png');
         left: 480px;
         top: -260px;
         transform: rotate(33deg);
@@ -425,7 +425,7 @@ img {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        background-image: url('/img/management/rosestick.png');
+        background-image: url('/img/manager/rosestick.png');
         left: -30px;
         top: -340px;
         transform: rotate(-20deg) scaleY(-1) scaleX(-1);
