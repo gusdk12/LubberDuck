@@ -29,112 +29,118 @@
 </head>
 <body>
 
-    <!--/* 헤더 */-->
-    <th:block th:insert="~{common/header::header}"></th:block>
+<!--/* 헤더 */-->
+<th:block th:insert="~{common/header::header}"></th:block>
 
-    <!-- chat&cart -->
-    <th:block th:insert="~{common/chatCart::chatCart}"></th:block>
+<!-- chat&cart -->
+<th:block th:insert="~{common/chatCart::chatCart}"></th:block>
 
-    <div id="container">
-        <div id="backgoundflower1"></div>
-        <div id="backgoundflower2"></div>
-        <img src='/img/menu/detailFrame1.png' id="backgoundframe1">
-        <img src='/img/menu/detailFrame1.png' id="backgoundframe2">
-        <div id="cocktailsection">
-            <div id="cocktailImg">
-                <div id="img"></div>
-                <div id="heartImg">
-                    <div id="heart"></div>
-                </div>
-                <div class="comment-con">
-                    <textarea class="comment" placeholder="코멘트를 작성해보세요"></textarea>
-                    <div class="comment-error-message"></div>
-                    <div id="commentCheck"></div>
-                </div>
+<div id="container">
+    <div id="backgoundflower1"></div>
+    <div id="backgoundflower2"></div>
+    <img src='/img/menu/detailFrame1.png' id="backgoundframe1">
+    <img src='/img/menu/detailFrame1.png' id="backgoundframe2">
+    <div id="cocktailsection">
+        <div id="cocktailImg">
+            <div id="img"></div>
+            <div id="heartImg">
+                <div id="heart"></div>
             </div>
-            <div id="cocktailInfo">
-                <div id="name"></div>
-                <div id="star">
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div>5.0</div> <!--임시-->
-                </div>
-                <div id="info"></div>
-                <div id="price"></div>
-                <div id="cart">
-                    <th:block sec:authorize="hasRole('CUSTOMER')">
-                        <div id="toCart">담기</div>
-                    </th:block>
-                </div>
+            <div class="comment-con">
+                <textarea class="comment" placeholder="코멘트를 작성해보세요"></textarea>
+                <div class="comment-error-message"></div>
+                <div id="commentCheck"></div>
             </div>
         </div>
-
-        <div id="reviewsection">
-
-<!--            <section>-->
-<!--                <div class="containerD">-->
-<!--                    <div class="list">-->
-<!--                        <div class="review-header">-->
-<!--                            <span><h3>리뷰</h3></span>-->
-<!--                            <span><p>4.8 / 5.0 (123) </p></span>-->
-<!--                        </div>-->
-<!--                        <hr>-->
-<!--                        <div class="tag_btn">-->
-<!--                            <input type="radio" name="sort" id="latest" value="최신순" checked>-->
-<!--                            <label for="latest">최신순</label>-->
-<!--                            <input type="radio" name="sort" id="rating" value="별점순">-->
-<!--                            <label for="rating">별점순</label>-->
-<!--                        </div>-->
-<!--                        <hr>-->
-
-
-<!--                        <div class="reviews-container">-->
-<!--                            <div th:each="review : ${reviews}" class="review">-->
-<!--                                <div>-->
-<!--                                    <div class="review-content">-->
-<!--                                        <div class="review-header">-->
-<!--                                            <div class="review-title">-->
-<!--                                                <span th:text="${'★'.repeat(review.rating)}" class="star">★★★</span>-->
-<!--                                                <span th:text="${review.rating}" class="star_score">3</span>-->
-<!--                                                <h6>이**</h6>-->
-<!--                                            </div>-->
-<!--                                            <span class="review-regdate">2020-04-27</span>-->
-<!--                                        </div>-->
-<!--                                        <div class="review-text" th:text="${review.text}">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </section>-->
-
+        <div id="cocktailInfo">
+            <div id="name"></div>
+            <div id="star">
+                <div class="stars"></div> <!--임시-->
+                <div class="stars"></div> <!--임시-->
+                <div class="stars"></div> <!--임시-->
+                <div class="stars"></div> <!--임시-->
+                <div class="stars"></div> <!--임시-->
+                <div>5.0</div> <!--임시-->
+            </div>
+            <div id="info"></div>
+            <div id="price"></div>
+            <div id="cart">
+                <th:block sec:authorize="hasRole('CUSTOMER')">
+                    <div id="toCart">담기</div>
+                </th:block>
+            </div>
         </div>
-
-        <th:block sec:authorize="hasRole('CUSTOMER')">
-            <th:block th:with="logged_user=${#authentication.principal.user}">
-                <script th:inline="javascript">
-                    logged_id = [[${logged_user.id}]]
-                </script>
-
-                <script th:src="@{/js/common/chatCart.js}"></script>
-                <script th:src="@{/js/cart/cartData.js}"></script>
-                <script th:src="@{/js/chat/chatData.js}"></script>
-                <script th:src="@{/js/bookmark/bookData.js}"></script>
-
-            </th:block>
-        </th:block>
     </div>
 
-    <script th:inline="javascript">
-        const menuList = [[${menuList}]];
-    </script>
-    <section id="footer"></section>
+    <div id="reviewsection">
 
-    <script th:src="@{/js/menu/detail.js}"></script>
+        <!--            <section>-->
+        <!--                <div class="containerD">-->
+        <!--                    <div class="list">-->
+        <!--                        <div class="review-header">-->
+        <!--                            <span><h3>리뷰</h3></span>-->
+        <!--                            <span><p>4.8 / 5.0 (123) </p></span>-->
+        <!--                        </div>-->
+        <!--                        <hr>-->
+        <!--                        <div class="tag_btn">-->
+        <!--                            <input type="radio" name="sort" id="latest" value="최신순" checked>-->
+        <!--                            <label for="latest">최신순</label>-->
+        <!--                            <input type="radio" name="sort" id="rating" value="별점순">-->
+        <!--                            <label for="rating">별점순</label>-->
+        <!--                        </div>-->
+        <!--                        <hr>-->
+
+
+        <!--                        <div class="reviews-container">-->
+        <!--                            <div th:each="review : ${reviews}" class="review">-->
+        <!--                                <div>-->
+        <!--                                    <div class="review-content">-->
+        <!--                                        <div class="review-header">-->
+        <!--                                            <div class="review-title">-->
+        <!--                                                <span th:text="${'★'.repeat(review.rating)}" class="star">★★★</span>-->
+        <!--                                                <span th:text="${review.rating}" class="star_score">3</span>-->
+        <!--                                                <h6>이**</h6>-->
+        <!--                                            </div>-->
+        <!--                                            <span class="review-regdate">2020-04-27</span>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="review-text" th:text="${review.text}">-->
+        <!--                                        </div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </section>-->
+
+    </div>
+
+    <div id="recentSection">
+        <!-- 최근 항목 불러오기 -->
+    </div>
+
+
+    <th:block sec:authorize="hasRole('CUSTOMER')">
+        <th:block th:with="logged_user=${#authentication.principal.user}">
+            <script th:inline="javascript">
+                logged_id = [[${logged_user.id}]]
+            </script>
+
+            <script th:src="@{/js/common/chatCart.js}"></script>
+            <script th:src="@{/js/cart/cartData.js}"></script>
+            <script th:src="@{/js/chat/chatData.js}"></script>
+            <script th:src="@{/js/recent/recent.js}"></script>
+            <script th:src="@{/js/bookmark/bookData.js}"></script>
+
+        </th:block>
+    </th:block>
+</div>
+
+<script th:inline="javascript">
+    const menuList = [[${menuList}]];
+</script>
+<section id="footer"></section>
+
+<script th:src="@{/js/menu/detail.js}"></script>
 </body>
 </html>

@@ -136,7 +136,7 @@ function addCalendarByMemo(memo){
         },
     });
 }
-//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // // 만약, 데이터가 있다면, update
 // // 없다면, insert
 //
@@ -209,51 +209,8 @@ async function addCalendarByMenu(menuId, comment) {
         console.error("Error checking date existence:", error);
     }
 }
-//
-//
-// // 특정 날짜에 아무 데이터도 없을 때 오늘의 메뉴 추가
-// function addCalendarByMenu(menuId, comment, selectedDate) {
-//     // 서버에서 해당 날짜의 데이터를 확인
-//     $.ajax({
-//         type: "GET",
-//         url: `/calendar/detail/${selectedDate}`,
-//         contentType: "application/json",
-//         success: function (data) {
-//             // 데이터가 없으면 추가
-//             if (!data || (!data.memo && !data.menu_id)) {
-//                 const dataToAdd = {
-//                     "menu_id": menuId,
-//                     "comment": comment,
-//                     "date": selectedDate
-//                 };
-//
-//                 $.ajax({
-//                     url: "/calendar/addByMenu",
-//                     type: "POST",
-//                     data: dataToAdd,
-//                     cache: false,
-//                     success: function(data, status) {
-//                         if (status === "success" && data.status === "OK") {
-//                             alert("오늘의 메뉴가 추가되었습니다.");
-//                             loadCalendars(); // 캘린더 다시 로드
-//                             $("#myForm2").hide(); // 팝업 닫기
-//                         }
-//                     },
-//                     error: function(xhr, status, error) {
-//                         console.error("Error adding today's menu:", error);
-//                     }
-//                 });
-//             } else {
-//                 alert("이미 데이터가 존재합니다.");
-//             }
-//         },
-//         error: function (xhr, status, error) {
-//             console.error("Error checking calendar detail:", error);
-//         }
-//     });
-// }
-//
-//  */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //
 //
 // // 이미 오늘의 메뉴가 있는 일정에 메모 추가된 경우 이거나,
@@ -377,7 +334,7 @@ function buildCalendar(data){
     $(".btn-cal.prev").on("click", () => loadYYMM(init.prevMonth()));
     $(".cal-body").on("click", "td", handleDayClick);
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 가연
 // 특정 날짜의 오늘의 메뉴 불러오기
 function loadTodayMenu(dateId){
@@ -428,3 +385,4 @@ function buildTodayMenu(data) {
         `);
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

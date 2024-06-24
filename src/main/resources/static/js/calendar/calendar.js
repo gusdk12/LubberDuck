@@ -187,6 +187,7 @@ function addEvents() {
             $(".select-menu-name").text(menu.name);
         }
 
+        // 오늘의 메뉴 저장 버튼
         $(".btn-save").on("click", function() {
             const comment = $("#select-menu-text").val();
             if (!comment) {

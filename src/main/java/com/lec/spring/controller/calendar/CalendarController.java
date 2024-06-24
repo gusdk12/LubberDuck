@@ -14,22 +14,12 @@ public class CalendarController {
     @Autowired
     private CalendarService calendarService;
 
-//    @Autowired
-//    public CalendarController(MenuService menuService, CalendarService calendarService) {
-//        this.calendarService = calendarService;
-//    }
 
     // 모든 일정 불러오기
     @GetMapping("/list")
     public QryCalendarList list(){
         return calendarService.findAll();
     }
-//    public QryCalendarList list(Model model){
-//        QryCalendarList calendarList = calendarService.list();
-//        model.addAttribute("calendarList", calendarList);
-//
-//        return calendarList;
-//    }
 
     // 특정 날짜 불러오기
     @GetMapping("/detail/{id}")

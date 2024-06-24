@@ -45,8 +45,6 @@ body {
 /*********************************************/
 /* 일정 */
 .schedule-container {
-    border: 1px solid red;
-
     width: 100%;
     min-width: 270px;
     max-height: 100%;
@@ -109,7 +107,6 @@ body {
 }
 
 .memo-container {
-    border: 1px solid chartreuse;
     position: relative;
 
     margin-top: 40px;
@@ -371,7 +368,6 @@ body {
 }
 
 .menu-text-container {
-    border: 1px solid chartreuse;
     position: relative;
 
     margin-top: 40px;
@@ -396,7 +392,6 @@ body {
 }
 
 .today-menu-container {
-    border: 2px solid cornflowerblue;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -412,7 +407,6 @@ body {
 }
 
 .menu-img {
-    border: 1px solid navy;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -491,13 +485,13 @@ body {
 /*********************************************/
 /* 오늘의 메뉴 알림 텍스트 */
 
-/*.notification-menu-container:hover {*/
-/*    opacity: 80%;*/
-/*}*/
+.notification-menu-container:hover {
+    opacity: 80%;
+}
 
-/*.notification-menu-container {*/
-/*    display: block;*/
-/*}*/
+.notification-menu-container {
+    display: block;
+}
 
 .notification-menu-content {
     margin-top: 10px;

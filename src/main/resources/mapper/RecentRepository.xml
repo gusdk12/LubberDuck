@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.lec.spring.repository.recent.RecentRepository">
 
     <resultMap id="mapCocktail" type="com.lec.spring.domain.menu.Menu">
@@ -14,11 +15,11 @@
     <resultMap id="mapRecent" type="com.lec.spring.domain.recent.Recent">
         <result column="r_user_id" property="user_id"/>
         <result column="r_menu_id" property="menu_id"/>
-        <result column="r_saw_date" property="saw_date"/>
+        <result column="r_saw_date" property="sawDate"/>
         <collection property="menu" resultMap="mapCocktail"/>
     </resultMap>
 
-    <select id="findByUser" resultMap="mapRecent">
+    <sql id="SELECT_BASE">
         SELECT
             r.cocktail_id "r_menu_id",
             r.user_id "r_user_id",
@@ -28,9 +29,28 @@
             m.img_url "m_imgUrl",
             m.sequence "m_sequence"
         FROM ctt_recent r, ctt_menu m
+    </sql>
+
+    <select id="findByUser" resultMap="mapRecent">
+        <include refid="SELECT_BASE"/>
         WHERE r.cocktail_id = m.id AND r.user_id = #{user_id}
+        ORDER BY r.saw_date DESC
     </select>
 
+    <select id="findByUserAndMenu" resultMap="mapRecent">
+        <include refid="SELECT_BASE"/>
+        WHERE r.cocktail_id = m.id AND r.user_id = #{user_id} AND r.cocktail_id = #{menu_id}
+    </select>
 
+    <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.recent.Recent"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO ctt_recent(user_id, cocktail_id)
+        VALUES (#{user_id}, #{menu_id})
+    </insert>
+
+    <!--/* 삭제하기 */-->
+    <delete id="delete" flushCache="true">
+        DELETE FROM ctt_recent WHERE user_id = #{user_id} AND cocktail_id = #{menu_id}
+    </delete>
 
 </mapper>

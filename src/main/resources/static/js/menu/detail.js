@@ -1,8 +1,11 @@
-window.addEventListener('load', () => {
 
+$(document).ready(function() {
+    loadRecent(logged_id);
+});
+
+window.addEventListener('load', () => {
     loadMenu();
     addEvent();
-
 });
 
 window.addEventListener('popstate', function(event) {
