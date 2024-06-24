@@ -36,6 +36,10 @@
     <!-- chat&cart -->
     <th:block th:insert="~{common/chatCart::chatCart}"></th:block>
 
+
+
+
+
     <div id="container">
         <div id="backgoundflower1"></div>
         <div id="backgoundflower2"></div>
@@ -75,12 +79,22 @@
 
         <div id="reviewsection">
 
+
             <section>
                 <div class="containerD">
                     <div class="list">
                         <div class="review-header">
                             <span><h3>리뷰</h3></span>
-                            <span><p>4.8 / 5.0 (123) </p></span>
+                            <!-- 페이징 헤더 -->
+                            <div>
+                                <span>총 [[${cnt}]]개</span>
+                                <span>
+                                <form name="frmPageRows">
+                                    <input type="hidden" name="page" th:value="${page}">
+                                </form>
+                                </span>
+                            </div>
+                            <!-- 페이징 헤더 -->
                         </div>
                         <hr>
                         <div class="tag_btn">

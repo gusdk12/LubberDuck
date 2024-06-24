@@ -178,7 +178,7 @@ function reviewsList() {
 // reviews-container 내부의 각 리뷰 div에 데이터 할당
     var reviewsContainer = document.querySelector('.reviews-container');
 
-    reviews.forEach(function(review) {
+    reviews.forEach(function (review) {
         // 리뷰 요소 생성
         var reviewElement = document.createElement('div');
         reviewElement.classList.add('review');
@@ -195,13 +195,13 @@ function reviewsList() {
                 <span class="review-regdate">${review.regdate}</span>
             </div>
             <div class="review-text">${review.content}</div>
+            <hr class="review_hr">
         </div>
+
     `;
 
         // reviewsContainer에 리뷰 요소 추가
         reviewsContainer.appendChild(reviewElement);
     });
-
-    console.log(reviews);
 }
 
