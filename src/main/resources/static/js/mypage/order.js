@@ -47,7 +47,7 @@ function buildBody(){
 
             let buttonHTML = "";
             const findReview = itemReviewMap[item.id];
-            findReview && (buttonHTML = `<input type="button" value="리뷰확인" name="reviewBtn" id="view" onclick="location.href='/mypage/review/detail/${findReview.id}'">`);
+            findReview && (buttonHTML = `<input type="button" value="리뷰확인" name="reviewBtn" id="view" onclick="location.href='/mypage/review'">`);
             findReview || (buttonHTML = `<input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/mypage/review/write/${item.id}'">`);
 
             let formattedItemPrice = item.price.toLocaleString('ko-KR');
