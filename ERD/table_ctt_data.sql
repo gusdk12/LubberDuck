@@ -88,6 +88,12 @@ INSERT INTO ctt_order (user_id, number, regdate) VALUES
 INSERT INTO ctt_order (user_id, number, regdate) VALUES
     (2, 3, 20240617121250);
 
+INSERT INTO ctt_order (user_id, number, regdate) VALUES
+    (3, 1, 20240617121250);
+
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (5, 15, 1, 7600);
+
 INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
  (1, 11, 1, 7600);
 
@@ -118,9 +124,13 @@ INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
 INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
     (4, 20, 3, 5800);
 
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (9, 20, 3, 5800);
+
 
 
 -- 샘플 리뷰
+
 
 INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
     (1, 5, '정말 맛있어요 최고예요. 달콤한 맛이 계속 기억에 남네요!', 20240619094950);

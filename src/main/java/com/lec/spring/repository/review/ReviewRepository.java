@@ -26,4 +26,8 @@ public interface ReviewRepository {
     List<Review> findByItemMenu(Long menu_id);
 
     int countAll(Long menu_id);
+
+    List<Review> findByUserId(Long userId);
+
+    int countAll(Long menu_id);
 }

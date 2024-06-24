@@ -86,6 +86,7 @@ function buildBody() {
                     <input type="radio" name="rate" value="1" id="star1" ${review.rate == 1 ? 'checked' : ''}><label for="star1"></label>
                 </div>
             </div>
+            <hr>
             <div id="rateError" class="error"></div>
             <div class="form-group">
                 <label for="content" class="form-left">리뷰 내용</label>
