@@ -29,5 +29,4 @@ public interface ReviewRepository {
 
     List<Review> findByUserId(Long userId);
 
-    int countAll(Long menu_id);
 }

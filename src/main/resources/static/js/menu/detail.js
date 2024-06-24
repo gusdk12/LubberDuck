@@ -190,7 +190,7 @@ function reviewsList() {
                 <div class="review-title">
                     <span class="star">${review.rate}</span>
                     <span class="star_score">${review.rate}</span>
-                    <h6 id="review_name">${review.user.username}</h6>
+                    <h6 id="review_name">${review.user.nickname}</h6>
                 </div>
                 <span class="review-regdate">${review.regdate}</span>
             </div>
