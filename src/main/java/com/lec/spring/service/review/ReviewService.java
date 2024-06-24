@@ -18,7 +18,7 @@ public interface ReviewService {
     //특정 id글 삭제하기(DELETE)
     int deleteById(Long id);
 
-    List<Review> findByItemId(Long item_id);
+    Review findByItemId(Long item_id);
 
     List<Review> findByItemMenu(Long menu_id);
 }

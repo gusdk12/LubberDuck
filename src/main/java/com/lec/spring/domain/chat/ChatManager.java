@@ -40,8 +40,4 @@ public class ChatManager {
         String result = bartendarSetting + "지금까지의 대화 기록입니다. 대화기록을 확인하고, 적절한 대화를 이어가세요. - " +String.join(" ", history);
         return result;
     }
-
-    public void clearHistory() {
-        history.clear();
-    }
 }

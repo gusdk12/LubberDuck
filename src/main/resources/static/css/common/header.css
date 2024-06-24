@@ -1,6 +1,12 @@
+#topnav_container {
+    max-width: 1300px;  /* 최대 폭 지정 */
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+}
+
 
 .topnav {
-    /*padding-top: 10px;*/
     overflow: visible;
     /*background-color: #EADBC8;*/
     /*background-color: #F9EDD4;*/
@@ -17,12 +23,12 @@
     margin-left: auto;
     margin-right: auto;
     z-index: 1;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 80px;
+    padding-right: 80px;
 
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
     /*border-bottom: 1px solid #f8e9d7;*/
     margin-bottom: 30px;
 }
@@ -32,13 +38,12 @@ section {
 }
 
 .headermenu{
-    position: absolute;
     /*background-color: #a2ff4b;*/
-    width: 70px;
-    height: 70px;
-    padding: 20px;
-    padding-top: 25px;
-    padding-bottom: 5px;
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+    border: none;
+    background: none;
 }
 
 #menuIcon{
@@ -49,13 +54,16 @@ section {
     width: 100%;
     height: 100%;
     filter: invert(100%) sepia(5%) saturate(4714%) hue-rotate(305deg) brightness(95%) contrast(108%);
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
 }
+
 .headeruser{
     width: 60px;
     height: 60px;
-    padding: 12px;
-    position: relative;
+    padding: 5px;
     margin-right: 10px;
+    background-color: rgba(0, 0, 0, 0);
 }
 #userIcon{
     background-image: url('/img/header/userIcon.png');
@@ -67,6 +75,7 @@ section {
     width: 100%;
     height: 100%;
     filter: invert(100%) sepia(5%) saturate(4714%) hue-rotate(305deg) brightness(95%) contrast(108%);
+    cursor: pointer;
 }
 
 #userIcon:hover {
@@ -74,7 +83,11 @@ section {
 }
 
 #headerlogo{
-    padding: 10px;
+    padding: 7px;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
 }
 .headerlogo{
     background-image: url('/img/header/logo.png');
@@ -95,14 +108,13 @@ a {
     height: 100%;
 }
 
-
 #headeruser{
     display: flex;
     align-items: center;
 }
 #login{
     background-color: #DAC0A3;
-    /*margin-left: auto;*/
+    margin-left: auto;
 }
 .headerButton{
     background-size: contain;
@@ -123,8 +135,27 @@ a {
     font-style: normal;
 
     background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
 }
-.headerButton:hover {
+.headerButton:hover, .nav_list:hover {
     color: #ffa6a6;
+}
+
+#manunav {
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -30px;
+    padding: 10px 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: visible;
+    z-index: 1;
+}
+
+.nav_list {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 25px;
 }
 

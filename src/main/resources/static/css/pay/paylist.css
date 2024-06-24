@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #10573e;
+    caret-color: transparent;
+    overflow-x: hidden;
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+#container{
+    background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
+    height: 1000px;
+    max-width: 900px;  /* 최대 폭 지정 */
+    border-radius: 20px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content : center;
+    align-items: center;
+    gap: 30px;
+}
+
+#cartlistsection{
+    height: 40%;
+    width: 90%;
+
+    display: flex;
+    justify-content : center;
+    align-items: center;
+    gap: 20px;
+    background-color: #9eb0c5;
+}
+
+/*-----------------------------------*/
+#paysection{
+    height: 40%;
+    width: 90%;
+    background-color: #c4eacd;
+}
+
+/*-----------------------------------*/
+#footer{
+    height: 200px;
+}

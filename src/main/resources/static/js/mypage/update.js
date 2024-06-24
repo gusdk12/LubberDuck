@@ -9,7 +9,7 @@ $(document).ready(function () {
         event.preventDefault(); // 기본 제출 동작 방지
 
         // var itemId = $('#itemId').val();
-        var itemId = item.id;
+        var reviewId = review.id;
         var selectedRating = $('.rating input:checked').val(); // 선택된 별점 값 가져오기
         var content = $('#content').val();
 
@@ -41,10 +41,10 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: '/review/insert',
+            url: '/review/modify',
             type: 'POST',
             data: {
-                "item_id": itemId,
+                "id": reviewId,
                 "rate": selectedRating,
                 "comment": content,
             },
@@ -63,14 +63,14 @@ $(document).ready(function () {
 
 function buildBody() {
     $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
-    const formattedDate = formatDate(item.order.regdate); // 날짜 형식 변경
+    const formattedDate = formatDate(review.order.regdate); // 날짜 형식 변경
     $('.container').append(`
         <div id="review-form">
             <button type="button" id="back_btn">X</button>
             <h1>리뷰 작성하기</h1>
             <span class="form-group">
                 <label for="title" class="form-left">메뉴 이름</label>
-                <input type="text" id="title" name="title" value="${item.menu.name}" disabled><br><br><hr>
+                <input type="text" id="title" name="title" value="${review.menu.name}" disabled><br><br><hr>
             </span>
             <div class="form-group">
                 <label for="name" class="form-left">주문 일시</label>
@@ -78,18 +78,18 @@ function buildBody() {
             </div>
             <div class="form-group rating-group">
                 <label for="rate" class="form-left">별점</label>
-                <div class="rating" id="star_rate">
-                    <input type="radio" name="rate" value="5" id="star5"><label for="star5"></label>
-                    <input type="radio" name="rate" value="4" id="star4"><label for="star4"></label>
-                    <input type="radio" name="rate" value="3" id="star3"><label for="star3"></label>
-                    <input type="radio" name="rate" value="2" id="star2"><label for="star2"></label>
-                    <input type="radio" name="rate" value="1" id="star1"><label for="star1"></label>
+                 <div class="rating" id="star_rate">
+                    <input type="radio" name="rate" value="5" id="star5" ${review.rate == 5 ? 'checked' : ''}><label for="star5"></label>
+                    <input type="radio" name="rate" value="4" id="star4" ${review.rate == 4 ? 'checked' : ''}><label for="star4"></label>
+                    <input type="radio" name="rate" value="3" id="star3" ${review.rate == 3 ? 'checked' : ''}><label for="star3"></label>
+                    <input type="radio" name="rate" value="2" id="star2" ${review.rate == 2 ? 'checked' : ''}><label for="star2"></label>
+                    <input type="radio" name="rate" value="1" id="star1" ${review.rate == 1 ? 'checked' : ''}><label for="star1"></label>
                 </div>
             </div>
             <div id="rateError" class="error"></div>
             <div class="form-group">
                 <label for="content" class="form-left">리뷰 내용</label>
-                <textarea id="content" name="content" rows="8" cols="80" placeholder="리뷰를 작성해주세요."></textarea>
+                <textarea id="content" name="content" rows="8" cols="80">${review.content}</textarea>
                 <div id="contentError" class="error"></div>
             </div>
             <div class="text-center">

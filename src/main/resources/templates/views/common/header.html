@@ -4,7 +4,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <body>
-    <th:block th:fragment="header">
+<th:block th:fragment="header">
+    <div id="topnav_container">
         <div class="topnav" id="myTopnav">
             <section id="headermenu">
                 <div class="headermenu">
@@ -20,17 +21,30 @@
             <section id="headeruser">
                 <!-- 로그인 안했을때는 로그인 form 보여주기 -->
                 <div class="headeruser">
-                    <button sec:authorize="hasRole('CUSTOMER')" th:onclick="|location.href='@{/mypage/info}'|" id="userIcon"></button>
+                    <button sec:authorize="hasRole('CUSTOMER')" th:onclick="|location.href='@{/mypage/info}'|"
+                            id="userIcon"></button>
                 </div>
-                <div><button sec:authorize="isAnonymous()" class="headerButton" th:onclick="|location.href='@{/user/login}'|">Login</button></div>
+                <div>
+                    <button sec:authorize="isAnonymous()" class="headerButton"
+                            th:onclick="|location.href='@{/user/login}'|">Login
+                    </button>
+                </div>
 
                 <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
-                <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}">
-                    <div><button type="submit" class="headerButton">Logout</button></div>
+                <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()"
+                      th:with="user=${#authentication.getPrincipal().getUser()}">
+                    <div>
+                        <button type="submit" class="headerButton">Logout</button>
+                    </div>
                 </form>
             </section>
-
         </div>
-    </th:block>
+        <section id="manunav" sec:authorize="hasRole('MANAGER')">
+            <a class="nav_list" href="">차트 관리</a>
+            <a class="nav_list" th:href="@{/manager/menuwrite}">메뉴판 관리</a>
+            <a class="nav_list" th:href="@{/manager/calendar}">캘린더 관리</a>
+        </section>
+    </div>
+</th:block>
 </body>
 </html>
