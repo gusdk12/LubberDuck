@@ -134,7 +134,7 @@ public class MyPageController {
             model.addAttribute("success", false);
         }
 
-        return "mypage/myPageUpdateOk";
+        return "mypage/myPageUpdate";
     }
     @RequestMapping("/info")
     public void info(){}
