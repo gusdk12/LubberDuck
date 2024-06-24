@@ -41,7 +41,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: '/review/insert',
+            url: '/review/modify',
             type: 'POST',
             data: {
                 "id": reviewId,

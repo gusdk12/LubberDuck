@@ -59,10 +59,15 @@ public class ReviewController {
         return "";
     }
 
-    @PostMapping("modify")
-    public String modify (@RequestParam("id") Long id) {
-        reviewService.update(reviewService.selectById(id));
-        return  "";
+    @PostMapping("/modify")
+    public ResponseEntity<Void> modify(@RequestParam("id") Long id,
+                                       @RequestParam("rate") Integer rate,
+                                       @RequestParam("comment") String comment) {
+        Review existingReview = reviewService.selectById(id);
+        existingReview.setRate(rate);
+        existingReview.setContent(comment);
+        reviewService.update(existingReview);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/update")
