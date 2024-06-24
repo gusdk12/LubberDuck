@@ -76,7 +76,7 @@ public class MyPageController {
 
     @GetMapping("/myPageUpdate")
     public String myPageUpdate(Model model,
-                             @AuthenticationPrincipal UserDetails userDetails) {
+                               @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
             return "redirect:/user/login";
         }
@@ -136,7 +136,7 @@ public class MyPageController {
 
         return "mypage/myPageUpdateOk";
     }
-        @RequestMapping("/info")
+    @RequestMapping("/info")
     public void info(){}
     @RequestMapping("/order")
     public void order(){}
@@ -202,6 +202,13 @@ public class MyPageController {
         Order_item item = orderItemService.findById(item_id);
         model.addAttribute("item", item);
         return "mypage/review/write";
+    }
+
+    @GetMapping("review/update/{id}")
+    public String update(Model model, @PathVariable("id") Long id) {
+        Review review = reviewService.selectById(id);
+        model.addAttribute("review", review);
+        return "mypage/review/update";
     }
 
     @GetMapping("/bookmark")

@@ -71,7 +71,7 @@ function buildBody() {
                             <div class="review-text">${review.content}</div>
                             <div class="extra-buttons">
                                 <div class="review-date" value="${review.regdate}">${formattedDate}</div>
-                                <button class="btn-update">수정</button>
+                                <button class="btn-update" onclick="location.href='/mypage/review/update/${review.id}'">수정</button>
                                 <button class="btn-delete">삭제</button>
                             </div>
                         </div>

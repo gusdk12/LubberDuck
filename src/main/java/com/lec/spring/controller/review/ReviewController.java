@@ -51,12 +51,18 @@ public class ReviewController {
 
     @PostMapping("/insert")
     public String insert(@RequestParam("item_id") Long item_id,
-                       @RequestParam("rate") Integer rate,
-                       @RequestParam("comment") String comment) {
+                         @RequestParam("rate") Integer rate,
+                         @RequestParam("comment") String comment) {
 
         reviewService.write(item_id, rate, comment);
 
         return "";
+    }
+
+    @PostMapping("modify")
+    public String modify (@RequestParam("id") Long id) {
+        reviewService.update(reviewService.selectById(id));
+        return  "";
     }
 
     @GetMapping("/update")
