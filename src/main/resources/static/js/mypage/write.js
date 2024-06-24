@@ -85,7 +85,7 @@ function buildBody() {
                     <input type="radio" name="rate" value="2" id="star2"><label for="star2"></label>
                     <input type="radio" name="rate" value="1" id="star1"><label for="star1"></label>
                 </div>
-            </div>
+            </div><hr>
             <div id="rateError" class="error"></div>
             <div class="form-group">
                 <label for="content" class="form-left">리뷰 내용</label>

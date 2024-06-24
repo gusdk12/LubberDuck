@@ -21,4 +21,8 @@ public interface ReviewService {
     Review findByItemId(Long item_id);
 
     List<Review> findByItemMenu(Long menu_id);
+
+    public List<Review> findByUserId(Long userId);
+
+    int countAll(Long menu_id);
 }

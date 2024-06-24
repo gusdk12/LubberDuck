@@ -24,4 +24,8 @@ public interface ReviewRepository {
     int delete(Review review);
 
     List<Review> findByItemMenu(Long menu_id);
+
+    List<Review> findByUserId(Long userId);
+
+    int countAll(Long menu_id);
 }
