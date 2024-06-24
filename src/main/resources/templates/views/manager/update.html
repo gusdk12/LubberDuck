@@ -11,7 +11,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/css/menu/detail.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/management/menudetail.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/manager/menudetail.css}">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
         <script th:src="@{/js/common/header.js}"></script>
-        <script th:src="@{/js/management/update.js}"></script>
+        <script th:src="@{/js/manager/update.js}"></script>
 
         <title>Menu Update</title>
     </head>
@@ -67,16 +67,16 @@
 
                 <div class="detail_btn">
                     <a class="btn_preview">
-                        <img src="/img/management/preview.png" alt="btn_preview">
+                        <img src="/img/manager/preview.png" alt="btn_preview">
                     </a>
                     <button class="btn_back" type="button" onclick="history.back()">
-                        <img class="update_btn" src="/img/management/back.png" alt="btn_back">
+                        <img class="update_btn" src="/img/manager/back.png" alt="btn_back">
                     </button>
                     <a class="btn_list_update" th:href="@{/manager/menuwrite}">
-                        <img class="update_btn" src="/img/management/list.png" alt="btn_list">
+                        <img class="update_btn" src="/img/manager/list.png" alt="btn_list">
                     </a>
                     <button class="btn_savebtn" type="submit">
-                        <img class="update_btn" src="/img/management/savebtn.png" alt="btn_save">
+                        <img class="update_btn" src="/img/manager/savebtn.png" alt="btn_save">
                     </button>
                 </div>
             </div>
