@@ -35,6 +35,11 @@ public class CartController {
         return cartService.delete(user_Id, cocktail_Id);
     }
 
+    @PostMapping("/clear/{user_Id}")
+    public QryResult clear(@PathVariable Long user_Id){
+        return cartService.clear(user_Id);
+    }
+
     @PostMapping("/incQuantity/{user_Id}/{cocktail_Id}")
     public QryResult incQuantity(@PathVariable Long user_Id, @PathVariable Long cocktail_Id){
         return cartService.incQuantity(user_Id, cocktail_Id);

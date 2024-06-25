@@ -9,37 +9,132 @@ body {
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
+
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 #container{
     background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
-    height: 1000px;
+    /*height: 1000px;*/
+    height: auto;
     max-width: 900px;  /* 최대 폭 지정 */
     border-radius: 20px;
     margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content : center;
+    justify-content : start;
     align-items: center;
-    gap: 30px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    gap: 50px;
 }
 
 #cartlistsection{
-    height: 40%;
+    /*height: 40%;*/
+    height: auto;
     width: 90%;
 
     display: flex;
-    justify-content : center;
+    justify-content: start;
     align-items: center;
-    gap: 20px;
-    background-color: #9eb0c5;
+    flex-direction: column;
+    gap: 5px;
+    /*background-color: #9eb0c5;*/
+}
+.cartItem{
+    height: 200px;
+    width: 100%;
+    /*background-color: #f8dfdf;*/
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.cartItem .itemImg{
+    height: 160px;
+    width: 180px;
+    /*background-color: coral;*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.cartItem .itemInfo{
+    height: 180px;
+    width: 500px;
+    /*background-color: darkorchid;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+.cartItem .itemInfo .itemName{
+    /*background-color: lightslategray;*/
+    width: 100%;
+    height: 50px;
+    font-weight: 400;
+    font-size: 30px;
+}
+.cartItem .itemInfo .quantity{
+    /*background-color: fuchsia;*/
+    width: 100%;
+    height: 40px;
+    font-weight: 400;
+    font-size: 22px;
+}
+.cartItem .itemInfo .itemPrice{
+    /*background-color: burlywood;*/
+    width: 100%;
+    height: 40px;
+    font-weight: 1000;
+    font-size: 22px;
+}
+.itemLine{
+    height: 2px;
+    width: 700px;
+    border-radius: 30px;
+    background-color: rgba(63, 56, 56, 0.44);
+}
+.totalItem{
+    height: 100px;
+    width: 90%;
+    /*background-color: deeppink;*/
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 1000;
+    font-size: 35px;
 }
 
 /*-----------------------------------*/
 #paysection{
-    height: 40%;
+    height: 200px;
     width: 90%;
-    background-color: #c4eacd;
+    /*background-color: #c4eacd;*/
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+#payButton{
+    height: 80px;
+    width: 90%;
+    background-color: #57a98c;
+    border-radius: 10px;
+    font-weight: 1000;
+    font-size: 35px;
+    color: #FEFAF4;
+    text-align: center;
+    align-content: center;
+
+    margin-top: 100px;
+}
+#payButton:hover{
+    background-color: #10573E;
 }
 
 /*-----------------------------------*/

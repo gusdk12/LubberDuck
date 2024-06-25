@@ -123,7 +123,9 @@ async function deleteFromCart(cocktail) {
     }
 }
 
-// 특정 글(post_id) 의 댓글 목록 읽어오기
+let cartSize = 0;
+
+
 function loadCart(user_id) {
     $.ajax({
         url: "/cart/list/" + user_id,
@@ -137,6 +139,7 @@ function loadCart(user_id) {
                     return;
                 }
 
+                cartSize = data.count;
                 buildCart(data);
             }
         },

@@ -80,22 +80,31 @@ INSERT INTO ctt_cart (user_id, cocktail_id, quantity) VALUES
     (3, 18, 2)
 ;
 
-INSERT INTO ctt_order (user_id, number, regdate) VALUES
-    (2, 1, 20240617);
-INSERT INTO ctt_order (user_id, number, regdate) VALUES
-    (2, 2, 20240617);
+INSERT INTO ctt_order (user_id, regdate) VALUES
+    (2, 20240617);
+INSERT INTO ctt_order (user_id, regdate) VALUES
+    (2, 20240617);
 
-INSERT INTO ctt_order (user_id, number, regdate) VALUES
-    (2, 3, 20240617121250);
+INSERT INTO ctt_order (user_id, regdate) VALUES
+    (2, 20240617121250);
 
-INSERT INTO ctt_order (user_id, number, regdate) VALUES
-    (3, 1, 20240617121250);
+INSERT INTO ctt_order (user_id, regdate) VALUES
+    (3, 20240617121250);
+
+INSERT INTO ctt_order (user_id, regdate) VALUES
+    (5, 20240617121250);
 
 INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
     (5, 15, 1, 7600);
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (5, 1, 1, 7600);
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (5, 2, 1, 7600);
+INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
+    (5, 3, 1, 7600);
 
 INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
- (1, 11, 1, 7600);
+    (1, 11, 1, 7600);
 
 INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
     (1, 19, 2, 6700);
@@ -123,9 +132,6 @@ INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
 
 INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
     (4, 20, 3, 5800);
-
-INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
-    (9, 20, 3, 5800);
 
 
 
