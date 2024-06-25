@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #10573e;
+    margin: 0;
+}
+
+.chart_page {
+    max-width: 1300px;
+    height: 1000px;
+    /* 높이를 페이지에 맞게 고치기 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.side {
+    float: left;
+    width: 20%;
+    /* height: 100%; */
+
+    text-align: center;
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.side #sideMenu {
+    color: #f8e9d7;
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.side a {
+    color: #f8e9d7;
+    text-decoration: none;
+    margin: 20px 0;
+}
+
+#age_nav {
+    line-height: 1.5;
+}
+
+.side .chartTitle {
+    margin: 100px 0 40px 0;
+    font-family: "Playwrite AU VIC", cursive;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.side .chart {
+    display: block;
+    height: 50px;
+
+    text-align: center;
+    line-height: 50px;
+}
+
+.article_chart {
+    width: 80%;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /*background-color: #f8e9d7;*/
+    background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
+    border-radius: 10px;
+    margin-top: 50px;
+    float: left;
+}
+
+#chart_container {
+    outline: 2px solid red;
+    width: 90%;
+    height: 90%;
+    margin: 30px 20px 30px 20px;
+    overflow-y: auto;
+}
+
+.chart_name {
+    font-family: "Meddon", cursive;
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+#menuChart {
+    max-width: 100%;
+    max-height: 100%;
+}
