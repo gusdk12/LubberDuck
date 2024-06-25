@@ -2,8 +2,11 @@ package com.lec.spring.controller.manager;
 
 import com.lec.spring.domain.manager.ManagerValidator;
 import com.lec.spring.domain.menu.Menu;
+import com.lec.spring.domain.order.Order_item;
 import com.lec.spring.service.calendar.CalendarService;
 import com.lec.spring.service.menu.MenuService;
+import com.lec.spring.service.order.Order_itemService;
+import com.nimbusds.jose.shaded.gson.Gson;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,14 +25,16 @@ public class ManagerController {
 
     private MenuService menuService;
     private CalendarService calendarService;
+    private Order_itemService orderItemService;
 
     @Autowired
     private ManagerValidator managerValidator;
 
     @Autowired
-    public ManagerController(MenuService menuService, CalendarService calendarService) {
+    public ManagerController(MenuService menuService, CalendarService calendarService, Order_itemService orderItemService) {
         this.menuService = menuService;
         this.calendarService = calendarService;
+        this.orderItemService = orderItemService;
     }
 
     @GetMapping("/calendar")
@@ -77,6 +82,14 @@ public class ManagerController {
         }
         model.addAttribute("result", menuService.update(menu));
         return "manager/updateOk";
+    }
+
+    // 메뉴별 판매 차트 조회
+    @GetMapping("/menuchart")
+    public String menuOrderList(Model model){
+        List<Order_item> orderItems = orderItemService.orderList();
+        model.addAttribute("orderList", orderItems);
+        return "manager/menuchart";
     }
 
     @InitBinder
