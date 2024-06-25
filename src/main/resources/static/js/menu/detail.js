@@ -181,6 +181,7 @@ function reviewsList() {
     reviews.forEach(function (review) {
         // 리뷰 요소 생성
         var reviewElement = document.createElement('div');
+        const stars = generateStars(review.rate); // Generate stars based on rating
         reviewElement.classList.add('review');
 
         // 리뷰 내용 구성
@@ -188,7 +189,7 @@ function reviewsList() {
         <div class="review-content">
             <div class="review-header">
                 <div class="review-title">
-                    <span class="star">${review.rate}</span>
+                    <span class="star-img">${stars}</span>
                     <span class="star_score">${review.rate}</span>
                     <h6 id="review_name">${review.user.nickname}</h6>
                 </div>
@@ -203,5 +204,14 @@ function reviewsList() {
         // reviewsContainer에 리뷰 요소 추가
         reviewsContainer.appendChild(reviewElement);
     });
+}
+
+
+function generateStars(score) {
+    const starImgFull = '<img src="/img/review/yellow_star.png" class="star-img">';
+    const starImgEmpty = '<img src="/img/review/grey_star.png" class="star-img">';
+    const fullStars = starImgFull.repeat(score);
+    const emptyStars = starImgEmpty.repeat(5 - score);
+    return fullStars + emptyStars;
 }
 

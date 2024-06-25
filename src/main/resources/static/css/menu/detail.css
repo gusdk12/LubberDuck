@@ -11,6 +11,8 @@ body {
     user-select:none;
 }
 
+
+
 #container{
     background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
     height: 1700px;
@@ -359,23 +361,25 @@ body {
 .review-title {
     display: flex;
     align-items: center;
+    gap: 85px;
 }
 
-.review-title > p {
-    font-weight: 700;
-    font-size: 15px;
-    margin: 0;
-    font-family: 'GmarketSansMedium';
-}
+/*.review-title > p {*/
+/*    font-weight: 700;*/
+/*    font-size: 15px;*/
+/*    margin: 0;*/
+/*}*/
 
 .review-title > h6 {
     margin: 0 0 0 8px;
     font-weight: normal;
+    margin-left: -70px;
 }
 
 .review-rating {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .star {
@@ -384,7 +388,7 @@ body {
 }
 
 .review-regdate{
-    float: right;
+    margin-left: 380px;
     right: 0;
     font-size: 10px;
     color: rgb(183, 183, 183);
@@ -443,4 +447,13 @@ body {
     border-width: 1px 0 0 0;
     border-style: dotted;
     border-color: #979797;
+}
+
+.star-img {
+    width: 20px;
+    height: 20px;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+
 }
