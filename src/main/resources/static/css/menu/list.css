@@ -112,7 +112,13 @@ body {
     /*position: relative;*/
     top: 60px;
     /*overflow-x: scroll;*/
+    cursor: pointer;
 }
+
+#menuscroll:hover {
+    cursor: url('/img/cursor/cursor2.png'), auto;
+}
+
 #menuscroll > div {
     flex-shrink: 0; /* Prevent child divs from shrinking */
 }

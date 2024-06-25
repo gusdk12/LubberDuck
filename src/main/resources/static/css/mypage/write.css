@@ -223,6 +223,10 @@ input#delete{
     margin-bottom: 1px;
 }
 
+div#star_rate.rating{
+    margin-top: 10px;
+}
+
 
 
 

@@ -1,11 +1,17 @@
+
+$(document).ready(function() {
+    loadRecent(logged_id);
+});
+
 window.addEventListener('load', () => {
 
     loadMenu();
     addEvent();
+    reviewsList();
 
 });
 
-window.addEventListener('popstate', function(event) {
+window.addEventListener('popstate', function (event) {
     // This code runs when the back button is clicked
     alert('popstate event triggered');
     location.reload(); // Refresh the page
@@ -73,35 +79,35 @@ function addEvent(){
             errorMessage.text(message);
             errorMessage.css('display','block');
             return; // 글자 수가 넘어가면 함수 종료
-        }else {
+        } else {
             errorMessage.css('display', 'none');
         }
 
         addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
-        swal("SUCCESS","즐겨찾기에 추가되었습니다","success");
-        $("#heart").css('display','block');
+        swal("SUCCESS", "즐겨찾기에 추가되었습니다", "success");
+        $("#heart").css('display', 'block');
 
         switchToFullHeart();
         closeComment();
     });
 }
 
-function switchToFullHeart(){
+function switchToFullHeart() {
     $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('fullHeart');
 }
 
-function switchToEmptyHeart(){
+function switchToEmptyHeart() {
     $('#container').find('#heart').removeClass('emptyHeart').removeClass('fullHeart').addClass('emptyHeart');
 }
 
 // 코멘트창 열기
-function openComment(){
+function openComment() {
     $('.comment-con').css('display', 'block');
     $('.comment').css('height', '200px');
 }
 
 // 코멘트창 닫기
-function closeComment(){
+function closeComment() {
     $('#container').find(".comment").val('');
     $('.comment-con').css('display', 'none');
     $('.comment').css('height', '0px');
@@ -109,63 +115,99 @@ function closeComment(){
 
 
 //다혜
-document.addEventListener('DOMContentLoaded', function() {
-    const reviewTexts = document.querySelectorAll('.review-text');
+// document.addEventListener('DOMContentLoaded', function () {
+//     const reviewTexts = document.querySelectorAll('.review-text');
+//
+//     reviewTexts.forEach(text => {
+//         text.addEventListener('click', () => {
+//             const reviewContent = text.parentElement;
+//
+//             // 다른 review-text들의 확장 상태를 초기화하고 추가 버튼을 숨깁니다.
+//             reviewTexts.forEach(otherText => {
+//                 if (otherText !== text) {
+//                     otherText.classList.remove('expanded');
+//                 }
+//             });
+//
+//             // 현재 클릭한 review-text와 해당하는 추가 버튼의 상태를 toggle합니다.
+//             text.classList.toggle('expanded');
+//             extraButtons.classList.toggle('show');
+//         });
+//     });
+//
+// });
 
-    reviewTexts.forEach(text => {
-        text.addEventListener('click', () => {
-            const reviewContent = text.parentElement;
 
-            // 다른 review-text들의 확장 상태를 초기화하고 추가 버튼을 숨깁니다.
-            reviewTexts.forEach(otherText => {
-                if (otherText !== text) {
-                    otherText.classList.remove('expanded');
-                }
-            });
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
 
-            // 현재 클릭한 review-text와 해당하는 추가 버튼의 상태를 toggle합니다.
-            text.classList.toggle('expanded');
-            extraButtons.classList.toggle('show');
-        });
-    });
-});
+$(document).ready(function () {
+    // 예제 데이터로 임시 리뷰 목록 설정
+    console.log(reviews);
+    reviewsData = reviews;
 
-$(document).ready(function() {
-    // 페이지 로드 시 최신순으로 정렬되도록 설정
-    var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
-    var reviews = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들
+    // 최신순으로 초기에 정렬하여 렌더링
+    renderReviews(sortReviews(reviewsData, '최신순'));
 
-    reviews.sort(function(a, b) {
-        var dateA = $(a).find('.review-regdate').text(); // 리뷰 날짜 가져오기
-        var dateB = $(b).find('.review-regdate').text();
-        return new Date(dateB) - new Date(dateA); // 최신순 정렬
-    });
-
-    // 정렬된 리뷰 목록을 다시 컨테이너에 추가
-    reviews.detach().appendTo(reviewsContainer);
-
-    // 최신순, 별점순 라디오 버튼 클릭 시 처리
-    $('input[name="sort"]').change(function() {
-        var sortType = $(this).val(); // 선택된 정렬 타입 (최신순 또는 별점순)
-
-        // 최신순으로 정렬
+    // 정렬 함수: 최신순 또는 별점순으로 리뷰를 정렬합니다.
+    function sortReviews(reviews, sortType) {
         if (sortType === '최신순') {
-            reviews.sort(function(a, b) {
-                var dateA = $(a).find('.review-regdate').text(); // 리뷰 날짜 가져오기
-                var dateB = $(b).find('.review-regdate').text();
-                return new Date(dateB) - new Date(dateA); // 최신순 정렬
-            });
+            return reviews.slice().sort((a, b) => new Date(b.regdate) - new Date(a.regdate));
+        } else if (sortType === '별점순') {
+            return reviews.slice().sort((a, b) => b.rate - a.rate);
         }
-        // 별점순으로 정렬
-        else if (sortType === '별점순') {
-            reviews.sort(function(a, b) {
-                var ratingA = $(a).find('.star_score').text(); // 리뷰 별점 가져오기
-                var ratingB = $(b).find('.star_score').text();
-                return ratingB - ratingA; // 별점순 정렬
-            });
-        }
+        return reviews;
+    }
 
-        // 정렬된 리뷰 목록을 다시 컨테이너에 추가
-        reviews.detach().appendTo(reviewsContainer);
+    // 리뷰 목록을 HTML에 렌더링합니다.
+    function renderReviews(reviews) {
+        var reviewsContainer = document.querySelector('.reviews-container');
+        reviewsContainer.innerHTML = ''; // 기존 리뷰를 비웁니다.
+
+        reviews.forEach(function (review) {
+            var reviewElement = document.createElement('div');
+            reviewElement.classList.add('review');
+
+            // 리뷰 내용 구성
+            reviewElement.innerHTML = `
+                <div class="review-content">
+                    <div class="review-header">
+                        <div class="review-title">
+                            <span class="star-img">${generateStars(review.rate)}</span>
+                            <span class="star_score">${review.rate}</span>
+                            <h6 id="review_name">${review.user.nickname}</h6>
+                        </div>
+                        <span class="review-regdate">${formatDate(review.regdate)}</span>
+                    </div>
+                    <div class="review-text">${review.content}</div>
+                    <hr class="review_hr">
+                </div>
+            `;
+
+            reviewsContainer.appendChild(reviewElement);
+        });
+    }
+
+    // 별점 이미지를 생성합니다.
+    function generateStars(score) {
+        var starImgFull = '<img src="/img/review/yellow_star.png" class="star-img">';
+        var starImgEmpty = '<img src="/img/review/grey_star.png" class="star-img">';
+        var fullStars = starImgFull.repeat(score);
+        var emptyStars = starImgEmpty.repeat(5 - score);
+        return fullStars + emptyStars;
+    }
+
+    // 라디오 버튼 변경 시 리뷰를 다시 정렬하여 렌더링
+    $('input[name="sort"]').change(function () {
+        var sortType = $(this).val();
+        var sortedReviews = sortReviews(reviewsData, sortType);
+        renderReviews(sortedReviews);
     });
 });

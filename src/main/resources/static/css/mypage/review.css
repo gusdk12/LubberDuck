@@ -90,7 +90,6 @@
     font-weight: 700;
     font-size: 15px;
     margin: 0;
-    font-family: 'GmarketSansMedium';
 }
 
 .review-content {
@@ -155,6 +154,7 @@
     max-height: calc(5 * 1.5em);
     min-height: 100px;
     cursor: pointer;
+    transition: max-height 0.5s ease-out; /* max-height 변화에 대한 전환 효과 추가 */
 }
 
 .review-text::after {
@@ -170,7 +170,6 @@
 .review-text.expanded {
     -webkit-line-clamp: initial;
     max-height: none;
-
 }
 
 .extra-buttons {

@@ -134,7 +134,7 @@ public class MyPageController {
             model.addAttribute("success", false);
         }
 
-        return "mypage/myPageUpdateOk";
+        return "mypage/myPageUpdate";
     }
     @RequestMapping("/info")
     public void info(){}
@@ -190,7 +190,9 @@ public class MyPageController {
     public String review(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         String username = userDetails.getUsername();
         User user = userService.findByUsername(username);
-        List<Review> reviews = reviewService.list();
+
+        List<Review> reviews = reviewService.findByUserId(user.getId());
+
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
 

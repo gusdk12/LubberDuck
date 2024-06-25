@@ -33,8 +33,8 @@
 .receipt .background {
     position: absolute;
     width: 110%;
-    height: 130%;
-    top: -17%;
+    height: 120%;
+    top: -13%;
     left: -5%;
     z-index: 1;
 }
@@ -131,6 +131,10 @@
 
 [name="reviewBtn"]:active {
     background-color: rgb(141, 185, 141);
+}
+
+[value="리뷰확인"]{
+    background-color: lightgray;
 }
 
 #view {

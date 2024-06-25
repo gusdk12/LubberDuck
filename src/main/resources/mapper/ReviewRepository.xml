@@ -31,12 +31,18 @@
             o.regdate AS "order.regdate",
             o.id AS "order.id",
             o.number AS "order.number",
-            o.user_id AS "order.user_id"
+            o.user_id AS "order.user_id",
+            u.username AS "user.username",
+            o.user_id AS "order.user_id",
+            u.username AS "user.username",
+            u.nickname AS "user.nickname",
+            u.id AS "user.id"
         FROM
             ctt_review r
                 JOIN ctt_order_item oi ON r.item_id = oi.id
                 JOIN ctt_menu m ON oi.cocktail_id = m.id
                 JOIN ctt_order o ON oi.order_id = o.id
+                JOIN ctt_user u ON o.user_id = u.id
     </sql>
 
     <select id="findAll" resultType="com.lec.spring.domain.review.Review">
@@ -69,5 +75,21 @@
         <include refid="SELECT_BASE"/>
         WHERE oi.cocktail_id = #{menu_id}
     </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM ctt_review r
+                 JOIN ctt_order_item oi ON r.item_id = oi.id
+                 JOIN ctt_menu m ON oi.cocktail_id = m.id
+                 JOIN ctt_order o ON oi.order_id = o.id
+        WHERE oi.cocktail_id = #{menu_id}
+    </select>
+
+
+    <select id="findByUserId" resultType="com.lec.spring.domain.review.Review">
+        <include refid="SELECT_BASE"/>
+        WHERE u.id = #{user_id}
+    </select>
+
 
 </mapper>

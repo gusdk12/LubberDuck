@@ -1,4 +1,3 @@
-
 /*********************************************/
 /* 메인화면 설정 */
 body {
@@ -25,10 +24,10 @@ body {
 .container-fluid {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 2fr 0.5fr;
+    grid-template-columns: 1fr 2fr 1fr;
     gap: 0;
     font-size: 0;
-    height: 690px;
+    height: 680px;
     border-radius: 10px;
     font-family: "Noto Sans KR", sans-serif;
     background-color: white;
@@ -46,13 +45,16 @@ body {
 /* 일정 */
 .schedule-container {
     width: 100%;
-    min-width: 270px;
-    max-height: 600px;
-    margin-top: 30px;
+    padding: 0 10px;
+    min-width: 200px;
+    max-height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
     text-align: center;
+    background: white;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .schedule-container::-webkit-scrollbar {
@@ -107,13 +109,12 @@ body {
 }
 
 .memo-container {
-    margin-top: -30px;
     position: relative;
+    margin-top: 40px;
 }
 
 .event-text {
     display: inline-block;
-    margin-top: 45px;
     font-size: 19px;
     font-weight: 600;
     text-align: center;
@@ -163,7 +164,7 @@ body {
 #new-memo {
     width: 270px;
     display: none;
-    margin: 8px 0;
+    margin: 8px 0 120px;
     border: none;
     resize: none;
     overflow: hidden;
@@ -222,11 +223,11 @@ body {
 
 .calendar-box {
     height: 100%;
-    min-width: 650px;
+    min-width: 670px;
     min-height: 650px;
-    margin-left: 8px;
     padding: 20px 0;
     text-align: center;
+    background: white;
 }
 
 .ctr-box {
@@ -361,23 +362,23 @@ body {
 .add-menu-container {
     min-width: 310px;
     width: 100%;
-    padding: 0 10px;
-}
-
-.today-menu-container {
-    display: none;
+    height: 680px;
+    background: white;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .menu-text-container {
     position: relative;
+    margin-top: 40px;
 }
 
 #btn-add-menu {
     width: 25px;
     height: 25px;
     position: absolute;
-    top: 48px;
-    right: 60px;
+    bottom: 19px;
+    right: 50px;
     border: none;
     border-radius: 50%;
     font-size: 15px;
@@ -388,15 +389,25 @@ body {
     opacity: 80%;
 }
 
-.menu-img {
-    width: 130px;
+.today-menu-container {
+    align-items: center;
 }
 
 .today-menu-name {
     margin: 0;
-    font-weight: 500;
-    font-size: 17px;
-    color:#033734;
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+    color : #033734;
+}
+
+.menu-img {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 85px;
 }
 
 .menu-text {
@@ -406,11 +417,12 @@ body {
 
 #today-menu-text {
     width: 86%;
-    height: 230px;
+    height: 160px;
     margin-top: 20px;
+    margin-left: 5px;
     resize: none;
     overflow-y: auto;
-    padding: 9px;
+    padding: 9px 11px;
     border: 1px solid #d1d5d4;
     margin-bottom: 30px;
     color:#434444;
@@ -422,7 +434,7 @@ body {
 
 #select-menu-text {
     width: 86%;
-    height: 230px;
+    height: 200px;
     margin-top: 20px;
     resize: none;
     overflow-y: auto;
@@ -442,7 +454,7 @@ body {
 
 .menu-buttons {
     text-align: end;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 .menu-buttons button {
@@ -496,9 +508,9 @@ body {
     vertical-align: middle;
 }
 
-.notification-menu-container:hover {
-    opacity: 80%;
-}
+/*.notification-menu-container:hover {*/
+/*    opacity: 80%;*/
+/*}*/
 
 /*********************************************/
 /* 오늘의 메뉴 리스트 팝업 */
@@ -652,7 +664,9 @@ body {
 
 .select-menu-img {
     width: 150px;
-    height: auto;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
 }
 
 .select-menu-name {
