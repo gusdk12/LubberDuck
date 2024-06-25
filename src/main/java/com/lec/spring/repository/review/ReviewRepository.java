@@ -33,6 +33,8 @@ public interface ReviewRepository{
 
     List<Review> selectFromReviewRow (int from, int rows);
 
+    List<Review> selectFromCocktailRow (int from, int rows);
+
 
     List<Review> pageList(int pageStart);
 }

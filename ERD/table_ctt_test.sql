@@ -39,6 +39,5 @@ FROM
         JOIN ctt_menu m ON oi.cocktail_id = m.id
         JOIN ctt_order o ON oi.order_id = o.id
         JOIN ctt_user u ON o.user_id = u.id
-ORDER BY r.id DESC
-    LIMIT 15, 5;
+WHERE oi.cocktail_id = 18;
 

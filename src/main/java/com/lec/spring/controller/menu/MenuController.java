@@ -27,7 +27,7 @@ public class MenuController {
     private ReviewService reviewService;
 
     @GetMapping("/detail/{menu_id}")
-    public String detail(@PathVariable Long menu_id, Model model){
+    public String detail(@PathVariable Long menu_id, Integer page, Model model){
         Menu menu = menuService.findById(menu_id);
         int reviewCount = reviewService.countAll(menu_id);
         if (menu == null) {
@@ -36,10 +36,11 @@ public class MenuController {
 
         model.addAttribute("menu", menu);
         model.addAttribute("menuList", menuService.sequenceList());
-        model.addAttribute("reviewCount", reviewCount);
+//        model.addAttribute("reviewCount", reviewCount);
+//        List<Review> reviews = reviewService.findByItemMenu(menu_id);
+//        model.addAttribute("reviews", reviews);
 
-        List<Review> reviews = reviewService.findByItemMenu(menu_id);
-        model.addAttribute("reviews", reviews);
+//        reviewService.detailList(page,model);
         return "menu/detail";
     }
 
