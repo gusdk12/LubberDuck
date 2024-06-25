@@ -1,16 +1,15 @@
 
-$(document).ready(function() {
-    loadRecent(logged_id);
+window.addEventListener('load', async () => {
+    try {
+        await checkToRecent(currentCocktail);
+        await loadRecent(logged_id);
+        loadMenu();
+        addEvent();
+        reviewsList();
+    } catch (error) {
+        console.error('Error during initialization:', error);
+    }
 });
-
-window.addEventListener('load', () => {
-
-    loadMenu();
-    addEvent();
-    reviewsList();
-
-});
-
 window.addEventListener('popstate', function (event) {
     // This code runs when the back button is clicked
     alert('popstate event triggered');
@@ -40,6 +39,7 @@ function addEvent(){
     $(document).click(function(event) {
         if (!$(event.target).closest('.comment-con').length && !$(event.target).closest('#heartImg').length) {
             $('.comment-con').css('display', 'none');
+            $("#heart").css('display','block');
         }
     });
 
