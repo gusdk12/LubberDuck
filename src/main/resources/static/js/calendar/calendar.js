@@ -64,8 +64,6 @@ function highlightEventDates(calendarData) {
         const year = dateParts[0];
         const month = dateParts[1];
         let day = dateParts[2];
-        console.log(`Processing date: ${year}.${month}.${day}`);
-
         $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`).addClass("event");
     });
 }
@@ -180,28 +178,25 @@ function addEvents() {
         let dateInt = Number(dateStr);
 
         const checkDateResult = await checkDate(dateInt);
-        if (checkDateResult.exists) {
+        if (checkDateResult.exists && checkDateResult.menu_id) {
             alert("이미 메뉴가 존재합니다.");
             return;
         }
 
         $("body").append(popupOverlay);
         $("#myForm").show();
-        initializePopup();
+        window.isEdit = false;
     });
-
-    let menuId = null;
 
     // 메뉴 클릭 시 오늘의 메뉴 디테일 팝업 열기
     $(".menu").on("click", function () {
         // 이전 이벤트 핸들러 제거
         $(".btn-save").off("click");
+        initializePopup();
 
         // 메뉴 정보 가져오기
         menuId = $(this).data("menu-id");
-        const menu = menuList.find(m => m.id === menuId);
-
-        initializePopup();
+        let menu = menuList.find(m => m.id === menuId);
 
         if (menu) {
             $("body").append(popupOverlay);
@@ -215,7 +210,7 @@ function addEvents() {
             return;
         }
 
-        // 오늘의 메뉴 저장 버튼 핸들러 바인딩
+        // 오늘의 메뉴 저장
         $(".btn-save").on("click", async function() {
             const comment = $("#select-menu-text").val();
             if (!comment) {
@@ -223,8 +218,15 @@ function addEvents() {
                 return;
             }
 
+            initializePopup();
             if (window.isEdit) {
-                await updateCalendarByMenu(menuId, comment);
+                const selectedDate = init.activeDate.toISOString().split("T")[0];
+                let dateStr = selectedDate.replace(/-/g, '');
+                let dateInt = Number(dateStr);
+                const checkDateResult = await checkDate(dateInt);
+                const calendarMenuId = checkDateResult.menu_id;
+
+                await updateCalendarByMenu(calendarMenuId, comment);
                 window.isEdit = false; // 초기화
             } else {
                 await addCalendarByMenu(menuId, comment);
@@ -236,7 +238,7 @@ function addEvents() {
         });
     });
 
-    // 오늘의 메뉴 수정 버튼
+    // 오늘의 메뉴 수정
     $('.today-menu-container').on('click', '.btn-edit', async function() {
         const selectedDate = init.activeDate.toISOString().split("T")[0];
         let dateStr = selectedDate.replace(/-/g, '');
@@ -249,14 +251,16 @@ function addEvents() {
         // 저장된 오늘의 메뉴 데이터를 불러와서 팝업창에 표시
         const todayMenuData = await buildEditTodayMenu(dateInt);
         if (todayMenuData) {
-            // 팝업창에 데이터 표시
             $("#select-menu-text").val(todayMenuData.comment);
+            window.isEdit = true;
+        } else {
+            $("#select-menu-text").empty();
         }
 
         window.isEdit = true;
     });
 
-    // 오늘의 메뉴 삭제 버튼
+    // 오늘의 메뉴 삭제
     $('.today-menu-container').on('click', '.btn-delete', async function() {
         if (confirm("오늘의 메뉴를 삭제하시겠습니까?")) {
             const selectedDate = init.activeDate.toISOString().split("T")[0];
@@ -276,7 +280,7 @@ function addEvents() {
         }
     });
 
-    // 오늘의 메뉴 취소 버튼
+    // 오늘의 메뉴 취소
     $('.btn-cancel').on('click', function() {
         $('#myForm2').hide();
         popupOverlay.remove();
