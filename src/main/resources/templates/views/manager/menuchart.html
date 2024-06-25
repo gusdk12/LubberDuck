@@ -30,14 +30,16 @@
                 <p>Chart<br>Management</p>
             </div>
             <a th:href="@{menuchart}" class="chart">메뉴별&nbsp;&nbsp;판매량</a>
-            <a th:href="@{agechart}" class="chart" id="age_nav">연령대별&nbsp;&nbsp;인기 메뉴</a>
+            <a th:href="@{agechart}" class="chart">연령대별&nbsp;&nbsp;인기 메뉴</a>
         </div>
     </aside>
 
     <div class="article_chart">
         <div class="chart_name">Chart by Menu</div>
         <div id="chart_container">
+        <div id="chart_containerBody">
             <canvas id="menuChart"></canvas>
+        </div>
         </div>
     </div>
 

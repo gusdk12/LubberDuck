@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <!--/* alert 꾸미기 */-->
+  <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
+
+  <script th:inline="javascript">
+    var logged_id = -1;
+  </script>
+  <title>결제완료</title>
+
+</head>
+<body>
+
+<th:block th:with="logged_user=${#authentication.principal.user}">
+    <script th:inline="javascript">
+    logged_id = [[${logged_user.id}]]
+    </script>
+    <script th:src="@{/js/mypage/orderData.js}"></script>
+    <script th:src="@{/js/pay/payOk.js}"></script>
+</th:block>
+
+</body>
+</html>
