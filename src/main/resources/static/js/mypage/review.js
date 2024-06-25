@@ -44,9 +44,9 @@ $(document).ready(function() {
     var reviewsElements = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들
 
     reviewsElements.sort(function(a, b) {
-        let dataparsA = new Date($(a).find('.review-date').attr('value'));
-        let dataparsB = new Date($(b).find('.review-date').attr('value'));
-        return dataparsA - dataparsB; // 최신순 정렬
+        let dateA = new Date($(a).find('.review-date').attr('value'));
+        let dateB = new Date($(b).find('.review-date').attr('value'));
+        return dateB - dateA; // 최신순 정렬
     });
 
     // 정렬된 리뷰 목록을 다시 컨테이너에 추가
@@ -59,9 +59,9 @@ $(document).ready(function() {
         // 최신순으로 정렬
         if (sortType === '최신순') {
             reviewsElements.sort(function(a, b) {
-                let dataparsA = new Date($(a).find('.review-date').attr('value'));
-                let dataparsB = new Date($(b).find('.review-date').attr('value'));
-                return dataparsB - dataparsA; // 최신순 정렬
+                let dateA = new Date($(a).find('.review-date').attr('value'));
+                let dateB = new Date($(b).find('.review-date').attr('value'));
+                return dateB - dateA; // 최신순 정렬
             });
         }
         // 별점순으로 정렬
@@ -138,6 +138,19 @@ function buildBody() {
             ${itemsHTML}
         </div>
     `);
+
+    // 페이지 로드 시 최신순으로 정렬되도록 설정
+    var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
+    var reviewsElements = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들
+
+    reviewsElements.sort(function(a, b) {
+        let dateA = new Date($(a).find('.review-date').attr('value'));
+        let dateB = new Date($(b).find('.review-date').attr('value'));
+        return dateB - dateA; // 최신순 정렬
+    });
+
+    // 정렬된 리뷰 목록을 다시 컨테이너에 추가
+    reviewsElements.detach().appendTo(reviewsContainer);
 }
 
 function generateStars(score) {
