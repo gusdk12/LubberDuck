@@ -11,4 +11,6 @@ public interface Order_itemService {
 
 
     Order_item findById(Long item_id);
+
+    List<Order_item> orderList();
 }
