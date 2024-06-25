@@ -5,8 +5,10 @@ window.addEventListener('load', async () => {
         loadMenu();
         addEvent();
         reviewsList();
-        await checkToRecent(currentCocktail);
-        await loadRecent(logged_id);
+        if (logged_id !== -1) {
+            await checkToRecent(currentCocktail);
+            await loadRecent(logged_id);
+        }
     } catch (error) {
         console.error('Error during initialization:', error);
     }
