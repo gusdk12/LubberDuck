@@ -11,8 +11,8 @@ public interface CartService {
 
     QryResult add(Long user_id, Long menu_Id, Integer quantity);
     QryResult delete(Long user_id, Long cocktail_Id);
+    QryResult clear(Long userId);
 
     QryResult incQuantity(Long user_id, Long cocktail_Id);
     QryResult decQuantity(Long user_id, Long cocktail_Id);
-
 }

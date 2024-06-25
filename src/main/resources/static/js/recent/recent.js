@@ -1,8 +1,6 @@
-
 // 존재 여부에 따른 추가
 async function checkToRecent(cocktail) {
-
-    if(cocktail == null || logged_id === -1){
+    if (cocktail == null || logged_id === -1) {
         return;
     }
 
@@ -25,10 +23,12 @@ async function checkToRecent(cocktail) {
     });
 
     // 최근 본 목록에 없다면 카트 추가
-    if(!findRecent) {
+    if (!findRecent) {
+        console.log('존재안하는 checkToRecent 호출');
         await addToRecent(cocktail);
-        await deleteLimited()
+        await deleteLimited();
     } else {
+        console.log('존재하는 checkToRecent 호출');
         await deleteToRecent(cocktail);
         await addToRecent(cocktail);
     }
@@ -39,8 +39,8 @@ async function deleteLimited() {
     const data = {
         "userId": logged_id
     };
-
-    await $.ajax({
+// return 키워드 : AJAX 요청의 결과를 반환하도록 함 => 각 함수 내에서 비동기 호출이 완료될 때까지 기다림
+    return $.ajax({
         url: "/deleteLimit/" + logged_id, // 5개 초과 시 오래된 항목 삭제
         type: "POST",
         cache: false,
@@ -51,6 +51,7 @@ async function deleteLimited() {
         },
     });
 }
+
 async function addToRecent(cocktail) {
     // 전달할 parameter 준비 (POST)
     const data = {
@@ -58,13 +59,14 @@ async function addToRecent(cocktail) {
         "cocktailId": cocktail.id,
     };
 
-    $.ajax({
+    return $.ajax({
         url: "/recentData/add",
         type: "POST",
         data: data,
         cache: false,
         success: function (data, status) {
             if (status === "success") {
+                console.log('addToRecent 성공');
                 if (data.status !== "OK") {
                     alert(data.status);
                 }
@@ -80,13 +82,14 @@ async function deleteToRecent(cocktail) {
         "cocktailId": cocktail.id,
     };
 
-    $.ajax({
+    return $.ajax({
         url: "/recentData/delete/" + logged_id + "/" + cocktail.id,
         type: "POST",
         data: data,
         cache: false,
         success: function (data, status) {
             if (status === "success") {
+                console.log('deleteToRecent 성공');
                 if (data.status !== "OK") {
                     alert(data.status);
                 }
@@ -95,18 +98,20 @@ async function deleteToRecent(cocktail) {
     });
 }
 
-function loadRecent(user_id){
+function loadRecent(user_id) {
     $.ajax({
         url: "/recentData/list/" + user_id,
         type: "GET",
         cache: false,
         success: function (data, status) {
             if (status === "success") {
+                console.log('loadRecent 성공');
                 // 서버쪽 에러 메세지 있는경우
                 if (data.status !== "OK") {
                     alert(data.status);
                     return;
                 }
+                console.log('로드 중..');
                 buildRecent(data);
             }
         },
@@ -114,14 +119,17 @@ function loadRecent(user_id){
 }
 
 function buildRecent(result) {
+    console.log('빌드 중..');
+    $('#recentSection').empty(); // 기존 항목들을 제거합니다.
     result.data.slice(0, 4).forEach(recent => { // 배열의 처음 4개 항목만 처리
         $('#recentSection').append($(`
             <div class="recent-con">
                 <div class="cttName"> ${recent.menu.name} </div>
                 <div class="cttImg" 
                     style="background-image: url('${recent.menu.imgUrl}')"
-                    onclick="location.href = '/menu/detail/${recent.menu.id}'"></div>
+                    onclick="location.href = '/menu/detail/${recent.menu.id}'">                    
+                </div>
             </div>
-        `))
-    })
+        `));
+    });
 }

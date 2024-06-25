@@ -1,7 +1,6 @@
 package com.lec.spring.repository.order;
 
 import com.lec.spring.domain.order.Order;
-import com.lec.spring.domain.order.Order_item;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,6 +9,9 @@ import java.util.List;
 public interface OrderRepository {
 
     List<Order> findByUser(Long user_id);
+
+    int countAll();
+    int insert(Order order);
 
 }
 

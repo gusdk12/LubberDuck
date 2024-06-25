@@ -310,32 +310,14 @@ body {
     margin-right: auto;
     height: auto;
     padding: 15px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 7px;
+    border-radius: 10px;
+    background-color: #ffffff;
 }
 
 .list > hr {
     border-width: 1px 0 0 0;
     border-style: dotted;
-    border-color: #979797;
-}
-
-.review-title {
-    display: flex;
-    align-items: center;
-}
-
-.star-img {
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.star-container {
-    display: flex;
-    align-items: center;
-    margin-right: 2px; /* Adjust as necessary */
+    border-color: #969696;
 }
 
 .tag_btn > input {
@@ -344,12 +326,11 @@ body {
 
 .tag_btn > label {
     background-color: transparent;
-    border: 0px;
     cursor: pointer;
     font-weight: 100;
     font-size: 12px;
     display: inline-flex;
-    margin-right: 7px;
+    margin-left: 10px;
 }
 
 .tag_btn > label:hover {
@@ -369,31 +350,36 @@ body {
 .review-header {
     display: flex;
     justify-content: left;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
-    padding: 2px;
+    padding: 5px;
+    margin-top: 3px;
+    margin-bottom: -5px;
 }
 
 .review-title {
     display: flex;
+    width: 100%;
     align-items: center;
 }
 
-.review-title > p {
-    font-weight: 700;
-    font-size: 15px;
-    margin: 0;
-    font-family: 'GmarketSansMedium';
+.star_score{
+    margin-left: 75px;
 }
+
 
 .review-title > h6 {
     margin: 0 0 0 8px;
     font-weight: normal;
+    margin-left: 10px;
+    display: flex;
+    /*background-color: red;*/
 }
 
 .review-rating {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .star {
@@ -402,11 +388,11 @@ body {
 }
 
 .review-regdate{
-    float: right;
     right: 0;
     font-size: 10px;
-    color: rgb(183, 183, 183);
-    margin-left: 5px;
+    color: rgb(154, 154, 154);
+    display: flex;
+    width: 100px;
 }
 
 .review-content {
@@ -420,9 +406,9 @@ body {
 .review-text {
     font-size: 11.5px;
     text-align: justify;
-    margin-top: 5px;
+    /*margin-top: 3px;*/
     padding: 15px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 248, 248);
     border-radius: 5px;
     box-sizing: border-box;
     overflow: hidden;
@@ -461,7 +447,15 @@ body {
 .review_hr{
     border-width: 1px 0 0 0;
     border-style: dotted;
-    border-color: #979797;
+    border-color: #969696;
+}
+
+.star-img {
+    width: 17px;
+    height: 17px;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
 }
 
 /* //////////////////최근 항목 css////////////////////// */

@@ -14,5 +14,7 @@ public interface Order_ItemRepository {
     Order_item findById(Long itemId);
 
     List<Order_item> findByOrderList();
+
+    int insert(Order_item item);
 }
 

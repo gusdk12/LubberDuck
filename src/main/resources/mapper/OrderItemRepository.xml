@@ -14,7 +14,6 @@
                oi.price       "price",
                o.regdate AS   "order.regdate",
                o.id      AS   "order.id",
-               o.number  AS   "order.number",
                o.user_id AS   "order.user_id",
                m.id           "menu.id",
                m.name         "menu.name",  -- 칵테일 이름 추가
@@ -38,4 +37,10 @@
     <select id="findByOrderList" resultType="com.lec.spring.domain.order.Order_item">
         <include refid="SELECT_BASE"/>
     </select>
+    <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.order.Order_item"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO ctt_order_item(order_id, cocktail_id, quantity, price)
+        VALUES(#{order_id}, #{cocktail_id}, #{quantity}, #{price})
+    </insert>
+
 </mapper>

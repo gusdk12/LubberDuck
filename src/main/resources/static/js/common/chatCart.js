@@ -33,6 +33,11 @@ function customerButtonsSet() {
         e.preventDefault();
         clearChat();
     });
+    $('#toPay').click(function(e){
+        e.preventDefault();
+        (cartSize > 0) && (location.href = "/pay/list");
+        (cartSize > 0) || (alert("카트에 아무것도 담겨있지 않습니다."));
+    });
 }
 function sendCustomerChat(){
     if(document.getElementById('chatInput').value === "")
