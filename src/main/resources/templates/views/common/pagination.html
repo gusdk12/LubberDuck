@@ -3,11 +3,11 @@
 
 <th:block th:fragment="pagination">
     <div class="containerA">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination">
             <!--/* << 표시여부 */-->
-            <li class="page-item" th:if="${page > 1}"><a class="page-link" th:href="${url}" title="처음"><i class="fas fa-angle-double-left"></i></a></li>
+            <li class="page-item" th:if="${page > 1}"><a class="page-link" th:href="${url}" title="처음"><i class="fas fa-angle-double-left" name="icon"><</i></a></li>
             <!--/* < 표시 여부 */-->
-            <li class="page-item" th:if="${startPage > 1 }"><a class="page-link" th:href="@{${url }(page=${startPage - 1 })}"><i class='fas fa-angle-left'></i></a></li>
+            <li class="page-item" th:if="${startPage > 1 }"><a class="page-link" th:href="@{${url }(page=${startPage - 1 })}"><i class='fas fa-angle-left' name="icon"><<</i></a></li>
 
 
             <!--/* 페이징 안의 '숫자' 표시 */-->
@@ -20,11 +20,11 @@
 
 
             <!--/* > 표시 여부 */-->
-            <li class="page-item" th:if="${totalPage > endPage }"><a class="page-link" th:href="@{${url }(page=${endPage + 1 })}"><i class='fas fa-angle-right'></i></a></li>
+            <li class="page-item" th:if="${totalPage > endPage }"><a class="page-link" th:href="@{${url }(page=${endPage + 1 })}"><i class='fas fa-angle-right' name="icon">></i></a></li>
 
 
             <!--/* >> 표시 여부 */-->
-            <li class="page-item" th:if="${page < totalPage }"><a class="page-link" th:href="@{${url }(page=${totalPage })}"><i class='fas fa-angle-double-right'></i></a></li>
+            <li class="page-item" th:if="${page < totalPage }"><a class="page-link" th:href="@{${url }(page=${totalPage })}"><i class='fas fa-angle-double-right' name="icon">>></i></a></li>
         </ul>
     </div>
 </th:block>

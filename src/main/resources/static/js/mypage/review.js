@@ -99,7 +99,7 @@ function buildBody() {
     $('.container').append(`
         <div class="list">
             <h2>${user.nickname}님</h2>
-            <h5>REVIEW | (${reviews.length})</h5>
+            <h5>REVIEW |  ${totalReviews} 개 </h5>
             <hr>
             <div class="tag_btn">
                 <input type="radio" name="sort" id="latest" value="최신순" checked><label for="latest">최신순</label>
