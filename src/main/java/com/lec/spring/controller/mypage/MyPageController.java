@@ -193,10 +193,11 @@ public class MyPageController {
         User user = userService.findByUsername(username);
 
         List<Review> reviews = reviewService.findByUserId(user.getId());
-        reviewService.list(page,model);
 
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
+
+        reviewService.list(page,model);
 
     }
 

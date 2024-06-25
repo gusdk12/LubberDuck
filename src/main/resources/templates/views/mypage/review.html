@@ -24,11 +24,9 @@
     <script th:src="@{/js/review/list.js}"></script>
 
     <script th:inline="javascript">
-        let orderList = [[${orders}]];
-        let orderItemMap = [[${orderItemsByOrderId}]];
         let user = [[${user}]];
-        let reviews = [[${reviews}]];
-
+        let reviews = [[${list}]];
+        // let reviews = [[${list}]];
     </script>
 </head>
 <body>
