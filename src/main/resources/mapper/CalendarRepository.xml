@@ -62,17 +62,26 @@
         VALUES (#{menu_id}, #{comment}, #{date}, #{id});
     </insert>
 
-    <!-- 캘린더 데이터(메모, 오늘의 메뉴) 수정 혹은 특정 날짜에 데이터가 있을 때 오늘의 메뉴, 메모 추가 -->
-    <!--
-        COALESCE 함수는 인자로 주어진 값들 중에서 null이 아닌 첫 번째 값을 반환합니다.
-        #{memo}가 null이 아니면 #{memo}의 값을 사용하고, null이면 기존의 memo 값을 유지합니다.
-     -->
     <update id="updateCalendar" parameterType="com.lec.spring.domain.calendar.Calendar">
         UPDATE ctt_calendar
         SET cocktail_id = COALESCE(#{menu_id}, cocktail_id),
         comment = COALESCE(#{comment}, comment),
         memo = COALESCE(#{memo}, memo)
         WHERE id = #{id}
+    </update>
+
+    <!-- 특정 id의 메모 삭제 -->
+    <update id="updateToDeleteMemo" parameterType="com.lec.spring.domain.calendar.Calendar">
+        UPDATE ctt_calendar
+        SET memo = null
+        WHERE id = #{id};
+    </update>
+
+    <!-- 특정 id의 오늘의 메뉴 삭제 -->
+    <update id="updateToDeleteMenu" parameterType="com.lec.spring.domain.calendar.Calendar">
+        UPDATE ctt_calendar
+        SET comment = null, cocktail_id = null
+        WHERE id = #{id};
     </update>
 
     <!-- 특정 id 삭제 -->

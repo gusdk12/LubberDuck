@@ -21,6 +21,10 @@ public interface CalendarService {
     // 캘린더 데이터(메모, 오늘의 메뉴) 수정
     QryResult update(Long id, Long menu_id, String comment, String memo);
 
+    QryResult updateToDeleteMemo(Long id, String memo);
+
+    QryResult updateToDeleteMenu(Long id, Long menu_id, String comment);
+
     // 캘린더 데이터 삭제 (전체 삭제)
     QryResult deleteById(Long id);
 

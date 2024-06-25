@@ -21,6 +21,10 @@ public interface CalendarRepository {
     // 캘린더 데이터(메모, 오늘의 메뉴) 수정
     int updateCalendar(Calendar calendar);
 
+    int updateToDeleteMemo(Calendar calendar);
+
+    int updateToDeleteMenu(Calendar calendar);
+
     // 캘린더 데이터 삭제 (전체 삭제)
     int deleteById(Long calendarId);
 }

@@ -106,7 +106,13 @@ function addEvents() {
             if ($("#new-memo").data("mode") === "edit") {
                 const selectedDate = init.activeDate.toISOString().split("T")[0];
                 let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
-                await updateCalendarByMemo(findSchedule.id, memoText);
+
+                let dateStr = selectedDate.replace(/-/g, '');
+                let dateInt = Number(dateStr);
+                const checkDateResult = await checkDate(dateInt);
+                const calendarMemoText = checkDateResult.memo
+
+                await updateCalendarByMemo(findSchedule.id, calendarMemoText);
             } else {
                 await addCalendarByMemo(memoText);
             }
@@ -188,15 +194,15 @@ function addEvents() {
         window.isEdit = false;
     });
 
+    let selectedMenuId = null;
+
     // 메뉴 클릭 시 오늘의 메뉴 디테일 팝업 열기
     $(".menu").on("click", function () {
-        // 이전 이벤트 핸들러 제거
-        $(".btn-save").off("click");
         initializePopup();
 
         // 메뉴 정보 가져오기
-        menuId = $(this).data("menu-id");
-        let menu = menuList.find(m => m.id === menuId);
+        selectedMenuId = $(this).data("menu-id");
+        let menu = menuList.find(m => m.id === selectedMenuId);
 
         if (menu) {
             $("body").append(popupOverlay);
@@ -205,37 +211,41 @@ function addEvents() {
             $(".select-menu-img").attr("src", menu.imgUrl);
             $(".select-menu-img").attr("alt", menu.name);
             $(".select-menu-name").text(menu.name);
-        } else {
-            console.error("Menu not found.");
+        }
+    });
+
+    // 오늘의 메뉴 저장
+    $(".btn-save").on("click", async function() {
+        const comment = $("#select-menu-text").val();
+
+        if (!comment) {
+            alert("코멘트를 입력하세요.");
             return;
         }
 
-        // 오늘의 메뉴 저장
-        $(".btn-save").on("click", async function() {
-            const comment = $("#select-menu-text").val();
-            if (!comment) {
-                alert("코멘트를 입력하세요.");
-                return;
-            }
+        initializePopup();
+        const selectedDate = init.activeDate.toISOString().split("T")[0];
+        let dateStr = selectedDate.replace(/-/g, '');
+        let dateInt = Number(dateStr);
 
-            initializePopup();
-            if (window.isEdit) {
-                const selectedDate = init.activeDate.toISOString().split("T")[0];
-                let dateStr = selectedDate.replace(/-/g, '');
-                let dateInt = Number(dateStr);
-                const checkDateResult = await checkDate(dateInt);
-                const calendarMenuId = checkDateResult.menu_id;
+        if (window.isEdit) {
+            const checkDateResult = await checkDate(dateInt);
+            const calendarMenuId = checkDateResult.menu_id;
 
-                await updateCalendarByMenu(calendarMenuId, comment);
-                window.isEdit = false; // 초기화
+            await updateCalendarByMenu(calendarMenuId, comment);
+            window.isEdit = false;
+        } else {
+            if (selectedMenuId) {
+                await addCalendarByMenu(selectedMenuId, comment);
             } else {
-                await addCalendarByMenu(menuId, comment);
+                alert("메뉴를 선택하세요.");
             }
+        }
 
-            // 저장 후 팝업 닫기
-            $("#myForm2").hide();
-            $(".popup-overlay").remove();
-        });
+        // 저장 후 팝업 닫기
+        $("#myForm2").hide();
+        $(".popup-overlay").remove();
+        selectedMenuId = null; // 초기화
     });
 
     // 오늘의 메뉴 수정
@@ -264,15 +274,20 @@ function addEvents() {
     $(document).on("click", '.btn-delete', async function() {
         if (confirm("오늘의 메뉴를 삭제하시겠습니까?")) {
             const selectedDate = init.activeDate.toISOString().split("T")[0];
+            let dateStr = selectedDate.replace(/-/g, '');
+            let dateInt = Number(dateStr);
+            const checkDateResult = await checkDate(dateInt);
+            const calendarMenuId = checkDateResult.menu_id;
+            const calendarComment = checkDateResult.comment;
 
             // 캘린더 리스트에서 해당 날짜 찾기
             let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
 
             if (findSchedule) {
                 if (findSchedule.memo) {
-                    await deleteToUpdateCalendarByMenu(findSchedule.id);
+                    await deleteCalendarByMenu(findSchedule.id, calendarMenuId, calendarComment);
                 } else {
-                    await deleteCalendarByMenu(findSchedule.id);
+                    await deleteCalendarByMenu(findSchedule.id, calendarMenuId, calendarComment);
                 }
             } else {
                 console.error("No schedule found for the selected date");

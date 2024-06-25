@@ -132,6 +132,43 @@ public class CalendarServiceImpl implements CalendarService {
         return result;
     }
 
+    @Override
+    public QryResult updateToDeleteMemo(Long id, String memo) {
+        Calendar calendar = Calendar.builder()
+                .id(id)
+                .memo(memo)
+                .build();
+
+        int cnt = calendarRepository.updateToDeleteMemo(calendar);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
+
+    @Override
+    public QryResult updateToDeleteMenu(Long id, Long menu_id, String comment) {
+        Menu menu = menuRepository.findById(menu_id);
+
+        Calendar calendar = Calendar.builder()
+                .id(id)
+                .menu_id(menu.getId())
+                .comment(comment)
+                .build();
+
+        int cnt = calendarRepository.updateToDeleteMenu(calendar);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
+
     // 캘린더 데이터 삭제 (전체 삭제)
     @Override
     public QryResult deleteById(Long id) {

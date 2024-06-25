@@ -63,6 +63,25 @@ public class CalendarController {
         return result;
     }
 
+    @PostMapping("/updateToDeleteMenu/{id}")
+    public QryResult updateToDeleteMenu(
+            @PathVariable Long id,
+            @RequestParam("menu_id") Long menu_id,
+            @RequestParam("comment") String comment
+    ) {
+        QryResult result = calendarService.updateToDeleteMenu(id, menu_id, comment);
+        return result;
+    }
+
+    @PostMapping("/updateToDeleteMemo/{id}")
+    public QryResult updateToDeleteMemo(
+            @PathVariable Long id,
+            @RequestParam("memo") String memo
+    ) {
+        QryResult result = calendarService.updateToDeleteMemo(id, memo);
+        return result;
+    }
+
     @PostMapping("/deleteById/{id}")
     public QryResult deleteById(@PathVariable Long id) {
         QryResult result = calendarService.deleteById(id);

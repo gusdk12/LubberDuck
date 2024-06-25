@@ -246,7 +246,6 @@ async function addCalendarByMenu(menuId, comment) {
     }
 }
 
-// todo
 // 오늘의 메뉴 수정
 async function updateCalendarByMenu(menuId, comment) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
@@ -283,9 +282,8 @@ async function updateCalendarByMenu(menuId, comment) {
     }
 }
 
-// todo
 // 오늘의 메뉴 삭제 (메모가 있을 때 삭제)
-async function deleteToUpdateCalendarByMenu(calendarId) {
+async function deleteCalendarByMenu(calendarId, menuId, comment) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
     let dateStr = selectedDate.replace(/-/g, '');
     let dateInt = Number(dateStr);
@@ -293,14 +291,15 @@ async function deleteToUpdateCalendarByMenu(calendarId) {
     try {
         const checkDateResult = await checkDate(dateInt);
 
+        // 메모 데이터가 있는지 없는지 구분하여 삭제
         const data = {
-            "menu_id": null,
-            "comment": null,
+            "menu_id": menuId,
+            "comment": comment,
             "date": selectedDate,
-            "memo": checkDateResult.memo
+            "memo": checkDateResult.exists ? checkDateResult.memo : null
         };
 
-        const url = `/calendar/update/${calendarId}`;
+        const url = checkDateResult.exists ? `/calendar/updateToDeleteMenu/${calendarId}` : `/calendar/deleteById/${calendarId}`;
 
         $.ajax({
             url: url,
@@ -311,6 +310,10 @@ async function deleteToUpdateCalendarByMenu(calendarId) {
                 if (status === "success" && data.status === "OK") {
                     alert("오늘의 메뉴가 삭제되었습니다.");
                     loadData(dateInt);
+                    $('.today-menu-container').empty();
+                    $('#select-menu-text').empty();
+                    $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
+                    $('#notification-menu .notification-menu-text').text('등록한 오늘의 메뉴가 없습니다.');
                 }
             }
         });
@@ -319,45 +322,6 @@ async function deleteToUpdateCalendarByMenu(calendarId) {
     }
 }
 
-// 오늘의 메뉴 삭제 (메모가 없을 때 삭제)
-async function deleteCalendarByMenu(calendarId) {
-    const selectedDate = init.activeDate.toISOString().split("T")[0];
-
-    try {
-        const checkDateResult = await checkDate(calendarId);
-
-        if (checkDateResult.exists) {
-            const data = {
-                "menu_id": null,
-                "comment": null,
-                "date": checkDateResult.date,
-                "memo": null
-            };
-
-            const url = `/calendar/deleteById/${calendarId}`;
-
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: data,
-                cache: false,
-                success: function(data, status) {
-                    if (status === "success" && data.status === "OK") {
-                        alert("오늘의 메뉴가 삭제되었습니다.");
-                        $('.today-menu-container').empty();
-                        $('#select-menu-text').empty();
-                        $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
-                        $('#notification-menu .notification-menu-text').text('등록한 오늘의 메뉴가 없습니다.');
-                    }
-                }
-            });
-        } else {
-            console.error("No existing record found for the given calendarId.");
-        }
-    } catch (error) {
-        console.error("Error checking date existence:", error);
-    }
-}
 
 /********************************************
                     메모
@@ -485,7 +449,7 @@ async function deleteToUpdateCalendarByMemo(calendarId) {
             "memo": null
         };
 
-        const url = `/calendar/update/${calendarId}`;
+        const url = `/calendar/updateToDeleteMemo/${calendarId}`;
 
         $.ajax({
             url: url,
