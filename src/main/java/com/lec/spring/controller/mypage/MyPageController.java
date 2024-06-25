@@ -8,6 +8,7 @@ import com.lec.spring.domain.review.Review;
 import com.lec.spring.service.UserService;
 import com.lec.spring.service.menu.MenuService;
 import com.lec.spring.service.review.ReviewService;
+import com.lec.spring.util.U;
 import jakarta.validation.Valid;
 import com.lec.spring.service.menu.MenuService;
 import com.lec.spring.service.order.OrderService;
@@ -187,16 +188,16 @@ public class MyPageController {
     }
 
     @GetMapping("/review")
-    public String review(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public void review(@AuthenticationPrincipal UserDetails userDetails, Integer page, Model model) {
         String username = userDetails.getUsername();
         User user = userService.findByUsername(username);
 
         List<Review> reviews = reviewService.findByUserId(user.getId());
+        reviewService.list(page,model);
 
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
 
-        return "/mypage/review";
     }
 
     @GetMapping("review/write/{item_id}")
@@ -217,6 +218,12 @@ public class MyPageController {
     public void bookmark(Model model){
         model.addAttribute("allList",menuService.list());
         model.addAttribute("menuList", menuService.sequenceList());
+    }
+
+    @PostMapping("/pageRows")
+    public String pageRows(Integer page, Integer pageRows){
+        U.getSession().setAttribute("pageRows", pageRows);
+        return "redirect:/mypage/review/list?page=" + page;
     }
 
     @InitBinder

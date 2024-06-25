@@ -1,13 +1,5 @@
 $(document).ready(function() {
-    // 사이드바 메뉴 클릭시 css 변경
-    $('.sm').eq(2).css({
-        'background-color': '#FBF5ED',
-        'border-radius': '10px 0 0 10px',
-        'color': '#54320f',
-        'font-weight': 'bold'
-    });
-
-    buildBody();
+    initializePage(); // 페이지 로드 시 초기화 함수 호출
 
     // 리뷰 삭제 버튼 클릭 시
     $(document).on('click', '.btn-delete', function() {
@@ -29,7 +21,8 @@ $(document).ready(function() {
                         $(this).remove();
                     });
                     alert('리뷰가 삭제되었습니다.');
-                    window.location.href = '/mypage/review'; // 리뷰 목록 페이지로 리디렉션
+                    // 리뷰 목록 페이지로 리디렉션
+                    window.location.href = '/mypage/review';
                 },
                 error: function(xhr, status, error) {
                     console.error('Error deleting review:', error);
@@ -39,60 +32,38 @@ $(document).ready(function() {
         }
     });
 
-    // 페이지 로드 시 최신순으로 정렬되도록 설정
-    var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
-    var reviewsElements = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들
-
-    reviewsElements.sort(function(a, b) {
-        let dataparsA = new Date($(a).find('.review-date').attr('value'));
-        let dataparsB = new Date($(b).find('.review-date').attr('value'));
-        return dataparsA - dataparsB; // 최신순 정렬
-    });
-
-    // 정렬된 리뷰 목록을 다시 컨테이너에 추가
-    reviewsElements.detach().appendTo(reviewsContainer);
-
     // 최신순, 별점순 라디오 버튼 클릭 시 처리
     $('input[name="sort"]').change(function() {
         var sortType = $(this).val(); // 선택된 정렬 타입 (최신순 또는 별점순)
-
-        // 최신순으로 정렬
-        if (sortType === '최신순') {
-            reviewsElements.sort(function(a, b) {
-                let dataparsA = new Date($(a).find('.review-date').attr('value'));
-                let dataparsB = new Date($(b).find('.review-date').attr('value'));
-                return dataparsB - dataparsA; // 최신순 정렬
-            });
-        }
-        // 별점순으로 정렬
-        else if (sortType === '별점순') {
-            reviewsElements.sort(function(a, b) {
-                var ratingA = $(a).find('.star_score').text(); // 리뷰 별점 가져오기
-                var ratingB = $(b).find('.star_score').text();
-                return ratingB - ratingA; // 별점순 정렬
-            });
-        }
-
-        // 정렬된 리뷰 목록을 다시 컨테이너에 추가
-        reviewsElements.detach().appendTo(reviewsContainer);
+        sortReviews(sortType); // 리뷰 정렬 함수 호출
     });
 
     // 리뷰 텍스트 클릭 시 토글 애니메이션
     $(document).on('click', '.review-text', function() {
         var $reviewContent = $(this).closest('.review-content');
         var $extraButtons = $reviewContent.find('.extra-buttons');
+        var $reviewText = $(this);
 
         // 다른 review-text들의 확장 상태를 초기화하고 추가 버튼을 숨깁니다.
-        $('.review-text.expanded').not(this).removeClass('expanded');
+        $('.review-text.expanded').not(this).removeClass('expanded').css('max-height', 'calc(5 * 1.5em)').next('.extra-buttons').slideUp('slow');
 
         // 현재 클릭한 review-text와 해당하는 추가 버튼의 상태를 toggle하며 애니메이션 적용
-        $(this).toggleClass('expanded');
-        $extraButtons.slideToggle('slow');
+        if ($reviewText.hasClass('expanded')) {
+            $reviewText.removeClass('expanded').css('max-height', 'calc(5 * 1.5em)');
+            $extraButtons.slideUp('slow');
+        } else {
+            $reviewText.addClass('expanded').css('max-height', $reviewText[0].scrollHeight + 'px');
+            $extraButtons.slideDown('slow');
+        }
     });
 });
 
+function initializePage() {
+    $('.container').empty(); // 리뷰 목록을 비웁니다.
+    buildBody(); // 리뷰 목록을 다시 빌드합니다.
+}
+
 function buildBody() {
-    $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
     let itemsHTML = "";
 
     reviews.forEach(review => {
@@ -138,6 +109,29 @@ function buildBody() {
             ${itemsHTML}
         </div>
     `);
+
+    sortReviews('최신순'); // 페이지 로드 시 최신순으로 정렬
+}
+
+function sortReviews(sortType) {
+    var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
+    var reviewsElements = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들
+
+    reviewsElements.detach(); // 기존 리뷰 요소들을 제거합니다.
+
+    reviewsElements.sort(function(a, b) {
+        if (sortType === '최신순') {
+            let dateA = new Date($(a).find('.review-date').attr('value'));
+            let dateB = new Date($(b).find('.review-date').attr('value'));
+            return dateB - dateA; // 최신순 정렬
+        } else if (sortType === '별점순') {
+            var ratingA = $(a).find('.star_score').text(); // 리뷰 별점 가져오기
+            var ratingB = $(b).find('.star_score').text();
+            return ratingB - ratingA; // 별점순 정렬
+        }
+    });
+
+    reviewsElements.appendTo(reviewsContainer); // 정렬된 요소들을 다시 추가합니다.
 }
 
 function generateStars(score) {

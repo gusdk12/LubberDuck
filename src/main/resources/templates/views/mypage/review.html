@@ -21,6 +21,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
 
+    <script th:src="@{/js/review/list.js}"></script>
+
     <script th:inline="javascript">
         let orderList = [[${orders}]];
         let orderItemMap = [[${orderItemsByOrderId}]];
@@ -59,6 +61,10 @@
         </th:block>
     </div>
     <!-- JS -->
+
+    <th:block th:replace="~{common/pagination :: pagination}"
+              th:with="page=${page}, startPage=${startPage}, endPage=${endPage}, totalPage=${totalPage}, url=${url}"></th:block>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script th:src="@{/js/mypage/review.js}"></script>
 </body>
