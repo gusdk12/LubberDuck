@@ -8,9 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Calendar {
-    private Long id;
+    private Long id; // 캘린더아이디 PK
 
-    private Long menu_id; // FK
+    private Long menu_id; // 칵테일아이디 FK
 
     @ToString.Exclude
     private Menu menu;

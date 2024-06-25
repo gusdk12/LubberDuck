@@ -11,8 +11,6 @@ body {
     user-select:none;
 }
 
-
-
 #container{
     background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
     height: 1700px;
@@ -456,4 +454,51 @@ body {
     display: flex;
     flex-direction: column;
 
+}
+
+/* //////////////////최근 항목 css////////////////////// */
+#recentSection-con {
+    position: fixed;
+    top: 105px;
+    right : 50px;
+    z-index: 10;
+
+    text-align: center;
+}
+
+#recent-title {
+    font-size: 20px;
+    color: #e0d4c3;
+    margin-bottom: 10px;
+}
+
+.recent-con {
+    background-color: rgba(255, 255, 255, 0.7);
+    /*border: 1px solid #ccc;*/
+    border-radius: 10px;
+}
+
+.cttName {
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+    color : #033734;
+
+    padding-top: 10px;
+}
+
+.cttImg {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    height: 120px;
+    width: 170px;
+
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+
+    cursor: pointer ;
 }

@@ -17,7 +17,7 @@ window.addEventListener('unload', function(e){
 function preloadImages(){
     // 미리 로드할 이미지 URL 목록
     var images = [
-        '/img/management/menu.jpg'
+        '/img/manager/menu.jpg'
     ];
 
     for(let menu of menuList){
@@ -102,6 +102,8 @@ function appendMenuToPlate(){
             $(this).find(".cocktailbutton").css({ 'display': `none` });
         });
     }
+
+    // addToCart
     for(cocktailadd of document.querySelectorAll("#cocktailadd")){
         cocktailadd.addEventListener("click", function(e){
             e.preventDefault();
@@ -109,12 +111,18 @@ function appendMenuToPlate(){
             addToCart(menuList.find(menu => menu.name === cocktailName));
         });
     }
-    // for(cocktaildetail of document.querySelectorAll("#cocktaildetail")){
-    //     cocktaildetail.addEventListener("click", function(e){
-    //         e.preventDefault();
-    //         window.scrollTo(0, 0);
-    //     });
-    // }
+
+    // checkToRecent - 가연
+    for (cocktaildetail of document.querySelectorAll("#cocktaildetail")) {
+        cocktaildetail.addEventListener("click", function (e) {
+            e.preventDefault();
+            var cocktailName = $(this).parent().siblings(".cocktailname").text();
+
+            var cocktail = menuList.find(menu => menu.name === cocktailName);
+
+            checkToRecent(cocktail);
+        });
+    }
 
     let fr = "";
     for(let i = 0; i < paperCount; i++)

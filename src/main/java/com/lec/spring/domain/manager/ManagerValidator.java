@@ -2,6 +2,7 @@ package com.lec.spring.domain.manager;
 
 import com.lec.spring.domain.calendar.Calendar;
 import com.lec.spring.domain.menu.Menu;
+import com.lec.spring.domain.order.Order_item;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -13,7 +14,7 @@ public class ManagerValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
         // Menu, Calender 클래스 각각지원
-        return Menu.class.isAssignableFrom(clazz) || Calendar.class.isAssignableFrom(clazz);
+        return Menu.class.isAssignableFrom(clazz) || Calendar.class.isAssignableFrom(clazz) || Order_item.class.isAssignableFrom(clazz);
     }
 
     @Override
