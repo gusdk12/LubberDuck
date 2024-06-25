@@ -137,6 +137,17 @@ function closeComment() {
 //
 // });
 
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
 $(document).ready(function () {
     // 예제 데이터로 임시 리뷰 목록 설정
     console.log(reviews);
@@ -173,7 +184,7 @@ $(document).ready(function () {
                             <span class="star_score">${review.rate}</span>
                             <h6 id="review_name">${review.user.nickname}</h6>
                         </div>
-                        <span class="review-regdate">${review.regdate}</span>
+                        <span class="review-regdate">${formatDate(review.regdate)}</span>
                     </div>
                     <div class="review-text">${review.content}</div>
                     <hr class="review_hr">
@@ -193,7 +204,7 @@ $(document).ready(function () {
         return fullStars + emptyStars;
     }
 
-    // 라디오 버튼 변경 시 리뷰를 다시 정렬하여 렌더링합니다.
+    // 라디오 버튼 변경 시 리뷰를 다시 정렬하여 렌더링
     $('input[name="sort"]').change(function () {
         var sortType = $(this).val();
         var sortedReviews = sortReviews(reviewsData, sortType);
