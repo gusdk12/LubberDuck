@@ -87,9 +87,16 @@ public class ManagerController {
     // 메뉴별 판매 차트 조회
     @GetMapping("/menuchart")
     public String menuOrderList(Model model){
-        List<Order_item> orderItems = orderItemService.orderList();
+        List<Order_item> orderItems = orderItemService.orderMenuChart();
         model.addAttribute("orderList", orderItems);
         return "manager/menuchart";
+    }
+
+    @GetMapping("/agechart")
+    public String ageOrderList(Model model){
+        List<Order_item> orderItems = orderItemService.orderMenuAgeChart();
+        model.addAttribute("orderList", orderItems);
+        return "manager/agechart";
     }
 
     @InitBinder

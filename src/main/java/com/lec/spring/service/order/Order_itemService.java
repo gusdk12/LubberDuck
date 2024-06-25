@@ -12,5 +12,9 @@ public interface Order_itemService {
 
     Order_item findById(Long item_id);
 
-    List<Order_item> orderList();
+    // 메뉴별 주문 수량 조회
+    List<Order_item> orderMenuChart();
+
+    // 연령별 메뉴 주문 수량 조회
+    List<Order_item> orderMenuAgeChart();
 }
