@@ -98,7 +98,7 @@ function addEvents() {
 
     // 메모 저장
     // 입력창에서 엔터키 누를 때 메모 저장
-    $("#new-memo").on("keydown", function (e) {
+    $("#new-memo").on("keydown", async function (e) {
         if (e.key === "Enter") {
             const memoText = $("#new-memo").val();
 
@@ -106,9 +106,9 @@ function addEvents() {
             if ($("#new-memo").data("mode") === "edit") {
                 const selectedDate = init.activeDate.toISOString().split("T")[0];
                 let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
-                updateCalendarByMemo(findSchedule.id, memoText);
+                await updateCalendarByMemo(findSchedule.id, memoText);
             } else {
-                addCalendarByMemo(memoText);
+                await addCalendarByMemo(memoText);
             }
 
             $(this).val("").hide();
@@ -261,7 +261,7 @@ function addEvents() {
     });
 
     // 오늘의 메뉴 삭제
-    $('.today-menu-container').on('click', '.btn-delete', async function() {
+    $(document).on("click", '.btn-delete', async function() {
         if (confirm("오늘의 메뉴를 삭제하시겠습니까?")) {
             const selectedDate = init.activeDate.toISOString().split("T")[0];
 

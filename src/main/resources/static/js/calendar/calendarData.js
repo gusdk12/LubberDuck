@@ -239,9 +239,6 @@ async function addCalendarByMenu(menuId, comment) {
                     $("#myForm2").hide();
                     $(".popup-overlay").remove();
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error adding/updating today's menu:", error);
             }
         });
     } catch (error) {
@@ -249,6 +246,7 @@ async function addCalendarByMenu(menuId, comment) {
     }
 }
 
+// todo
 // 오늘의 메뉴 수정
 async function updateCalendarByMenu(menuId, comment) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
@@ -278,9 +276,6 @@ async function updateCalendarByMenu(menuId, comment) {
                     $("#myForm2").hide();
                     $(".popup-overlay").remove();
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error updating menu:", error);
             }
         });
     } catch (error) {
@@ -288,7 +283,7 @@ async function updateCalendarByMenu(menuId, comment) {
     }
 }
 
-// TODO: 이건 안됨
+// todo
 // 오늘의 메뉴 삭제 (메모가 있을 때 삭제)
 async function deleteToUpdateCalendarByMenu(calendarId) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
@@ -317,9 +312,6 @@ async function deleteToUpdateCalendarByMenu(calendarId) {
                     alert("오늘의 메뉴가 삭제되었습니다.");
                     loadData(dateInt);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error(`Error updating/deleting menu:`, error);
             }
         });
     } catch (error) {
@@ -357,9 +349,6 @@ async function deleteCalendarByMenu(calendarId) {
                         $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
                         $('#notification-menu .notification-menu-text').text('등록한 오늘의 메뉴가 없습니다.');
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error deleting menu:", error);
                 }
             });
         } else {
@@ -435,9 +424,6 @@ async function addCalendarByMemo(memo) {
                     alert("메모가 추가되었습니다.");
                     loadData(dateInt);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error adding/updating memo:", error);
             }
         });
     } catch (error) {
@@ -445,6 +431,7 @@ async function addCalendarByMemo(memo) {
     }
 }
 
+// todo
 // 메모 수정
 async function updateCalendarByMemo(calendarId, memo) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
@@ -475,9 +462,6 @@ async function updateCalendarByMemo(calendarId, memo) {
                     alert("메모가 수정되었습니다.");
                     loadData(dateInt);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error updating memo:", error);
             }
         });
     } catch (error) {
@@ -513,9 +497,6 @@ async function deleteToUpdateCalendarByMemo(calendarId) {
                     alert("메모가 삭제되었습니다.");
                     loadData(dateInt);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error(`Error updating/deleting memo:`, error);
             }
         });
     } catch (error) {
@@ -550,9 +531,6 @@ async function deleteCalendarByMemo(calendarId) {
                     $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
                     loadData(calendarId);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error(`Error updating/deleting memo:`, error);
             }
         });
     } catch (error) {

@@ -39,7 +39,7 @@ public class ManagerController {
 
     @GetMapping("/calendar")
     public void calendar(Model model) {
-        List<Menu> menuList = menuService.list();
+        List<Menu> menuList = menuService.sequenceList();
         model.addAttribute("menuList", menuList);
     }
 
