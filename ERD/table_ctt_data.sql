@@ -132,14 +132,14 @@ INSERT INTO ctt_order_item (order_id, cocktail_id, quantity, price) VALUES
 -- 샘플 리뷰
 
 
-INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
-    (1, 5, '정말 맛있어요 최고예요. 달콤한 맛이 계속 기억에 남네요!', 20240619094950);
+INSERT INTO ctt_review (item_id, rate, content) VALUES
+    (18, 5, '정말 맛있어요 최고예요. 달콤한 맛이 계속 기억에 남네요!');
 
-INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
-    (2, 4, '제가 생각한 맛이에요 ! 그런데 가게 분위기가 조금 시끄러워서 아쉽네요. 별점 1개 깎겠습니다!', 20240619095004);
+INSERT INTO ctt_review (item_id, rate, content) VALUES
+    (18, 4, '제가 생각한 맛이에요 ! 그런데 가게 분위기가 조금 시끄러워서 아쉽네요. 별점 1개 깎겠습니다!');
 
-INSERT INTO ctt_review (item_id, rate, content, regdate) VALUES
-    (9, 2, '흑흑 이걸 마신다고 해도 그녀가 잊혀지지 않아!!!!!!!!!!!', 20240620151320);
+INSERT INTO ctt_review (item_id, rate, content) VALUES
+    (18, 2, '흑흑 이걸 마신다고 해도 그녀가 잊혀지지 않아!!!!!!!!!!!');
 
 -- 샘플 최근
 INSERT INTO ctt_recent (user_id, cocktail_id) VALUES
