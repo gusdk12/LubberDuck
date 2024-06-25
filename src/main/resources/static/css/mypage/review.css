@@ -9,7 +9,6 @@
 .container{
     display: flex;
     justify-content: center; /* 가로 중앙 정렬 */
-
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
@@ -90,7 +89,6 @@
     font-weight: 700;
     font-size: 15px;
     margin: 0;
-    font-family: 'GmarketSansMedium';
 }
 
 .review-content {

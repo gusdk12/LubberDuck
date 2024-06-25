@@ -2,11 +2,10 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="pagination">
-    <div class="container mt-1">
+    <div class="containerA">
         <ul class="pagination justify-content-center">
             <!--/* << 표시여부 */-->
             <li class="page-item" th:if="${page > 1}"><a class="page-link" th:href="${url}" title="처음"><i class="fas fa-angle-double-left"></i></a></li>
-
             <!--/* < 표시 여부 */-->
             <li class="page-item" th:if="${startPage > 1 }"><a class="page-link" th:href="@{${url }(page=${startPage - 1 })}"><i class='fas fa-angle-left'></i></a></li>
 
@@ -26,10 +25,6 @@
 
             <!--/* >> 표시 여부 */-->
             <li class="page-item" th:if="${page < totalPage }"><a class="page-link" th:href="@{${url }(page=${totalPage })}"><i class='fas fa-angle-double-right'></i></a></li>
-
-
-
-
         </ul>
     </div>
 </th:block>

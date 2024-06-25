@@ -4,7 +4,7 @@ import com.lec.spring.domain.review.Review;
 
 import java.util.List;
 
-public interface ReviewRepository {
+public interface ReviewRepository{
 
     int save(Review review);
 
@@ -29,4 +29,10 @@ public interface ReviewRepository {
 
     List<Review> findByUserId(Long userId);
 
+    int cntAll();
+
+    List<Review> selectFromReviewRow (int from, int rows);
+
+
+    List<Review> pageList(int pageStart);
 }
