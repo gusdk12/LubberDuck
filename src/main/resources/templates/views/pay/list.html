@@ -36,7 +36,11 @@
     </div>
 
     <div id="paysection">
-        <div id="payButton">결제하기</div>
+        <form name="payForm" method="post" th:action="@{/kakaoPay}">
+            <input type="number" id="user_id" name="user_id" value="" style="display: none">
+            <input type="number" id="totalPrice" name="totalPrice" value="" style="display: none">
+            <div id="payButton">결제하기</div>
+        </form>
     </div>
 
     <th:block sec:authorize="hasRole('CUSTOMER')">
