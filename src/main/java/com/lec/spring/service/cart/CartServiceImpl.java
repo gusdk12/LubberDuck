@@ -93,6 +93,18 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public QryResult clear(Long user_id) {
+        int cnt = cartRepository.clear(user_id);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
+
+    @Override
     public QryResult incQuantity(Long user_id, Long menu_Id) {
 
         cartRepository.incQuantity(user_id, menu_Id);

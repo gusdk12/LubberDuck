@@ -90,6 +90,10 @@
         DELETE FROM ctt_cart WHERE user_id = #{user_id} AND cocktail_id = #{menu_id}
     </delete>
 
+    <delete id="clear" flushCache="true">
+        DELETE FROM ctt_cart WHERE user_id = #{user_id};
+    </delete>
+
 </mapper>
 
 

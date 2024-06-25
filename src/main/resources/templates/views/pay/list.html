@@ -33,12 +33,10 @@
 
 <div id="container">
     <div id="cartlistsection">
-
     </div>
 
     <div id="paysection">
-
-
+        <div id="payButton">결제하기</div>
     </div>
 
     <th:block sec:authorize="hasRole('CUSTOMER')">
@@ -50,6 +48,7 @@
             <script th:src="@{/js/common/chatCart.js}"></script>
             <script th:src="@{/js/cart/cartData.js}"></script>
             <script th:src="@{/js/chat/chatData.js}"></script>
+            <script th:src="@{/js/mypage/orderData.js}"></script>
 
         </th:block>
     </th:block>

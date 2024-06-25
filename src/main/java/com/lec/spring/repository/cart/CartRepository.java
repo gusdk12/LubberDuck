@@ -12,6 +12,7 @@ public interface CartRepository {
 
     int insert(Cart cart);
     int delete(Long user_id, Long menu_id);
+    int clear(Long user_id);
 
     int incQuantity(Long user_id, Long menu_id);
     int decQuantity(Long user_id, Long menu_id);

@@ -9,7 +9,6 @@
         SELECT
             id "id"
              , user_id "user_id"
-             , number "number"
              , regdate "regdate"
         FROM ctt_order
     </sql>
@@ -18,6 +17,17 @@
         <include refid="SELECT_BASE"/>
         WHERE user_id = #{param1}
     </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM ctt_order;
+    </select>
+
+    <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.order.Order"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO ctt_order(id, user_id)
+        VALUES(#{id}, #{user_id})
+    </insert>
 
 </mapper>
 

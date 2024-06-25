@@ -71,7 +71,6 @@ CREATE TABLE ctt_order
 (
     id      INT      NOT NULL AUTO_INCREMENT COMMENT '주문아이디',
     user_id INT      NOT NULL COMMENT '유저아이디',
-    number  INT      NOT NULL COMMENT '주문묶는번호',
     regdate DATETIME NOT NULL DEFAULT now() COMMENT '주문일시',
     PRIMARY KEY (id)
 ) COMMENT '주문히스토리테이블';
