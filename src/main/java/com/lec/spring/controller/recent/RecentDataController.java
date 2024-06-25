@@ -30,6 +30,11 @@ public class RecentDataController {
         return recentService.add(userId, cocktailId);
     }
 
+    @PostMapping("/deleteLimit/{userId}")
+    public QryResult deleteLimit(@PathVariable Long userId){
+        return recentService.deleteLimit(userId);
+    }
+
     @PostMapping("/delete/{userId}/{cocktailId}")
     public QryResult delete(@PathVariable Long userId, @PathVariable Long cocktailId){
         return recentService.delete(userId,cocktailId);

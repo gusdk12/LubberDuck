@@ -77,6 +77,18 @@ public class RecentServiceImpl implements RecentService {
     }
 
     @Override
+    public QryResult deleteLimit(Long userId) {
+        int cnt = recentRepository.limitedDelete(userId);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+
+        return result;
+    }
+
+    @Override
     public QryResult delete(Long userId, Long menuId) {
         int cnt = recentRepository.delete(userId, menuId);
 
