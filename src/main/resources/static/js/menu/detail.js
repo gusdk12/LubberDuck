@@ -1,3 +1,8 @@
+
+$(document).ready(function() {
+    loadRecent(logged_id);
+});
+
 window.addEventListener('load', () => {
 
     loadMenu();
@@ -29,39 +34,39 @@ async function loadMenu() {
     }
 }
 
-function addEvent() {
+function addEvent(){
 
     // Hide the comment-con when clicking outside of it
-    $(document).click(function (event) {
+    $(document).click(function(event) {
         if (!$(event.target).closest('.comment-con').length && !$(event.target).closest('#heartImg').length) {
             $('.comment-con').css('display', 'none');
         }
     });
 
     // addToCart
-    $('#toCart').click(function () {
+    $('#toCart').click(function(){
         var cocktailName = $(this).parent().siblings("#name").text();
         addToCart(menuList.find(menu => menu.name === cocktailName));
     });
 
-    // swtichHeartIcon
-    $('#heart').click(function (event) {
-        if (event.target.className === "fullHeart") {
+   // swtichHeartIcon
+    $('#heart').click(function(event) {
+        if(event.target.className === "fullHeart"){
             event.stopPropagation();
             var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
             deleteFromBook(menuList.find(menu => menu.name === cocktailName));
-            swal("DELETE", cocktailName + '가 즐겨찾기에서 삭제되었습니다.', "success");
+            swal("DELETE",cocktailName+'가 즐겨찾기에서 삭제되었습니다.',"success");
 
             switchToEmptyHeart();
-        } else if (event.target.className === "emptyHeart") {
+        } else if(event.target.className === "emptyHeart"){
             event.stopPropagation();
             openComment();
-            $("#heart").css('display', 'none');
+            $("#heart").css('display','none');
         }
     });
 
     // addToBook
-    $('#commentCheck').click(function () {
+    $('#commentCheck').click(function() {
         var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
         var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
         var errorMessage = $(this).closest('#cocktailsection').find('.comment-error-message');
@@ -72,7 +77,7 @@ function addEvent() {
             var currentLength = commentValue.length;
             var message = '코멘트는 30자까지 작성 가능합니다. (현재 ' + currentLength + '글자)';
             errorMessage.text(message);
-            errorMessage.css('display', 'block');
+            errorMessage.css('display','block');
             return; // 글자 수가 넘어가면 함수 종료
         } else {
             errorMessage.css('display', 'none');

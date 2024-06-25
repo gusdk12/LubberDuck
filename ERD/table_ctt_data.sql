@@ -146,3 +146,20 @@ INSERT INTO ctt_recent (user_id, cocktail_id) VALUES
     (2,2)
 ;
 
+-- 샘플 캘린더
+INSERt INTO ctt_calendar (id, date, cocktail_id, comment, memo) VALUES
+    (20240604,'2024-06-04',1,'가나다','일정메모는 longtext?')
+;
+
+INSERt INTO ctt_calendar (id, date, memo) VALUES
+    (20240618,'2024-06-18','일정메모는 longtext?')
+;
+
+-- 샘플 recent
+INSERT INTO ctt_recent (user_id, cocktail_id) VALUES
+    (2,10)
+;
+
+INSERT INTO ctt_recent(user_id, cocktail_id)
+VALUES (5,12)
+;
