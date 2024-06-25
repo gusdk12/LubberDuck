@@ -1,11 +1,12 @@
 
 window.addEventListener('load', async () => {
     try {
-        await checkToRecent(currentCocktail);
-        await loadRecent(logged_id);
+
         loadMenu();
         addEvent();
         reviewsList();
+        await checkToRecent(currentCocktail);
+        await loadRecent(logged_id);
     } catch (error) {
         console.error('Error during initialization:', error);
     }
