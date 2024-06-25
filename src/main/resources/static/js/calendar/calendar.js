@@ -139,7 +139,7 @@ function addEvents() {
 
     // 메모 삭제
     // 캘린더 데이터에서 메모만 null 로 설정하기
-    $(document).on("click", ".memo-delete", function () {
+    $(document).on("click", ".memo-delete", async function () {
         // 삭제 확인 대화상자 표시
         if (confirm("메모를 삭제하시겠습니까?")) {
             const selectedDate = init.activeDate.toISOString().split("T")[0];
@@ -148,10 +148,10 @@ function addEvents() {
             let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
 
             if (findSchedule) {
-                if (findSchedule.memo) {
-                    deleteToUpdateCalendarByMemo(findSchedule.id);
+                if (findSchedule.menu) {
+                    await deleteToUpdateCalendarByMemo(findSchedule.id);
                 } else {
-                    deleteCalendarByMemo(findSchedule.id);
+                    await deleteCalendarByMemo(findSchedule.id);
                 }
             } else {
                 console.error("No schedule found for the selected date");
@@ -270,7 +270,7 @@ function addEvents() {
 
             if (findSchedule) {
                 if (findSchedule.memo) {
-                    await deleteToUpdateCalendarByMenu();
+                    await deleteToUpdateCalendarByMenu(findSchedule.id);
                 } else {
                     await deleteCalendarByMenu(findSchedule.id);
                 }

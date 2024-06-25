@@ -290,7 +290,7 @@ async function updateCalendarByMenu(menuId, comment) {
 
 // TODO: 이건 안됨
 // 오늘의 메뉴 삭제 (메모가 있을 때 삭제)
-async function deleteToUpdateCalendarByMenu() {
+async function deleteToUpdateCalendarByMenu(calendarId) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
     let dateStr = selectedDate.replace(/-/g, '');
     let dateInt = Number(dateStr);
@@ -305,7 +305,7 @@ async function deleteToUpdateCalendarByMenu() {
             "memo": checkDateResult.memo
         };
 
-        const url = `/calendar/update/${dateInt}`;
+        const url = `/calendar/update/${calendarId}`;
 
         $.ajax({
             url: url,
@@ -315,7 +315,6 @@ async function deleteToUpdateCalendarByMenu() {
             success: function(data, status) {
                 if (status === "success" && data.status === "OK") {
                     alert("오늘의 메뉴가 삭제되었습니다.");
-
                     loadData(dateInt);
                 }
             },
@@ -524,20 +523,17 @@ async function deleteToUpdateCalendarByMemo(calendarId) {
     }
 }
 
-// TODO: 이건 안됨
 // 메모 삭제 (오늘의 메뉴 데이터가 없을 때)
 async function deleteCalendarByMemo(calendarId) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
-    let dateStr = selectedDate.replace(/-/g, '');
-    let dateInt = Number(dateStr);
 
     try {
-        const checkDateResult = await checkDate(dateInt);
+        const checkDateResult = await checkDate(calendarId);
 
         const data = {
             "menu_id": null,
             "comment": null,
-            "date": selectedDate,
+            "date": checkDateResult.date,
             "memo": null
         };
 
@@ -552,7 +548,7 @@ async function deleteCalendarByMemo(calendarId) {
                 if (status === "success" && data.status === "OK") {
                     alert("메모가 삭제되었습니다.");
                     $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
-                    loadData(dateInt);
+                    loadData(calendarId);
                 }
             },
             error: function(xhr, status, error) {

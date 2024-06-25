@@ -5,6 +5,7 @@ import com.lec.spring.domain.calendar.Calendar;
 import com.lec.spring.domain.calendar.QryCalendarList;
 import com.lec.spring.service.calendar.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController   // data 를 response 한다. ('View' 를 리턴하는게 아니다!)
@@ -17,7 +18,8 @@ public class CalendarController {
 
     // 모든 일정 불러오기
     @GetMapping("/list")
-    public QryCalendarList list(){
+    public QryCalendarList list(Model model){
+        model.addAttribute("calendarlist", calendarService.findAll());
         return calendarService.findAll();
     }
 
