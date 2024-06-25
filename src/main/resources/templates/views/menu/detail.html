@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        <div id="reviewsection">
+    <div id="reviewsection">
 
 
             <section>
@@ -85,16 +85,9 @@
                     <div class="list">
                         <div class="review-header">
                             <span><h3>리뷰</h3></span>
-                            <!-- 페이징 헤더 -->
                             <div>
                                 <span>총 [[${reviewCount}]]개</span>
-                                <span>
-                                <form name="frmPageRows">
-                                    <input type="hidden" name="page" th:value="${page}">
-                                </form>
-                                </span>
                             </div>
-                            <!-- 페이징 헤더 -->
                         </div>
                         <hr>
                         <div class="tag_btn">
@@ -108,30 +101,36 @@
 
                         <div class="reviews-container">
                             <div id="review">
-                                <div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-        </div>
-
-        <th:block sec:authorize="hasRole('CUSTOMER')">
-            <th:block th:with="logged_user=${#authentication.principal.user}">
-                <script th:inline="javascript">
-                    logged_id = [[${logged_user.id}]]
-                </script>
-
-                <script th:src="@{/js/common/chatCart.js}"></script>
-                <script th:src="@{/js/cart/cartData.js}"></script>
-                <script th:src="@{/js/chat/chatData.js}"></script>
-                <script th:src="@{/js/bookmark/bookData.js}"></script>
-
-            </th:block>
-        </th:block>
     </div>
+
+    <div id="recentSection-con">
+        <div id="recent-title">최근 본 상품</div>
+        <div id="recentSection">
+            <!-- 최근 항목 불러오기 -->
+        </div>
+    </div>
+
+    <th:block sec:authorize="hasRole('CUSTOMER')">
+        <th:block th:with="logged_user=${#authentication.principal.user}">
+            <script th:inline="javascript">
+                logged_id = [[${logged_user.id}]]
+            </script>
+
+            <script th:src="@{/js/common/chatCart.js}"></script>
+            <script th:src="@{/js/cart/cartData.js}"></script>
+            <script th:src="@{/js/chat/chatData.js}"></script>
+            <script th:src="@{/js/recent/recent.js}"></script>
+            <script th:src="@{/js/bookmark/bookData.js}"></script>
+
+        </th:block>
+    </th:block>
+</div>
 
     <script th:inline="javascript">
         const menuList = [[${menuList}]];

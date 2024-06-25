@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/manager/chart.css}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap"
+          rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script th:src="@{/js/common/header.js}"></script>
+
+    <title>Sales Chart</title>
+</head>
+<body>
+<th:block th:insert="~{common/header::header}"></th:block>
+
+<div class="chart_page">
+    <aside class="side">
+        <div id="sideMenu">
+            <div class="chartTitle">
+                <p>Chart<br>Management</p>
+            </div>
+            <a th:href="@{menuchart}" class="chart">메뉴별&nbsp;&nbsp;판매량</a>
+            <a th:href="@{agechart}" class="chart" id="age_nav">연령대별&nbsp;&nbsp;인기 메뉴</a>
+        </div>
+    </aside>
+
+    <div class="article_chart">
+        <div class="chart_name">Chart by Menu</div>
+        <div id="chart_container">
+            <canvas id="menuChart"></canvas>
+        </div>
+    </div>
+
+</div>
+<script th:inline="javascript">
+    var orderList = [[${orderList}]];
+</script>
+<script th:src="@{/js/manager/menuchart.js}"></script>
+
+</body>
+
+</html>

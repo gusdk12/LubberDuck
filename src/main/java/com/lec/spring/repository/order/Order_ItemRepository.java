@@ -1,5 +1,6 @@
 package com.lec.spring.repository.order;
 
+import com.lec.spring.domain.order.Order;
 import com.lec.spring.domain.order.Order_item;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,6 +12,8 @@ public interface Order_ItemRepository {
     List<Order_item> findByOrder(Long order_id);
 
     Order_item findById(Long itemId);
+
+    List<Order_item> findByOrderList();
 
     int insert(Order_item item);
 }
