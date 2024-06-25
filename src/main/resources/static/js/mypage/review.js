@@ -81,13 +81,19 @@ $(document).ready(function() {
     $(document).on('click', '.review-text', function() {
         var $reviewContent = $(this).closest('.review-content');
         var $extraButtons = $reviewContent.find('.extra-buttons');
+        var $reviewText = $(this);
 
         // 다른 review-text들의 확장 상태를 초기화하고 추가 버튼을 숨깁니다.
-        $('.review-text.expanded').not(this).removeClass('expanded');
+        $('.review-text.expanded').not(this).removeClass('expanded').css('max-height', 'calc(5 * 1.5em)').next('.extra-buttons').slideUp('slow');
 
         // 현재 클릭한 review-text와 해당하는 추가 버튼의 상태를 toggle하며 애니메이션 적용
-        $(this).toggleClass('expanded');
-        $extraButtons.slideToggle('slow');
+        if ($reviewText.hasClass('expanded')) {
+            $reviewText.removeClass('expanded').css('max-height', 'calc(5 * 1.5em)');
+            $extraButtons.slideUp('slow');
+        } else {
+            $reviewText.addClass('expanded').css('max-height', $reviewText[0].scrollHeight + 'px');
+            $extraButtons.slideDown('slow');
+        }
     });
 });
 

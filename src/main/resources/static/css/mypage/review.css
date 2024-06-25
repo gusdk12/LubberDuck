@@ -137,7 +137,6 @@
     text-align: left;
 }
 
-
 .review-text {
     font-size: 14px;
     font-weight: 300;
@@ -151,11 +150,10 @@
     position: relative;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    max-height: calc(5 * 1.5em);
-    min-height: 100px;
+    -webkit-line-clamp: 5; /* 5줄로 제한 */
+    max-height: calc(5 * 1.5em); /* 높이 제한 */
     cursor: pointer;
-    transition: max-height 0.5s ease-out; /* max-height 변화에 대한 전환 효과 추가 */
+    transition: max-height 0.5s ease-out; /* max-height 변화 애니메이션 */
 }
 
 .review-text::after {
@@ -169,19 +167,21 @@
 }
 
 .review-text.expanded {
-    -webkit-line-clamp: initial;
-    max-height: none;
+    -webkit-line-clamp: initial; /* 줄 제한 해제 */
+    max-height: 1000px; /* 높이 제한 해제 (너무 큰 값으로 설정하여 제한 해제 효과) */
+    transition: max-height 0.5s ease-in-out; /* 열리고 닫히는 애니메이션 */
 }
 
 .extra-buttons {
-    display: none; /* 기본적으로 버튼 숨김 */
+    display: none; /* 기본적으로 숨김 */
     margin-top: 10px;
 }
 
 .extra-buttons.show {
-    display:block;
-    width: 100%;
+    display: block; /* 펼칠 때 보이도록 설정 */
+    transition: all 0.5s ease-in-out; /* 모든 변화 애니메이션 */
 }
+
 
 .review-date {
     font-size: 12px;
