@@ -163,16 +163,26 @@ function addEvents() {
     $(".date").on("click", function () {
         const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
         alert(selectedDate);
-        // findCalendarByDate(selectedDate); // 해당 날짜의 메모 로드
     });
 
 // --------------------------------------------------------
 // 오늘의 메뉴 관련 Event
 
     // 메뉴 리스트 팝업 열기
-    $("#btn-add-menu").on("click", function () {
+    $("#btn-add-menu").on("click", async function () {
+        const selectedDate = init.activeDate.toISOString().split("T")[0];
+        let dateStr = selectedDate.replace(/-/g, '');
+        let dateInt = Number(dateStr);
+
+        const checkDateResult = await checkDate(dateInt);
+        if (checkDateResult.exists) {
+            alert("이미 메뉴가 존재합니다.");
+            return;
+        }
+
         $("body").append(popupOverlay);
         $("#myForm").show();
+        initializePopup();
     });
 
     // 메뉴 클릭 시 오늘의 메뉴 디테일 팝업 열기
@@ -187,6 +197,8 @@ function addEvents() {
             $(".select-menu-img").attr("src", menu.imgUrl);
             $(".select-menu-img").attr("alt", menu.name);
             $(".select-menu-name").text(menu.name);
+        } else {
+            initializePopup();
         }
 
         // 오늘의 메뉴 저장 버튼
@@ -200,17 +212,24 @@ function addEvents() {
         });
     });
 
-    // 수정 버튼 클릭 시 팝업창 열기
-    $('.btn-edit').on('click', function() {
-        console.log("팝업창 열렸당");
-        // 팝업창 열기
+    // 수정 버튼 클릭
+    $('.today-menu-container').on('click', '.btn-edit', async function() {
+        const selectedDate = init.activeDate.toISOString().split("T")[0];
+        let dateStr = selectedDate.replace(/-/g, '');
+        let dateInt = Number(dateStr);
+
+        $("body").append(popupOverlay);
         $('#myForm2').show();
+        initializePopup();
+
+        // 저장된 오늘의 메뉴 데이터를 불러와서 팝업창에 표시
+        await buildEditTodayMenu(dateInt);
     });
 
-    // 취소 버튼 클릭 이벤트 핸들러
+    // 취소 버튼 클릭
     $('.btn-cancel').on('click', function() {
         $('#myForm2').hide();
-        $('.popup-overlay').remove();
+        popupOverlay.remove();
     });
 
     $(".menu-close").on("click", function () {

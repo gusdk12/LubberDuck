@@ -664,7 +664,9 @@ body {
 
 .select-menu-img {
     width: 150px;
-    height: auto;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
 }
 
 .select-menu-name {

@@ -127,6 +127,7 @@ function loadData(dateId){
             if (status === "success") {
                 buildTodayMenu(data);
                 buildMemo(data);
+                // buildEditTodayMenu(data);
             }
         },
         error: function (xhr, status, error) {
@@ -172,21 +173,36 @@ function buildTodayMenu(data) {
 }
 
 // TODO: 수정 버튼을 클릭할 때만 오늘의 메뉴 팝업 화면에 표시..
-/*
-function buildEditTodayMenu(data) {
-    // 팝업창 내용을 초기화
-    $('.select-menu-img').css('background-image', 'none');
-    $('.select-menu-name').text('');
-    $('#select-menu-text').val('');
 
-    // TODO 그 날짜에 저장된 오늘의 메뉴 data가 있을 경우에만 데이터를 불러와야함...
-    if (data && data.menu) {
-        $('.select-menu-img').css('background-image', `url('${data.menu.imgUrl}')`);
-        $('.select-menu-name').text(data.menu.name);
-        $('#select-menu-text').val(data.comment);
+// 팝업을 열 때 초기화 함수
+function initializePopup() {
+    // 팝업 열기 전 초기화
+    $(".select-menu-img").css("background-image", "none");
+    $(".select-menu-name").text("");
+    $("#select-menu-text").val("");
+}
+
+// 오늘의 메뉴 데이터를 가져오는 함수
+async function buildEditTodayMenu(dateInt) {
+    try {
+        const checkDateResult = await checkDate(dateInt);
+
+        if (checkDateResult.exists) {
+            if (checkDateResult.menu_id && checkDateResult.comment) {
+                const menu = menuList.find(m => m.id === checkDateResult.menu_id);
+                if (menu) {
+                    $('.select-menu-img').css('background-image', `url('${menu.imgUrl}')`);
+                    $('.select-menu-name').text(menu.name);
+                }
+                $('#select-menu-text').val(checkDateResult.comment);
+            } else {
+                console.error("No valid menu or comment data found.");
+            }
+        }
+    } catch (error) {
+        console.error("Error fetching today's menu:", error);
     }
 }
- */
 
 // 오늘의 메뉴 추가
 async function addCalendarByMenu(menuId, comment) {
