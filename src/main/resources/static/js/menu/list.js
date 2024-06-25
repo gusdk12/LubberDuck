@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
     appendMenuToPlate();
     showCustomerButtons();
 });
+
 window.addEventListener('unload', function(e){
     window.scrollTo({
         top: 0,
@@ -113,16 +114,16 @@ function appendMenuToPlate(){
     }
 
     // checkToRecent - 가연
-    for (cocktaildetail of document.querySelectorAll("#cocktaildetail")) {
-        cocktaildetail.addEventListener("click", function (e) {
-            e.preventDefault();
-            var cocktailName = $(this).parent().siblings(".cocktailname").text();
-
-            var cocktail = menuList.find(menu => menu.name === cocktailName);
-
-            checkToRecent(cocktail);
-        });
-    }
+    // for (cocktaildetail of document.querySelectorAll("#cocktaildetail")) {
+    //     cocktaildetail.addEventListener("click", function (e) {
+    //         e.preventDefault();
+    //         var cocktailName = $(this).parent().siblings(".cocktailname").text();
+    //
+    //         var cocktail = menuList.find(menu => menu.name === cocktailName);
+    //
+    //         checkToRecent(cocktail);
+    //     });
+    // }
 
     let fr = "";
     for(let i = 0; i < paperCount; i++)

@@ -16,6 +16,7 @@
     <select id="findByUser" resultType="com.lec.spring.domain.order.Order">
         <include refid="SELECT_BASE"/>
         WHERE user_id = #{param1}
+        ORDER BY regdate DESC;
     </select>
 
     <select id="countAll" resultType="int">

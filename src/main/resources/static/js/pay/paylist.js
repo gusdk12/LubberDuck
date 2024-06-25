@@ -1,5 +1,5 @@
-let cartMenuId = [];
 
+let totalPrice = 0;
 
 window.addEventListener('load', () => {
     loadCartData();
@@ -9,27 +9,10 @@ window.addEventListener('load', () => {
 function addEvent(){
     $('#payButton').click(function(e){
         e.preventDefault();
-        payComplete();
-    });
-}
+        $('#user_id').val(logged_id);
+        $('#totalPrice').val(totalPrice);
 
-function payComplete(){
-    $.ajax({
-        url: "/cart/clear/" + logged_id,
-        type: "POST",
-        cache: false,
-        success: async function (data, status) {
-            if (status === "success") {
-                if (data.status !== "OK") {
-                    alert(data.status);
-                    return;
-                }
-
-                await addOrder(logged_id, cartMenuId);
-                alert("결제가 완료되었습니다.")
-                location.href = '/home';
-            }
-        },
+        document.forms['payForm'].submit();
     });
 }
 
@@ -52,17 +35,7 @@ function loadCartData() {
 }
 
 function buildCartToHTML(data){
-    cartMenuId = [];
-
-    let totalPrice = 0;
     data.data.forEach(item => {
-        let itemInfo = {
-            menu_id : item.menu_id,
-            quantity : item.quantity,
-            price : item.menu.price
-        }
-        cartMenuId.push(itemInfo);
-
         totalPrice += (item.menu.price * item.quantity);
         $('#cartlistsection').append(`
             <div class="cartItem">

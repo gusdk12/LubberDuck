@@ -46,7 +46,6 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
   ('Mulled Apple Cider', '/img/menu/MulledAppleCider.png', '따뜻한 사과 사이다에 향신료의 향이 잘 스며들어 부드럽고 향긋한 향이 가득한 칵테일 (10도)', 12, 7300),
   ('Mulled Wine', '/img/menu/MulledWine.png', '와인에 4가지 과일과 5가지 향신료를 넣고 끓여 만든 낮은 도수의 칵테일 (6도)', -1, 6200),
   ('Old Fashioned', '/img/menu/OldFashioned.png', '"비터드슬링"이라 불리며 위스키, 설탕, 비터스 세 가지의 조합의 칵테일 (33도)', 3, 7200),
-  ('Tequila Sunrise', '/img/menu/OrangeIcedFreshJuice.png', '데킬라의 향과 오렌지의 달달함이 느껴지며 해 뜰 때의 붉은 하늘을 연상시키는 칵테일 (15도)', -1, 6900),
   ('Planters Punch', '/img/menu/PlantersPunch.png', '럼 베이스로 신맛과 단맛이 어우러지는 과일 위주의 맛을 가진 칵테일 (20도)', -1, 6900),
   ('Rob Roy', '/img/menu/RobRoy.png', '위스키의 향과 스윗 베르뭇의 달콤한 맛이 잘 어우러지며 비터의 씁쓸한 맛으로 깔끔하게 마무리 해주는 칵테일 (32도)', 16, 6700),
   ('Sazerac', '/img/menu/Sazerac.png', '상큼한 레몬의 풍미와 상쾌한 허브, 향긋한 아니스의 조합으로 부드러운 질감과 은은한 단맛이 환상적인 밸런스를 이룬 칵테일 (35도)', -1, 4900),

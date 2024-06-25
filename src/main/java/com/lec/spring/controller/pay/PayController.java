@@ -29,4 +29,16 @@ public class PayController {
         return "pay/list";
     }
 
+    @GetMapping("/payOk")
+    public String payOk(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails == null) return "redirect:/user/login"; // UserDetails가 null일 경우에 대한 처리
+
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username);
+        if (user == null) return "redirect:/error"; // 사용자가 null일 경우에 대한 처리
+
+        model.addAttribute("user", user);
+        return "pay/payOk";
+    }
+
 }

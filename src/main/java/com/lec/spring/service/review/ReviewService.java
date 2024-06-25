@@ -1,6 +1,7 @@
 package com.lec.spring.service.review;
 
 import com.lec.spring.domain.review.Review;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface ReviewService {
 
     public List<Review> findByUserId(Long userId);
 
+//    페이징 리스트
+    List<Review> list(Integer page, Model model);
 }
