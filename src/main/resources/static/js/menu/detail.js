@@ -18,6 +18,18 @@ window.addEventListener('popstate', function (event) {
     location.reload(); // Refresh the page
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const recentSectionCon = document.getElementById("recentSection-con");
+
+    window.addEventListener("scroll", function() {
+        // Get the current scroll position
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+        // Set the top position of the element
+        recentSectionCon.style.top = scrollTop + "px";
+    });
+});
+
 async function loadMenu() {
     $('#img').css({'background-image': `url('${menu.imgUrl}')`});
     document.querySelector(`#name`).textContent = `${menu.name}`;
