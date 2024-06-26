@@ -67,13 +67,12 @@ async function addToCart(cocktail) {
         });
     }
 }
-async function deleteFromCart(cocktail) {
+async function deleteFromCart(cocktail_id, isForce) {
 
     // 카트에 검색하기
     let findCart = null;
-    // findItemInCart(cocktail.id);
-    await $.ajax({
-        url: "/cart/detail/" + logged_id + "/" + cocktail.id,
+    isForce || await $.ajax({
+        url: "/cart/detail/" + logged_id + "/" + cocktail_id,
         type: "GET",
         cache: false,
         success: function (data, status) {
@@ -86,11 +85,12 @@ async function deleteFromCart(cocktail) {
             }
         },
     });
+    isForce && (findCart = {quantity: 1});
 
     // 담긴 칵테일의 개수가 1보다 크다면, 수량만 감소시킨다
     if(findCart.quantity > 1){
         $.ajax({
-            url: "/cart/decQuantity/" + logged_id + "/" + cocktail.id,
+            url: "/cart/decQuantity/" + logged_id + "/" + cocktail_id,
             type: "POST",
             cache: false,
             success: function(data, status){
@@ -107,7 +107,7 @@ async function deleteFromCart(cocktail) {
     // 담긴 칵테일의 수가 1개라면, 아예 delete한다.
     else if(findCart.quantity === 1){
         $.ajax({
-            url: "/cart/delete/" + logged_id + "/" + cocktail.id,
+            url: "/cart/delete/" + logged_id + "/" + cocktail_id,
             type: "POST",
             cache: false,
             success: function(data, status){
@@ -155,7 +155,12 @@ function buildCart(cart){
     let totalPrice = 0;
     cart.data.forEach(item => {
         let price = item.menu.price * item.quantity;
-        totalPrice += price;
+        let sequenceBanBox = "";
+        (item.menu.sequence === -1) && (sequenceBanBox = `<div id="banbox">
+                                                            <div id="deleteMenu" value="${item.menu.id}"></div>
+                                                            판매종료
+                                                          </div>`);
+        (item.menu.sequence === -1) || (totalPrice += price);
 
         $('#cartcontent').append(`
                 <div id="cartline"></div>
@@ -170,6 +175,7 @@ function buildCart(cart){
                         </div>
                         <div id="cartitemprice">${price}￦</div>
                     </div>
+                    ${sequenceBanBox}
                 </div>
             `);
     });
@@ -185,7 +191,13 @@ function buildCart(cart){
         cocktaildelete.addEventListener("click", function(e){
             e.preventDefault();
             var cocktailName = $(this).parent().siblings("#cartitemname").text();
-            deleteFromCart(menuList.find(menu => menu.name === cocktailName));
+            deleteFromCart(menuList.find(menu => menu.name === cocktailName).id, false);
+        });
+    }
+    for(cocktaildelete of document.querySelectorAll("#deleteMenu")){
+        cocktaildelete.addEventListener("click", function(e){
+            e.preventDefault();
+            deleteFromCart(Number($(this).attr('value')), true);
         });
     }
 
