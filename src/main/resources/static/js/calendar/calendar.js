@@ -207,11 +207,16 @@ function addEvents() {
     // 입력창에서 엔터키 누를 때 메모 저장
     $("#new-memo").on("keydown", async function (e) {
         if (e.key === "Enter") {
+            e.preventDefault();
             const memoText = $("#new-memo").val();
 
             // 메모 수정할 때 저장할 때 구별
-            if ($("#new-memo").data("mode") === "edit") {
-                await updateCalendarByMemo(memoText);
+            if ($(this).data("mode") === "edit") {
+                try {
+                    await updateCalendarByMemo(memoText);
+                } catch (error) {
+                    console.error("메모 수정 중 오류 발생:", error);
+                }
             } else {
                 await addCalendarByMemo(memoText);
             }
@@ -220,21 +225,33 @@ function addEvents() {
         }
     });
 
-    // 메모 수정
+    // 메모 추가 + 수정
     $("#btn-add-memo").on("click", function () {
 
         // 기존 메모가 없는 경우에만 추가 모드로 설정
         if ($(".event-list li").length === 0) {
-            $("#new-memo").val("");
-            $("#new-memo").css("height", "100px");
-            $("#new-memo").data("mode", "add").show().focus();
+            $("#new-memo")
+                .val("")
+                .css("height", "100px")
+                .data("mode", "add")
+                .show()
+                .focus();
             $("#notification").hide();
 
         // 기존 메모가 있는 경우 수정 모드로 설정
         } else {
             $(".event-list li").find(".memo-delete").remove();
             const memoText = $(".event-list li").text().trim();
-            $("#new-memo").val(memoText).data("mode", "edit").show().focus();
+
+            // 기존 메모 높이 가져오기
+            const existingMemoHeight = $(".event-list li").outerHeight();
+
+            // 수정 모드로 설정하면서 높이 설정
+            $("#new-memo").val(memoText)
+                .css("height", existingMemoHeight + "px")
+                .data("mode", "edit")
+                .show()
+                .focus();
             $(".event-list li").hide();
         }
     });
