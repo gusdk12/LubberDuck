@@ -309,10 +309,6 @@ async function updateCalendarByMemo(memo) {
                 alert("메모가 수정되었습니다.");
                 loadData(dateInt);
             }
-        },
-        error: function(xhr, status, error) {
-            console.error("AJAX 오류 발생:", data);
-            alert("메모 수정 중 오류가 발생했습니다.");
         }
     });
 }

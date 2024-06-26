@@ -143,13 +143,9 @@ function addEvents() {
         if (confirm("오늘의 메뉴를 삭제하시겠습니까?")) {
             const {dateInt, selectedDate} = await checkAndConvertDate();
             const checkDateResult = await checkDate(dateInt);
-            const calendarMenuId = checkDateResult.menu_id;
-            const calendarComment = checkDateResult.comment;
 
-            let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
-
-            if (findSchedule) {
-                await deleteCalendarByMenu(findSchedule.id, calendarMenuId, calendarComment);
+            if (checkDateResult.exists) {
+                await deleteCalendarByMenu(checkDateResult.id, checkDateResult.menu_id, checkDateResult.comment);
             }
         }
     });
@@ -261,12 +257,10 @@ function addEvents() {
         if (confirm("메모를 삭제하시겠습니까?")) {
             const memoText = $("#new-memo").val();
             const {dateInt, selectedDate} = await checkAndConvertDate();
+            const checkDateResult = await checkDate(dateInt);
 
-            // 캘린더 리스트에서 해당 날짜 찾기
-            let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
-
-            if (findSchedule) {
-                await deleteCalendarByMemo(findSchedule.id, memoText);
+            if (checkDateResult.exists) {
+                await deleteCalendarByMemo(checkDateResult.id, memoText);
             }
         }
     });
