@@ -123,7 +123,12 @@ function loadRecent(user_id) {
 function buildRecent(result) {
     console.log('빌드 중..');
     $('#recentSection').empty(); // 기존 항목들을 제거합니다.
-    result.data.slice(0, 4).forEach(recent => { // 배열의 처음 4개 항목만 처리
+
+    const recentItems = result.data.slice(0, 4);
+
+    recentItems.forEach((recent, index) => {
+        const isLastItem = index === recentItems.length - 1;
+
         $('#recentSection').append($(`
             <div class="recent-con">
                 <div class="cttName"> ${recent.menu.name} </div>
@@ -132,6 +137,7 @@ function buildRecent(result) {
                     onclick="location.href = '/menu/detail/${recent.menu.id}'">                    
                 </div>
             </div>
+            <div id="recentLine" style="display: ${isLastItem ? 'none' : 'block'};"></div>
         `));
     });
 }
