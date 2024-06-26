@@ -47,7 +47,7 @@ public class CalendarServiceImpl implements CalendarService {
         return calendar;
     }
 
-    // 특정 날짜에 아무 데이터도 없을 때 메모 추가
+    // 메모 추가
     @Override
     public QryResult addByMemo(String memo, String dateString){
 
@@ -78,7 +78,7 @@ public class CalendarServiceImpl implements CalendarService {
         return result;
     }
 
-    // 특정 날짜에 대한 데이터가 없을때 오늘의 메뉴 추가
+    // 오늘의 메뉴 추가
     @Override
     public QryResult addByMenu(Long menu_id, String comment, String dateString) {
         QryResult result = new QryResult();
@@ -132,6 +132,7 @@ public class CalendarServiceImpl implements CalendarService {
         return result;
     }
 
+    // 메모 삭제
     @Override
     public QryResult updateToDeleteMemo(Long id, String memo) {
         Calendar calendar = Calendar.builder()
@@ -149,6 +150,7 @@ public class CalendarServiceImpl implements CalendarService {
         return result;
     }
 
+    // 오늘의 메뉴 삭제
     @Override
     public QryResult updateToDeleteMenu(Long id, Long menu_id, String comment) {
         Menu menu = menuRepository.findById(menu_id);

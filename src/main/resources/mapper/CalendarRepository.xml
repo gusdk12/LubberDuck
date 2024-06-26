@@ -2,7 +2,6 @@
         <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lec.spring.repository.calendar.CalendarRepository">
 
-
     <resultMap id="mapMenu" type="com.lec.spring.domain.menu.Menu">
         <result column="m_id" property="id"/>
         <result column="m_name" property="name"/>
@@ -44,24 +43,25 @@
         <include refid="SELECT_BASE"/>
     </select>
 
-    <!-- 특정 날짜의 메모를 조회 -->
+    <!-- 특정 날짜 불러오기 -->
     <select id="findById" resultMap="mapCalendar">
         <include refid="SELECT_BASE"/>
         AND c.id = #{id}
     </select>
 
-    <!-- 특정 날짜에 아무 데이터도 없을 때 메모 추가 -->
+    <!-- 메모 추가 -->
     <insert id="insertByMemo" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO ctt_calendar (memo, date, id)
         VALUES (#{memo}, #{date}, #{id});
     </insert>
 
-    <!-- 특정 날짜에 아무 데이터도 없을 때 오늘의 메뉴 추가 -->
+    <!-- 오늘의 메뉴 추가 -->
     <insert id="insertByMenu" parameterType="com.lec.spring.domain.calendar.Calendar" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO ctt_calendar (cocktail_id, comment, date, id)
         VALUES (#{menu_id}, #{comment}, #{date}, #{id});
     </insert>
 
+    <!-- 캘린더 데이터(메모, 오늘의 메뉴) 수정 -->
     <update id="updateCalendar" parameterType="com.lec.spring.domain.calendar.Calendar">
         UPDATE ctt_calendar
         SET cocktail_id = COALESCE(#{menu_id}, cocktail_id),
@@ -70,14 +70,14 @@
         WHERE id = #{id}
     </update>
 
-    <!-- 특정 id의 메모 삭제 -->
+    <!-- 메모 삭제 -->
     <update id="updateToDeleteMemo" parameterType="com.lec.spring.domain.calendar.Calendar">
         UPDATE ctt_calendar
         SET memo = null
         WHERE id = #{id};
     </update>
 
-    <!-- 특정 id의 오늘의 메뉴 삭제 -->
+    <!-- 오늘의 메뉴 삭제 -->
     <update id="updateToDeleteMenu" parameterType="com.lec.spring.domain.calendar.Calendar">
         UPDATE ctt_calendar
         SET comment = null, cocktail_id = null
