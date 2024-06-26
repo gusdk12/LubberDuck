@@ -112,7 +112,7 @@ function addEvents() {
             return;
         }
         initializeAndShowPopup("#myForm");
-        window.isEdit = false;
+        window.isMenuEdit = false;
     });
 
     // 메뉴 클릭 시 선택한 메뉴 정보 가져와서 오늘의 메뉴 디테일 팝업 열기
@@ -140,11 +140,11 @@ function addEvents() {
         initializePopup();
         const {dateInt} = await checkAndConvertDate();
 
-        if (window.isEdit) {
+        if (window.isMenuEdit) {
             const checkDateResult = await checkDate(dateInt);
             const calendarMenuId = checkDateResult.menu_id;
             await updateCalendarByMenu(calendarMenuId, comment);
-            window.isEdit = false;
+            window.isMenuEdit = false;
         } else {
             if (selectedMenuId) {
                 await addCalendarByMenu(selectedMenuId, comment);
@@ -169,7 +169,7 @@ function addEvents() {
         const todayMenuData = await buildEditTodayMenu(dateInt);
         if (todayMenuData) {
             $("#select-menu-text").val(todayMenuData.comment);
-            window.isEdit = true;
+            window.isMenuEdit = true;
         } else {
             $("#select-menu-text").empty();
         }
@@ -282,7 +282,7 @@ function addEvents() {
     $(document).on("click", ".memo-delete", async function () {
         if (confirm("메모를 삭제하시겠습니까?")) {
             const memoText = $("#new-memo").val();
-            const selectedDate = init.activeDate.toISOString().split("T")[0];
+            const {dateInt, selectedDate} = await checkAndConvertDate();
 
             // 캘린더 리스트에서 해당 날짜 찾기
             let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);

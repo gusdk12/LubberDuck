@@ -11,12 +11,14 @@ async function checkDate(dateId) {
 
     // 응답 객체에서 id 필드가 존재하는지를 확인하여 데이터의 존재 여부를 판단
     if (response.id) {
+        const id = response.id;
         const memo = response.memo;
         const menu_id = response.menu_id;
         const comment = response.comment;
 
         return {
             exists: true,
+            id: id,
             menu_id: menu_id,
             comment: comment,
             memo: memo
@@ -251,13 +253,19 @@ async function deleteCalendarByMenu(calendarId, menuId, comment) {
     const checkDateResult = await checkDate(dateInt);
 
     const data = {
+        "id": calendarId,
         "menu_id": menuId,
         "comment": comment,
         "date": selectedDate,
         "memo": checkDateResult.exists ? checkDateResult.memo : null
     };
 
-    const url = checkDateResult.exists ? `/calendar/updateToDeleteMenu/${dateInt}` : `/calendar/deleteById/${dateInt}`;
+    let url;
+    if (checkDateResult.exists && checkDateResult.memo !== null) {
+        url = `/calendar/updateToDeleteMenu/${calendarId}`;
+    } else {
+        url = `/calendar/deleteById/${calendarId}`;
+    }
 
     $.ajax({
         url: url,
@@ -382,7 +390,12 @@ async function deleteCalendarByMemo(calendarId, memo) {
         "memo": memo
     };
 
-    const url = checkDateResult.exists ? `/calendar/updateToDeleteMemo/${dateInt}` : `/calendar/deleteById/${dateInt}`;
+    let url;
+    if (checkDateResult.exists && checkDateResult.menu_id !== null) {
+        url = `/calendar/updateToDeleteMemo/${calendarId}`;
+    } else {
+        url = `/calendar/deleteById/${calendarId}`;
+    }
 
     $.ajax({
         url: url,
