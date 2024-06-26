@@ -44,11 +44,13 @@ function buildBody(){
         let totalPrice = 0;
 
         orderItemMap[order.id].forEach(item => {
-
             let buttonHTML = "";
             const findReview = itemReviewMap[item.id];
-            findReview && (buttonHTML = `<input type="button" value="리뷰확인" name="reviewBtn" id="view" onclick="location.href='/mypage/review'">`);
-            findReview || (buttonHTML = `<input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/mypage/review/write/${item.id}'">`);
+            if (findReview) {
+                buttonHTML = `<input type="button" value="리뷰확인" name="reviewBtn" id="view" onclick="location.href='/mypage/review/detail/' + ${findReview.id}">`;
+            } else {
+                buttonHTML = `<input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/mypage/review/write/${item.id}'">`;
+            }
 
             let formattedItemPrice = item.price.toLocaleString('ko-KR');
             itemsHTML += `
