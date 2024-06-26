@@ -102,8 +102,10 @@ function buildBody() {
             <h5>REVIEW |  ${totalReviews} 개 </h5>
             <hr>
             <div class="tag_btn">
-                <input type="radio" name="sort" id="latest" value="최신순" checked><label for="latest">최신순</label>
-                <input type="radio" name="sort" id="rating" value="별점순"><label for="rating">별점순</label>
+                <input type="radio" name="sort" id="latest" value="latest" checked>
+                <label for="latest">최신순</label>
+                <input type="radio" name="sort" id="rating" value="rating">
+                <label for="rating">별점순</label>
             </div>
             <hr>
             ${itemsHTML}
@@ -120,11 +122,11 @@ function sortReviews(sortType) {
     reviewsElements.detach(); // 기존 리뷰 요소들을 제거합니다.
 
     reviewsElements.sort(function(a, b) {
-        if (sortType === '최신순') {
+        if (sortType === 'latest') {
             let dateA = new Date($(a).find('.review-date').attr('value'));
             let dateB = new Date($(b).find('.review-date').attr('value'));
             return dateB - dateA; // 최신순 정렬
-        } else if (sortType === '별점순') {
+        } else if (sortType === 'rating') {
             var ratingA = $(a).find('.star_score').text(); // 리뷰 별점 가져오기
             var ratingB = $(b).find('.star_score').text();
             return ratingB - ratingA; // 별점순 정렬
@@ -146,3 +148,12 @@ function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     return new Date(dateString).toLocaleDateString('ko-KR', options);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('input[name="sort"]').forEach((radio) => {
+        radio.addEventListener('change', (event) => {
+            const sortType = event.target.value;
+            window.location.href = `/review/list?sortType=${sortType}`;
+        });
+    });
+});
