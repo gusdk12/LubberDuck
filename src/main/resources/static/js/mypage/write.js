@@ -51,7 +51,7 @@ $(document).ready(function () {
             cache: false,
             success: function (response) {
                 alert('리뷰가 성공적으로 작성되었습니다.');
-                window.location.href = '/mypage/review'; // 리뷰 목록 페이지로 리디렉션
+                window.location.href = '/mypage/review/detail/' + item.id; // 리뷰 목록 페이지로 리디렉션
             },
             error:
                 function (error) {

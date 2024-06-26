@@ -201,6 +201,13 @@ public class MyPageController {
 
     }
 
+    @GetMapping("review/detail/{id}")
+    public String detail (Model model, @PathVariable("id") Long id){
+        Review review = reviewService.selectById(id);
+        model.addAttribute("review", review);
+        return "mypage/review/detail";
+    }
+
     @GetMapping("review/write/{item_id}")
     public String write(Model model, @PathVariable("item_id") Long item_id){
         Order_item item = orderItemService.findById(item_id);
@@ -226,6 +233,7 @@ public class MyPageController {
         U.getSession().setAttribute("pageRows", pageRows);
         return "redirect:/mypage/review/list?page=" + page;
     }
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

@@ -11,12 +11,14 @@ async function checkDate(dateId) {
 
     // 응답 객체에서 id 필드가 존재하는지를 확인하여 데이터의 존재 여부를 판단
     if (response.id) {
+        const id = response.id;
         const memo = response.memo;
         const menu_id = response.menu_id;
         const comment = response.comment;
 
         return {
             exists: true,
+            id: id,
             menu_id: menu_id,
             comment: comment,
             memo: memo
@@ -43,71 +45,6 @@ function loadCalendars(){
             }
         },
     });
-}
-
-// 캘린더 다시 그리기
-function buildCalendar(data){
-
-    // 달력에 년도와 월을 로드하는 함수
-    function loadYYMM(fullDate) {
-        let yy = fullDate.getFullYear();
-        let mm = fullDate.getMonth();
-        let firstDay = new Date(yy, mm, 1);
-        let lastDay = new Date(yy, mm + 1, 0);
-        let markToday;
-
-        if (mm === init.today.getMonth() && yy === init.today.getFullYear()) {
-            markToday = init.today.getDate();
-        }
-
-        $(".cal-month").text(init.monList[mm]);
-        $(".cal-year").text(yy + "년");
-
-        let trtd = "";
-        let startCount;
-        let countDay = 0;
-        for (let i = 0; i < 6; i++) {
-            trtd += "<tr>";
-            for (let j = 0; j < 7; j++) {
-                if (i === 0 && !startCount && j === firstDay.getDay()) {
-                    startCount = 1;
-                }
-                if (!startCount) {
-                    trtd += "<td>";
-                } else {
-                    let fullDate =
-                        yy + "." + init.addZero(mm + 1) + "." + init.addZero(countDay + 1);
-                    let eventClass = ""; // 이벤트 클래스는 DB와 연동하여 결정
-
-                    trtd += `<td class="day${eventClass}`;
-                    trtd += markToday && markToday === countDay + 1 ? ' today" ' : '"';
-                    trtd += ` data-date="${countDay + 1}" data-fdate="${fullDate}">`;
-
-                    // 메뉴가 있는 경우 표시할 수 있도록 DB와 연동하여 처리
-                    const menuExists = false; // 예시로 false로 설정
-                    if (menuExists) {
-                        trtd += `<span style="border-bottom: 2px solid #000;"></span>`;
-                    }
-
-                }
-                trtd += startCount ? ++countDay : "";
-                if (countDay === lastDay.getDate()) {
-                    startCount = 0;
-                }
-                trtd += "</td>";
-            }
-            trtd += "</tr>";
-        }
-        $(".cal-body").html(trtd);
-
-        highlightEventDates(data);
-
-    }
-
-    loadYYMM(init.today);
-    $(".btn-cal.next").on("click", () => loadYYMM(init.nextMonth()));
-    $(".btn-cal.prev").on("click", () => loadYYMM(init.prevMonth()));
-    $(".cal-body").on("click", "td", handleDayClick);
 }
 
 // 특정 날짜 데이터 불러오기
@@ -251,13 +188,19 @@ async function deleteCalendarByMenu(calendarId, menuId, comment) {
     const checkDateResult = await checkDate(dateInt);
 
     const data = {
+        "id": calendarId,
         "menu_id": menuId,
         "comment": comment,
         "date": selectedDate,
         "memo": checkDateResult.exists ? checkDateResult.memo : null
     };
 
-    const url = checkDateResult.exists ? `/calendar/updateToDeleteMenu/${dateInt}` : `/calendar/deleteById/${dateInt}`;
+    let url;
+    if (checkDateResult.exists && checkDateResult.memo !== null) {
+        url = `/calendar/updateToDeleteMenu/${calendarId}`;
+    } else {
+        url = `/calendar/deleteById/${calendarId}`;
+    }
 
     $.ajax({
         url: url,
@@ -382,7 +325,12 @@ async function deleteCalendarByMemo(calendarId, memo) {
         "memo": memo
     };
 
-    const url = checkDateResult.exists ? `/calendar/updateToDeleteMemo/${dateInt}` : `/calendar/deleteById/${dateInt}`;
+    let url;
+    if (checkDateResult.exists && checkDateResult.menu_id !== null) {
+        url = `/calendar/updateToDeleteMemo/${calendarId}`;
+    } else {
+        url = `/calendar/deleteById/${calendarId}`;
+    }
 
     $.ajax({
         url: url,
