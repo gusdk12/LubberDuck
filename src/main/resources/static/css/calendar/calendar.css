@@ -515,9 +515,11 @@ body {
 
 .form-container {
     width: 500px;
-    padding: 30px;
+    padding: 30px 0;
     background-color: white;
     border-radius: 22px;
+    overflow: hidden;
+    height: 600px;
 }
 
 .popup-overlay {
@@ -535,24 +537,31 @@ body {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -55%);
+    transform: translate(-50%, -50%);
     z-index: 400;
-    overflow-y: auto;
-    margin-top: 30px;
+    overflow: hidden;
     height: 600px;
 }
 
-.form-popup1::-webkit-scrollbar {
-    width: 4px;
+.menu-scroll {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 580px;
+    padding-left: 6px;
 }
 
-.form-popup1::-webkit-scrollbar-thumb {
-    /*background-color: none;*/
+.menu-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.menu-scroll::-webkit-scrollbar-thumb {
+    background: rgba(14, 42, 33, 0.54);
     border-radius: 10px;
 }
 
-.form-popup1::-webkit-scrollbar-track {
-    /*background-color: none;*/
+.menu-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }
 
 .form-popup2 {
@@ -562,22 +571,29 @@ body {
     left: 50%;
     transform: translate(-50%, -55%);
     z-index: 400;
-    overflow-y: auto;
-    margin-top: 30px;
+    overflow: hidden;
     height: 600px;
 }
 
-.form-popup2::-webkit-scrollbar {
-    width: 4px;
+.select-menu-scroll {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 580px;
+    padding-left: 6px;
 }
 
-.form-popup2::-webkit-scrollbar-thumb {
-    /*background-color: none;*/
+.select-menu-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.select-menu-scroll::-webkit-scrollbar-thumb {
+    background: rgba(14, 42, 33, 0.54);
     border-radius: 10px;
 }
 
-.form-popup2::-webkit-scrollbar-track {
-    /*background-color: none;*/
+.select-menu-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }
 
 .menu-close {
@@ -599,11 +615,15 @@ body {
     opacity: 70%;
 }
 
+.menu-title {
+    padding: 0 30px;
+}
+
 .title-text {
     padding-left: 32px;
     text-align: center;
     font-size: 24px;
-    margin-bottom: 18px;
+    margin: 0 0 18px;
     font-weight: 600;
 }
 
@@ -617,13 +637,13 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    padding: 20px 20px 0 20px;
 }
 
 .line {
     margin: 0 -30px;
-    margin-bottom: 40px;
     height: 0.2px;
-    background-color: #42555072;
+    color: rgba(14, 42, 33, 0.54);
 }
 
 .menu {
@@ -702,6 +722,7 @@ body {
 .select-menu-buttons {
     text-align: end;
     margin-right: 24px;
+    margin-bottom: 70px;
 }
 
 .select-menu-buttons button {
