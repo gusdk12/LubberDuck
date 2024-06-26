@@ -31,43 +31,6 @@ $(document).ready(function () {
     addEvents();
 });
 
-// 날짜 클릭 시 이벤트를 처리하는 함수
-function handleDayClick(e) {
-    const target = $(e.target);
-    if (target.hasClass("day")) {
-        $("#new-memo").hide();
-
-        if (init.activeDTag) {
-            init.activeDTag.removeClass("day-active");
-        }
-        let day = Number(target.text());
-        let date = target.data("fdate");
-        target.addClass("day-active");
-        init.activeDTag = target;
-        init.activeDate.setDate(day);
-
-        // String 타입인 date 를 int 타입으로 바꾸기
-        if (date) {
-            let dateStr = date.replace(/\./g, '');
-            let dateInt = Number(dateStr);
-            loadData(dateInt);
-        } else {
-            console.error("date 값이 없습니다.");
-        }
-    }
-}
-
-// 캘린더 셀에 이벤트 클래스 추가하는 함수
-function highlightEventDates(calendarData) {
-    calendarData.forEach(event => {
-        const dateParts = event.date.split("-");
-        const year = dateParts[0];
-        const month = dateParts[1];
-        let day = dateParts[2];
-        $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`).addClass("event");
-    });
-}
-
 // 공통 기능: 날짜 변환 및 체크
 async function checkAndConvertDate() {
     const selectedDate = init.activeDate.toISOString().split("T")[0]; // 사용자에 의해 선택된 날짜
@@ -248,8 +211,6 @@ function addEvents() {
 
             // 메모 수정할 때 저장할 때 구별
             if ($("#new-memo").data("mode") === "edit") {
-                // TODO : 이부분이 문제야
-                console.log(memoText);
                 await updateCalendarByMemo(memoText);
             } else {
                 await addCalendarByMemo(memoText);
@@ -302,4 +263,111 @@ function addEvents() {
         const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
         alert(selectedDate);
     });
+
+    // 다음달 클릭
+    $(".btn-cal.next").on("click", () => loadYYMM(init.nextMonth()));
+
+    // 이전달 클릭
+    $(".btn-cal.prev").on("click", () => loadYYMM(init.prevMonth()));
+
+    // 사용자가 클릭한 날짜 표시
+    $(".cal-body").on("click", "td", function(e) {
+        const target = $(e.target);
+        if (target.hasClass("day")) {
+
+            // 현재 활성화된 날짜 태그가 존재하는 경우, 'day-active' 클래스 제거
+            if (init.activeDTag) {
+                init.activeDTag.removeClass("day-active");
+            }
+            let day = Number(target.text()); // 클릭된 날짜의 숫자 값을 가져옴
+            let date = target.data("fdate"); // 클릭된 날짜의 'fdate' 데이터 속성을 가져옴
+
+            // 클릭된 날짜에 'day-active' 클래스 추가 (활성화 상태 표시)
+            target.addClass("day-active");
+
+            // init 객체의 활성화된 날짜 태그를 클릭된 날짜로 업데이트
+            init.activeDTag = target;
+            init.activeDate.setDate(day);
+
+            // String 타입인 date 를 int 타입으로 바꾸기
+            if (date) {
+                let dateStr = date.replace(/\./g, '');
+                let dateInt = Number(dateStr);
+                loadData(dateInt);
+            } else {
+                console.error("date 값이 없습니다.");
+            }
+        }
+    });
+}
+
+// 캘린더를 구성하고 초기화하는 함수
+function buildCalendar(data){
+
+    // 달력에 년도와 월을 로드하는 함수
+    function loadYYMM(fullDate) {
+        let yy = fullDate.getFullYear(); // 년도
+        let mm = fullDate.getMonth(); // 월 (0부터 시작)
+        let firstDay = new Date(yy, mm, 1); // 해당 월의 첫째 날
+        let lastDay = new Date(yy, mm + 1, 0); // 해당 월의 마지막 날
+        let markToday;
+
+        // 오늘 날짜를 표시하기 위한 변수 설정
+        if (mm === init.today.getMonth() && yy === init.today.getFullYear()) {
+            markToday = init.today.getDate();
+        }
+
+        // 월과 년도를 UI에 표시
+        $(".cal-month").text(init.monList[mm]);
+        $(".cal-year").text(yy + "년");
+
+        let trtd = "";
+        let startCount; // 첫째 주 시작 여부
+        let countDay = 0; // 날짜 카운트 변수 초기화
+        for (let i = 0; i < 6; i++) { // 6주(행)까지 반복
+            trtd += "<tr>";
+            for (let j = 0; j < 7; j++) { // 7일(열)까지 반복
+                if (i === 0 && !startCount && j === firstDay.getDay()) {
+                    startCount = 1; // 첫째 주 첫째 날을 시작으로 표시
+                }
+                if (!startCount) {
+                    trtd += "<td>"; // 첫째 주 시작 전에는 빈 td 요소 추가
+                } else {
+                    // 각 날짜에 대한 정보 설정
+                    let fullDate =
+                        yy + "." + init.addZero(mm + 1) + "." + init.addZero(countDay + 1); // 날짜 포맷 설정
+                    let eventClass = ""; // 이벤트 클래스는 DB와 연동하여 결정
+
+                    trtd += `<td class="day${eventClass}`;  // td 요소에 클래스 추가
+                    trtd += markToday && markToday === countDay + 1 ? ' today" ' : '"'; // 오늘 날짜인 경우 클래스 추가
+                    trtd += ` data-date="${countDay + 1}" data-fdate="${fullDate}">`; // 데이터 속성 추가
+
+                    // 메뉴가 있는 경우 표시할 수 있도록 DB와 연동하여 처리
+                    const menuExists = false; // 예시로 false로 설정
+                    if (menuExists) {
+                        trtd += `<span style="border-bottom: 2px solid #000;"></span>`;
+                    }
+
+                }
+                trtd += startCount ? ++countDay : ""; // 날짜 카운트 증가
+                if (countDay === lastDay.getDate()) {
+                    startCount = 0; // 마지막 날짜에 도달하면 첫째 주 표시 종료
+                }
+                trtd += "</td>";
+            }
+            trtd += "</tr>";
+        }
+        $(".cal-body").html(trtd);
+
+        // 날짜에 데이터가 있으면 색상 표시
+        data.forEach(event => {
+            const dateParts = event.date.split("-");
+            const year = dateParts[0];
+            const month = dateParts[1];
+            let day = dateParts[2];
+            $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`).addClass("event");
+        });
+    }
+
+    loadYYMM(init.today); // 현재 날짜로 달력 초기화
 }
