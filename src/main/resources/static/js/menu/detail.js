@@ -1,10 +1,9 @@
 
 window.addEventListener('load', async () => {
     try {
-
         loadMenu();
         addEvent();
-        reviewsList();
+
         if (logged_id !== -1) {
             await checkToRecent(currentCocktail);
             await loadRecent(logged_id);

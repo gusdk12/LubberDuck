@@ -42,3 +42,40 @@ FROM
 ORDER BY r.id DESC
     LIMIT 15, 5;
 
+SELECT cocktail_id
+FROM ctt_recent
+WHERE user_id = 6
+ORDER BY saw_date ASC LIMIT 1
+;
+
+DELETE FROM ctt_recent
+WHERE user_id = 5
+  AND cocktail_id = (SELECT cocktail_id
+                     FROM ctt_recent
+                     WHERE user_id = 5
+                     ORDER BY saw_date ASC LIMIT 1);
+
+
+
+DELETE FROM ctt_recent
+WHERE user_id = 3
+  AND cocktail_id = (
+    SELECT cocktail_id
+    FROM (
+             SELECT cocktail_id
+             FROM ctt_recent
+             WHERE user_id = 3
+             ORDER BY saw_date ASC
+             LIMIT 1
+         ) AS recent_data
+);
+
+DELETE FROM ctt_recent
+WHERE user_id = 6 AND cocktail_id = 25
+;
+
+SELECT *
+FROM ctt_recent
+WHERE user_id = 6
+ORDER BY saw_date DESC
+;

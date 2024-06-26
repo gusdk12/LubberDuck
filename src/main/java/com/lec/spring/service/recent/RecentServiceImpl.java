@@ -57,6 +57,8 @@ public class RecentServiceImpl implements RecentService {
 
     @Override
     public QryResult add(Long user_id, Long menu_id) {
+
+        // Continue with the existing add logic
         User user = userRepository.findById(user_id);
         Menu menu = menuRepository.findById(menu_id);
 
