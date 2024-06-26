@@ -130,12 +130,39 @@ body {
     color: #FEFAF4;
     text-align: center;
     align-content: center;
-
     margin-top: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
 }
 #payButton:hover{
     background-color: #10573E;
 }
+
+/*-----------------------------------*/
+#pikabusection{
+    position: absolute;
+    height: 200px;
+    width: 100px;
+    background-color: #c4eacd;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+/*.cocktailPikabu{*/
+/*    position: absolute;*/
+/*    height: 160px;*/
+/*    width: 180px;*/
+/*    background-color: coral;*/
+/*    !*background-size: contain;*!*/
+/*    !*background-repeat: no-repeat;*!*/
+/*    !*background-position: center;*!*/
+/*}*/
+
 
 /*-----------------------------------*/
 #footer{

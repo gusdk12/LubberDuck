@@ -43,6 +43,12 @@
         </form>
     </div>
 
+<!--    <div id="pikabusection">-->
+<!--        <div class="cocktailPikabu"></div>-->
+<!--        <div class="cocktailPikabu"></div>-->
+<!--        <div class="cocktailPikabu"></div>-->
+<!--    </div>-->
+
     <th:block sec:authorize="hasRole('CUSTOMER')">
         <th:block th:with="logged_user=${#authentication.principal.user}">
             <script th:inline="javascript">
