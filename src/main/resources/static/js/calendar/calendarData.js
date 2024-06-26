@@ -287,16 +287,16 @@ async function addCalendarByMemo(memo) {
 
 // 메모 수정
 async function updateCalendarByMemo(memo) {
-    const {dateInt, selectedDate} = await checkAndConvertDate();
+    const { dateInt, selectedDate } = await checkAndConvertDate();
     const checkDateResult = await checkDate(dateInt);
 
-    // TODO : 이부분이 문제야
     const data = {
         "menu_id": checkDateResult.exists ? checkDateResult.menu_id : null,
         "comment": checkDateResult.exists ? checkDateResult.comment : null,
         "date": selectedDate,
         "memo": memo
     };
+
 
     $.ajax({
         url: `/calendar/update/${dateInt}`,
@@ -309,6 +309,10 @@ async function updateCalendarByMemo(memo) {
                 alert("메모가 수정되었습니다.");
                 loadData(dateInt);
             }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX 오류 발생:", data);
+            alert("메모 수정 중 오류가 발생했습니다.");
         }
     });
 }

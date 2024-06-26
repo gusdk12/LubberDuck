@@ -113,14 +113,27 @@ public class CalendarServiceImpl implements CalendarService {
     // 캘린더 데이터(메모, 오늘의 메뉴) 수정
     @Override
     public QryResult update(Long id, Long menu_id, String comment, String memo){
-        Menu menu = menuRepository.findById(menu_id);
+        Menu menu = null;
+        Long menuId = null;
+
+        if (menu_id != null) {
+            menu = menuRepository.findById(menu_id);
+            if (menu != null) {
+                menuId = menu.getId();
+            }
+        }
 
         Calendar calendar = Calendar.builder()
                 .id(id)
-                .menu_id(menu.getId())
+                .menu_id(menuId) // menuId 변수를 사용하여 메뉴 ID를 설정
                 .comment(comment)
                 .memo(memo)
                 .build();
+
+        // 필요한 경우 메뉴가 존재하는지 확인 후 추가 작업 수행
+        if (menu != null) {
+            calendar.setMenu_id(menu.getId());
+        }
 
         int cnt = calendarRepository.updateCalendar(calendar);
 
