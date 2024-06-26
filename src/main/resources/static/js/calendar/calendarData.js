@@ -3,31 +3,26 @@
  ********************************************/
 // 특정 날짜의 데이터가 존재하는지 확인
 async function checkDate(dateId) {
-    try {
-        const response = await $.ajax({
-            url: "/calendar/detail/" + dateId,
-            type: "GET",
-            cache: false
-        });
+    const response = await $.ajax({
+        url: "/calendar/detail/" + dateId,
+        type: "GET",
+        cache: false
+    });
 
-        // 응답 객체에서 id 필드가 존재하는지를 확인하여 데이터의 존재 여부를 판단
-        if (response.id) {
-            const memo = response.memo;
-            const menu_id = response.menu_id;
-            const comment = response.comment;
+    // 응답 객체에서 id 필드가 존재하는지를 확인하여 데이터의 존재 여부를 판단
+    if (response.id) {
+        const memo = response.memo;
+        const menu_id = response.menu_id;
+        const comment = response.comment;
 
-            return {
-                exists: true,
-                menu_id: menu_id,
-                comment: comment,
-                memo: memo
-            };
-        } else {
-            return false;
-        }
-    } catch (error) {
-        console.error("Error fetching calendar details:", error);
-        throw error;
+        return {
+            exists: true,
+            menu_id: menu_id,
+            comment: comment,
+            memo: memo
+        };
+    } else {
+        return false;
     }
 }
 
@@ -185,27 +180,23 @@ function initializePopup() {
 
 // 오늘의 메뉴 데이터를 가져오는 함수
 async function buildEditTodayMenu(dateInt) {
-    try {
-        const checkDateResult = await checkDate(dateInt);
-        if (!checkDateResult.exists) {
-            console.error("No valid data found for the given date.");
-            return null;
-        }
 
-        const menu = menuList.find(m => m.id === checkDateResult.menu_id);
-        if (menu) {
-            $('.select-menu-img').attr("src", menu.imgUrl);
-            $('.select-menu-name').text(menu.name);
-        }
-
-        return {
-            menu_id: checkDateResult.menu_id,
-            comment: checkDateResult.comment
-        };
-    } catch (error) {
-        console.error("Error fetching today's menu:", error);
+    const checkDateResult = await checkDate(dateInt);
+    if (!checkDateResult.exists) {
+        console.error("No valid data found for the given date.");
         return null;
     }
+
+    const menu = menuList.find(m => m.id === checkDateResult.menu_id);
+    if (menu) {
+        $('.select-menu-img').attr("src", menu.imgUrl);
+        $('.select-menu-name').text(menu.name);
+    }
+
+    return {
+        menu_id: checkDateResult.menu_id,
+        comment: checkDateResult.comment
+    };
 }
 
 // 오늘의 메뉴 추가
@@ -214,36 +205,31 @@ async function addCalendarByMenu(menuId, comment) {
     let dateStr = selectedDate.replace(/-/g, '');
     let dateInt = Number(dateStr);
 
-    try {
-        const checkDateResult = await checkDate(dateInt);
+    const checkDateResult = await checkDate(dateInt);
 
-        // 메모 데이터가 있는지 없는지 구분하여 추가
-        const data = {
-            "menu_id": menuId,
-            "comment": comment,
-            "date": selectedDate,
-            "memo": checkDateResult.exists ? checkDateResult.memo : null
-        };
+    const data = {
+        "menu_id": menuId,
+        "comment": comment,
+        "date": selectedDate,
+        "memo": checkDateResult.exists ? checkDateResult.memo : null
+    };
 
-        const url = checkDateResult.exists ? `/calendar/update/${dateInt}` : "/calendar/addByMenu";
+    const url = checkDateResult.exists ? `/calendar/update/${dateInt}` : "/calendar/addByMenu";
 
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status) {
-                if (status === "success" && data.status === "OK") {
-                    alert("오늘의 메뉴가 추가되었습니다.");
-                    loadData(dateInt);
-                    $("#myForm2").hide();
-                    $(".popup-overlay").remove();
-                }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if (status === "success" && data.status === "OK") {
+                alert("오늘의 메뉴가 추가되었습니다.");
+                loadData(dateInt);
+                $("#myForm2").hide();
+                $(".popup-overlay").remove();
             }
-        });
-    } catch (error) {
-        console.error("Error checking date existence:", error);
-    }
+        }
+    });
 }
 
 // 오늘의 메뉴 수정
@@ -252,74 +238,64 @@ async function updateCalendarByMenu(menuId, comment) {
     let dateStr = selectedDate.replace(/-/g, '');
     let dateInt = Number(dateStr);
 
-    try {
-        const checkDateResult = await checkDate(dateInt);
+    const checkDateResult = await checkDate(dateInt);
 
-        // 메모 데이터가 있는지 없는지 구분하여 수정
-        const data = {
-            "menu_id": menuId,
-            "comment": comment,
-            "date": selectedDate,
-            "memo": checkDateResult.exists ? checkDateResult.memo : null
-        };
+    const data = {
+        "menu_id": menuId,
+        "comment": comment,
+        "date": selectedDate,
+        "memo": checkDateResult.exists ? checkDateResult.memo : null
+    };
 
-        $.ajax({
-            url: `/calendar/update/${dateInt}`,
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status) {
-                if (status === "success" && data.status === "OK") {
-                    alert("오늘의 메뉴가 수정되었습니다.");
-                    loadData(dateInt);
-                    $("#myForm2").hide();
-                    $(".popup-overlay").remove();
-                }
+    $.ajax({
+        url: `/calendar/update/${dateInt}`,
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if (status === "success" && data.status === "OK") {
+                alert("오늘의 메뉴가 수정되었습니다.");
+                loadData(dateInt);
+                $("#myForm2").hide();
+                $(".popup-overlay").remove();
             }
-        });
-    } catch (error) {
-        console.error("Error checking date existence:", error);
-    }
+        }
+    });
 }
 
-// 오늘의 메뉴 삭제 (메모가 있을 때 삭제)
+// 오늘의 메뉴 삭제
 async function deleteCalendarByMenu(calendarId, menuId, comment) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
     let dateStr = selectedDate.replace(/-/g, '');
     let dateInt = Number(dateStr);
 
-    try {
-        const checkDateResult = await checkDate(dateInt);
+    const checkDateResult = await checkDate(dateInt);
 
-        // 메모 데이터가 있는지 없는지 구분하여 삭제
-        const data = {
-            "menu_id": menuId,
-            "comment": comment,
-            "date": selectedDate,
-            "memo": checkDateResult.exists ? checkDateResult.memo : null
-        };
+    const data = {
+        "menu_id": menuId,
+        "comment": comment,
+        "date": selectedDate,
+        "memo": checkDateResult.exists ? checkDateResult.memo : null
+    };
 
-        const url = checkDateResult.exists ? `/calendar/updateToDeleteMenu/${calendarId}` : `/calendar/deleteById/${calendarId}`;
+    const url = checkDateResult.exists ? `/calendar/updateToDeleteMenu/${calendarId}` : `/calendar/deleteById/${calendarId}`;
 
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status) {
-                if (status === "success" && data.status === "OK") {
-                    alert("오늘의 메뉴가 삭제되었습니다.");
-                    loadData(dateInt);
-                    $('.today-menu-container').empty();
-                    $('#select-menu-text').empty();
-                    $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
-                    $('#notification-menu .notification-menu-text').text('등록한 오늘의 메뉴가 없습니다.');
-                }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if (status === "success" && data.status === "OK") {
+                alert("오늘의 메뉴가 삭제되었습니다.");
+                loadData(dateInt);
+                $('.today-menu-container').empty();
+                $('#select-menu-text').empty();
+                $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
+                $('#notification-menu .notification-menu-text').text('등록한 오늘의 메뉴가 없습니다.');
             }
-        });
-    } catch (error) {
-        console.error("Error checking date existence:", error);
-    }
+        }
+    });
 }
 
 
@@ -365,34 +341,29 @@ async function addCalendarByMemo(memo) {
     let dateStr = selectedDate.replace(/-/g, '');
     let dateInt = Number(dateStr);
 
-    try {
-        const checkDateResult = await checkDate(dateInt);
+    const checkDateResult = await checkDate(dateInt);
 
-        // 오늘의 메뉴 데이터가 있는지 없는지 구분하여 추가
-        const data = {
-            "menu_id": checkDateResult.exists ? checkDateResult.menu_id : null,
-            "comment": checkDateResult.exists ? checkDateResult.comment : null,
-            "date": selectedDate,
-            "memo": memo
-        };
+    const data = {
+        "menu_id": checkDateResult.exists ? checkDateResult.menu_id : null,
+        "comment": checkDateResult.exists ? checkDateResult.comment : null,
+        "date": selectedDate,
+        "memo": memo
+    };
 
-        const url = checkDateResult.exists ? `/calendar/update/${dateInt}` : "/calendar/addByMemo";
+    const url = checkDateResult.exists ? `/calendar/update/${dateInt}` : "/calendar/addByMemo";
 
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status) {
-                if (status === "success" && data.status === "OK") {
-                    alert("메모가 추가되었습니다.");
-                    loadData(dateInt);
-                }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if (status === "success" && data.status === "OK") {
+                alert("메모가 추가되었습니다.");
+                loadData(dateInt);
             }
-        });
-    } catch (error) {
-        console.error("Error checking date existence:", error);
-    }
+        }
+    });
 }
 
 // todo
@@ -433,71 +404,33 @@ async function updateCalendarByMemo(calendarId, memo) {
     }
 }
 
-// 메모 삭제 (오늘의 메뉴 데이터가 있을 때)
-async function deleteToUpdateCalendarByMemo(calendarId) {
+// 메모 삭제
+async function deleteCalendarByMemo(calendarId) {
     const selectedDate = init.activeDate.toISOString().split("T")[0];
     let dateStr = selectedDate.replace(/-/g, '');
     let dateInt = Number(dateStr);
 
-    try {
-        const checkDateResult = await checkDate(dateInt);
+    const checkDateResult = await checkDate(dateInt);
 
-        const data = {
-            "menu_id": checkDateResult.menu_id,
-            "comment": checkDateResult.comment,
-            "date": selectedDate,
-            "memo": null
-        };
+    const data = {
+        "menu_id": checkDateResult.exists ? checkDateResult.menu_id : null,
+        "comment": checkDateResult.exists ? checkDateResult.comment : null,
+        "date": selectedDate,
+        "memo": null
+    };
 
-        const url = `/calendar/updateToDeleteMemo/${calendarId}`;
+    const url = checkDateResult.exists ? `/calendar/updateToDeleteMemo/${calendarId}` : `/calendar/deleteById/${calendarId}`;
 
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status) {
-                if (status === "success" && data.status === "OK") {
-                    alert("메모가 삭제되었습니다.");
-                    loadData(dateInt);
-                }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if (status === "success" && data.status === "OK") {
+                alert("메모가 삭제되었습니다.");
+                loadData(dateInt);
             }
-        });
-    } catch (error) {
-        console.error("Error checking date existence:", error);
-    }
-}
-
-// 메모 삭제 (오늘의 메뉴 데이터가 없을 때)
-async function deleteCalendarByMemo(calendarId) {
-    const selectedDate = init.activeDate.toISOString().split("T")[0];
-
-    try {
-        const checkDateResult = await checkDate(calendarId);
-
-        const data = {
-            "menu_id": null,
-            "comment": null,
-            "date": checkDateResult.date,
-            "memo": null
-        };
-
-        const url = `/calendar/deleteById/${calendarId}`;
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status) {
-                if (status === "success" && data.status === "OK") {
-                    alert("메모가 삭제되었습니다.");
-                    $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
-                    loadData(calendarId);
-                }
-            }
-        });
-    } catch (error) {
-        console.error("Error checking date existence:", error);
-    }
+        }
+    });
 }
