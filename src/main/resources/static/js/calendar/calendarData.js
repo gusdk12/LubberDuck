@@ -166,18 +166,6 @@ function buildTodayMenu(data) {
     }
 }
 
-// 팝업을 열 때 초기화 함수
-function initializePopup() {
-    // 팝업 열기 전 초기화
-    $(".menu-img").css('background-image', 'none'); // 팝업에서 선택해서 달력으로 넘어간 이미지 초기화
-    $(".today-menu-name").text(''); // 팝업에서 선택해서 달력으로 넘어간 메뉴 이름 초기화
-    $("#today-menu-text").val(''); // 팝업에서 선택해서 달력으로 넘어간 코멘트 초기화
-
-    $(".select-menu-name").text('');  // 팝업에서 선택된 메뉴 이름 초기화
-    $("#select-menu-text").val(''); // 팝업에서 선택된 메뉴 코멘트 초기화
-    $('.select-menu-img').css('background-image', 'none'); // 팝업에서 선택된 이미지 초기화
-}
-
 // 오늘의 메뉴 데이터를 가져오는 함수
 async function buildEditTodayMenu(dateInt) {
 
@@ -201,10 +189,7 @@ async function buildEditTodayMenu(dateInt) {
 
 // 오늘의 메뉴 추가
 async function addCalendarByMenu(menuId, comment) {
-    const selectedDate = init.activeDate.toISOString().split("T")[0];
-    let dateStr = selectedDate.replace(/-/g, '');
-    let dateInt = Number(dateStr);
-
+    const {dateInt, selectedDate} = await checkAndConvertDate();
     const checkDateResult = await checkDate(dateInt);
 
     const data = {
@@ -234,10 +219,7 @@ async function addCalendarByMenu(menuId, comment) {
 
 // 오늘의 메뉴 수정
 async function updateCalendarByMenu(menuId, comment) {
-    const selectedDate = init.activeDate.toISOString().split("T")[0];
-    let dateStr = selectedDate.replace(/-/g, '');
-    let dateInt = Number(dateStr);
-
+    const {dateInt, selectedDate} = await checkAndConvertDate();
     const checkDateResult = await checkDate(dateInt);
 
     const data = {
@@ -265,10 +247,7 @@ async function updateCalendarByMenu(menuId, comment) {
 
 // 오늘의 메뉴 삭제
 async function deleteCalendarByMenu(calendarId, menuId, comment) {
-    const selectedDate = init.activeDate.toISOString().split("T")[0];
-    let dateStr = selectedDate.replace(/-/g, '');
-    let dateInt = Number(dateStr);
-
+    const {dateInt, selectedDate} = await checkAndConvertDate();
     const checkDateResult = await checkDate(dateInt);
 
     const data = {
@@ -278,7 +257,7 @@ async function deleteCalendarByMenu(calendarId, menuId, comment) {
         "memo": checkDateResult.exists ? checkDateResult.memo : null
     };
 
-    const url = checkDateResult.exists ? `/calendar/updateToDeleteMenu/${calendarId}` : `/calendar/deleteById/${calendarId}`;
+    const url = checkDateResult.exists ? `/calendar/updateToDeleteMenu/${dateInt}` : `/calendar/deleteById/${dateInt}`;
 
     $.ajax({
         url: url,
@@ -337,10 +316,7 @@ function buildMemo(data) {
 
 // 메모 추가
 async function addCalendarByMemo(memo) {
-    const selectedDate = init.activeDate.toISOString().split("T")[0];
-    let dateStr = selectedDate.replace(/-/g, '');
-    let dateInt = Number(dateStr);
-
+    const {dateInt, selectedDate} = await checkAndConvertDate();
     const checkDateResult = await checkDate(dateInt);
 
     const data = {
@@ -366,60 +342,47 @@ async function addCalendarByMemo(memo) {
     });
 }
 
-// todo
 // 메모 수정
-async function updateCalendarByMemo(calendarId, memo) {
-    const selectedDate = init.activeDate.toISOString().split("T")[0];
-    let dateStr = selectedDate.replace(/-/g, '');
-    let dateInt = Number(dateStr);
+async function updateCalendarByMemo(memo) {
+    const {dateInt, selectedDate} = await checkAndConvertDate();
+    const checkDateResult = await checkDate(dateInt);
 
-    if (!memo) return;
+    // TODO : 이부분이 문제야
+    const data = {
+        "menu_id": checkDateResult.exists ? checkDateResult.menu_id : null,
+        "comment": checkDateResult.exists ? checkDateResult.comment : null,
+        "date": selectedDate,
+        "memo": memo
+    };
 
-    try {
-        const checkDateResult = await checkDate(dateInt);
-
-        // 오늘의 메뉴 데이터가 있는지 없는지 구분하여 수정
-        const data = {
-            "menu_id": checkDateResult.exists ? checkDateResult.menu_id : null,
-            "comment": checkDateResult.exists ? checkDateResult.comment : null,
-            "date": selectedDate,
-            "memo": memo
-        };
-
-        $.ajax({
-            url: `/calendar/update/${calendarId}`,
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status) {
-                if (status === "success" && data.status === "OK") {
-                    $("#new-memo").val("").hide();
-                    alert("메모가 수정되었습니다.");
-                    loadData(dateInt);
-                }
+    $.ajax({
+        url: `/calendar/update/${dateInt}`,
+        type: "POST",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if (status === "success" && data.status === "OK") {
+                $("#new-memo").val("").hide();
+                alert("메모가 수정되었습니다.");
+                loadData(dateInt);
             }
-        });
-    } catch (error) {
-        console.error("Error checking date existence:", error);
-    }
+        }
+    });
 }
 
 // 메모 삭제
-async function deleteCalendarByMemo(calendarId) {
-    const selectedDate = init.activeDate.toISOString().split("T")[0];
-    let dateStr = selectedDate.replace(/-/g, '');
-    let dateInt = Number(dateStr);
-
+async function deleteCalendarByMemo(calendarId, memo) {
+    const {dateInt, selectedDate} = await checkAndConvertDate();
     const checkDateResult = await checkDate(dateInt);
 
     const data = {
         "menu_id": checkDateResult.exists ? checkDateResult.menu_id : null,
         "comment": checkDateResult.exists ? checkDateResult.comment : null,
         "date": selectedDate,
-        "memo": null
+        "memo": memo
     };
 
-    const url = checkDateResult.exists ? `/calendar/updateToDeleteMemo/${calendarId}` : `/calendar/deleteById/${calendarId}`;
+    const url = checkDateResult.exists ? `/calendar/updateToDeleteMemo/${dateInt}` : `/calendar/deleteById/${dateInt}`;
 
     $.ajax({
         url: url,

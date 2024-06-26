@@ -68,27 +68,39 @@ function highlightEventDates(calendarData) {
     });
 }
 
-function addEvents() {
+// 공통 기능: 날짜 변환 및 체크
+async function checkAndConvertDate() {
+    const selectedDate = init.activeDate.toISOString().split("T")[0]; // 사용자에 의해 선택된 날짜
+    let dateStr = selectedDate.replace(/-/g, '');
+    let dateInt = Number(dateStr);
+    return {dateStr, dateInt, selectedDate}; // 객체로 반환
+}
 
-    // 공통 기능: 날짜 변환 및 체크
-    async function checkAndConvertDate() {
-        const selectedDate = init.activeDate.toISOString().split("T")[0]; // 사용자에 의해 선택된 날짜
-        let dateStr = selectedDate.replace(/-/g, '');
-        let dateInt = Number(dateStr);
-        return {dateStr, dateInt, selectedDate}; // 객체로 반환
-    }
+// 공통 기능: 팝업 초기화 및 오버레이 추가
+function initializeAndShowPopup(popupId) {
+    initializePopup();
+    $("body").append(popupOverlay);
+    $(popupId).show();
+}
+
+// 팝업을 열 때 초기화 함수
+function initializePopup() {
+    // 팝업 열기 전 초기화
+    $(".menu-img").css('background-image', 'none'); // 팝업에서 선택해서 달력으로 넘어간 이미지 초기화
+    $(".today-menu-name").text(''); // 팝업에서 선택해서 달력으로 넘어간 메뉴 이름 초기화
+    $("#today-menu-text").val(''); // 팝업에서 선택해서 달력으로 넘어간 코멘트 초기화
+
+    $(".select-menu-name").text('');  // 팝업에서 선택된 메뉴 이름 초기화
+    $("#select-menu-text").val(''); // 팝업에서 선택된 메뉴 코멘트 초기화
+    $('.select-menu-img').css('background-image', 'none'); // 팝업에서 선택된 이미지 초기화
+}
+
+function addEvents() {
 
     /****************************************************************
                         오늘의 메뉴 관련 이벤트
      ****************************************************************/
     let selectedMenuId = null; // 사용자가 선택한 메뉴 정보
-
-    // 공통 기능: 팝업 초기화 및 오버레이 추가
-    function initializeAndShowPopup(popupId) {
-        initializePopup();
-        $("body").append(popupOverlay);
-        $(popupId).show();
-    }
 
     // 메뉴 리스트 팝업 열기
     $("#btn-add-menu").on("click", async function () {
@@ -236,17 +248,12 @@ function addEvents() {
 
             // 메모 수정할 때 저장할 때 구별
             if ($("#new-memo").data("mode") === "edit") {
-                const { dateInt, selectedDate } = await checkAndConvertDate();
-                let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
-                const checkDateResult = await checkDate(dateInt);
-                const calendarMemoText = checkDateResult.memo;
-
-                await updateCalendarByMemo(findSchedule.id, calendarMemoText);
+                // TODO : 이부분이 문제야
+                console.log(memoText);
+                await updateCalendarByMemo(memoText);
             } else {
                 await addCalendarByMemo(memoText);
             }
-
-            $(this).val("").hide();
         } else if (e.key === "Escape") {
             $(this).val("").hide();
         }
@@ -258,7 +265,7 @@ function addEvents() {
         // 기존 메모가 없는 경우에만 추가 모드로 설정
         if ($(".event-list li").length === 0) {
             $("#new-memo").val("");
-            $("#new-memo").css("height", "100px"); // 기본 높이로 설정
+            $("#new-memo").css("height", "100px");
             $("#new-memo").data("mode", "add").show().focus();
             $("#notification").hide();
 
@@ -274,13 +281,14 @@ function addEvents() {
     // 메모 삭제
     $(document).on("click", ".memo-delete", async function () {
         if (confirm("메모를 삭제하시겠습니까?")) {
+            const memoText = $("#new-memo").val();
             const selectedDate = init.activeDate.toISOString().split("T")[0];
 
             // 캘린더 리스트에서 해당 날짜 찾기
             let findSchedule = calendarlist.find(schedule => schedule.date === selectedDate);
 
             if (findSchedule) {
-                await deleteCalendarByMemo(findSchedule.id);
+                await deleteCalendarByMemo(findSchedule.id, memoText);
             }
         }
     });
