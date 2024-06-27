@@ -100,12 +100,13 @@
                             </div>
                         </div>
 
-                    </div>
-
-                    <div class="pagination">
-                        <ul class="pagination" id="pagination">
-                            <!-- 여기에 페이징 버튼이 동적으로 추가될 예정 -->
-                        </ul>
+                        <div class="pagination">
+                            <span id="reviewPrev" style="display: none; background-color: red;">이전</span>
+                            <ul class="pagination" id="pagination">
+                                <!-- 여기에 페이징 버튼이 동적으로 추가될 예정 -->
+                            </ul>
+                            <span id="reviewNext" style="display: block; background-color: red;">다음</span>
+                        </div>
                     </div>
 
                 </div>
@@ -142,6 +143,7 @@
     <script th:inline="javascript">
         const menuList = [[${menuList}]];
         const currentCocktail = [[${menu}]];
+        const reviewCount = [[${reviewCount}]];
     </script>
     <section id="footer"></section>
 
