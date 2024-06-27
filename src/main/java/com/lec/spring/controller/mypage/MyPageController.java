@@ -198,7 +198,6 @@ public class MyPageController {
         model.addAttribute("reviews", reviews);
 
         reviewService.list(page,model);
-
     }
 
     @GetMapping("review/detail/{id}")

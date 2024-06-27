@@ -1,10 +1,12 @@
 package com.lec.spring.controller.review;
 
 import com.lec.spring.domain.QryResult;
+import com.lec.spring.domain.cart.QryCartList;
 import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.domain.mypage.MypageValidator;
 import com.lec.spring.domain.order.Order;
 import com.lec.spring.domain.order.Order_item;
+import com.lec.spring.domain.review.QryReviewList;
 import com.lec.spring.domain.review.Review;
 import com.lec.spring.service.menu.MenuService;
 import com.lec.spring.service.order.OrderService;
@@ -44,10 +46,20 @@ public class ReviewController {
     private OrderService orderService;
 
 
+    @GetMapping("/list/{menu_id}/{page}")
+    public QryReviewList listByMenu(@PathVariable Long menu_id,
+                                    @PathVariable Integer page){
+
+
+        return reviewService.findByItemMenuPaging(menu_id, page);
+    }
+
+
     // write가 완료가 되면, 그제서야, insert를 해줘야해.
     // insert는 reviewcontroller가 맞아. 단, restcontroller여야 한다.
     // update는 두 컨트롤러 전부 필요함.
     // delte는 reviewcontroller가 맞다.
+
 
     @PostMapping("/insert")
     public String insert(@RequestParam("item_id") Long item_id,
@@ -75,4 +87,6 @@ public class ReviewController {
         model.addAttribute("result", reviewService.deleteById(id));
         return "review/deleteOk";
     }
+
+
 }

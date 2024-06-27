@@ -1,5 +1,8 @@
 package com.lec.spring.service.review;
 
+import com.lec.spring.domain.cart.Cart;
+import com.lec.spring.domain.cart.QryCartList;
+import com.lec.spring.domain.review.QryReviewList;
 import com.lec.spring.domain.review.Review;
 import com.lec.spring.repository.review.ReviewRepository;
 import com.lec.spring.util.U;
@@ -84,8 +87,29 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> findByItemMenu(Long menu_id) {
-        return reviewRepository.findByItemMenu(menu_id);
+    public QryReviewList findByItemMenu(Long menu_id) {
+        QryReviewList list = new QryReviewList();
+
+        List<Review> reviews = reviewRepository.findByItemMenu(menu_id);
+
+        list.setCount(reviews.size());
+        list.setList(reviews);
+        list.setStatus("OK");
+
+        return list;
+    }
+
+    public QryReviewList findByItemMenuPaging(Long menu_id, Integer page) {
+        QryReviewList list = new QryReviewList();
+
+
+        List<Review> reviews = reviewRepository.findByItemMenu(menu_id);
+
+        list.setCount(reviews.size());
+        list.setList(reviews);
+        list.setStatus("OK");
+
+        return list;
     }
 
     @Override
@@ -128,6 +152,7 @@ public class ReviewServiceImpl implements ReviewService {
 
            list = reviewRepository.selectFromReviewRow(fromRow, pageRows);
            model.addAttribute("list", list);
+
         } else {
 
             page = 0;
@@ -147,6 +172,8 @@ public class ReviewServiceImpl implements ReviewService {
 
         return list;
     }
+
+
 
 }
 
