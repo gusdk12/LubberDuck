@@ -94,8 +94,9 @@ public class ManagerController {
 
     @GetMapping("/agechart")
     public String ageOrderList(Model model){
-        List<Order_item> orderItems = orderItemService.orderMenuAgeChart();
-        model.addAttribute("orderList", orderItems);
+        List<Order_item> orderAgeItems = orderItemService.orderMenuAgeChart();
+        model.addAttribute("orderAgeList", orderAgeItems);
+        System.out.println(orderAgeItems);
         return "manager/agechart";
     }
 
