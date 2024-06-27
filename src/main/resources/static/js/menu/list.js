@@ -50,34 +50,42 @@ async function appendMenuToPlate() {
     let $currentPaper = null;
 
     const checkDateResult = await checkDate(Number(getKoreanDate()));
-    const todayMenu = menuList.find(menu => menu.id === checkDateResult.menu_id);
+
+    if(checkDateResult !== false){
+        const todayMenu = menuList.find(menu => menu.id === checkDateResult.menu_id);
+
+        paperCount++;
+        $menuPlate.append(`<div class="paperRight" id=paper${paperCount}></div>`);
+        $currentPaper = $(`#paper${paperCount}`);
+
+        $currentPaper.append(`
+                <div id="todaypart" onClick="location.href ='/menu/detail/${todayMenu.id}'">
+                    <div class="todayimg" style="background-image: url('${todayMenu.imgUrl}')"></div>
+                    <div class="todayname">${todayMenu.name}</div>
+                    <div class="todayprice">${todayMenu.price}￦</div>
+                    <div class="todayinfo">${checkDateResult.comment}</div>
+                    <div id="leftwreath"></div> 
+                    <div id="rightwreath"></div> 
+                    <div id="sunburst"></div> 
+                    <div id="todaylabel"></div> 
+<!--                    <div class="starRightEffect" style="transform: translate(300px, 350px) rotate(30deg)"><div class="starline"></div><div class="rotatestar"></div></div>-->
+<!--                    <div class="starRightEffect" style="transform: translate(320px, 275px)"><div class="starline"></div><div class="rotatestar"></div></div>-->
+<!--                    <div class="starRightEffect" style="transform: translate(300px, 200px) rotate(-30deg)"><div class="starline"></div><div class="rotatestar"></div></div>-->
+<!--                    <div class="starLeftEffect" style="transform: translate(20px, 350px) rotate(-30deg)"><div class="rotatestar"></div><div class="starline"></div></div>-->
+<!--                    <div class="starLeftEffect" style="transform: translate(0px, 275px)"><div class="rotatestar"></div><div class="starline"></div></div>-->
+<!--                    <div class="starLeftEffect" style="transform: translate(20px, 200px) rotate(30deg)"><div class="rotatestar"></div><div class="starline"></div></div>-->
+                </div>
+            `)
+        count += 4;
+    }
 
     menuList.forEach(cocktail => {
-        if(cocktail.id === checkDateResult.menu_id)
-            return;
-
         if (count % 4 === 0) {
             paperCount++;
 
             (paperCount % 2 === 0) && $menuPlate.append(`<div class="paperLeft" id=paper${paperCount}></div>`);
             (paperCount % 2 === 1) && $menuPlate.append(`<div class="paperRight" id=paper${paperCount}></div>`);
             $currentPaper = $(`#paper${paperCount}`);
-        }
-
-        if(paperCount===1 && checkDateResult !== false){
-            $currentPaper.append(`
-                <div class="todaypart">
-<!--                    <div class="todaymenu">TODAY'S<br>COCKTAIL</div>-->
-                    <div class="todayimg" style="background-image: url('${todayMenu.imgUrl}')"></div>
-                    <div class="todayname">${todayMenu.name}</div>
-                    <div class="todayprice">${todayMenu.price}￦</div>
-                    <div class="todayinfo">${checkDateResult.comment}</div>
-<!--                    <div id="leftwreath"></div> -->
-<!--                    <div id="rightwreath"></div> -->
-                </div>
-            `)
-            count += 4;
-            return;
         }
 
         (count % 2 === 0) && (
@@ -171,15 +179,7 @@ function openMenu() {
 
     let menu = document.getElementById("menu");
     menu.style.width = `${paperCount * 500}px`;
-    // menu.addEventListener('transitionend', function(event) {
-    //     if (event.propertyName === 'width') {
-    //         document.getElementById('leftwreath').style.transform = 'translate(15%, 45%) rotate(-10deg)';
-    //         document.getElementById('rightwreath').style.transform = 'translate(190%, 45%) rotate(10deg)';
-    //     }
-    // });
 
-
-    // const viewport = document.querySelector('.viewport');
     const menuBody = document.querySelector('#menuBody');
     const menuscroll = document.querySelector('#menuscroll');
 
