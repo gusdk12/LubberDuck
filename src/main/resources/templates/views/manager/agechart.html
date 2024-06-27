@@ -35,19 +35,19 @@
     </aside>
 
     <div class="article_chart">
-        <div class="chart_name">Chart by Menu</div>
+        <div class="chart_name">Popular menu by age</div>
         <div id="chart_container">
-        <div id="chart_containerBody">
-            <canvas id="menuChart"></canvas>
-        </div>
+            <div id="chart_containerBody_age">
+                <canvas id="ageChart"></canvas>
+            </div>
         </div>
     </div>
 
 </div>
 <script th:inline="javascript">
-    var orderList = [[${orderList}]];
+    var orderAgeList = [[${orderAgeList}]];
 </script>
-<script th:src="@{/js/manager/menuchart.js}"></script>
+<script th:src="@{/js/manager/agechart.js}"></script>
 
 </body>
 

@@ -99,9 +99,18 @@
                             <div id="review">
                             </div>
                         </div>
+
                     </div>
+
+                    <div class="pagination">
+                        <ul class="pagination" id="pagination">
+                            <!-- 여기에 페이징 버튼이 동적으로 추가될 예정 -->
+                        </ul>
+                    </div>
+
                 </div>
             </section>
+
 
     </div>
 
@@ -123,7 +132,7 @@
             <script th:src="@{/js/common/chatCart.js}"></script>
             <script th:src="@{/js/cart/cartData.js}"></script>
             <script th:src="@{/js/chat/chatData.js}"></script>
-            <script th:src="@{/js/recent/recent.js}"></script>
+            <script th:src="@{/js/chat/chatData.js}"></script>
             <script th:src="@{/js/bookmark/bookData.js}"></script>
 
         </th:block>
@@ -132,11 +141,13 @@
 
     <script th:inline="javascript">
         const menuList = [[${menuList}]];
-        var reviews = [[${reviews}]];
         const currentCocktail = [[${menu}]];
     </script>
     <section id="footer"></section>
 
+    <script th:src="@{/js/review/reviewData.js}"></script>
     <script th:src="@{/js/menu/detail.js}"></script>
+
+
 </body>
 </html>

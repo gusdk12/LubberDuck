@@ -186,7 +186,7 @@ public class MyPageController {
     }
 
     @GetMapping("/review")
-    public void review(@AuthenticationPrincipal UserDetails userDetails, Integer page, Model model) {
+    public void review(@AuthenticationPrincipal UserDetails userDetails, Integer sort, Integer page, Model model) {
         String username = userDetails.getUsername();
         User user = userService.findByUsername(username);
 
@@ -195,7 +195,7 @@ public class MyPageController {
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
 
-        reviewService.list(page,model);
+        reviewService.list(user.getId(), sort, page, model);
 
     }
 

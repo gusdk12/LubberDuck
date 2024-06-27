@@ -14,7 +14,6 @@
     font-weight: 600;
     font-style: normal;
     font-size: 25px;
-    min-height: 1100px;
 }
 
 .list{
@@ -23,7 +22,9 @@
     padding: 45px;
     justify-content: center;
     place-content: center;
-    margin: 80px 0;
+    margin-top: 10px;
+    align-content: baseline;
+    margin-bottom: 70px;
 }
 
 .list > hr {
@@ -153,6 +154,7 @@
     max-height: calc(5 * 1.5em); /* 높이 제한 */
     cursor: pointer;
     transition: max-height 0.5s ease-out; /* max-height 변화 애니메이션 */
+    min-height: 100px;
 }
 
 .review-text::after {
@@ -216,4 +218,44 @@
 .star-img {
     width: 25px;
     height: 25px;
+}
+
+.no-reviews {
+    padding: 150px;
+    text-align: center;
+    margin: 50px 0;
+    background-image: url(/img/mypage/receipt.png);
+    background-repeat: round;
+    margin-top: 180px;
+    margin-bottom: 130px;
+}
+
+.no-reviews p {
+    font-size: 15px;
+    color: #818181;
+    font-weight: 100;
+}
+
+.no-reviews a {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #9d9d9d;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    border-radius: 35px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    font-size: 15px;
+    height: auto;
+}
+
+.no-reviews a:hover {
+    background-color: #878787;
+    color: white;
+    transform: translateY(-5px); /* 살짝 위로 올림 */
+}
+
+.no-reviews img{
+    width: 55px;
+    margin-bottom: 7px;
 }
