@@ -28,5 +28,5 @@ public interface ReviewService {
     public List<Review> findByUserId(Long userId);
 
 //    페이징 리스트
-    List<Review> list(Integer page, Model model);
+    List<Review> list(Long user_id, Integer sort, Integer page, Model model);
 }

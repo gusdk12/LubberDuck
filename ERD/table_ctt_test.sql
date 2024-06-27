@@ -12,4 +12,3 @@ SELECT * FROM ctt_recent;
 SELECT * FROM ctt_aichat;
 SELECT * FROM ctt_calendar;
 
-

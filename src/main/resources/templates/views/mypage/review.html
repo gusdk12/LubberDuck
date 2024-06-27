@@ -25,6 +25,9 @@
         let user = [[${user}]];
         let reviews = [[${list}]];
         let totalReviews = [[${cnt}]];  // 전체 리뷰 개수
+        let url = [[${url}]];
+        let page = [[${page}]];
+        let sort = [[${sort}]];
         // let reviews = [[${list}]];
     </script>
 </head>
@@ -59,7 +62,7 @@
     <!-- JS -->
 
     <th:block th:replace="~{common/pagination :: pagination}"
-              th:with="page=${page}, startPage=${startPage}, endPage=${endPage}, totalPage=${totalPage}, url=${url}"></th:block>
+              th:with="page=${page}, startPage=${startPage}, endPage=${endPage}, totalPage=${totalPage}, url=${url}, sort=${sort}"></th:block>
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script th:src="@{/js/mypage/review.js}"></script>
