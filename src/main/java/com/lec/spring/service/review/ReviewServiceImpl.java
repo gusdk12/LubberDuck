@@ -123,8 +123,9 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> list(Integer page, Model model) {
+    public List<Review> list(Long user_id, Integer sort, Integer page, Model model) {
         if(page == null || page < 1) page = 1; // default page
+        if(sort == null || sort < 1) sort = 1; // default sort
 
         HttpSession session = U.getSession();
         Integer writePages = (Integer) session.getAttribute("writePages");
@@ -133,7 +134,7 @@ public class ReviewServiceImpl implements ReviewService {
         if (pageRows == null) pageRows = PAGE_ROWS;
         session.setAttribute("page", page);
 
-        long cnt = reviewRepository.cntAll();
+        long cnt = reviewRepository.cntAll(user_id);
         int totalPage = (int) Math.ceil(cnt / (double) pageRows); // 총 '페이지' 분량
 
         int startPage = 0;
@@ -150,7 +151,8 @@ public class ReviewServiceImpl implements ReviewService {
            endPage = startPage + writePages - 1;
            if( endPage >= totalPage) endPage = totalPage;
 
-           list = reviewRepository.selectFromReviewRow(fromRow, pageRows);
+           if(sort == 1) list = reviewRepository.selectFromReviewRowByDate(user_id, fromRow, pageRows);
+           if(sort == 2) list = reviewRepository.selectFromReviewRowByRate(user_id, fromRow, pageRows);
            model.addAttribute("list", list);
 
         } else {
@@ -169,6 +171,8 @@ public class ReviewServiceImpl implements ReviewService {
         model.addAttribute("writePages", writePages); // [페이징] 에 표시할 숫자 개수
         model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
         model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
+
+        model.addAttribute("sort", sort); // 현재 정렬방식
 
         return list;
     }

@@ -98,7 +98,13 @@
 
     <select id="cntAll" resultType="int">
         SELECT COUNT(*)
-        FROM ctt_review;
+        FROM
+            ctt_review r
+                JOIN ctt_order_item oi ON r.item_id = oi.id
+                JOIN ctt_menu m ON oi.cocktail_id = m.id
+                JOIN ctt_order o ON oi.order_id = o.id
+                JOIN ctt_user u ON o.user_id = u.id
+        WHERE u.id = #{param1}
     </select>
 
 
@@ -109,10 +115,18 @@
         LIMIT #{param1}, #{param2}
     </select>
 
-    <select id="selectFromReviewRow" resultMap="mapReview">
+    <select id="selectFromReviewRowByDate" resultMap="mapReview">
         <include refid="SELECT_BASE"/>
-        ORDER BY r.id DESC
-        LIMIT #{param1}, #{param2}
+        WHERE u.id = #{param1}
+        ORDER BY r.regdate DESC
+        LIMIT #{param2}, #{param3}
+    </select>
+
+    <select id="selectFromReviewRowByRate" resultMap="mapReview">
+        <include refid="SELECT_BASE"/>
+        WHERE u.id = #{param1}
+        ORDER BY r.rate DESC
+        LIMIT #{param2}, #{param3}
     </select>
 
     <select id="sortRate" resultMap="mapReview">
@@ -124,7 +138,6 @@
         <include refid="SELECT_BASE"/>
         ORDER BY r.regdate DESC
     </select>
-
 
 
 </mapper>
