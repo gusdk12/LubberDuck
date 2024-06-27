@@ -40,7 +40,6 @@ function loadCalendars(){
                     alert(data.status);
                     return;
                 }
-                calendarlist = data.data;
                 buildCalendar(data.data);
             }
         },

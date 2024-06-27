@@ -4,7 +4,7 @@ package com.lec.spring.domain.review;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.domain.order.Order;
-import com.lec.spring.domain.order.Order_item;
+import com.lec.spring.domain.order.OrderItem;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -28,7 +28,7 @@ public class Review {
     private Order order; // Order 객체 포함
 
     @ToString.Exclude
-    private Order_item order_item; // Order_item 객체 포함
+    private OrderItem order_item; // Order_item 객체 포함
 
     @ToString.Exclude
     private User user;

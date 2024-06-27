@@ -2,11 +2,10 @@ package com.lec.spring.controller.manager;
 
 import com.lec.spring.domain.manager.ManagerValidator;
 import com.lec.spring.domain.menu.Menu;
-import com.lec.spring.domain.order.Order_item;
+import com.lec.spring.domain.order.OrderItem;
 import com.lec.spring.service.calendar.CalendarService;
 import com.lec.spring.service.menu.MenuService;
-import com.lec.spring.service.order.Order_itemService;
-import com.nimbusds.jose.shaded.gson.Gson;
+import com.lec.spring.service.order.OrderItemService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,13 +24,13 @@ public class ManagerController {
 
     private MenuService menuService;
     private CalendarService calendarService;
-    private Order_itemService orderItemService;
+    private OrderItemService orderItemService;
 
     @Autowired
     private ManagerValidator managerValidator;
 
     @Autowired
-    public ManagerController(MenuService menuService, CalendarService calendarService, Order_itemService orderItemService) {
+    public ManagerController(MenuService menuService, CalendarService calendarService, OrderItemService orderItemService) {
         this.menuService = menuService;
         this.calendarService = calendarService;
         this.orderItemService = orderItemService;
@@ -87,14 +86,14 @@ public class ManagerController {
     // 메뉴별 판매 차트 조회
     @GetMapping("/menuchart")
     public String menuOrderList(Model model){
-        List<Order_item> orderItems = orderItemService.orderMenuChart();
+        List<OrderItem> orderItems = orderItemService.orderMenuChart();
         model.addAttribute("orderList", orderItems);
         return "manager/menuchart";
     }
 
     @GetMapping("/agechart")
     public String ageOrderList(Model model){
-        List<Order_item> orderItems = orderItemService.orderMenuAgeChart();
+        List<OrderItem> orderItems = orderItemService.orderMenuAgeChart();
         model.addAttribute("orderList", orderItems);
         return "manager/agechart";
     }

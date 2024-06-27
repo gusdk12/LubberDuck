@@ -2,10 +2,10 @@ package com.lec.spring.service.order;
 
 import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.order.Order;
-import com.lec.spring.domain.order.Order_item;
+import com.lec.spring.domain.order.OrderItem;
 import com.lec.spring.domain.order.QryOrder;
 import com.lec.spring.repository.order.OrderRepository;
-import com.lec.spring.repository.order.Order_ItemRepository;
+import com.lec.spring.repository.order.OrderItemRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +19,12 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
-    private Order_ItemRepository orderItemRepository;
+    private OrderItemRepository orderItemRepository;
 
     @Autowired
     public OrderServiceImpl(SqlSession sqlSession){
         orderRepository = sqlSession.getMapper(OrderRepository.class);
-        orderItemRepository = sqlSession.getMapper(Order_ItemRepository.class);
+        orderItemRepository = sqlSession.getMapper(OrderItemRepository.class);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public QryResult addOrderItem(Long order_id, Long menu_id, Integer quantity, Integer price) {
-        Order_item item = Order_item.builder()
+        OrderItem item = OrderItem.builder()
                 .order_id(order_id)
                 .cocktail_id(menu_id)
                 .quantity(quantity)

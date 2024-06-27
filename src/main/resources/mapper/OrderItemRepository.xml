@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- Order_ItemRepository.xml -->
-<mapper namespace="com.lec.spring.repository.order.Order_ItemRepository">
+<mapper namespace="com.lec.spring.repository.order.OrderItemRepository">
 
     <sql id="SELECT_BASE">
         SELECT oi.id          "id",
@@ -23,27 +23,27 @@
                  JOIN ctt_order o ON oi.order_id = o.id
     </sql>
 
-    <select id="findByOrder" resultType="com.lec.spring.domain.order.Order_item">
+    <select id="findByOrder" resultType="com.lec.spring.domain.order.OrderItem">
         <include refid="SELECT_BASE"/>
         WHERE oi.order_id = #{param1}
     </select>
 
-    <select id="findById" resultType="com.lec.spring.domain.order.Order_item">
+    <select id="findById" resultType="com.lec.spring.domain.order.OrderItem">
         <include refid="SELECT_BASE"/>
         WHERE oi.id = #{param1}
     </select>
 
-    <select id="findByOrderMenuList" resultType="com.lec.spring.domain.order.Order_item">
+    <select id="findByOrderMenuList" resultType="com.lec.spring.domain.order.OrderItem">
         <include refid="SELECT_BASE"/>
     </select>
 
-    <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.order.Order_item"
+    <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.order.OrderItem"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO ctt_order_item(order_id, cocktail_id, quantity, price)
         VALUES(#{order_id}, #{cocktail_id}, #{quantity}, #{price})
     </insert>
 
-    <select id="findByOrderAgeList" resultType="com.lec.spring.domain.order.Order_item">
+    <select id="findByOrderAgeList" resultType="com.lec.spring.domain.order.OrderItem">
         SELECT
             FLOOR((YEAR(CURRENT_DATE) - YEAR(u.birth_date)) / 10) * 10 AS age_group,
             COUNT(oi.id) AS total_order_items,
@@ -57,5 +57,24 @@
         WHERE u.birth_date IS NOT NULL
         GROUP BY age_group, m.name, m.img_url
         ORDER BY age_group;
+    </select>
+
+    <resultMap id="mapReview" type="com.lec.spring.domain.review.Review">
+        <result column="r.rate" property="rate"/>
+        <result column="r.item_id" property="item_id"/>
+    </resultMap>
+
+    <resultMap id="mapOrderItem" type="com.lec.spring.domain.order.OrderItem">
+        <result column="o.id" property="id"/>
+        <result column="o.cocktail_id" property="cocktail_id"/>
+        <result column="avgRate" property="avgRate"/>
+        <collection property="review" resultMap="mapReview"/>
+    </resultMap>
+
+    <!--/* 별점 */-->
+    <select id="findByRate" resultMap="mapOrderItem">
+        SELECT AVG(r.rate) as avgRate
+        FROM ctt_order_item o, ctt_review r
+        WHERE o.id = r.item_id AND o.cocktail_id = #{cocktail_id}
     </select>
 </mapper>
