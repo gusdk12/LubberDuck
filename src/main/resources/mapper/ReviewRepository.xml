@@ -110,9 +110,9 @@
 
     <select id="selectFromCocktailRow" resultMap="mapReview">
         <include refid="SELECT_BASE"/>
-        WHERE oi.cocktail_id = #{menu_id}
+        WHERE oi.cocktail_id = #{param1}
         ORDER BY r.id DESC
-        LIMIT #{start}, #{sizePerPage}
+        LIMIT #{param2}, #{param3}
     </select>
 
     <select id="selectFromReviewRowByDate" resultMap="mapReview">

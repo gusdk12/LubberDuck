@@ -101,19 +101,15 @@
                         </div>
 
                     </div>
-                    <div th:if="${totalPages != null}">
-                        <ul>
-                            <!-- 페이지 번호 생성 -->
-                            <li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
-                                <a th:href="@{/menu/detail/{menu_id}/{pageNumber}(menu_id=${menu.id}, pageNumber=${pageNumber})}" th:text="${pageNumber}"></a>
-                            </li>
+
+                    <div class="pagination">
+                        <ul class="pagination" id="pagination">
+                            <!-- 여기에 페이징 버튼이 동적으로 추가될 예정 -->
                         </ul>
                     </div>
+
                 </div>
             </section>
-
-        <th:block th:replace="~{common/pagination :: pagination}"
-                  th:with="page=${page}, startPage=${startPage}, endPage=${endPage}, totalPage=${totalPage}, url=${url}"></th:block>
 
 
     </div>
@@ -151,5 +147,7 @@
 
     <script th:src="@{/js/review/reviewData.js}"></script>
     <script th:src="@{/js/menu/detail.js}"></script>
+
+
 </body>
 </html>

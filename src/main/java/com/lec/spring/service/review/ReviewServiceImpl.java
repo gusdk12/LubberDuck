@@ -99,6 +99,7 @@ public class ReviewServiceImpl implements ReviewService {
         return list;
     }
 
+    @Override
     public QryReviewList findByItemMenuPaging(Long menu_id, Integer page) {
         QryReviewList list = new QryReviewList();
 

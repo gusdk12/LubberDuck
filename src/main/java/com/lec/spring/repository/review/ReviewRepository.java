@@ -35,9 +35,7 @@ public interface ReviewRepository{
     List<Review> selectFromReviewRowByDate (Long user_id, int from, int rows);
     List<Review> selectFromReviewRowByRate (Long user_id, int from, int rows);
 
-    List<Review> selectFromCocktailRow (@Param("menu_id") Long menu_id,
-                                        @Param("start") int start,
-                                        @Param("sizePerPage") int sizePerPage);
+    List<Review> selectFromCocktailRow (Long menu_id, int from, int rows);
 
     List<Review> pageList(int pageStart);
 }

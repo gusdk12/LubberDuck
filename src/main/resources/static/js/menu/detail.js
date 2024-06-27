@@ -11,6 +11,8 @@ window.addEventListener('load', async () => {
     } catch (error) {
         console.error('Error during initialization:', error);
     }
+
+    loadReviews(menu.id, 1); // 리뷰 로드
 });
 window.addEventListener('popstate', function (event) {
     // This code runs when the back button is clicked
