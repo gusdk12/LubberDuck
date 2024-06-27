@@ -36,7 +36,7 @@ public class MenuController {
 
         model.addAttribute("menu", menu);
         model.addAttribute("menuList", menuService.sequenceList());
-//        model.addAttribute("reviewCount", reviewCount);
+        model.addAttribute("reviewCount", reviewCount);
 //        List<Review> reviews = reviewService.findByItemMenu(menu_id);
 //        model.addAttribute("reviews", reviews);
 

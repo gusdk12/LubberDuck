@@ -99,6 +99,19 @@
                             <div id="review">
                             </div>
                         </div>
+
+                    </div>
+                    <div th:if="${totalPages != null}">
+                        <ul>
+                            <!-- 페이지 번호 생성 -->
+                            <li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+                                <a th:href="@{/menu/detail/{menu_id}/{pageNumber}(menu_id=${menu.id}, pageNumber=${pageNumber})}" th:text="${pageNumber}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div th:else>
+                        <!-- totalPages가 null인 경우에 대한 처리 -->
+                        <p>No pages available.</p>
                     </div>
                 </div>
             </section>
