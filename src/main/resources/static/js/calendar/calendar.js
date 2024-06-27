@@ -173,18 +173,18 @@ function addEvents() {
     });
 
     /****************************************************************
-                            메모 관련 이벤트
+                        일정 메모 관련 이벤트
      ****************************************************************/
 
-    // 일정 부분 스크롤
-    $(".schedule-container").scroll(function () {
+    // 메모 부분 스크롤
+    $(".event-list li").scroll(function () {
         var scrollTop = $(this).scrollTop();
 
         // 스크롤이 맨 위에 도달할 때
         if (scrollTop === 0) {
             $(this).addClass("scroll-top");
             setTimeout(function () {
-                $(".schedule-container").removeClass("scroll-top");
+                $(".event-list li").removeClass("scroll-top");
             }, 500);
         }
     });
@@ -208,11 +208,7 @@ function addEvents() {
 
             // 메모 수정할 때 저장할 때 구별
             if ($(this).data("mode") === "edit") {
-                try {
-                    await updateCalendarByMemo(memoText);
-                } catch (error) {
-                    console.error("메모 수정 중 오류 발생:", error);
-                }
+                await updateCalendarByMemo(memoText);
             } else {
                 await addCalendarByMemo(memoText);
             }
@@ -221,8 +217,15 @@ function addEvents() {
         }
     });
 
-    // 메모 추가 + 수정
-    $("#btn-add-memo").on("click", function () {
+    // 메모 추가
+    $("#btn-add-memo").on("click", async function () {
+        const {dateInt} = await checkAndConvertDate();
+
+        const checkDateResult = await checkDate(dateInt);
+        if (checkDateResult.exists && checkDateResult.memo) {
+            alert("이미 메모가 존재합니다.");
+            return;
+        }
 
         // 기존 메모가 없는 경우에만 추가 모드로 설정
         if ($(".event-list li").length === 0) {
@@ -233,10 +236,17 @@ function addEvents() {
                 .show()
                 .focus();
             $("#notification").hide();
+        }
+    });
+
+    // 메모 수정
+    $(document).on("click", ".memo-edit", function () {
 
         // 기존 메모가 있는 경우 수정 모드로 설정
-        } else {
-            $(".event-list li").find(".memo-delete").remove();
+        if ($(".event-list li").length !== 0) {
+
+            $(".memo-delete, .memo-edit").hide();
+
             const memoText = $(".event-list li").text().trim();
 
             // 기존 메모 높이 가져오기
@@ -274,12 +284,6 @@ function addEvents() {
         const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
         alert(selectedDate);
     });
-
-    // 다음달 클릭
-    $(".btn-cal.next").on("click", () => loadYYMM(init.nextMonth()));
-
-    // 이전달 클릭
-    $(".btn-cal.prev").on("click", () => loadYYMM(init.prevMonth()));
 
     // 사용자가 클릭한 날짜 표시
     $(".cal-body").on("click", "td", function(e) {
@@ -347,17 +351,10 @@ function buildCalendar(data){
                     // 각 날짜에 대한 정보 설정
                     let fullDate =
                         yy + "." + init.addZero(mm + 1) + "." + init.addZero(countDay + 1); // 날짜 포맷 설정
-                    let eventClass = ""; // 이벤트 클래스는 DB와 연동하여 결정
 
-                    trtd += `<td class="day${eventClass}`;  // td 요소에 클래스 추가
+                    trtd += `<td class="day`;  // td 요소에 클래스 추가
                     trtd += markToday && markToday === countDay + 1 ? ' today" ' : '"'; // 오늘 날짜인 경우 클래스 추가
                     trtd += ` data-date="${countDay + 1}" data-fdate="${fullDate}">`; // 데이터 속성 추가
-
-                    // 메뉴가 있는 경우 표시할 수 있도록 DB와 연동하여 처리
-                    const menuExists = false; // 예시로 false로 설정
-                    if (menuExists) {
-                        trtd += `<span style="border-bottom: 2px solid #000;"></span>`;
-                    }
 
                 }
                 trtd += startCount ? ++countDay : ""; // 날짜 카운트 증가
@@ -376,9 +373,31 @@ function buildCalendar(data){
             const year = dateParts[0];
             const month = dateParts[1];
             let day = dateParts[2];
-            $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`).addClass("event");
+
+            const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
+
+            // 날짜에 데이터가 있으면 색상 표시
+            if (event) {
+                cell.addClass("event"); // 메모와 메뉴 둘 다 있는 경우
+            }
+
+            // 메뉴 이미지가 있으면 이미지를 추가
+            if (event.menu) {
+                const img = $('<img>', {
+                    src: event.menu.imgUrl,
+                    alt: event.menu.name,
+                    class: 'cell-menu-image'
+                });
+                cell.append(img);
+            }
         });
     }
+
+    // 다음달 클릭
+    $(".btn-cal.next").on("click", () => loadYYMM(init.nextMonth()));
+
+    // 이전달 클릭
+    $(".btn-cal.prev").on("click", () => loadYYMM(init.prevMonth()));
 
     loadYYMM(init.today); // 현재 날짜로 달력 초기화
 }
