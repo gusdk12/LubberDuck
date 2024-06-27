@@ -61,11 +61,23 @@ $(document).ready(function() {
 
 function initializePage() {
     $('.container').empty(); // 리뷰 목록을 비웁니다.
+
     buildBody(); // 리뷰 목록을 다시 빌드합니다.
 }
 
 function buildBody() {
     let itemsHTML = "";
+
+    $('.container').empty();
+    if (reviews === null) {
+        // 주문이 없는 경우
+        $('.container').append('<div class="no-reviews">' +
+            '<img id="icon" src="/img/mypage/order-icon.png">' +
+            '<p>리뷰 목록이 없습니다.</p>' +
+            '<a href="/home">홈으로 가기</a>' +
+            '</div>');
+        return;
+    }
 
     reviews.forEach(review => {
         const stars = generateStars(review.rate); // Generate stars based on rating
