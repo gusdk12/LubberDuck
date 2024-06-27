@@ -17,7 +17,6 @@
 
     <script th:inline="javascript">
         var menuList = [[${menuList}]];
-        var calendarlist = [[${calendarList}]];
     </script>
 
     <title>Calendar</title>
@@ -29,15 +28,19 @@
     <!-- 오늘의 메뉴 리스트 팝업 -->
     <div class="form-popup1" id="myForm">
         <div class="form-container form-text-style">
-            <button type="button" class="menu-close">
-                <span class="fa fa-xmark">X</span>
-            </button>
-            <h2 class="title-text">오늘의 메뉴</h2>
-            <hr class="line">
-            <div class="menu-list">
-                <div th:each="menu : ${menuList}" class="menu" th:data-menu-id="${menu.id}">
-                    <img class="menu-img-list" th:src="${menu.imgUrl}" th:alt="${menu.name}">
-                    <p class="menu-name" th:text="${menu.name}"></p>
+            <div class="menu-scroll">
+                <div class="menu-title">
+                    <button type="button" class="menu-close">
+                        <span class="fa fa-xmark">X</span>
+                    </button>
+                    <h2 class="title-text">오늘의 메뉴</h2>
+                </div>
+                <hr class="line">
+                <div class="menu-list">
+                    <div th:each="menu : ${menuList}" class="menu" th:data-menu-id="${menu.id}">
+                        <img class="menu-img-list" th:src="${menu.imgUrl}" th:alt="${menu.name}">
+                        <p class="menu-name" th:text="${menu.name}"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,20 +49,24 @@
     <!-- 오늘의 메뉴 작성 및 수정 팝업 -->
     <div class="form-popup2" id="myForm2">
         <div class="form-container form-text-style">
-            <button type="button" class="menu-close menu-close2">
-                <span class="fa fa-xmark">X</span>
-            </button>
-            <h2 class="title-text">오늘의 메뉴</h2>
-            <div class="select-menu">
-                <img class="select-menu-img">
-                <p class="select-menu-name"></p>
+            <div class="select-menu-scroll">
+            <div class="menu-title">
+                <button type="button" class="menu-close menu-close2">
+                    <span class="fa fa-xmark">X</span>
+                </button>
+                <h2 class="title-text">오늘의 메뉴</h2>
             </div>
-            <div class="select-menu-text">
-                <textarea id="select-menu-text"></textarea>
-            </div>
-            <div class="select-menu-buttons">
-                <button type="button" class="btn-cancel">취소</button>
-                <button type="button" class="btn-save">저장</button>
+                <div class="select-menu">
+                    <img class="select-menu-img">
+                    <p class="select-menu-name"></p>
+                </div>
+                <div class="select-menu-text">
+                    <textarea id="select-menu-text"></textarea>
+                </div>
+                <div class="select-menu-buttons">
+                    <button type="button" class="btn-cancel">취소</button>
+                    <button type="button" class="btn-save">저장</button>
+                </div>
             </div>
         </div>
     </div>
@@ -136,6 +143,7 @@
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
     <script th:src="@{/js/calendar/calendarData.js}"></script>
     <script th:src="@{/js/calendar/calendar.js}"></script>
     <script th:src="@{/js/common/header.js}"></script>

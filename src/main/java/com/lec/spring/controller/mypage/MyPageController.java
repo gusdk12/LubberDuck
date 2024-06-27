@@ -3,16 +3,15 @@ package com.lec.spring.controller.mypage;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.mypage.MypageValidator;
 import com.lec.spring.domain.order.Order;
-import com.lec.spring.domain.order.Order_item;
+import com.lec.spring.domain.order.OrderItem;
 import com.lec.spring.domain.review.Review;
 import com.lec.spring.service.UserService;
 import com.lec.spring.service.menu.MenuService;
 import com.lec.spring.service.review.ReviewService;
 import com.lec.spring.util.U;
 import jakarta.validation.Valid;
-import com.lec.spring.service.menu.MenuService;
 import com.lec.spring.service.order.OrderService;
-import com.lec.spring.service.order.Order_itemService;
+import com.lec.spring.service.order.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +27,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -45,7 +43,7 @@ public class MyPageController {
     private OrderService orderService;
 
     @Autowired
-    private Order_itemService orderItemService;
+    private OrderItemService orderItemService;
 
     @Autowired
     private ReviewService reviewService;
@@ -160,18 +158,18 @@ public class MyPageController {
         List<Order> orders = orderService.findByUser(userId);
 
         // 주문 항목들을 저장할 맵을 준비합니다.
-        Map<Long, List<Order_item>> orderItemsByOrderId = new HashMap<>();
+        Map<Long, List<OrderItem>> orderItemsByOrderId = new HashMap<>();
         // 리뷰 항목들을 저장할 맵을 준비합니다.
         Map<Long, Review> reviewByOrderItemId = new HashMap<>();
 
 
         // 각 주문에 대해 주문 항목을 조회하고 맵에 저장합니다.
         for (Order order : orders) {
-            List<Order_item> items = orderItemService.findByOrder(order.getId());
+            List<OrderItem> items = orderItemService.findByOrder(order.getId());
             orderItemsByOrderId.put(order.getId(), items);
 
             // 각 아이템에 대해 리뷰 항목을 조회하고 맵에 저장합니다.
-            for (Order_item item : items) {
+            for (OrderItem item : items) {
                 Review review = reviewService.findByItemId(item.getId());
                 reviewByOrderItemId.put(item.getId(), review);
             }
@@ -188,7 +186,7 @@ public class MyPageController {
     }
 
     @GetMapping("/review")
-    public void review(@AuthenticationPrincipal UserDetails userDetails, Integer page, Model model) {
+    public void review(@AuthenticationPrincipal UserDetails userDetails, Integer sort, Integer page, Model model) {
         String username = userDetails.getUsername();
         User user = userService.findByUsername(username);
 
@@ -197,13 +195,20 @@ public class MyPageController {
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
 
-        reviewService.list(page,model);
+        reviewService.list(user.getId(), sort, page, model);
 
+    }
+
+    @GetMapping("review/detail/{id}")
+    public String detail (Model model, @PathVariable("id") Long id){
+        Review review = reviewService.selectById(id);
+        model.addAttribute("review", review);
+        return "mypage/review/detail";
     }
 
     @GetMapping("review/write/{item_id}")
     public String write(Model model, @PathVariable("item_id") Long item_id){
-        Order_item item = orderItemService.findById(item_id);
+        OrderItem item = orderItemService.findById(item_id);
         model.addAttribute("item", item);
         return "mypage/review/write";
     }
@@ -226,6 +231,7 @@ public class MyPageController {
         U.getSession().setAttribute("pageRows", pageRows);
         return "redirect:/mypage/review/list?page=" + page;
     }
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

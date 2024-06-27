@@ -47,3 +47,7 @@ async function addOrderItem(order_id, item) {
     });
 }
 
+async function avgRate(cocktail_id) {
+
+}
+

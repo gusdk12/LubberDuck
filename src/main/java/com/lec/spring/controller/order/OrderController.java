@@ -4,6 +4,7 @@ package com.lec.spring.controller.order;
 import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.order.QryOrder;
 import com.lec.spring.service.order.OrderService;
+import com.lec.spring.service.order.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,9 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private OrderItemService orderItemService;
 
     @PostMapping("/addOrder/{user_id}")
     public QryOrder addOrder(@PathVariable Long user_id){
@@ -26,6 +30,12 @@ public class OrderController {
             @RequestParam("quantity") Integer quantity,
             @RequestParam("price") Integer price){
         return orderService.addOrderItem(order_id, menu_id, quantity, price);
+    }
+
+    @GetMapping("/starRate/{cocktail_id}")
+    public QryResult starRate(
+            @PathVariable Long cocktail_id) {
+        return orderItemService.findByRate(cocktail_id);
     }
 
 }

@@ -406,6 +406,34 @@
     background-color: white;
     filter: invert(14%) sepia(26%) saturate(934%) hue-rotate(314deg) brightness(95%) contrast(90%);
 }
+#banbox{
+    width: 100%;
+    height: 30%;
+    background-color: rgba(72, 14, 0, 0.38);
+    position: absolute;
+    transform: translate(0%, 7%);
+    float: left;
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
+    color: white;
+}
+#banbox #deleteMenu{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transform: translate(50%, -80%);
+    float: right;
+    background-image: url('/img/common/exit.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(87%) sepia(11%) saturate(406%) hue-rotate(2deg) brightness(102%) contrast(106%);
+}
 #cartitemprice{
     /*float: right;*/
     /*width: 50%;*/

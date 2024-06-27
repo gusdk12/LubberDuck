@@ -26,7 +26,7 @@ async function checkToRecent(cocktail) {
     if (!findRecent) {
         console.log('존재안하는 checkToRecent 호출');
         await addToRecent(cocktail);
-        await deleteLimited();
+        // deleteLimited();
     } else {
         console.log('존재하는 checkToRecent 호출');
         await deleteToRecent(cocktail);
@@ -35,13 +35,9 @@ async function checkToRecent(cocktail) {
 }
 
 async function deleteLimited() {
-    // 전달할 parameter 준비 (POST)
-    const data = {
-        "userId": logged_id
-    };
-// return 키워드 : AJAX 요청의 결과를 반환하도록 함 => 각 함수 내에서 비동기 호출이 완료될 때까지 기다림
+    // return 키워드 : AJAX 요청의 결과를 반환하도록 함 => 각 함수 내에서 비동기 호출이 완료될 때까지 기다림
     return $.ajax({
-        url: "/deleteLimit/" + logged_id, // 5개 초과 시 오래된 항목 삭제
+        url: "/recentData/deleteLimit/" + logged_id, // 4개 초과 시 오래된 항목 삭제
         type: "POST",
         cache: false,
         success: function (data, status) {
@@ -99,7 +95,7 @@ async function deleteToRecent(cocktail) {
 }
 
 function loadRecent(user_id) {
-    $.ajax({
+    return $.ajax({
         url: "/recentData/list/" + user_id,
         type: "GET",
         cache: false,
@@ -113,6 +109,12 @@ function loadRecent(user_id) {
                 }
                 console.log('로드 중..');
                 buildRecent(data);
+
+                console.log(data.data.length);
+                if (data.data.length > 4) {
+                    console.log('삭제 필요');
+                    deleteLimited();
+                }
             }
         },
     });
@@ -121,7 +123,12 @@ function loadRecent(user_id) {
 function buildRecent(result) {
     console.log('빌드 중..');
     $('#recentSection').empty(); // 기존 항목들을 제거합니다.
-    result.data.slice(0, 4).forEach(recent => { // 배열의 처음 4개 항목만 처리
+
+    const recentItems = result.data.slice(0, 4);
+
+    recentItems.forEach((recent, index) => {
+        const isLastItem = index === recentItems.length - 1;
+
         $('#recentSection').append($(`
             <div class="recent-con">
                 <div class="cttName"> ${recent.menu.name} </div>
@@ -130,6 +137,7 @@ function buildRecent(result) {
                     onclick="location.href = '/menu/detail/${recent.menu.id}'">                    
                 </div>
             </div>
+            <div id="recentLine" style="display: ${isLastItem ? 'none' : 'block'};"></div>
         `));
     });
 }

@@ -34,15 +34,29 @@ function preloadImages(){
 function showCustomerButtons(){
     document.getElementById("rightsection") && $('#rightsection').css({bottom: '-40%'});
 }
+function getKoreanDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
 
-function appendMenuToPlate(){
+    return `${year}${month}${day}`;
+}
+
+async function appendMenuToPlate() {
     let count = 0;
     paperCount = 0;
     let $menuPlate = $('.menu');
     let $currentPaper = null;
 
+    const checkDateResult = await checkDate(Number(getKoreanDate()));
+    const todayMenu = menuList.find(menu => menu.id === checkDateResult.menu_id);
+
     menuList.forEach(cocktail => {
-        if(count % 4 === 0){
+        if(cocktail.id === checkDateResult.menu_id)
+            return;
+
+        if (count % 4 === 0) {
             paperCount++;
 
             (paperCount % 2 === 0) && $menuPlate.append(`<div class="paperLeft" id=paper${paperCount}></div>`);
@@ -50,7 +64,23 @@ function appendMenuToPlate(){
             $currentPaper = $(`#paper${paperCount}`);
         }
 
-        if(count % 2 === 0) {
+        if(paperCount===1 && checkDateResult !== false){
+            $currentPaper.append(`
+                <div class="todaypart">
+<!--                    <div class="todaymenu">TODAY'S<br>COCKTAIL</div>-->
+                    <div class="todayimg" style="background-image: url('${todayMenu.imgUrl}')"></div>
+                    <div class="todayname">${todayMenu.name}</div>
+                    <div class="todayprice">${todayMenu.price}￦</div>
+                    <div class="todayinfo">${checkDateResult.comment}</div>
+<!--                    <div id="leftwreath"></div> -->
+<!--                    <div id="rightwreath"></div> -->
+                </div>
+            `)
+            count += 4;
+            return;
+        }
+
+        (count % 2 === 0) && (
             $currentPaper.append(`
                 <div class="cocktailpart">
                     <div class="thumbnail" style="background-image: url('${cocktail.imgUrl}')"></div>
@@ -63,8 +93,9 @@ function appendMenuToPlate(){
                         </div>
                     </div>
                 </div>
-            `);
-        } else{
+            `)
+        );
+        (count % 2 === 0) || (
             $currentPaper.append(`
                 <div class="cocktailpart">
                     <div class="explain">
@@ -77,16 +108,16 @@ function appendMenuToPlate(){
                     </div>
                     <div class="thumbnail" style="background-image: url('${cocktail.imgUrl}')"></div> 
                 </div>
-            `);
-        }
+            `)
+        );
 
         count++;
     });
 
-    if(logged_id !== -1){
+    if (logged_id !== -1) {
         var parentDiv = document.getElementsByClassName('cocktailbutton');
 
-        for(let div of parentDiv) {
+        for (let div of parentDiv) {
             var newChildAddDiv = document.createElement('div');
             newChildAddDiv.id = 'cocktailadd';
             div.appendChild(newChildAddDiv);
@@ -94,19 +125,19 @@ function appendMenuToPlate(){
     }
 
     for (cocktailpart of document.querySelectorAll(".cocktailpart")) {
-        cocktailpart.addEventListener("mouseenter", function(){
+        cocktailpart.addEventListener("mouseenter", function () {
             this.style.backgroundColor = 'white';
-            $(this).find(".cocktailbutton").css({ 'display': `flex` });
+            $(this).find(".cocktailbutton").css({'display': `flex`});
         });
-        cocktailpart.addEventListener("mouseleave", function(){
+        cocktailpart.addEventListener("mouseleave", function () {
             this.style.backgroundColor = 'unset';
-            $(this).find(".cocktailbutton").css({ 'display': `none` });
+            $(this).find(".cocktailbutton").css({'display': `none`});
         });
     }
 
     // addToCart
-    for(cocktailadd of document.querySelectorAll("#cocktailadd")){
-        cocktailadd.addEventListener("click", function(e){
+    for (cocktailadd of document.querySelectorAll("#cocktailadd")) {
+        cocktailadd.addEventListener("click", function (e) {
             e.preventDefault();
             var cocktailName = $(this).parent().siblings(".cocktailname").text();
             addToCart(menuList.find(menu => menu.name === cocktailName));
@@ -126,9 +157,9 @@ function appendMenuToPlate(){
     // }
 
     let fr = "";
-    for(let i = 0; i < paperCount; i++)
+    for (let i = 0; i < paperCount; i++)
         fr += "1fr ";
-    $menuPlate.css({ 'grid-template-columns': `${fr.trim()}` });
+    $menuPlate.css({'grid-template-columns': `${fr.trim()}`});
     $('#menuscroll').css({'width': `${((paperCount + 1) * 500) + 1000}px`});
 
 }
@@ -138,14 +169,15 @@ let startX;
 let scrollLeft;
 function openMenu() {
 
-    var menu = document.getElementById("menu");
-    menu.animate({ width: `${paperCount * 500}px` },
-        {
-            duration: 1000, // 밀리초 지정
-            fill: 'forwards', // 종료 시 속성을 지님
-            easing: 'ease', // 가속도 종류
-        }
-    );
+    let menu = document.getElementById("menu");
+    menu.style.width = `${paperCount * 500}px`;
+    // menu.addEventListener('transitionend', function(event) {
+    //     if (event.propertyName === 'width') {
+    //         document.getElementById('leftwreath').style.transform = 'translate(15%, 45%) rotate(-10deg)';
+    //         document.getElementById('rightwreath').style.transform = 'translate(190%, 45%) rotate(10deg)';
+    //     }
+    // });
+
 
     // const viewport = document.querySelector('.viewport');
     const menuBody = document.querySelector('#menuBody');

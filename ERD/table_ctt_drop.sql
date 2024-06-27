@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS ctt_menu;
 
 
 
-DELETE FROM ctt_menu;
+DELETE FROM ctt_calendar;
 DELETE FROM ctt_cart;
 DELETE FROM ctt_AIchat;
 DELETE FROM ctt_order;

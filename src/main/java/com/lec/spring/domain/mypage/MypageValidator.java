@@ -2,13 +2,12 @@ package com.lec.spring.domain.mypage;
 
 
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.order.Order_item;
+import com.lec.spring.domain.order.OrderItem;
 import com.lec.spring.domain.review.Review;
 import com.lec.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import java.time.DateTimeException;
@@ -24,7 +23,7 @@ public class MypageValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
         boolean assignableFrom = User.class.isAssignableFrom(clazz)
-                || Order_item.class.isAssignableFrom(clazz)
+                || OrderItem.class.isAssignableFrom(clazz)
                 || Review.class.isAssignableFrom(clazz);
         return assignableFrom;
     }
@@ -32,7 +31,7 @@ public class MypageValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        if(Order_item.class.isAssignableFrom(target.getClass())) return;
+        if(OrderItem.class.isAssignableFrom(target.getClass())) return;
         if(Review.class.isAssignableFrom(target.getClass())) return;
 
         validateUser((User) target, errors);

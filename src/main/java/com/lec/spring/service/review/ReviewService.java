@@ -1,5 +1,6 @@
 package com.lec.spring.service.review;
 
+import com.lec.spring.domain.review.QryReviewList;
 import com.lec.spring.domain.review.Review;
 import org.springframework.ui.Model;
 
@@ -21,12 +22,13 @@ public interface ReviewService {
 
     Review findByItemId(Long item_id);
 
-    List<Review> findByItemMenu(Long menu_id);
+    QryReviewList findByItemMenu(Long menu_id);
+    QryReviewList findByItemMenuPaging(Long menu_id, Integer page);
 
     int countAll(Long menu_id);
 
     public List<Review> findByUserId(Long userId);
 
 //    페이징 리스트
-    List<Review> list(Integer page, Model model);
+    List<Review> list(Long user_id, Integer sort, Integer page, Model model);
 }

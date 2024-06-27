@@ -55,7 +55,7 @@ public class CalendarController {
     @PostMapping("/update/{id}")
     public QryResult update(
             @PathVariable Long id,
-            @RequestParam("menu_id") Long menu_id,
+            @RequestParam(name = "menu_id", required = false) Long menu_id,
             @RequestParam("comment") String comment,
             @RequestParam("memo") String memo
     ) {
