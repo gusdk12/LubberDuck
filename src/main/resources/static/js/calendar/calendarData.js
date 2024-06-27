@@ -237,22 +237,15 @@ function buildMemo(data) {
         $('#notification .notification-text').text('');
 
         $(".event-list").append(`
-            <li>${data.memo}
-                <button type="button" class="memo-delete">
-                    <span class="fa fa-xmark">X</span>
-                </button>
-            </li>
+            <li>${data.memo}</li>
+             <button type="button" class="memo-edit">
+                <span class="fa fa-xmark"></span>
+            </button>
+            
+            <button type="button" class="memo-delete">
+                <span class="fa fa-xmark"></span>
+            </button>
         `);
-
-        // 메모 삭제 버튼 hover 효과
-        $(".event-list li").hover(
-            function () {
-                $(this).find(".memo-delete").css("opacity", "1");
-            },
-            function () {
-                $(this).find(".memo-delete").css("opacity", "0");
-            }
-        );
     }
 }
 
@@ -279,6 +272,7 @@ async function addCalendarByMemo(memo) {
             if (status === "success" && data.status === "OK") {
                 alert("메모가 추가되었습니다.");
                 loadData(dateInt);
+                $(".memo-delete, .memo-edit").show();
             }
         }
     });
@@ -307,6 +301,7 @@ async function updateCalendarByMemo(memo) {
                 $("#new-memo").val("").hide();
                 alert("메모가 수정되었습니다.");
                 loadData(dateInt);
+                $(".memo-delete, .memo-edit").show();
             }
         }
     });
