@@ -39,6 +39,16 @@ function formatDateTime(dateTimeString) {
 function buildBody(){
     $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
 
+    if (orderList.length === 0) {
+        // 주문이 없는 경우
+        $('.container').append('<div class="no-orders">' +
+            '<img id="icon" src="/img/mypage/order-icon.png">' +
+            '<p>주문 내역이 없습니다.</p>' +
+            '<a href="/home">홈으로 가기</a>' +
+            '</div>');
+        return;
+    }
+
     orderList.forEach(order => {
         let itemsHTML = "";
         let totalPrice = 0;
