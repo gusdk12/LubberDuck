@@ -29,6 +29,7 @@ const popupOverlay = $('<div class="popup-overlay"></div>');
 $(document).ready(function () {
     loadCalendars();
     addEvents();
+    $("#menunav").show();
 });
 
 // 공통 기능: 날짜 변환 및 체크
@@ -59,7 +60,6 @@ function initializePopup() {
 }
 
 function addEvents() {
-
     /****************************************************************
                         오늘의 메뉴 관련 이벤트
      ****************************************************************/

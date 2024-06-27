@@ -1,5 +1,12 @@
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #topnav_container {
-    max-width: 1300px;  /* 최대 폭 지정 */
+    max-width: 1300px; /* 최대 폭 지정 */
     margin-left: auto;
     margin-right: auto;
     z-index: 100;
@@ -19,7 +26,7 @@
     /*    rgba(0, 0, 0, 0) 100%);*/
 
     height: 100px;
-    max-width: 1300px;  /* 최대 폭 지정 */
+    max-width: 1300px; /* 최대 폭 지정 */
     margin-left: auto;
     margin-right: auto;
     z-index: 1;
@@ -37,16 +44,18 @@ section {
     flex-basis: 150px;
 }
 
-.headermenu{
+.headermenu {
     /*background-color: #a2ff4b;*/
     width: 60px;
     height: 60px;
     padding: 10px;
     border: none;
     background: none;
+    position: relative;
+    display: inline-block;
 }
 
-#menuIcon{
+#menuIcon {
     background-image: url('/img/header/menuIcon.png');
     background-position: center;
     background-size: contain;
@@ -58,14 +67,42 @@ section {
     cursor: pointer;
 }
 
-.headeruser{
+#drop {
+    display: none;
+    position: absolute;
+    background-image: url('/img/header/dropmenu.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 250px;
+    z-index: 100;
+}
+
+.dropNav_list {
+    width: 200px;
+    height: 50px;
+    margin: 28px 0 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: saddlebrown;
+    font-family: 'Cafe24Ssurround';
+    font-size: 21px;
+    text-align: left;
+}
+
+.dropNav_list:hover {
+    color: rgba(139, 69, 19, 0.8);
+}
+
+.headeruser {
     width: 60px;
     height: 60px;
     padding: 5px;
     margin-right: 10px;
     background-color: rgba(0, 0, 0, 0);
 }
-#userIcon{
+
+#userIcon {
     background-image: url('/img/header/userIcon.png');
     background-position: center;
     background-size: contain;
@@ -82,19 +119,21 @@ section {
     filter: invert(94%) sepia(19%) saturate(6643%) hue-rotate(297deg) brightness(105%) contrast(99%);
 }
 
-#headerlogo{
+#headerlogo {
     padding: 7px;
     width: 100px;
     height: 100px;
     align-items: center;
     justify-content: center;
 }
-.headerlogo{
+
+.headerlogo {
     background-image: url('/img/header/logo.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
+
 a {
     color: #f8e9d7;
     text-align: center;
@@ -103,20 +142,22 @@ a {
 
     font-family: "League Gothic", sans-serif;
     font-size: 23px;
-    font-weight: 400;
+    font-weight: 800;
     font-style: normal;
     height: 100%;
 }
 
-#headeruser{
+#headeruser {
     display: flex;
     align-items: center;
 }
-#login{
+
+#login {
     background-color: #DAC0A3;
     margin-left: auto;
 }
-.headerButton{
+
+.headerButton {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -137,15 +178,16 @@ a {
     background-color: rgba(255, 255, 255, 0);
     cursor: pointer;
 }
+
 .headerButton:hover, .nav_list:hover {
     color: #ffa6a6;
 }
 
-#manunav {
+#menunav {
     max-width: 1300px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -30px;
+    margin-top: 30px;
     padding: 10px 200px;
     display: flex;
     align-items: center;
