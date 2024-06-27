@@ -32,5 +32,4 @@ public interface ReviewService {
 //    페이징 리스트
     List<Review> list(Integer page, Model model);
 
-    List<Review> detailList(Integer page, Model model);
 }

@@ -50,7 +50,6 @@ public class ReviewController {
     public QryReviewList listByMenu(@PathVariable Long menu_id,
                                     @PathVariable Integer page){
 
-        int itemsPerPage = 4;
 
         return reviewService.findByItemMenuPaging(menu_id, page);
     }
