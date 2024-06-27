@@ -12,3 +12,13 @@ SELECT * FROM ctt_recent;
 SELECT * FROM ctt_aichat;
 SELECT * FROM ctt_calendar;
 
+
+
+SELECT
+    id "id"
+     , user_id "user_id"
+     , regdate "regdate"
+FROM ctt_order
+WHERE user_id = 2
+ORDER BY regdate DESC
+LIMIT 0, 4

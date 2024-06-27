@@ -2,6 +2,7 @@ package com.lec.spring.service.order;
 
 import com.lec.spring.domain.order.Order;
 import com.lec.spring.domain.order.Order_item;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -17,4 +18,5 @@ public interface Order_itemService {
 
     // 연령별 메뉴 주문 수량 조회
     List<Order_item> orderMenuAgeChart();
+
 }
