@@ -6,7 +6,6 @@ import com.lec.spring.domain.order.OrderItem;
 import com.lec.spring.domain.order.QryOrder;
 import com.lec.spring.repository.order.OrderRepository;
 import com.lec.spring.repository.order.OrderItemRepository;
-import com.lec.spring.repository.order.Order_ItemRepository;
 import com.lec.spring.util.U;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
