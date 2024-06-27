@@ -109,12 +109,12 @@
                             </li>
                         </ul>
                     </div>
-                    <div th:else>
-                        <!-- totalPages가 null인 경우에 대한 처리 -->
-                        <p>No pages available.</p>
-                    </div>
                 </div>
             </section>
+
+        <th:block th:replace="~{common/pagination :: pagination}"
+                  th:with="page=${page}, startPage=${startPage}, endPage=${endPage}, totalPage=${totalPage}, url=${url}"></th:block>
+
 
     </div>
 

@@ -1,6 +1,7 @@
 package com.lec.spring.repository.review;
 
 import com.lec.spring.domain.review.Review;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -33,8 +34,9 @@ public interface ReviewRepository{
 
     List<Review> selectFromReviewRow (int from, int rows);
 
-    List<Review> selectFromCocktailRow (int from, int rows);
-
+    List<Review> selectFromCocktailRow (@Param("menu_id") Long menu_id,
+                                        @Param("start") int start,
+                                        @Param("sizePerPage") int sizePerPage);
 
     List<Review> pageList(int pageStart);
 }

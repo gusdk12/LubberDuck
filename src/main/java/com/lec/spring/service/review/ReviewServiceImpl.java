@@ -102,8 +102,10 @@ public class ReviewServiceImpl implements ReviewService {
     public QryReviewList findByItemMenuPaging(Long menu_id, Integer page) {
         QryReviewList list = new QryReviewList();
 
+        int sizePerPage = 4;
 
-        List<Review> reviews = reviewRepository.findByItemMenu(menu_id);
+        int start = (page - 1) * sizePerPage;
+        List<Review> reviews = reviewRepository.selectFromCocktailRow(menu_id, start, sizePerPage);
 
         list.setCount(reviews.size());
         list.setList(reviews);

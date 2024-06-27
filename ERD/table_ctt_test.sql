@@ -39,5 +39,7 @@ FROM
         JOIN ctt_menu m ON oi.cocktail_id = m.id
         JOIN ctt_order o ON oi.order_id = o.id
         JOIN ctt_user u ON o.user_id = u.id
-WHERE oi.cocktail_id = 18;
+WHERE oi.cocktail_id = 18
+ORDER BY r.id DESC
+LIMIT 0, 4
 
