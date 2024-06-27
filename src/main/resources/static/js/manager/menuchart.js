@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     // 사이드바 메뉴 클릭시 css 변경
     $('.chart').eq(0).css({
-        'background-color': '#FDF8F1',
+        'background-color': '#FAF4EB',
         'border-radius': "10px 0 0 10px",
         'color': '#54320f',
         'font-weight': 'bold'
@@ -13,14 +13,12 @@ $(document).ready(function () {
 // 데이터 수집
 const quantities = [];
 const labels = [];
-const menuIds = [];
 const img_urls = [];
 const backgroundColors = [];
 
-for (i = 0; i < orderList.length; i++) {
+for (let i = 0; i < orderList.length; i++) {
     quantities.push(`${orderList[i].quantity}`);
     labels.push(`${orderList[i].menu.name}`);
-    menuIds.push(`${orderList[i].menu.id}`);
     img_urls.push(`${orderList[i].menu.imgUrl}`);
 
     // 배경색과 선 색상의 투명도 설정
@@ -37,13 +35,6 @@ const summedQuantities = uniqueLabels.map(label => {
     const labelQuantities = quantities.filter((_, i) => labels[i] === label);
     return labelQuantities.reduce((sum, q) => sum + Number(q), 0);
 });
-
-const ctx = $('#menuChart').get(0).getContext('2d');
-// 캔버스 해상도를 높게 설정합니다
-const scale = window.devicePixelRatio; // 디바이스 픽셀 비율을 가져옵니다
-$('#menuChart').get(0).width = $('#menuChart').get(0).width * scale;
-$('#menuChart').get(0).height = $('#menuChart').get(0).height * scale;
-ctx.scale(scale, scale);
 
 // 이미지 객체 배열 생성
 const images = uniqueImages.map(url => {
@@ -76,14 +67,14 @@ const imagePlugin = {
         });
     }
 };
-
+const ctx = $('#menuChart').get(0).getContext('2d');
 // Chart.js 차트 생성
 const menuChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: uniqueLabels,
             datasets: [{
-                label: '             칵테일 판매량      ',
+                label: '             칵테일 판매량',
                 data: summedQuantities,
                 backgroundColor: backgroundColors, // 각 데이터 포인트에 대한 배경색 배열
                 borderColor: getRandomRGBA(1.0), // 선 색상의 투명도 1.0로 설정, // 각 데이터 포인트에 대한 선색 배열
@@ -94,7 +85,7 @@ const menuChart = new Chart(ctx, {
         options: {
             responsive: true, // 반응형 차트 설정
             maintainAspectRatio: false, // 비율 유지 설정
-            height: 680, // 차트의 높이를 400 픽셀로 설정
+            height: 680, // 차트의 높이 설정
             indexAxis: 'y', // 세로 방향으로 바 차트 생성
             scales: {
                 x: {
@@ -109,7 +100,7 @@ const menuChart = new Chart(ctx, {
                     right: 60 // 오른쪽 여백을 늘려 이미지가 잘리지 않도록 설정
                 }
             },
-            barThickness: 40, // 막대 두께를 30 픽셀로 설정
+            barThickness: 40, // 막대 두께 설정
 
         },
         plugins: [imagePlugin] // 위에서 정의한 플러그인 추가
