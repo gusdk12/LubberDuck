@@ -162,8 +162,13 @@
 }
 
 .no-orders {
+    width: 500px;
+    height: auto;
+    padding: 150px;
     text-align: center;
     margin: 50px 0;
+    background-image: url(/img/mypage/receipt.png);
+    background-repeat: round;
 }
 
 .no-orders p {
@@ -181,6 +186,7 @@
     font-weight: 300;
     border-radius: 35px;
     transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    font-size: 15px;
 }
 
 .no-orders a:hover {
