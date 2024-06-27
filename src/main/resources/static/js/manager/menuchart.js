@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#manunav").show();
+    $("#menunav").show();
 
     // 사이드바 메뉴 클릭시 css 변경
     $('.chart').eq(0).css({

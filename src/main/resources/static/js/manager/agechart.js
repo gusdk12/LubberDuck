@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#manunav").show();
+    $("#menunav").show();
 
     // 사이드바 메뉴 클릭시 css 변경
     $('.chart').eq(1).css({
@@ -12,7 +12,6 @@ $(document).ready(function () {
 
 // 연령별 최대 판매량과 메뉴 정보를 저장할 객체
 let maxSalesByAgeGroup = {};
-let menuImageList = [];
 
 // 연령별 최대 판매량과 메뉴 정보 찾기
 orderAgeList.forEach(function (item) {
@@ -30,11 +29,6 @@ orderAgeList.forEach(function (item) {
             menuImage: menuImage,
         };
     }
-    // 메뉴 이미지 배열에 추가
-    menuImageList.push({
-        menuName: menuName,
-        imageUrl: menuImage
-    });
 });
 
 // maxSalesByAgeGroup 객체에서 데이터셋 생성

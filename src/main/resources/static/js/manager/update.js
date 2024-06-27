@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#manunav").show();
+    $("#menunav").show();
 
     var preview_box = $("#preview_box");
     var btn_preview = $(".btn_preview");

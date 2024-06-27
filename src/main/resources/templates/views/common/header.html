@@ -11,6 +11,13 @@
                 <div class="headermenu">
                     <!-- 관리자용 메뉴 -->
                     <div sec:authorize="hasRole('MANAGER')" id="menuIcon"></div>
+                    <div id="drop" sec:authorize="hasRole('MANAGER')">
+                        <div>
+                        <a class="dropNav_list" th:href="@{/manager/menuchart}">차트 관리</a>
+                        <a class="dropNav_list" th:href="@{/manager/menuwrite}">메뉴판 관리</a>
+                        <a class="dropNav_list" th:href="@{/manager/calendar}">캘린더 관리</a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -39,7 +46,7 @@
                 </form>
             </section>
         </div>
-        <section id="manunav" sec:authorize="hasRole('MANAGER')">
+        <section id="menunav" sec:authorize="hasRole('MANAGER')">
             <a class="nav_list" th:href="@{/manager/menuchart}">차트 관리</a>
             <a class="nav_list" th:href="@{/manager/menuwrite}">메뉴판 관리</a>
             <a class="nav_list" th:href="@{/manager/calendar}">캘린더 관리</a>

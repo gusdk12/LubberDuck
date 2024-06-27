@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#manunav").show();
+    $("#menunav").show();
 
     // 메뉴 모음집 체크박스 옵션
     $('#selectAll').change(function () {

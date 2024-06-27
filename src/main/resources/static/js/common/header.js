@@ -1,9 +1,10 @@
 $(document).ready(function () {
-    $("#manunav").hide();
+    $("#menunav").hide();
+    $("#drop").hide();
     // 햄버거 토글버튼
     $(function () {
         $("#headermenu").click(function () {
-            $("#manunav").slideToggle();
+            $("#drop").slideToggle();
         });
     });
 }); // end ready()
