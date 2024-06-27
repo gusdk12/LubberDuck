@@ -27,7 +27,7 @@
     z-index: 1;
     overflow: visible;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .receipt .background {
@@ -159,4 +159,43 @@
     justify-content: space-between;
     font-size: 16px;
     font-weight: bold;
+}
+
+.no-orders {
+    width: 500px;
+    height: auto;
+    padding: 150px;
+    text-align: center;
+    margin: 50px 0;
+    background-image: url(/img/mypage/receipt.png);
+    background-repeat: round;
+}
+
+.no-orders p {
+    font-size: 15px;
+    color: #818181;
+    font-weight: 100;
+}
+
+.no-orders a {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #9d9d9d;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    border-radius: 35px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    font-size: 15px;
+}
+
+.no-orders a:hover {
+    background-color: #878787;
+    color: white;
+    transform: translateY(-5px); /* 살짝 위로 올림 */
+}
+
+.no-orders img{
+    width: 55px;
+    margin-bottom: 7px;
 }

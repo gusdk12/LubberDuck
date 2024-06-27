@@ -1,0 +1,43 @@
+.containerA {
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    list-style: none;
+    margin-left: 230px;
+    margin-top: -110px;
+    width: 100%;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    color: #ed8f8f;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.pagination .page-link:hover {
+    background-color: #ffffff;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #dda7a7;
+    color: white;
+}
+
+.pagination .page-link i :not([name="icon"]){
+    font-size: 1.2em;
+
+}
+
+[name="icon"]{
+    font-size: 17px;
+}

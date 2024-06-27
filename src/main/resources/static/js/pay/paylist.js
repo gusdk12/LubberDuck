@@ -1,5 +1,6 @@
 
 let totalPrice = 0;
+let menuImgs = [];
 
 window.addEventListener('load', () => {
     loadCartData();
@@ -14,6 +15,16 @@ function addEvent(){
 
         document.forms['payForm'].submit();
     });
+
+    // const animationDiv = document.getElementById('payButton');
+    // animationDiv.addEventListener('mouseenter', function(event) {
+    //     menuImgs.forEach(img => {
+    //             $('#paysection').append(`
+    //                 <div className="cocktailPikabu"></div>
+    //             `);
+    //         }
+    //     );
+    // });
 }
 
 function loadCartData() {
@@ -36,7 +47,9 @@ function loadCartData() {
 
 function buildCartToHTML(data){
     data.data.forEach(item => {
+        if(item.menu.sequence === -1) return;
         totalPrice += (item.menu.price * item.quantity);
+        menuImgs.push(item.menu.imgUrl);
         $('#cartlistsection').append(`
             <div class="cartItem">
                 <div class="itemImg" style="background-image: url('${item.menu.imgUrl}')"></div>

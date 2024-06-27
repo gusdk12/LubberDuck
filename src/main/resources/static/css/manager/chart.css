@@ -4,32 +4,34 @@
 
 body {
     background-color: #10573e;
-    margin: 0;
+    margin: 0 0 100px 0;
 }
 
 .chart_page {
     max-width: 1300px;
-    height: 1000px;
+    height: 800px;
     /* 높이를 페이지에 맞게 고치기 */
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .side {
-    float: left;
-    width: 20%;
-    /* height: 100%; */
-
+    width: 260px;
+    height: 800px;
     text-align: center;
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    font-size: 13px;
+    font-size: 10px;
 }
 
 .side #sideMenu {
     color: #f8e9d7;
+    height: 600px;
     font-weight: bolder;
     margin-top: 30px;
 }
@@ -37,11 +39,7 @@ body {
 .side a {
     color: #f8e9d7;
     text-decoration: none;
-    margin: 20px 0;
-}
-
-#age_nav {
-    line-height: 1.5;
+    margin: 25px 0;
 }
 
 .side .chartTitle {
@@ -54,13 +52,12 @@ body {
 .side .chart {
     display: block;
     height: 50px;
-
     text-align: center;
     line-height: 50px;
 }
 
 .article_chart {
-    width: 80%;
+    width: 1040px;
     height: 800px;
     display: flex;
     flex-direction: column;
@@ -68,25 +65,53 @@ body {
     justify-content: flex-start;
     background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
     border-radius: 10px;
-    margin-top: 50px;
-    float: left;
+    margin-top: 70px;
 }
 
 #chart_container {
-    width: 90%;
-    height: 90%;
-    margin: 30px 20px 30px 20px;
-    overflow-y: auto;
+    width: 936px;
+    height: 670px;
+    margin: 10px 20px 30px 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#chart_container::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+    height: 5px; /*가로 스크롤바 높이*/
+}
+
+#chart_container::-webkit-scrollbar-track {
+    background: none; /* 트랙 배경 색상 */
+    border-radius: 10px; /* 트랙 모서리 둥글게 */
+}
+
+#chart_container::-webkit-scrollbar-thumb {
+    background: rgba(16, 87, 62, 0.89); /* 핸들 색상 */
+    border-radius: 10px; /* 핸들 모서리 둥글게 */
+}
+
+#chart_container::-webkit-scrollbar-thumb:hover {
+    background: #10573e; /* 호버 시 핸들 색상 */
+}
+
+#chart_containerBody {
+    width: 936px;
+    height: 1200px;
 }
 
 .chart_name {
     font-family: "Meddon", cursive;
-    font-size: 50px;
-    margin-top: 50px;
+    font-size: 70px;
+    margin-top: 20px;
 }
 
-#menuChart {
+#menuChart, #ageChart {
     max-width: 100%;
     max-height: 100%;
-    margin: auto 20px;
+}
+
+#chart_containerBody_age {
+    width: 936px;
+    height: 500px;
 }

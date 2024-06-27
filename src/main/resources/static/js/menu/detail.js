@@ -3,19 +3,31 @@ window.addEventListener('load', async () => {
     try {
         loadMenu();
         addEvent();
-        await checkToRecent(currentCocktail);
-        await loadRecent(logged_id);
+
+        if (logged_id !== -1) {
+            await checkToRecent(currentCocktail);
+            await loadRecent(logged_id);
+        }
     } catch (error) {
         console.error('Error during initialization:', error);
     }
-
-    // alert(menu.id);
-    loadReviews(menu.id, 3);
 });
 window.addEventListener('popstate', function (event) {
     // This code runs when the back button is clicked
     alert('popstate event triggered');
     location.reload(); // Refresh the page
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const recentSectionCon = document.getElementById("recentSection-con");
+
+    window.addEventListener("scroll", function() {
+        // Get the current scroll position
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+        // Set the top position of the element
+        recentSectionCon.style.top = scrollTop + "px";
+    });
 });
 
 async function loadMenu() {

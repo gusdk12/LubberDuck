@@ -33,14 +33,27 @@
         WHERE oi.id = #{param1}
     </select>
 
-
-    <select id="findByOrderList" resultType="com.lec.spring.domain.order.Order_item">
+    <select id="findByOrderMenuList" resultType="com.lec.spring.domain.order.Order_item">
         <include refid="SELECT_BASE"/>
     </select>
+
     <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.order.Order_item"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO ctt_order_item(order_id, cocktail_id, quantity, price)
         VALUES(#{order_id}, #{cocktail_id}, #{quantity}, #{price})
     </insert>
 
+    <select id="findByOrderAgeList" resultType="com.lec.spring.domain.order.Order_itemChart">
+        SELECT FLOOR((YEAR(CURRENT_DATE) - YEAR(u.birth_date)) / 10) * 10 AS "ageGroup",
+               SUM(oi.quantity)                                           AS "totalQuantity",
+               m.name                                                     AS "menuName",
+               m.img_url                                                  AS "menuImage"
+        FROM ctt_order_item oi
+                 JOIN ctt_order o ON oi.order_id = o.id
+                 JOIN ctt_user u ON o.user_id = u.id
+                 JOIN ctt_menu m ON oi.cocktail_id = m.id
+        WHERE u.birth_date IS NOT NULL
+        GROUP BY ageGroup, m.name, m.img_url
+        ORDER BY ageGroup;
+    </select>
 </mapper>

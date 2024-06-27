@@ -188,7 +188,7 @@ public class MyPageController {
     }
 
     @GetMapping("/review")
-    public void review(@AuthenticationPrincipal UserDetails userDetails, Integer page, Model model) {
+    public void review(@AuthenticationPrincipal UserDetails userDetails, Integer sort, Integer page, Model model) {
         String username = userDetails.getUsername();
         User user = userService.findByUsername(username);
 
@@ -197,7 +197,15 @@ public class MyPageController {
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
 
-        reviewService.list(page,model);
+        reviewService.list(user.getId(), sort, page, model);
+
+    }
+
+    @GetMapping("review/detail/{id}")
+    public String detail (Model model, @PathVariable("id") Long id){
+        Review review = reviewService.selectById(id);
+        model.addAttribute("review", review);
+        return "mypage/review/detail";
     }
 
     @GetMapping("review/write/{item_id}")
@@ -225,6 +233,7 @@ public class MyPageController {
         U.getSession().setAttribute("pageRows", pageRows);
         return "redirect:/mypage/review/list?page=" + page;
     }
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

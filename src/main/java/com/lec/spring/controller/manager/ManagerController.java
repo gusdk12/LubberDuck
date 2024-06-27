@@ -39,7 +39,7 @@ public class ManagerController {
 
     @GetMapping("/calendar")
     public void calendar(Model model) {
-        List<Menu> menuList = menuService.list();
+        List<Menu> menuList = menuService.sequenceList();
         model.addAttribute("menuList", menuList);
     }
 
@@ -87,9 +87,17 @@ public class ManagerController {
     // 메뉴별 판매 차트 조회
     @GetMapping("/menuchart")
     public String menuOrderList(Model model){
-        List<Order_item> orderItems = orderItemService.orderList();
+        List<Order_item> orderItems = orderItemService.orderMenuChart();
         model.addAttribute("orderList", orderItems);
         return "manager/menuchart";
+    }
+
+    @GetMapping("/agechart")
+    public String ageOrderList(Model model){
+        List<Order_item> orderAgeItems = orderItemService.orderMenuAgeChart();
+        model.addAttribute("orderAgeList", orderAgeItems);
+        System.out.println(orderAgeItems);
+        return "manager/agechart";
     }
 
     @InitBinder

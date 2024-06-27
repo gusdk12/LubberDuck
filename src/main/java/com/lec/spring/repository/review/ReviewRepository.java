@@ -30,9 +30,10 @@ public interface ReviewRepository{
 
     List<Review> findByUserId(Long userId);
 
-    int cntAll();
+    int cntAll(Long user_id);
 
-    List<Review> selectFromReviewRow (int from, int rows);
+    List<Review> selectFromReviewRowByDate (Long user_id, int from, int rows);
+    List<Review> selectFromReviewRowByRate (Long user_id, int from, int rows);
 
     List<Review> selectFromCocktailRow (@Param("menu_id") Long menu_id,
                                         @Param("start") int start,

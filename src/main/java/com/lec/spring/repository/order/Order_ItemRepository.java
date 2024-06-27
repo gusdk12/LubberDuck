@@ -13,7 +13,11 @@ public interface Order_ItemRepository {
 
     Order_item findById(Long itemId);
 
-    List<Order_item> findByOrderList();
+    // 주문한 메뉴 리스트 조회
+    List<Order_item> findByOrderMenuList();
+
+    // 연령별로 주문한 메뉴 조회
+    List<Order_item> findByOrderAgeList();
 
     int insert(Order_item item);
 }

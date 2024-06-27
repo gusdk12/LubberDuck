@@ -41,8 +41,7 @@ body {
     width: 380px;
     margin: 50px auto;
     padding: 20px;
-    background-image: url(/img/review/background.jpg);
-    background-size: contain;
+    background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border: 1px solid rgb(243, 243, 243);
 }
@@ -74,7 +73,7 @@ textarea {
 
 input[type="text"] {
     float: right;
-    background-color: #eeeeee;
+    background-color: #EAF1EF;
 }
 
 textarea {
@@ -83,7 +82,7 @@ textarea {
     float: right;
 }
 
-#submit_btn {
+#back_button {
     padding: 12px 20px;
     background-color: #10573e;
     color: white;
@@ -95,7 +94,7 @@ textarea {
     font-weight: 500;
 }
 
-#submit_btn:hover {
+#back_button:hover {
     background-color: #468969;
 }
 
@@ -131,7 +130,6 @@ textarea {
 /*빈별*/
 .rating > label {
     display: inline-block;
-    cursor: pointer;
     background-image: url(/img/review/grey_star.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -147,11 +145,15 @@ textarea {
 }
 
 textarea#content {
-    background-color: white;
     height: 150px;
     text-overflow: inherit;
     resize: none;
     padding: 15px;
+    background-color: #EAF1EF;
+}
+
+textarea#content:focus {
+    outline: none; /* 클릭 시 발생하는 기본적인 아웃라인 스타일을 제거합니다. */
 }
 
 textarea#content::-webkit-scrollbar {
@@ -228,13 +230,7 @@ div#star_rate.rating{
     margin-top: 10px;
 }
 
-#top{
 
-}
-
-#bottom{
-
-}
 
 
 

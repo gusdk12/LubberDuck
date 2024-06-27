@@ -30,8 +30,14 @@ public class Order_itemServiceImpl implements Order_itemService {
         return orderItemRepository.findById(item_id);
     }
 
+    // 메뉴별 차트 판매량 조회
     @Override
-    public List<Order_item> orderList() {
-        return orderItemRepository.findByOrderList();
+    public List<Order_item> orderMenuChart() {
+        return orderItemRepository.findByOrderMenuList();
+    }
+
+    @Override
+    public List<Order_item> orderMenuAgeChart() {
+        return orderItemRepository.findByOrderAgeList();
     }
 }

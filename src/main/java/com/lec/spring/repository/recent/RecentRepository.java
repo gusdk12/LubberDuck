@@ -15,7 +15,7 @@ public interface RecentRepository {
     // 데이터 저장하기
     int insert(Recent recent);
 
-    // 데이터 5개 초과시 삭제
+    // 데이터 4개 초과시 삭제
     int limitedDelete(Long user_id);
 
     // 데이터 삭제하기

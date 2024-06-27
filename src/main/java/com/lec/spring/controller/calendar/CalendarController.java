@@ -5,6 +5,7 @@ import com.lec.spring.domain.calendar.Calendar;
 import com.lec.spring.domain.calendar.QryCalendarList;
 import com.lec.spring.service.calendar.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController   // data 를 response 한다. ('View' 를 리턴하는게 아니다!)
@@ -17,7 +18,8 @@ public class CalendarController {
 
     // 모든 일정 불러오기
     @GetMapping("/list")
-    public QryCalendarList list(){
+    public QryCalendarList list(Model model){
+        model.addAttribute("calendarlist", calendarService.findAll());
         return calendarService.findAll();
     }
 
@@ -53,11 +55,30 @@ public class CalendarController {
     @PostMapping("/update/{id}")
     public QryResult update(
             @PathVariable Long id,
-            @RequestParam("menu_id") Long menu_id,
+            @RequestParam(name = "menu_id", required = false) Long menu_id,
             @RequestParam("comment") String comment,
             @RequestParam("memo") String memo
     ) {
         QryResult result = calendarService.update(id, menu_id, comment, memo);
+        return result;
+    }
+
+    @PostMapping("/updateToDeleteMenu/{id}")
+    public QryResult updateToDeleteMenu(
+            @PathVariable Long id,
+            @RequestParam("menu_id") Long menu_id,
+            @RequestParam("comment") String comment
+    ) {
+        QryResult result = calendarService.updateToDeleteMenu(id, menu_id, comment);
+        return result;
+    }
+
+    @PostMapping("/updateToDeleteMemo/{id}")
+    public QryResult updateToDeleteMemo(
+            @PathVariable Long id,
+            @RequestParam("memo") String memo
+    ) {
+        QryResult result = calendarService.updateToDeleteMemo(id, memo);
         return result;
     }
 

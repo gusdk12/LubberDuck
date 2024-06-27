@@ -116,7 +116,10 @@ body {
 }
 
 #menuscroll:hover {
-    cursor: url('/img/cursor/cursor2.png'), auto;
+    cursor: url('/img/cursor/freeHand.png'), auto;
+}
+#menuscroll:active {
+    cursor: url('/img/cursor/grabHand.png'), auto;
 }
 
 #menuscroll > div {
@@ -160,6 +163,7 @@ body {
     height: 800px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    transition: width 0.8s ease;
 }
 
 .paper {
@@ -189,6 +193,100 @@ body {
     grid-template-rows: 1fr 1fr 1fr 1fr;
     padding-top: 40px;
     padding-bottom: 30px;
+}
+
+.todaypart{
+    position: absolute;
+    float: left;
+    height: 93%;
+    width: 90%;
+    /*background-color: #ec1e37;*/
+    align-self: center;
+    justify-self: center;
+    overflow: hidden;
+}
+.todaymenu{
+    z-index: 1;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    transform: translate(25%, 60%) skewY(-20deg);
+    text-align: center;
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 40px;
+}
+.todayimg{
+    z-index: 3;
+    width: 300px;
+    height: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    transform: translate(27%, 35%);
+}
+.todayname{
+    /*background-color: #fdd8df;*/
+    position: absolute;
+    transform: translate(7%, 430%);
+    width: 400px;
+    height: 100px;
+    font-family: "Damion", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 55px;
+    text-align: center;
+}
+.todayprice{
+    /*background-color: #fdd8df;*/
+    position: absolute;
+    transform: translate(7%, 510%);
+    width: 400px;
+    height: 100px;
+    font-family: "Coming Soon", cursive;
+    font-size: 30px;
+    text-align: center;
+}
+.todayinfo{
+    /*background-color: #fdd8df;*/
+    position: absolute;
+    transform: translate(10%, 380%);
+    width: 380px;
+    height: 150px;
+    font-family: "Coming Soon", cursive;
+    font-size: 19px;
+    text-align: center;
+}
+#leftwreath{
+    z-index: 2;
+    /*background-color: #fdd8df;*/
+    position: absolute;
+    transform: translate(15%, 45%) rotate(-10deg);
+    width: 150px;
+    height: 300px;
+    background-image: url('/img/menu/leftwreath.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(92%) sepia(16%) saturate(682%) hue-rotate(338deg) brightness(108%) contrast(101%);
+    transition: transform 0.8s ease;
+}
+#rightwreath{
+    z-index: 2;
+    /*background-color: #fdd8df;*/
+    position: absolute;
+    transform: translate(190%, 45%) rotate(10deg);
+    width: 150px;
+    height: 300px;
+    background-image: url('/img/menu/rightwreath.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(92%) sepia(16%) saturate(682%) hue-rotate(338deg) brightness(108%) contrast(101%);
+    transition: transform 0.8s ease;
 }
 
 .cocktailpart {
@@ -276,6 +374,7 @@ body {
     filter: invert(63%) sepia(71%) saturate(461%) hue-rotate(309deg) brightness(101%) contrast(104%);
 }
 #cocktailadd:hover{
+    cursor: url('/img/cursor/pointHand.png'), auto;
     filter: invert(39%) sepia(38%) saturate(1775%) hue-rotate(319deg) brightness(97%) contrast(85%);
 }
 #cocktaildetail{
@@ -289,6 +388,7 @@ body {
     filter: invert(72%) sepia(15%) saturate(658%) hue-rotate(112deg) brightness(91%) contrast(87%);
 }
 #cocktaildetail:hover{
+    cursor: url('/img/cursor/pointHand.png'), auto;
     filter: invert(47%) sepia(79%) saturate(372%) hue-rotate(113deg) brightness(92%) contrast(95%);
 }
 
