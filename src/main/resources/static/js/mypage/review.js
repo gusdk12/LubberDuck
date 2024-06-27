@@ -20,9 +20,10 @@ $(document).ready(function() {
                     $reviewContainer.slideUp('slow', function() {
                         $(this).remove();
                     });
-                    alert('리뷰가 삭제되었습니다.');
-                    // 리뷰 목록 페이지로 리디렉션
-                    window.location.href = '/mypage/review';
+                    swal('삭제 성공!', "리뷰가 정상적으로 삭제되었습니다.", 'success')
+                        .then(function (){
+                            window.location.href = '/mypage/review';
+                        })
                 },
                 error: function(xhr, status, error) {
                     console.error('Error deleting review:', error);
@@ -156,12 +157,3 @@ function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     return new Date(dateString).toLocaleDateString('ko-KR', options);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('input[name="sort"]').forEach((radio) => {
-        radio.addEventListener('change', (event) => {
-            const sortType = event.target.value;
-            window.location.href = `/review/list?sortType=${sortType}`;
-        });
-    });
-});

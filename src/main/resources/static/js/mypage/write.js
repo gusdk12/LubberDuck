@@ -50,12 +50,14 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (response) {
-                alert('리뷰가 성공적으로 작성되었습니다.');
-                window.location.href = '/mypage/review'; // 리뷰 목록 페이지로 리디렉션
+                swal("리뷰 작성 성공!","리뷰 목록에서 리뷰를 확인해주세요.","success")
+                .then(function (){
+                    window.location.href = '/mypage/review'; // 리뷰 목록 페이지로 리디렉션
+                })
             },
             error:
                 function (error) {
-                    alert('리뷰 작성에 실패했습니다.');
+                    swal("리뷰 작성 실패!","다시 작성해주세요.","warning")
                 }
         });
     });

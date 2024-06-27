@@ -58,6 +58,7 @@
     <select id="findById" resultType="com.lec.spring.domain.review.Review">
         <include refid="SELECT_BASE"/>
         WHERE r.id = #{id}
+        ORDER BY r.regdate DESC
     </select>
 
     <select id="findByItemId" resultType="com.lec.spring.domain.review.Review">
@@ -126,6 +127,16 @@
         WHERE u.id = #{param1}
         ORDER BY r.rate DESC
         LIMIT #{param2}, #{param3}
+    </select>
+
+    <select id="sortRate" resultMap="mapReview">
+        <include refid="SELECT_BASE"/>
+        ORDER BY r.rate DESC
+    </select>
+
+    <select id="sortRegdate" resultMap="mapReview">
+        <include refid="SELECT_BASE"/>
+        ORDER BY r.regdate DESC
     </select>
 
 
