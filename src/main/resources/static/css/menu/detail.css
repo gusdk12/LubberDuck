@@ -245,6 +245,14 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+#review_name{
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 15px;
+}
 #cocktailInfo #info{
     /*background-color: blueviolet;*/
     height: 30%;
@@ -302,7 +310,7 @@ body {
     height: 200px;
 }
 
-#reviewsection{
+#reviewSection{
     border-top: 1px solid #10573e;
     border-radius: 7px;
     height: 40%;
@@ -351,6 +359,7 @@ body {
 .tag_btn > label {
     background-color: transparent;
     cursor: pointer;
+    font-family: "Noto Sans KR", sans-serif;
     font-weight: 100;
     font-size: 12px;
     display: inline-flex;
@@ -368,7 +377,9 @@ body {
 
 .reviews-container {
     display: flex;
-    flex-direction: column; /* 각 리뷰가 세로로 쌓이도록 설정 */
+    flex-direction: column;
+    font-family: "Noto Sans KR", sans-serif;
+
 }
 
 .review-header {
@@ -390,6 +401,20 @@ body {
     margin-left: 75px;
 }
 
+.reviewrv{
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 30px;
+}
+
+.totalcnt{
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
 
 .review-title > h6 {
     margin: 0 0 0 8px;
