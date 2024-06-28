@@ -1,13 +1,3 @@
-
-function getKoreanDate() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-
-    return `${year}${month}${day}`;
-}
-
 // 변수 설정
 const init = {
     monList: [
@@ -74,13 +64,6 @@ function addEvents() {
 
     // 메뉴 리스트 팝업 열기
     $("#btn-add-menu").on("click", async function () {
-        const {dateInt} = await checkAndConvertDate();
-
-        const checkDateResult = await checkDate(dateInt);
-        if (checkDateResult.exists && checkDateResult.menu_id) {
-            alert("이미 메뉴가 존재합니다.");
-            return;
-        }
         initializeAndShowPopup("#myForm");
         window.isMenuEdit = false;
     });
@@ -143,12 +126,13 @@ function addEvents() {
         } else {
             $("#select-menu-text").empty();
         }
+
     });
 
     // 오늘의 메뉴 삭제
     $(document).on("click", '.btn-delete', async function () {
         if (confirm("오늘의 메뉴를 삭제하시겠습니까?")) {
-            const {dateInt, selectedDate} = await checkAndConvertDate();
+            const {dateInt} = await checkAndConvertDate();
             const checkDateResult = await checkDate(dateInt);
 
             if (checkDateResult.exists) {
@@ -226,14 +210,6 @@ function addEvents() {
 
     // 메모 추가
     $("#btn-add-memo").on("click", async function () {
-        const {dateInt} = await checkAndConvertDate();
-
-        const checkDateResult = await checkDate(dateInt);
-        if (checkDateResult.exists && checkDateResult.memo) {
-            alert("이미 메모가 존재합니다.");
-            return;
-        }
-
         // 기존 메모가 없는 경우에만 추가 모드로 설정
         if ($(".event-list li").length === 0) {
             $("#new-memo")
@@ -242,7 +218,9 @@ function addEvents() {
                 .data("mode", "add")
                 .show()
                 .focus();
-            $("#notification").hide();
+            $(".notification-text").hide();
+        } else {
+            $(".notification-text").show();
         }
     });
 
@@ -273,7 +251,7 @@ function addEvents() {
     $(document).on("click", ".memo-delete", async function () {
         if (confirm("메모를 삭제하시겠습니까?")) {
             const memoText = $("#new-memo").val();
-            const {dateInt, selectedDate} = await checkAndConvertDate();
+            const {dateInt} = await checkAndConvertDate();
             const checkDateResult = await checkDate(dateInt);
 
             if (checkDateResult.exists) {
@@ -329,25 +307,48 @@ function addEvents() {
     });
 }
 
-// 캘린더를 구성하고 초기화하는 함수
+/****************************************************************
+                     화면 구성 및 초기화
+ ****************************************************************/
+
+/*** 캘린더 관련 화면 구성 ***/
+// 캘린더를 구성하고 초기화
 function buildCalendar(data){
-    // loadYYMM(init.today); // 현재 날짜로 달력 초기화
+    if(!data) return;
+
     data.forEach(date => {
         const year = date.id.toString().substring(0, 4);
         const month =  date.id.toString().substring(4, 6);
         const day =  date.id.toString().substring(6, 8);
 
-        console.log(date.id);
         const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
 
         // 날짜에 데이터가 있으면 색상 표시
         cell.addClass("event");
     });
-
 }
 
+// 실시간으로 날짜에 데이터가 있으면 색상 표시
+function addEvent(dateId) {
+    const year = dateId.toString().substring(0, 4);
+    const month = dateId.toString().substring(4, 6);
+    const day = dateId.toString().substring(6, 8);
 
-// 달력에 년도와 월을 로드하는 함수
+    const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
+    cell.addClass("event");
+}
+
+// 실시간으로 날짜에 데이터가 없으면 색상 표시 해제
+function removeEvent(dateId) {
+    const year = dateId.toString().substring(0, 4);
+    const month = dateId.toString().substring(4, 6);
+    const day = dateId.toString().substring(6, 8);
+
+    const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
+    cell.removeClass("event");
+}
+
+// 달력에 년도와 월을 로드
 function loadYYMM(fullDate) {
     clearTodayMenuMemo();
     let yy = fullDate.getFullYear(); // 년도
@@ -399,4 +400,91 @@ function loadYYMM(fullDate) {
     loadCalendars();
 }
 
+/*** 메모, 메뉴 관련 화면 구성 ***/
+// 메모, 메뉴 표시 초기화
+function clearTodayMenuMemo(){
+    // 메뉴 데이터 및 내용 비우기
+    $('.today-menu-container').empty();
+    $("#btn-add-menu").show();
+    initializePopup();
 
+    // 메모 데이터 및 내용 비우기
+    $(".event-list").empty();
+    $(".notification-text").show();
+    $(".notification-menu-text").show();
+    $("#btn-add-memo").show();
+}
+
+/*** 메뉴 관련 화면 구성 ***/
+// 오늘의 메뉴 화면에 표시
+function buildTodayMenu(data) {
+    // 오늘의 메뉴 데이터가 없는 경우
+    if(!data.menu_id) {
+        $('.notification-menu-text').show();
+        return;
+    }
+    $("#btn-add-menu").hide();
+    $('.notification-menu-text').hide();
+
+    // 메뉴 데이터를 추가
+    $('.today-menu-container').append(`
+        <div class="menu-item">
+            <p class="today-menu-name">${data.menu.name}</p>
+            <div class="img">
+                <div class="menu-img" style="background-image: url('${data.menu.imgUrl}'); height: 200px;"></div>
+            </div>
+            <div class="menu-text">
+                <textarea id="today-menu-text" readonly>${data.comment}</textarea>
+            </div>
+            <div class="menu-buttons">
+                <button class="btn-edit">수정</button>
+                <button class="btn-delete">삭제</button>
+            </div>
+        </div>
+    `);
+
+}
+
+// 오늘의 메뉴 데이터를 가져오는 함수
+async function buildEditTodayMenu(dateInt) {
+
+    const checkDateResult = await checkDate(dateInt);
+    if (!checkDateResult.exists) {
+        return null;
+    }
+
+    const menu = menuList.find(m => m.id === checkDateResult.menu_id);
+    if (menu) {
+        $('.select-menu-img').attr("src", menu.imgUrl);
+        $('.select-menu-name').text(menu.name);
+    }
+
+    return {
+        menu_id: checkDateResult.menu_id,
+        comment: checkDateResult.comment
+    };
+}
+
+/*** 메모 관련 화면 구성 ***/
+// 메모 화면에 표시
+async function buildMemo(data) {
+    // 메모 데이터가 없는 경우
+    if (!data.memo) {
+        $('.notification-text').show();
+        return;
+    }
+
+    $("#btn-add-memo").hide();
+    $('.notification-text').hide();
+
+    $(".event-list").append(`
+        <li>${data.memo}</li>
+         <button type="button" class="memo-edit">
+            <span class="fa fa-xmark"></span>
+        </button>
+        
+        <button type="button" class="memo-delete">
+            <span class="fa fa-xmark"></span>
+        </button>
+    `);
+}
