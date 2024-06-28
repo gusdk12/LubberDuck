@@ -63,9 +63,11 @@ function addEvents() {
     let selectedMenuId = null; // 사용자가 선택한 메뉴 정보
 
     // 메뉴 리스트 팝업 열기
-    $("#btn-add-menu").on("click", async function () {
+    $("#btn-add-menu, .change-menu-button").on("click", async function () {
         initializeAndShowPopup("#myForm");
         window.isMenuEdit = false;
+        $("#myForm").show();
+        $("#myForm2").hide();
     });
 
     // 메뉴 클릭 시 선택한 메뉴 정보 가져와서 오늘의 메뉴 디테일 팝업 열기
@@ -415,6 +417,27 @@ function clearTodayMenuMemo(){
     $("#btn-add-memo").show();
 }
 
+// 이전 날짜인지 여부를 확인하는 함수
+function isPastDate(dateString) {
+    const currentDate = new Date(); // 현재 날짜
+    const compareDate = new Date(dateString); // 비교할 날짜
+
+    // 현재 날짜의 년, 월, 일 정보를 가져옴
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+
+    // 비교할 날짜의 년, 월, 일 정보를 가져옴
+    const compareYear = compareDate.getFullYear();
+    const compareMonth = compareDate.getMonth();
+    const compareDay = compareDate.getDate();
+
+    // 두 날짜의 연, 월, 일이 모두 같은지 비교하여 하루 이전인지 확인
+    return compareYear < currentYear ||
+        compareMonth < currentMonth ||
+        compareDay < currentDay;
+}
+
 /*** 메뉴 관련 화면 구성 ***/
 // 오늘의 메뉴 화면에 표시
 function buildTodayMenu(data) {
@@ -437,12 +460,23 @@ function buildTodayMenu(data) {
                 <textarea id="today-menu-text" readonly>${data.comment}</textarea>
             </div>
             <div class="menu-buttons">
-                <button class="btn-edit">수정</button>
-                <button class="btn-delete">삭제</button>
+                <p class="edit-disabled-text">이전 날짜의 메뉴는 수정할 수 없습니다.</p>
+                <button class="btn-edit"></button>
+                <button class="btn-delete"></button>
             </div>
         </div>
     `);
 
+    // 이전 날짜에는 버튼 숨기기
+    if (isPastDate(data.date)) {
+        $(".btn-edit").hide();
+        $(".btn-delete").hide();
+        $(".edit-disabled-text").show();
+    } else {
+        $(".btn-edit").show();
+        $(".btn-delete").show();
+        $(".edit-disabled-text").hide();
+    }
 }
 
 // 오늘의 메뉴 데이터를 가져오는 함수
