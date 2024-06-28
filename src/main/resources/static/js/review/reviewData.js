@@ -55,9 +55,11 @@ function buildReviewSection(reviews){
     });
 }
 
-
-function renderPagination(totalPages) {
+function renderPagination(reviewCount) {
+    var pageSize = 4; // 한 페이지에 보여질 아이템 수
     currentPage = 1;
+    var totalPages = Math.ceil(reviewCount / pageSize);
+
     var paginationContainer = document.getElementById('pagination');
     paginationContainer.innerHTML = ''; // 기존의 내용을 모두 지움
 
@@ -88,7 +90,9 @@ function changePage(pageNumber) {
             changePage(1); // 정렬 기준 변경 시 첫 페이지로 이동
         });
     });
-
+    function ceilDivideBy4(reviewCount) {
+        return Math.ceil(reviewCount / 4);
+    }
 
     var reviewPrev = $('#reviewPrev');
     var reviewNext = $('#reviewNext');
@@ -100,7 +104,7 @@ function changePage(pageNumber) {
         reviewPrev.css('display', 'none'); // 이전 버튼 숨기기
     }
 
-    if (currentPage < (parseInt(reviewCount/4)) + 1) {
+    if (currentPage < (parseInt(ceilDivideBy4(reviewCount)))) {
         reviewNext.css('display', 'block'); // 다음 버튼 보이기
     }else {
         reviewNext.css('display', 'none'); // 다음 버튼 숨기기
