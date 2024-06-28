@@ -65,15 +65,9 @@
     </th:block>
 </th:block>
 
-<script th:inline="javascript">
-    var postItList = [[${postItAll}]];
-    const logged_id = [[${logged_user.id}]]
-    console.log(postItList);
-</script>
 <script th:src="@{/js/common/chatCart.js}"></script>
 <script th:src="@{/js/common/header.js}"></script>
-<script th:src="@{/js/cart/cartData.js}"></script>
-<script th:src="@{/js/chat/chatData.js}"></script>
+<script th:src="@{/js/guestbook/guestbookData.js}"></script>
 <script th:src="@{/js/guestbook/guestbook.js}"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class GuestBook {
     private Long id;    // PK
     private Long user_id;   // FK
+    private String nickname; // 유저 닉네임
     private Double x_coordinate;   // x좌표
     private Double y_coordinate;   // y좌표
     private Long z_coordinate;     // z좌표

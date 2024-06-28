@@ -262,6 +262,8 @@ img:hover:not(.ctt_img, #preview_img, #backgoundframe1, #backgoundframe2) {
     align-items: center;
     justify-content: center;
     padding-left: 15px;
+    margin-bottom: 100px;
+
 }
 
 .detail_container_update {

@@ -5,6 +5,7 @@
 body {
     background-color: #10573e;
     margin: 0 0 100px 0;
+    caret-color: transparent;
 }
 
 .chart_page {
