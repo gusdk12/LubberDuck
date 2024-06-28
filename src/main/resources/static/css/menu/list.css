@@ -371,15 +371,25 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0;
+    /*opacity: 0;*/
     transition: opacity 0.8s ease;
+    opacity: 0.8;
+    animation: sunspin 20s linear infinite, sunopacity 4s linear infinite;
 }
 @keyframes sunspin {
     from {
-        transform: translate(90px, -370px) rotate(0deg);
+        transform: translate(80px, -370px) rotate(0deg);
     }
     to {
-        transform: translate(90px, -370px) rotate(360deg);
+        transform: translate(80px, -370px) rotate(360deg);
+    }
+}
+@keyframes sunopacity {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0;
     }
 }
 #todaypart:hover{
@@ -387,8 +397,8 @@ body {
     /*cursor: url('/img/cursor/pointHand.png'), auto;*/
     cursor: pointer;
     #sunburst{
-        opacity: 0.8;
-        animation: sunspin 20s linear infinite;
+        /*opacity: 0.8;*/
+        /*animation: sunspin 20s linear infinite;*/
     }
 }
 #todaylabel{
@@ -396,8 +406,7 @@ body {
     /*background-color: #fdd8df;*/
     position: absolute;
     transform: translate(100px, -290px);
-    /*width: 300px;*/
-    width: 0px;
+    width: 300px;
     height: 140px;
     bottom: 0px;
     /*background-image: url('/img/menu/todaylabel.png');*/

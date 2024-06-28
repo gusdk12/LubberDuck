@@ -50,10 +50,9 @@ async function appendMenuToPlate() {
     let $currentPaper = null;
 
     const checkDateResult = await checkDate(Number(getKoreanDate()));
+    const todayMenu = menuList.find(menu => menu.id === checkDateResult.menu_id);
 
-    if(checkDateResult !== false){
-        const todayMenu = menuList.find(menu => menu.id === checkDateResult.menu_id);
-
+    if(checkDateResult && todayMenu){
         paperCount++;
         $menuPlate.append(`<div class="paperRight" id=paper${paperCount}></div>`);
         $currentPaper = $(`#paper${paperCount}`);
@@ -179,12 +178,12 @@ function openMenu() {
 
     let menu = document.getElementById("menu");
     menu.style.width = `${paperCount * 500}px`;
-    menu.addEventListener('transitionend', function(event) {
-        if (event.propertyName === 'width') {
-            let todaylabel = document.getElementById("todaylabel");
-            (todaylabel) && (todaylabel.style.width = `300px`);
-        }
-    });
+    // menu.addEventListener('transitionend', function(event) {
+    //     if (event.propertyName === 'width') {
+    //         let todaylabel = document.getElementById("todaylabel");
+    //         (todaylabel) && (todaylabel.style.width = `300px`);
+    //     }
+    // });
 
 
     const menuBody = document.querySelector('#menuBody');
