@@ -141,11 +141,10 @@ body {
 }
 
 .comment {
-    font-family: "Noto Sans KR", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
+    font-family: "Nanum Pen Script", cursive;
+    font-weight: 400;
     font-style: normal;
-    font-size: 17px;
+    font-size: 25px;
 
     background-color: rgba(255, 255, 255, 0.8);
     resize: none;
@@ -158,6 +157,9 @@ body {
     position: absolute;
     right: 0;
     bottom: -20px;
+
+    padding-top: 5px;
+    padding-left: 5px;
 
     z-index: 4;
     caret-color: black;
