@@ -44,7 +44,7 @@ $(document).ready(function () {
             url: '/review/insert',
             type: 'POST',
             data: {
-                "item_id": itemId,
+                "item.id": itemId,
                 "rate": selectedRating,
                 "comment": content,
             },
