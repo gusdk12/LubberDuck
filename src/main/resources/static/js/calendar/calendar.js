@@ -1,3 +1,13 @@
+
+function getKoreanDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+
+    return `${year}${month}${day}`;
+}
+
 // 변수 설정
 const init = {
     monList: [
@@ -27,7 +37,8 @@ const popupOverlay = $('<div class="popup-overlay"></div>');
 
 // --------------------------------------------------------
 $(document).ready(function () {
-    loadCalendars();
+    // loadCalendars();
+    loadYYMM(init.today);
     addEvents();
     $("#menunav").show();
 });
@@ -275,6 +286,12 @@ function addEvents() {
                             캘린더 관련 이벤트
     ****************************************************************/
 
+    // 다음달 클릭
+    $(".btn-cal.next").on("click", () => loadYYMM(init.nextMonth()));
+
+    // 이전달 클릭
+    $(".btn-cal.prev").on("click", () => loadYYMM(init.prevMonth()));
+
     // 날짜 클릭
     $(".date").on("click", function () {
         const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
@@ -314,61 +331,72 @@ function addEvents() {
 
 // 캘린더를 구성하고 초기화하는 함수
 function buildCalendar(data){
+    // loadYYMM(init.today); // 현재 날짜로 달력 초기화
+    data.forEach(date => {
+        const year = date.id.toString().substring(0, 4);
+        const month =  date.id.toString().substring(4, 6);
+        const day =  date.id.toString().substring(6, 8);
 
-    // 달력에 년도와 월을 로드하는 함수
-    function loadYYMM(fullDate) {
-        let yy = fullDate.getFullYear(); // 년도
-        let mm = fullDate.getMonth(); // 월 (0부터 시작)
-        let firstDay = new Date(yy, mm, 1); // 해당 월의 첫째 날
-        let lastDay = new Date(yy, mm + 1, 0); // 해당 월의 마지막 날
-        let markToday;
+        console.log(date.id);
+        const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
 
-        // 오늘 날짜를 표시하기 위한 변수 설정
-        if (mm === init.today.getMonth() && yy === init.today.getFullYear()) {
-            markToday = init.today.getDate();
-        }
+        // 날짜에 데이터가 있으면 색상 표시
+        cell.addClass("event");
+    });
 
-        // 월과 년도를 UI에 표시
-        $(".cal-month").text(init.monList[mm]);
-        $(".cal-year").text(yy + "년");
+}
 
-        let trtd = "";
-        let startCount; // 첫째 주 시작 여부
-        let countDay = 0; // 날짜 카운트 변수 초기화
-        for (let i = 0; i < 6; i++) { // 6주(행)까지 반복
-            trtd += "<tr>";
-            for (let j = 0; j < 7; j++) { // 7일(열)까지 반복
-                if (i === 0 && !startCount && j === firstDay.getDay()) {
-                    startCount = 1; // 첫째 주 첫째 날을 시작으로 표시
-                }
-                if (!startCount) {
-                    trtd += "<td>"; // 첫째 주 시작 전에는 빈 td 요소 추가
-                } else {
-                    // 각 날짜에 대한 정보 설정
-                    let fullDate =
-                        yy + "." + init.addZero(mm + 1) + "." + init.addZero(countDay + 1); // 날짜 포맷 설정
 
-                    trtd += `<td class="day`;  // td 요소에 클래스 추가
-                    trtd += markToday && markToday === countDay + 1 ? ' today" ' : '"'; // 오늘 날짜인 경우 클래스 추가
-                    trtd += ` data-date="${countDay + 1}" data-fdate="${fullDate}">`; // 데이터 속성 추가
+// 달력에 년도와 월을 로드하는 함수
+function loadYYMM(fullDate) {
+    clearTodayMenuMemo();
+    let yy = fullDate.getFullYear(); // 년도
+    let mm = fullDate.getMonth() + 1; // 월 (0부터 시작)
+    let firstDay = new Date(yy, mm, 1); // 해당 월의 첫째 날
+    let lastDay = new Date(yy, mm + 1, 0); // 해당 월의 마지막 날
+    let markToday;
 
-                }
-                trtd += startCount ? ++countDay : ""; // 날짜 카운트 증가
-                if (countDay === lastDay.getDate()) {
-                    startCount = 0; // 마지막 날짜에 도달하면 첫째 주 표시 종료
-                }
-                trtd += "</td>";
-            }
-            trtd += "</tr>";
-        }
-        $(".cal-body").html(trtd);
+    // 오늘 날짜를 표시하기 위한 변수 설정
+    if ((mm - 1) === init.today.getMonth() && yy === init.today.getFullYear()) {
+        markToday = init.today.getDate();
     }
 
-    // 다음달 클릭
-    $(".btn-cal.next").on("click", () => loadYYMM(init.nextMonth()));
+    // 월과 년도를 UI에 표시
+    $(".cal-month").text(init.monList[mm - 1]);
+    $(".cal-year").text(yy + "년");
 
-    // 이전달 클릭
-    $(".btn-cal.prev").on("click", () => loadYYMM(init.prevMonth()));
+    let trtd = "";
+    let startCount; // 첫째 주 시작 여부
+    let countDay = 0; // 날짜 카운트 변수 초기화
+    for (let i = 0; i < 6; i++) { // 6주(행)까지 반복
+        trtd += "<tr>";
+        for (let j = 0; j < 7; j++) { // 7일(열)까지 반복
+            if (i === 0 && !startCount && j === firstDay.getDay()) {
+                startCount = 1; // 첫째 주 첫째 날을 시작으로 표시
+            }
+            if (!startCount) {
+                trtd += "<td>"; // 첫째 주 시작 전에는 빈 td 요소 추가
+            } else {
+                // 각 날짜에 대한 정보 설정
+                let fullDate =
+                    yy + "." + init.addZero(mm) + "." + init.addZero(countDay + 1); // 날짜 포맷 설정
 
-    loadYYMM(init.today); // 현재 날짜로 달력 초기화
+                trtd += `<td class="day`;  // td 요소에 클래스 추가
+                trtd += markToday && markToday === countDay + 1 ? ' today" ' : '"'; // 오늘 날짜인 경우 클래스 추가
+                trtd += ` data-date="${countDay + 1}" data-fdate="${fullDate}">`; // 데이터 속성 추가
+
+            }
+            trtd += startCount ? ++countDay : ""; // 날짜 카운트 증가
+            if (countDay === lastDay.getDate()) {
+                startCount = 0; // 마지막 날짜에 도달하면 첫째 주 표시 종료
+            }
+            trtd += "</td>";
+        }
+        trtd += "</tr>";
+    }
+    $(".cal-body").html(trtd);
+
+    loadCalendars();
 }
+
+

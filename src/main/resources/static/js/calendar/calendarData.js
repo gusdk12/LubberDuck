@@ -27,7 +27,6 @@ async function checkDate(dateId) {
         return false;
     }
 }
-
 // 모든 일정 불러오기
 function loadCalendars(){
     $.ajax({
@@ -56,9 +55,9 @@ async function loadData(dateId){
         success: function (data, status) {
             console.log("AJAX 요청 성공:", status, data);
             if (status === "success") {
+                clearTodayMenuMemo();
                 buildTodayMenu(data);
                 buildMemo(data);
-                buildDate(data);
             }
         },
         error: function (xhr, status, error) {
@@ -72,25 +71,19 @@ async function loadData(dateId){
                 오늘의 메뉴
  ********************************************/
 
-function buildDate(data) {
-    const year = data.id.toString().substring(0, 4);
-    const month =  data.id.toString().substring(4, 6);
-    const day =  data.id.toString().substring(6, 8);
+function clearTodayMenuMemo(){
+    // 메뉴 데이터 및 내용 비우기
+    $('.today-menu-container').empty();
+    initializePopup();
 
-    console.log(data.id);
-    const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
-
-    // 날짜에 데이터가 있으면 색상 표시
-    if (data) {
-        cell.addClass("event");
-    }
+    // 메모 데이터 및 내용 비우기
+    $(".event-list").empty();
+    $("#notification").show();
 }
 
 // 오늘의 메뉴 화면에 표시
 function buildTodayMenu(data) {
-    // 데이터 및 내용 비우기
-    $('.today-menu-container').empty();
-    initializePopup();
+    if(!data.menu_id) return;
 
     // 데이터가 없는 경우 알림 메시지를 표시
     if (!data || !data.menu) {
@@ -254,24 +247,20 @@ async function deleteCalendarByMenu(calendarId, menuId, comment) {
 
 // 메모 화면에 표시
 function buildMemo(data) {
-    // 'event-list' 클래스를 비우기
-    $(".event-list").empty();
-    $("#notification").show();
+    if(!data.memo) return;
 
-    if (data && !data.memo) {
-        $('#notification .notification-text').hide();
+    $('#notification .notification-text').hide();
 
-        $(".event-list").append(`
-            <li>${data.memo}</li>
-             <button type="button" class="memo-edit">
-                <span class="fa fa-xmark"></span>
-            </button>
-            
-            <button type="button" class="memo-delete">
-                <span class="fa fa-xmark"></span>
-            </button>
-        `);
-    }
+    $(".event-list").append(`
+        <li>${data.memo}</li>
+         <button type="button" class="memo-edit">
+            <span class="fa fa-xmark"></span>
+        </button>
+        
+        <button type="button" class="memo-delete">
+            <span class="fa fa-xmark"></span>
+        </button>
+    `);
 }
 
 // 메모 추가
