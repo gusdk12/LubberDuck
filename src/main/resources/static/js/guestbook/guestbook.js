@@ -1,10 +1,13 @@
 
+const CREATEPOSTIT = 1;
+const POSTIT = 2;
+
 window.addEventListener('load', () => {
     initBoardDragEvent();
     initPostItCreateEvent();
 });
 
-function initBoardDragEvent() {
+function initBoardDragEvent(postItType, element) {
     let isDragging = false;
     let startX, startY, scrollLeft, scrollTop;
     //const allcontainer = document.querySelector('#allcontainer');
@@ -48,52 +51,61 @@ function initBoardDragEvent() {
 }
 function initPostItCreateEvent(){
     const draggableList = document.querySelectorAll('.createpostIt');
+
+    for(let draggable of draggableList){
+        addDragEventToPostIt(CREATEPOSTIT, draggable);
+    }
+}
+
+function addDragEventToPostIt(postItType, postItElement){
     const dropzone = document.querySelector('#guestbook');
     let offsetX, offsetY;
 
-    for(let draggable of draggableList) {
-        draggable.addEventListener('mousedown', (e) => {
+    postItElement.addEventListener('mousedown', (e) => {
+        if(postItType === CREATEPOSTIT){
             const newDiv = document.createElement('div');
-            newDiv.style.position = 'absolute';
-            newDiv.style.zIndex = 999999;
             newDiv.className = 'postIt';
-            newDiv.id = "postIt" + `${draggable.getAttribute('value')}`;
+            newDiv.id = `${postItElement.getAttribute('id')}`;
             dropzone.appendChild(newDiv);
-            offsetX = e.offsetX;
-            offsetY = e.offsetY;
+            postItElement = newDiv;
+        }
 
-            moveAt(e.pageX, e.pageY);
+        postItElement.style.position = 'absolute';
+        postItElement.style.zIndex = 999999;
+        offsetX = e.offsetX;
+        offsetY = e.offsetY;
+        let isMouseDown = true;
 
-            function moveAt(pageX, pageY) {
-                const dropzoneRect = dropzone.getBoundingClientRect();
+        moveAt(e.pageX, e.pageY);
 
-                let newLeft = (pageX - offsetX) - dropzoneRect.left - window.scrollX;
-                let newTop = (pageY - offsetY) - dropzoneRect.top - window.scrollY;
+        function moveAt(pageX, pageY) {
+            const dropzoneRect = dropzone.getBoundingClientRect();
 
-                (newLeft < 0) && (newLeft = 0);
-                (newLeft > (dropzoneRect.width - newDiv.offsetWidth)) && (newLeft = dropzoneRect.width - newDiv.offsetWidth);
-                (newTop < 0) && (newTop = 0);
-                (newTop > (dropzoneRect.height - newDiv.offsetHeight)) && (newTop = dropzoneRect.height - newDiv.offsetHeight);
+            let newLeft = (pageX - offsetX) - dropzoneRect.left - window.scrollX;
+            let newTop = (pageY - offsetY) - dropzoneRect.top - window.scrollY;
 
-                newDiv.style.left = newLeft + 'px';
-                newDiv.style.top = newTop + 'px';
-            }
+            (newLeft < 0) && (newLeft = 0);
+            (newLeft > (dropzoneRect.width - postItElement.offsetWidth)) && (newLeft = dropzoneRect.width - postItElement.offsetWidth);
+            (newTop < 0) && (newTop = 0);
+            (newTop > (dropzoneRect.height - postItElement.offsetHeight)) && (newTop = dropzoneRect.height - postItElement.offsetHeight);
 
-            function onMouseMove(event) {
-                moveAt(event.pageX, event.pageY);
-            }
+            postItElement.style.left = newLeft + 'px';
+            postItElement.style.top = newTop + 'px';
+        }
 
-            document.addEventListener('mousemove', onMouseMove);
+        function onMouseMove(event) {
+            isMouseDown && moveAt(event.pageX, event.pageY);
+        }
+        document.body.onmousemove = onMouseMove;
 
-            document.body.onmouseup = function () {
-                document.removeEventListener('mousemove', onMouseMove);
-                newDivonmouseup = null;
-                newDiv.style.zIndex = 1; // TODO
+        document.body.onmouseup = function () {
+            isMouseDown = false;
+            postItElement.style.zIndex = 1; // TODO
 
-                console.log("x-coordinate : " + newDiv.offsetLeft);
-                console.log("y-coordinate : " + newDiv.offsetTop);
-                console.log("z-coordinate : " + 1);
-            };
-        });
-    }
+            // console.log("x-coordinate : " + postItElement.offsetLeft);
+            // console.log("y-coordinate : " + postItElement.offsetTop);
+            // console.log("z-coordinate : " + 1);
+            addDragEventToPostIt(POSTIT, postItElement);
+        };
+    });
 }
