@@ -141,6 +141,12 @@ body {
 }
 
 .comment {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 17px;
+
     background-color: rgba(255, 255, 255, 0.8);
     resize: none;
     border: none;
@@ -154,6 +160,7 @@ body {
     bottom: -20px;
 
     z-index: 4;
+    caret-color: black;
 }
 
 .comment-error-message {
@@ -178,7 +185,7 @@ body {
 
     position: absolute;
     right: 20px;
-    bottom: 0;
+    bottom: -13px;
 
     z-index: 7;
     cursor: pointer;
