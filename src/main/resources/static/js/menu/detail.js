@@ -24,7 +24,7 @@ window.addEventListener('load', async () => {
     }
 
     changePage(1);
-    renderPagination((parseInt(reviewCount/4)) + 1);
+    renderPagination(reviewCount);
 });
 
 

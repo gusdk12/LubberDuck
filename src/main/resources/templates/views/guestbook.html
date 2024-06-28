@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common/chatCart.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/guestbook/guestbook.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Freeman&family=League+Gothic&family=Meddon&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=DM+Serif+Display:ital@0;1&family=Damion&family=Freeman&family=League+Gothic&family=Meddon&family=Permanent+Marker&family=Sacramento&family=Staatliches&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
+
+    <script th:inline="javascript">
+        var logged_id = -1;
+    </script>
+    <title>방명록</title>
+
+</head>
+<body>
+
+<!--/* 헤더 */-->
+<th:block th:insert="~{common/header::header}"></th:block>
+<!-- chat&cart -->
+<th:block th:insert="~{common/chatCart::chatCart}"></th:block>
+
+<section id="guestbooksection">
+    <div id="guestbookcontainer">
+        <div id="guestbook"></div>
+    </div>
+</section>
+
+<section id="editsection">
+    <div id="editcontainer">
+        <div id="edittogglebutton"></div>
+        <div id="editarea">
+            <div class="createpostIt" id="postIt1"></div>
+            <div class="createpostIt" id="postIt2"></div>
+            <div class="createpostIt" id="postIt3"></div>
+            <div class="createpostIt" id="postIt4"></div>
+            <div class="createpostIt" id="postIt5"></div>
+        </div>
+    </div>
+</section>
+
+<section id="mousesection">
+    <div id="postitcontainer">
+    </div>
+</section>
+
+<section id="footer">
+</section>
+
+<th:block sec:authorize="hasRole('CUSTOMER')">
+    <th:block th:with="logged_user=${#authentication.principal.user}">
+        <script th:inline="javascript">
+            logged_id = [[${logged_user.id}]]
+        </script>
+    </th:block>
+</th:block>
+
+<script th:inline="javascript">
+    var menuList = [[${menuList}]];
+</script>
+<script th:src="@{/js/common/chatCart.js}"></script>
+<script th:src="@{/js/cart/cartData.js}"></script>
+<script th:src="@{/js/chat/chatData.js}"></script>
+<script th:src="@{/js/guestbook/guestbook.js}"></script>
+<script th:src="@{/js/common/header.js}"></script>
+</body>
+</html>
+
+

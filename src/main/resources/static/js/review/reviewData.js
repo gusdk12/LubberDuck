@@ -55,9 +55,11 @@ function buildReviewSection(reviews){
     });
 }
 
-
-function renderPagination(totalPages) {
+function renderPagination(reviewCount) {
+    var pageSize = 4; // 한 페이지에 보여질 아이템 수
     currentPage = 1;
+    var totalPages = Math.ceil(reviewCount / pageSize);
+
     var paginationContainer = document.getElementById('pagination');
     paginationContainer.innerHTML = ''; // 기존의 내용을 모두 지움
 
@@ -68,11 +70,39 @@ function renderPagination(totalPages) {
     // 페이지 버튼 추가
     for (var i = startPage; i <= endPage; i++) {
         var pageLi = document.createElement('li');
-        pageLi.innerHTML = '<span onclick="changePage(' + i + ')">' + i + '</span>';
+        var pageNumberSpan = document.createElement('span');
+        pageNumberSpan.textContent = i;
+
+        // 페이지 번호 클릭 시 이벤트 처리
+        pageNumberSpan.addEventListener('click', function() {
+            var pageNumber = parseInt(this.textContent);
+            currentPage = pageNumber; // 현재 페이지 업데이트
+
+            // 모든 페이지 번호의 활성 클래스 제거
+            var allPageNumbers = paginationContainer.querySelectorAll('li span');
+            allPageNumbers.forEach(function(span) {
+                span.classList.remove('active');
+            });
+
+            // 클릭된 페이지 번호에 활성 클래스 추가
+            this.classList.add('active');
+
+            // 페이지 이동 함수 호출
+            changePage(currentPage);
+        });
+
+        // 페이지 번호를 li에 추가하고 ul에 추가
+        pageLi.appendChild(pageNumberSpan);
         paginationContainer.appendChild(pageLi);
     }
 
+    // 페이지 로드 후 첫 페이지 리뷰를 로드
+    var sortOption = document.querySelector('input[name="sort"]:checked').value;
+    loadReviews(currentCocktail, currentPage, sortOption);
 
+    // 초기 페이지의 활성 클래스 설정
+    var initialActivePage = paginationContainer.querySelector('li:first-child span');
+    initialActivePage.classList.add('active');
 }
 
 
@@ -90,6 +120,10 @@ function changePage(pageNumber) {
     });
 
 
+    function ceilDivideBy4(reviewCount) {
+        return Math.ceil(reviewCount / 4);
+    }
+
     var reviewPrev = $('#reviewPrev');
     var reviewNext = $('#reviewNext');
 
@@ -100,7 +134,7 @@ function changePage(pageNumber) {
         reviewPrev.css('display', 'none'); // 이전 버튼 숨기기
     }
 
-    if (currentPage < (parseInt(reviewCount/4)) + 1) {
+    if (currentPage < (parseInt(ceilDivideBy4(reviewCount)))) {
         reviewNext.css('display', 'block'); // 다음 버튼 보이기
     }else {
         reviewNext.css('display', 'none'); // 다음 버튼 숨기기
