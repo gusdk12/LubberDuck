@@ -7,6 +7,62 @@ $(document).ready(function(){
         'font-weight': 'bold'
     });
 
+    $(document).on('click', '#submit_btn', function (event) {
+        event.preventDefault(); // 기본 제출 동작 방지
+
+        // var itemId = $('#itemId').val();
+        var itemId = $(this).closest('#review-form').find('input[name="item_id"]').val();
+        var selectedRating = $('.rating input:checked').val(); // 선택된 별점 값 가져오기
+        var content = $('#content').val();
+
+        // 기존 오류 메시지 제거
+        $('.error').text('');
+
+        var isValid = true;
+
+        // 별점이 선택되지 않은 경우 에러 메시지 출력
+        if (!selectedRating) {
+            $('#rateError').text('별점을 선택해주세요.');
+            $('#rateError').show();
+            isValid = false;
+        } else {
+            $('#rateError').hide();
+        }
+
+        // 리뷰 내용이 20자 미만인 경우 에러 메시지 출력
+        if (content.length < 20) {
+            $('#contentError').text('리뷰 내용을 20자 이상 작성해주세요.');
+            $('#contentError').show();
+            isValid = false;
+        } else {
+            $('#contentError').hide();
+        }
+
+        if (!isValid) {
+            return;
+        }
+
+        $.ajax({
+            url: '/review/insert',
+            type: 'POST',
+            data: {
+                "item_id": itemId,
+                "rate": selectedRating,
+                "comment": content,
+            },
+            cache: false,
+            success: function (response) {
+                swal("리뷰 작성 성공!","리뷰 목록에서 리뷰를 확인해주세요.","success")
+                    .then(function (){
+                        window.location.href = '/mypage/review'; // 리뷰 목록 페이지로 리디렉션
+                    })
+            },
+            error: function (error) {
+                swal("리뷰 작성 실패!","다시 작성해주세요.","warning")
+            }
+        });
+    });
+
     buildBody(); // buildBody를 호출하여 본문을 만듭니다.
 
     // 모달 이벤트 리스너 설정
@@ -58,20 +114,71 @@ $(document).ready(function(){
         const modalHeight = $('#reviewModal').outerHeight();
 
         $('#reviewModal').css({
-            top: buttonOffset.top - modalHeight / 2 + 'px', // 클릭한 버튼의 중앙에 맞춤
-            left: buttonOffset.left + $(this).outerWidth() + 10 + 'px' // 버튼 오른쪽에 모달을 띄움
-        }).show(); // 모달을 표시합니다.
+            top: buttonOffset.top - modalHeight / 2 + 'px',
+            left: buttonOffset.left + $(this).outerWidth() + 10 + 'px'
+        }).show();
     });
 
-    $(document).on('click', '.close_btn', function(){
+    // 수정된 부분
+    $(document).on('click', '.write_btn', function(){
+        const reviewItemId = $(this).data('item-id');
+        const reviewItemOrderRegdate = $(this).data('item-order-regdate');
+        const reviewItemMenuName = $(this).data('item-menu-name');
+        const writeContent =
+            `
+            <div id="review-form">
+            <input type="hidden" name="item_id" value="${reviewItemId}">
+            <button type="button" id="back_btn">X</button>
+            <h3>리뷰 작성하기</h3>
+            <span class="form-group">
+                <label for="title" class="form-left">메뉴 이름</label>
+                <input type="text" id="title" name="title" value="${reviewItemMenuName}" disabled><br><br><hr>
+            </span>
+            <div class="form-group">
+                <label for="name" class="form-left">주문 일시</label>
+                <input type="text" id="name" name="name" value="${formatDateTime(reviewItemOrderRegdate)}" disabled><br><hr>
+            </div>
+            <div class="form-group rating-group">
+                <label for="rate" class="form-left">별점</label>
+                      <div class="rating" id="star_rate" aria-required="true">
+                    <input type="radio" name="rate" value="5" id="star5"><label for="star5"></label>
+                    <input type="radio" name="rate" value="4" id="star4"><label for="star4"></label>
+                    <input type="radio" name="rate" value="3" id="star3"><label for="star3"></label>
+                    <input type="radio" name="rate" value="2" id="star2"><label for="star2"></label>
+                    <input type="radio" name="rate" value="1" id="star1"><label for="star1"></label>
+                </div>
+            </div>
+            <hr>
+            <div id="rateError" class="error"></div>
+            <div class="form-group">
+                <label for="content" class="form-left">리뷰 내용</label>
+                <textarea id="content" name="content" rows="8" cols="80" required></textarea>
+                <div id="contentError" class="error"></div>
+            </div>
+            <div class="text-center">
+                <button type="button" id="submit_btn">작성 완료</button>
+                <h5> * 작성하신 리뷰는 <마이페이지-나의리뷰>에서 확인하실 수 있습니다.</h5>
+            </div>
+        </div>`;
+        $('#writeContent').html(writeContent);
+
+        // 모달 위치를 클릭한 버튼 옆으로 이동
+        const buttonOffset = $(this).offset();
+        const modalWidth = $('#writeModal').outerWidth();
+        const modalHeight = $('#writeModal').outerHeight();
+
+        $('#writeModal').css({
+            top: buttonOffset.top - modalHeight / 2 + 'px',
+            left: buttonOffset.left + $(this).outerWidth() + 10 + 'px'
+        }).show();
+    });
+
+    $(document).on('click', '#back_button', function(){
         $('#reviewModal').hide(); // 모달을 숨깁니다.
     });
 
-    // 모달 외부 클릭 시 모달 닫기
-    $(window).on('click', function(event) {
-        if ($(event.target).is('#back_button')) {
-            $('#reviewModal').hide();
-        }
+    $(document).on('click', '#back_btn', function(){
+        $('#writeModal').hide(); // 모달을 숨깁니다.
     });
 
     // buildBody 이후에 정렬을 수행해야 합니다.
@@ -124,7 +231,7 @@ function buildBody(){
             if (findReview) {
                 buttonHTML = `<input type="button" value="리뷰확인" name="reviewBtn" class="modal_btn" data-review-id="${findReview.id}" data-review-content="${findReview.content}" data-review-rate="${findReview.rate}" data-review-regdate="${findReview.regdate}" data-review-menu-name="${findReview.menu.name}">`;
             } else {
-                buttonHTML = `<input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/mypage/review/write/${item.id}'">`;
+                buttonHTML = `<input type="button" value="리뷰작성" name="reviewBtn" class="write_btn" data-item-id="${item.id}" data-item-menu-name="${item.menu.name}" data-item-order-regdate="${item.order.regdate}">`;
             }
 
             let formattedItemPrice = item.price.toLocaleString('ko-KR');
@@ -182,6 +289,12 @@ function buildBody(){
     $('body').append(`
         <div id="reviewModal" class="modal" style="position: absolute; display: none;">
                 <p id="modalContent"></p>
+        </div>
+    `);
+
+    $('body').append(`
+        <div id="writeModal" class="modal" style="position: absolute; display: none;">
+                <p id="writeContent"></p>
         </div>
     `);
 }
