@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Order_itemChart {
+public class OrderItemChart {
     private long ageGroup;   // 연령별 그룹
     private long totalQuantity; // 메뉴별 총 판매량
     private String menuName;    // 메뉴 이름

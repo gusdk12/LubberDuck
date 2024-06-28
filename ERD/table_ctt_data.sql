@@ -185,6 +185,10 @@ INSERt INTO ctt_calendar (id, date, memo) VALUES
     (20240618,'2024-06-18','일정메모는 longtext?')
 ;
 
+INSERt INTO ctt_calendar (id, date, cocktail_id, comment) VALUES
+    (20240618,'2024-06-28', 29, '와 맛있겠죠??^^')
+;
+
 -- 샘플 recent
 INSERT INTO ctt_recent (user_id, cocktail_id) VALUES
     (2,10)

@@ -13,6 +13,12 @@
         FROM ctt_order
     </sql>
 
+    <resultMap id="mapOrder" type="com.lec.spring.domain.order.Order">
+        <result column="id" property="id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="regdate" property="regdate"/>
+    </resultMap>
+
     <select id="findByUser" resultType="com.lec.spring.domain.order.Order">
         <include refid="SELECT_BASE"/>
         WHERE user_id = #{param1}
@@ -21,7 +27,14 @@
 
     <select id="countAll" resultType="int">
         SELECT COUNT(*)
-        FROM ctt_order;
+        FROM ctt_order
+    </select>
+
+    <select id="cntAll" resultType="int">
+        SELECT COUNT(*)
+        FROM ctt_order
+        WHERE user_id = #{user_id}
+        ORDER BY regdate DESC
     </select>
 
     <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.order.Order"
@@ -29,6 +42,13 @@
         INSERT INTO ctt_order(id, user_id)
         VALUES(#{id}, #{user_id})
     </insert>
+
+    <select id="selectFromOrder" resultMap="mapOrder">
+        <include refid="SELECT_BASE"/>
+        WHERE user_id = #{param1}
+        ORDER BY regdate DESC
+        LIMIT #{param2}, #{param3}
+    </select>
 
 </mapper>
 

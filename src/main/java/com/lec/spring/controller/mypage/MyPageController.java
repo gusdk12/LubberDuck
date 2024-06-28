@@ -141,7 +141,7 @@ public class MyPageController {
     public void order(){}
 
     @GetMapping("/order")
-    public String order(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+    public String order(Model model, Integer page, @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
             return "redirect:/user/login";
         }
@@ -180,6 +180,8 @@ public class MyPageController {
         model.addAttribute("user", user);
         model.addAttribute("orderItemsByOrderId", orderItemsByOrderId);
         model.addAttribute("reviewByOrderItemId", reviewByOrderItemId);
+
+        orderService.orderList(user.getId(), page, model);
 
         // mypage/order 뷰를 반환합니다.
         return "/mypage/order";
@@ -225,13 +227,6 @@ public class MyPageController {
         model.addAttribute("allList",menuService.list());
         model.addAttribute("menuList", menuService.sequenceList());
     }
-
-    @PostMapping("/pageRows")
-    public String pageRows(Integer page, Integer pageRows){
-        U.getSession().setAttribute("pageRows", pageRows);
-        return "redirect:/mypage/review/list?page=" + page;
-    }
-
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

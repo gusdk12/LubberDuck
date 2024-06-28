@@ -61,7 +61,7 @@
                     <p class="select-menu-name"></p>
                 </div>
                 <div class="select-menu-text">
-                    <textarea id="select-menu-text"></textarea>
+                    <textarea id="select-menu-text" placeholder="코멘트를 입력하세요."></textarea>
                 </div>
                 <div class="select-menu-buttons">
                     <button type="button" class="btn-cancel">취소</button>
@@ -75,7 +75,7 @@
     <div class="main-view">
         <div class="container-fluid my-calendar clearfix">
 
-        <!-- 일정 -->
+        <!-- 일정 메모 -->
         <div class="schedule-container">
             <div class="memo-container">
                 <p class="event-text">일정</p>
@@ -87,12 +87,12 @@
                     <p class="notification-text">일정 추가 버튼을 클릭해 일정을 <br>저장하시려면 ENTER 버튼, 취소하시려면<br> ESC 버튼을 누르세요.</p>
                 </div>
             </div>
-
             <!-- 추가될 메모 부분 -->
             <div class="clicked-date">
                 <ul class="event-list"></ul>
                 <textarea id="new-memo"></textarea>
             </div>
+
         </div>
 
         <!-- 캘린더-->
@@ -144,8 +144,8 @@
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
+    <script th:src="@{/js/common/header.js}"></script>
     <script th:src="@{/js/calendar/calendarData.js}"></script>
     <script th:src="@{/js/calendar/calendar.js}"></script>
-    <script th:src="@{/js/common/header.js}"></script>
 
 </html>

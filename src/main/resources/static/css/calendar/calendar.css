@@ -3,13 +3,11 @@
 body {
     width: 100%;
     height: 100%;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    background-color: rgba(16, 87, 62, 0.95) !important;
     max-width: 1300px;
-    margin-left: auto;
-    margin-right: auto;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #10573E !important;
 }
 
 *, *:before, *:after {
@@ -21,18 +19,21 @@ body {
     display: block;
 }
 
+.container-fluid, .schedule-container, .calendar-box, .add-menu-container {
+    background-color: white;
+}
+
 .container-fluid {
     width: 100%;
+    height: 680px;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     gap: 0;
-    font-size: 0;
-    height: 680px;
     border-radius: 10px;
+    font-size: 0;
     font-family: "Noto Sans KR", sans-serif;
-    background-color: white;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .my-calendar {
@@ -41,71 +42,18 @@ body {
     font-weight: 400;
     cursor: default;
 }
+
 /*********************************************/
-/* 일정 */
+/* 일정 메모 */
 .schedule-container {
     width: 100%;
+    height: 680px;
     padding: 0 10px;
     min-width: 260px;
-    max-height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
     position: relative;
     text-align: center;
-    background: white;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-}
-
-.schedule-container::-webkit-scrollbar {
-    width: 10px;
-}
-
-.schedule-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.schedule-container::-webkit-scrollbar-thumb {
-    background: #aaadac56;
-    border-radius: 20px;
-}
-
-.schedule-container::-webkit-scrollbar-thumb:hover {
-    background: #aaadac7b;
-}
-
-/* 스크롤 맨 위 */
-.schedule-container.scroll-top {
-    animation: scrollAnimationTop 0.5s ease-in-out;
-}
-
-/* 스크롤 맨 아래 */
-.schedule-container.scroll-bottom {
-    animation: scrollAnimationBottom 0.5s ease-in-out;
-}
-
-@keyframes scrollAnimationTop {
-    0% {
-        transform: translateY(-10px);
-    }
-    50% {
-        transform: translateY(10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-@keyframes scrollAnimationBottom {
-    0% {
-        transform: translateY(10px);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
 }
 
 .memo-container {
@@ -152,26 +100,100 @@ body {
 }
 
 .event-list li {
-    position: relative;
     width: 260px;
     min-height: 100px;
+    max-height: 480px;
     padding: 20px;
+    position: relative;
     display: inline-block;
     text-align: start;
     background-color: #EAF1EF;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.event-list li::-webkit-scrollbar {
+    width: 5px;
+}
+
+.event-list li::-webkit-scrollbar-thumb {
+    background: rgba(63, 121, 117, 0.55);
+    border-radius: 10px;
+}
+
+.event-list li::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.event-list li::-webkit-scrollbar-thumb:hover {
+    opacity: 80%;
+}
+
+/* 스크롤 맨 위 */
+.event-list li.scroll-top {
+    animation: scrollAnimationTop 0.5s ease-in-out;
+}
+
+/* 스크롤 맨 아래 */
+.event-list li.scroll-bottom {
+    animation: scrollAnimationBottom 0.5s ease-in-out;
+}
+
+@keyframes scrollAnimationTop {
+    0% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes scrollAnimationBottom {
+    0% {
+        transform: translateY(10px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 #new-memo {
     width: 260px;
+    min-height: 100px;
+    max-height: 480px;
     display: none;
     margin: 8px 0 120px;
     border: none;
     resize: none;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 400;
     font-size: 15px;
     color: #434444;
+}
+
+#new-memo::-webkit-scrollbar {
+    width: 5px;
+}
+
+#new-memo::-webkit-scrollbar-thumb {
+    background: rgba(63, 121, 117, 0.55);
+    border-radius: 10px;
+}
+
+#new-memo::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#new-memo::-webkit-scrollbar-thumb:hover {
+    opacity: 80%;
 }
 
 #new-memo:focus {
@@ -181,25 +203,32 @@ body {
     padding: 20px;
 }
 
-.memo-gap {
-    background-color: white;
-    height: 20px;
+.clicked-date {
+    position: relative;
+}
+
+.memo-edit, .memo-delete {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: -30px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    float: right;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px 15px;
+}
+
+.memo-edit {
+    right: 42px;
+    background-image: url('/img/calendar/edit.png');
 }
 
 .memo-delete {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    border: none;
-    background-color: #EAF1EF;
-    float: right;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-}
-
-.memo-delete:hover {
-    opacity: 1;
+    right: 17px;
+    background-image: url('/img/calendar/close.png');
 }
 
 /*********************************************/
@@ -227,7 +256,6 @@ body {
     min-height: 650px;
     padding: 20px 0;
     text-align: center;
-    background: white;
 }
 
 .ctr-box {
@@ -235,7 +263,6 @@ body {
     margin-left: 50px;
     font-size: 24px;
     font-weight: 700;
-    color: #5e6060;
     text-align: left;
     position: relative;
 }
@@ -294,20 +321,19 @@ body {
     height: 86%;
     border-collapse: separate;
     border-spacing: 8px;
+    border-radius: 20px;
 }
 
 .cal-table th {
     padding-bottom: 5px;
     font-size: 21px;
     font-weight: 500;
-    opacity: 80%;
 }
 
 .cal-table td {
     padding: 3px 0;
     height: 50px;
     font-size: 19px;
-    opacity: 80%;
     vertical-align: middle;
 }
 
@@ -317,13 +343,24 @@ body {
     display: inline-block;
     text-decoration: none;
     vertical-align: middle;
-    color: inherit;
     font-size: 19px;
 }
 
 .cal-table td.day {
     position: relative;
     cursor: pointer;
+}
+
+.cell-menu-image {
+    max-width: 20px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
+    opacity: 80%;
 }
 
 .cal-table td.event {
@@ -363,7 +400,6 @@ body {
     min-width: 310px;
     width: 100%;
     height: 680px;
-    background: white;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -415,40 +451,74 @@ body {
     text-align: center;
 }
 
-#today-menu-text {
+#today-menu-text, #select-menu-text {
     width: 86%;
-    height: 160px;
     margin-top: 20px;
-    margin-left: 5px;
+    margin-bottom: 30px;
     resize: none;
     overflow-y: auto;
-    padding: 9px 11px;
-    border: 1px solid #d1d5d4;
-    margin-bottom: 30px;
-    color:#434444;
+    color: #434444;
     font-family: "Noto Sans KR", sans-serif;
-    font-weight: 400;
+}
+
+/* 캘린더 화면에 뜨는 텍스트 */
+#today-menu-text {
+    height: 160px;
+    padding: 15px;
+    border: none;
+    background-color: #f8f4ef;
+    font-weight: 500;
     font-size: 15px;
 }
 
+#today-menu-text::-webkit-scrollbar {
+    width: 6px;
+}
 
+#today-menu-text::-webkit-scrollbar-thumb {
+    background: rgb(200 179 142 / 54%);
+    border-radius: 10px;
+}
+
+#today-menu-text::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* 스크롤 맨 위 */
+#today-menu-text.scroll-top {
+    animation: scrollAnimationTop 0.5s ease-in-out;
+}
+
+/* 스크롤 맨 아래 */
+#today-menu-text.scroll-bottom {
+    animation: scrollAnimationBottom 0.5s ease-in-out;
+}
+
+/* 사용자가 작성하는 팝업 화면에 뜨는 텍스트 */
 #select-menu-text {
-    width: 86%;
-    height: 200px;
-    margin-top: 20px;
-    resize: none;
-    overflow-y: auto;
-    padding: 9px;
-    border: 1px solid #d1d5d4;
-    margin-bottom: 30px;
-    color:#434444;
-    font-family: "Noto Sans KR", sans-serif;
-    font-weight: 400;
-    font-size: 15px;
+    height: 230px;
+    padding: 16px 20px;
+    border: none;
+    background-color: #faf9f7;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+#select-menu-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+#select-menu-text::-webkit-scrollbar-thumb {
+    background: rgb(200 179 142 / 54%);
+    border-radius: 10px;
+}
+
+#select-menu-text::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }
 
 .menu-text textarea:focus {
-    border:1px solid #033734;
+    border: none;
     outline: none;
 }
 
@@ -459,7 +529,7 @@ body {
 
 .menu-buttons button {
     border: none;
-    background-color: white;
+    background: none;
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 600;
     font-size: 15px;
@@ -495,7 +565,6 @@ body {
 .notification-menu-content {
     margin-top: 10px;
     padding: 0 20px;
-    background-color: white;
 }
 
 .notification-menu-text {
@@ -506,20 +575,16 @@ body {
     vertical-align: middle;
 }
 
-/*.notification-menu-container:hover {*/
-/*    opacity: 80%;*/
-/*}*/
-
 /*********************************************/
 /* 오늘의 메뉴 리스트 팝업 */
 
 .form-container {
     width: 500px;
     padding: 30px 0;
-    background-color: white;
     border-radius: 22px;
     overflow: hidden;
     height: 600px;
+    background-color: white;
 }
 
 .popup-overlay {
@@ -532,7 +597,8 @@ body {
     z-index: 300;
 }
 
-.form-popup1 {
+.form-popup1, .form-popup2 {
+    height: 600px;
     display: none;
     position: fixed;
     top: 50%;
@@ -540,7 +606,6 @@ body {
     transform: translate(-50%, -50%);
     z-index: 400;
     overflow: hidden;
-    height: 600px;
 }
 
 .menu-scroll {
@@ -556,7 +621,7 @@ body {
 }
 
 .menu-scroll::-webkit-scrollbar-thumb {
-    background: rgba(14, 42, 33, 0.54);
+    background: rgba(58, 75, 74, 0.47);
     border-radius: 10px;
 }
 
@@ -564,15 +629,14 @@ body {
     background: #f1f1f1;
 }
 
-.form-popup2 {
-    position: fixed;
-    display: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 400;
-    overflow: hidden;
-    height: 600px;
+/* 스크롤 맨 위 */
+.menu-scroll.scroll-top {
+    animation: scrollAnimationTop 0.5s ease-in-out;
+}
+
+/* 스크롤 맨 아래 */
+.menu-scroll.scroll-bottom {
+    animation: scrollAnimationBottom 0.5s ease-in-out;
 }
 
 .select-menu-scroll {
@@ -588,7 +652,7 @@ body {
 }
 
 .select-menu-scroll::-webkit-scrollbar-thumb {
-    background: rgba(14, 42, 33, 0.54);
+    background: rgba(58, 75, 74, 0.47);
     border-radius: 10px;
 }
 
@@ -600,13 +664,12 @@ body {
     float: right;
     cursor: pointer;
     border: none;
-    background-color: white;
+    background: none;
 }
 
 .menu-close span {
     display: inline-block;
     vertical-align: top;
-    color: #1a1d1cd2;
     font-size: 22px;
     font-weight: 600;
 }
@@ -621,9 +684,9 @@ body {
 
 .title-text {
     padding-left: 32px;
+    margin: 0 0 18px;
     text-align: center;
     font-size: 24px;
-    margin: 0 0 18px;
     font-weight: 600;
 }
 
@@ -643,14 +706,14 @@ body {
 .line {
     margin: 0 -30px;
     height: 0.2px;
-    color: rgba(14, 42, 33, 0.54);
+    background-color: #033734;
 }
 
 .menu {
     width: 100%;
     margin-bottom: 20px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.966);
+    /*border: 1px solid #422626;*/
     cursor: pointer;
 }
 
@@ -671,7 +734,7 @@ body {
 }
 
 .menu-name {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 17px;
     color: rgb(56, 56, 56);
 }
@@ -700,22 +763,8 @@ body {
     text-align: center;
 }
 
-.select-menu-text textarea {
-    width: 86%;
-    height: 230px;
-    resize: none;
-    overflow-y: auto;
-    padding: 16px 20px;
-    border: 1px solid #d1d5d4;
-    margin-bottom: 30px;
-    color:#434444;
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-}
-
-.select-menu-text textarea:focus {
-    border:1px solid #033734;
+#select-menu-text:focus {
+    border: none;
     outline: none;
 }
 
@@ -727,7 +776,7 @@ body {
 
 .select-menu-buttons button {
     border: none;
-    background-color: white;
+    background: none;
     font-size: 16px;
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 600;

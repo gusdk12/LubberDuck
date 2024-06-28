@@ -38,14 +38,12 @@ function buildChat(data, menudata){
 
         } else if(chat.role === "손님"){
             $('#historycontainer').append(`
-                <div class="customerChat">${chat.content}</div>
+                <div class="customerChat">
+                    ${chat.content}
+                </div>
             `);
         }
     });
-
-    // for(menuInfo of document.querySelectorAll(".chatMenuInfo")){
-    //
-    // }
 }
 
 function addCustomerChat(content){

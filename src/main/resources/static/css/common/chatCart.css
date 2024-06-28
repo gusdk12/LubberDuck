@@ -138,6 +138,7 @@
 }
 
 .bartenderChat{
+    z-index: 1;
     background-color: #fff8ea;
     max-width: 70%;
     height: auto;

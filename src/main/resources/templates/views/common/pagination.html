@@ -5,9 +5,9 @@
     <div class="containerA">
         <ul class="pagination">
             <!--/* << 표시여부 */-->
-            <li class="page-item" th:if="${page > 1}"><a class="page-link" th:href="@{${url}(sort=${sort},page=${startPage})}" title="처음"><i class="fas fa-angle-double-left" name="icon"><</i></a></li>
+            <li class="page-item" th:if="${page > 1}"><a class="page-link" th:href="@{${url}(sort=${sort},page=${startPage})}" title="처음"><i class="fas fa-angle-double-left" name="icon"><<</i></a></li>
             <!--/* < 표시 여부 */-->
-            <li class="page-item" th:if="${startPage > 1 }"><a class="page-link" th:href="@{${url}(sort=${sort},page=${startPage - 1})}"><i class='fas fa-angle-left' name="icon"><<</i></a></li>
+            <li class="page-item" th:if="${startPage > 1 }"><a class="page-link" th:href="@{${url}(sort=${sort},page=${startPage - 1})}"><i class='fas fa-angle-left' name="icon"><</i></a></li>
 
 
             <!--/* 페이징 안의 '숫자' 표시 */-->
