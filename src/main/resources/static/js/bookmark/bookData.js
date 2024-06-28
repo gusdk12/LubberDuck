@@ -123,12 +123,27 @@ function loadBookmark(user_id) {
 }
 
 function buildBook(result){
-    result.data.forEach(book => {
-        var randomIndex1 = Math.floor(Math.random() * 4) + 1;
-        var randomIndex2 = Math.floor(Math.random() * 6) + 1;
+    var $favorite = $('#favorite');
 
-        // box 요소를 append
-        var $box = $(`
+    $favorite.empty();
+
+    if (result.data.length === 0) {
+        $('#favorite').append(`
+            <img src="/img/bookmark/fullheart.png" id="bigHeart1"/>
+            <img src="/img/bookmark/fullheart.png" id="bigHeart2"/>
+            <div class="bookEmpty"> 
+                아직 즐겨찾기한 칵테일이 존재하지 않습니다. <br> 
+                칵테일을 <a href="/home" class="add-link">추가</a> 해보세요!
+            </div>`);
+        $('.all').css('height','700px');
+    } else {
+        $('.all').css('height','1000px');
+        result.data.forEach(book => {
+            var randomIndex1 = Math.floor(Math.random() * 4) + 1;
+            var randomIndex2 = Math.floor(Math.random() * 6) + 1;
+
+            // box 요소를 append
+            var $box = $(`
             <div class="box" id="randomrotate${randomIndex1}">
                 <div class="background background${randomIndex2}">
                     <img src="" id="memoImg">
@@ -161,27 +176,30 @@ function buildBook(result){
             </div>
         `);
 
-        // book.menu.sequence == -1 -> 판매 X
-        var checkItem = book.menu.sequence;
+            // book.menu.sequence == -1 -> 판매 X
+            var checkItem = book.menu.sequence;
 
-        // menuList에 존재하는 경우 즉 sequence가 -1이 아니면 switchToCartIn 적용, 아닌 경우 switchToCartNo 적용
-        if (checkItem !== -1) {
-            switchToCartIn($box);
-        } else {
-            switchToCartNo($box);
-        }
+            // menuList에 존재하는 경우 즉 sequence가 -1이 아니면 switchToCartIn 적용, 아닌 경우 switchToCartNo 적용
+            if (checkItem !== -1) {
+                switchToCartIn($box);
+            } else {
+                switchToCartNo($box);
+            }
 
-        // #favorite 요소에 $box 추가
-        $('#favorite').append($box);
+            // #favorite 요소에 $box 추가
+            $('#favorite').append($box);
 
-        function switchToCartIn(){
-            $box.find('#cartYesNo').removeClass('cartIn cartNo').addClass('cartIn');
-        }
+            function switchToCartIn(){
+                $box.find('#cartYesNo').removeClass('cartIn cartNo').addClass('cartIn');
+            }
 
-        function switchToCartNo() {
-            $box.find('#cartYesNo').removeClass('cartIn cartNo').addClass('cartNo');
-        }
-    });
+            function switchToCartNo() {
+                $box.find('#cartYesNo').removeClass('cartIn cartNo').addClass('cartNo');
+            }
+        });
+    }
+
+
 
     // 박스 hover 시 삭제 아이콘 등장
     $(".box").hover(
@@ -287,14 +305,22 @@ function buildBook(result){
         // 칵테일 이름에 맞는 객체를 찾아서 deleteFromBook 함수에 전달합니다.
         var menuItem = list.find(menu => menu.name === cocktailName);
 
-        if (menuItem){
+        if (menuItem) {
             deleteFromBook(menuItem);
-        }else {
+            swal({
+                title: "DELETE",
+                text: cocktailName + '가 즐겨찾기에서 삭제되었습니다.',
+                icon: "success",
+                buttons: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $box.remove();
+                    location.reload();
+                }
+            });
+        } else {
             console.error('Menu item not found for name:', cocktailName);
         }
-
-        swal("DELETE",cocktailName+'가 즐겨찾기에서 삭제되었습니다.',"success");
-        $box.remove();
     });
 
     $('#favorite').on('keydown', '.modifyBox', function(e) {
