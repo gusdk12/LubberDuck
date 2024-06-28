@@ -456,7 +456,7 @@ body {
 #today-menu-text, #select-menu-text {
     width: 86%;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     resize: none;
     overflow-y: auto;
     color: #434444;
@@ -530,12 +530,32 @@ body {
     margin-right: 20px;
 }
 
-.menu-buttons button {
-    border: none;
-    background: none;
+.edit-disabled-text {
+    margin: 0;
     font-family: "Noto Sans KR", sans-serif;
-    font-weight: 600;
-    font-size: 15px;
+    font-size: 13px;
+    color: #808080;
+}
+
+.btn-edit, .btn-delete {
+    width: 15px;
+    height: 15px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px 15px;
+}
+
+.btn-edit {
+    margin-right: 10px;
+    background-image: url('/img/calendar/edit.png');
+}
+
+.btn-delete {
+    margin-right: 8px;
+    background-image: url('/img/calendar/close.png');
 }
 
 .btn-edit {
@@ -716,7 +736,6 @@ body {
     width: 100%;
     margin-bottom: 20px;
     text-align: center;
-    /*border: 1px solid #422626;*/
     cursor: pointer;
 }
 
@@ -744,14 +763,54 @@ body {
 
 .select-menu {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .select-menu-img {
-    text-align: center;
     width: 150px;
     height: 200px;
+    margin-left: 170px;
     background-size: cover;
     background-position: center;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.change-menu-button {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 1;
+    font-size: 16px;
+    color: black;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 600;
+}
+
+.img-container:hover .select-menu-img {
+    opacity: 0.8;
+}
+
+.img-container:hover .change-menu-button {
+    display: block;
 }
 
 .select-menu-name {
