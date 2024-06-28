@@ -65,7 +65,17 @@ async function avgRate(cocktail) {
 }
 
 function buildRate(data) {
+    var avgRate = data && data.avgRate ? data.avgRate : 0;
+
+    $('.star-ratings-fill').css('width', (avgRate  * 20) + '%').append($(`
+        <img src='/img/review/star_32.png' alt="별1">
+        <img src='/img/review/star_32.png' alt="별1">
+        <img src='/img/review/star_32.png' alt="별1">
+        <img src='/img/review/star_32.png' alt="별1">
+        <img src='/img/review/star_32.png' alt="별1">
+    `))
+
     $('#star').append($(`
-        <div>${data.avgRate}</div>
+        <div class="star-ratings-score">${avgRate}</div>
     `));
 }

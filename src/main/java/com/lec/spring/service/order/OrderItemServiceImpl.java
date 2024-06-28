@@ -54,8 +54,8 @@ public class OrderItemServiceImpl implements OrderItemService {
             qryOrderItem.setStatus("OK");
         } else {
             qryOrderItem.setCount(0);
-            qryOrderItem.setOrderItem(null);
-            qryOrderItem.setStatus("NO DATA");
+            qryOrderItem.setOrderItem(orderItem);
+            qryOrderItem.setStatus("OK");
         }
 
         return qryOrderItem;

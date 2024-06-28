@@ -71,7 +71,7 @@
 
     <!--/* 별점 */-->
     <select id="findByRate" resultMap="mapOrderItem">
-        SELECT AVG(r.rate) as avgRate
+        SELECT ROUND(AVG(r.rate), 1) as avgRate
         FROM ctt_order_item o, ctt_review r
         WHERE o.id = r.item_id AND o.cocktail_id = #{cocktail_id}
     </select>

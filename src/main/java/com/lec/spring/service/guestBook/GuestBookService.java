@@ -1,22 +1,25 @@
 package com.lec.spring.service.guestBook;
 
 import com.lec.spring.domain.guestBook.GuestBook;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface GuestBookService {
-    // 게시글 작성
-    int write(GuestBook board);
 
-    // 게시글 전체 목록
-    List<GuestBook> memoAll();
+    // 방명록 작성
+    int write(GuestBook guestBook);
 
-    // 특정 id 게시글 조회
-    GuestBook selectByMemo(Long id);
+    // 방명록 전체 조회
+    List<GuestBook> postItAll();
 
-    // 특정 id 게시글 수정
-    int updateByMemo(GuestBook board);
+    // 특정 id 방명록 조회 ( 및 z_coordinate 같이 수정)
+    @Transactional
+    GuestBook selectByPostIt(Long id);
 
-    // 특정 id 게시글 삭제
+    // 특정 id 방명록 수정
+    int updateByPostIt(GuestBook guestBook);
+
+    // 특정 id 방명록 삭제
     int deleteById(Long id);
 }
