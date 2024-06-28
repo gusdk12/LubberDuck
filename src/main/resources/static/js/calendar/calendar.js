@@ -50,10 +50,6 @@ function initializeAndShowPopup(popupId) {
 // 팝업을 열 때 초기화 함수
 function initializePopup() {
     // 팝업 열기 전 초기화
-    $(".menu-img").css('background-image', 'none'); // 팝업에서 선택해서 달력으로 넘어간 이미지 초기화
-    $(".today-menu-name").text(''); // 팝업에서 선택해서 달력으로 넘어간 메뉴 이름 초기화
-    $("#today-menu-text").val(''); // 팝업에서 선택해서 달력으로 넘어간 코멘트 초기화
-
     $(".select-menu-name").text('');  // 팝업에서 선택된 메뉴 이름 초기화
     $("#select-menu-text").val(''); // 팝업에서 선택된 메뉴 코멘트 초기화
     $('.select-menu-img').css('background-image', 'none'); // 팝업에서 선택된 이미지 초기화
@@ -366,31 +362,6 @@ function buildCalendar(data){
             trtd += "</tr>";
         }
         $(".cal-body").html(trtd);
-
-        // 날짜에 데이터가 있으면 색상 표시
-        data.forEach(event => {
-            const dateParts = event.date.split("-");
-            const year = dateParts[0];
-            const month = dateParts[1];
-            let day = dateParts[2];
-
-            const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
-
-            // 날짜에 데이터가 있으면 색상 표시
-            if (event) {
-                cell.addClass("event"); // 메모와 메뉴 둘 다 있는 경우
-            }
-
-            // 메뉴 이미지가 있으면 이미지를 추가
-            if (event.menu) {
-                const img = $('<img>', {
-                    src: event.menu.imgUrl,
-                    alt: event.menu.name,
-                    class: 'cell-menu-image'
-                });
-                cell.append(img);
-            }
-        });
     }
 
     // 다음달 클릭

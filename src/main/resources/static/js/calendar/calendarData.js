@@ -58,6 +58,7 @@ async function loadData(dateId){
             if (status === "success") {
                 buildTodayMenu(data);
                 buildMemo(data);
+                buildDate(data);
             }
         },
         error: function (xhr, status, error) {
@@ -70,6 +71,20 @@ async function loadData(dateId){
 /********************************************
                 오늘의 메뉴
  ********************************************/
+
+function buildDate(data) {
+    const year = data.id.toString().substring(0, 4);
+    const month =  data.id.toString().substring(4, 6);
+    const day =  data.id.toString().substring(6, 8);
+
+    console.log(data.id);
+    const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
+
+    // 날짜에 데이터가 있으면 색상 표시
+    if (data) {
+        cell.addClass("event");
+    }
+}
 
 // 오늘의 메뉴 화면에 표시
 function buildTodayMenu(data) {
@@ -99,6 +114,19 @@ function buildTodayMenu(data) {
                 </div>
             </div>
         `);
+
+        const year = data.id.toString().substring(0, 4);
+        const month =  data.id.toString().substring(4, 6);
+        const day =  data.id.toString().substring(6, 8);
+
+        const cell = $(`.cal-body td[data-fdate="${year}.${month}.${day}"]`);
+
+        const img = $('<img>', {
+            src: data.menu.imgUrl,
+            alt: data.menu.name,
+            class: 'cell-menu-image'
+        });
+        cell.append(img);
     }
 }
 
@@ -230,11 +258,8 @@ function buildMemo(data) {
     $(".event-list").empty();
     $("#notification").show();
 
-    // 데이터가 없는 경우, 알림 메시지를 표시
-    if (!data || !data.memo) {
-        $('#notification .notification-text').text('등록한 메모가 없습니다.');
-    } else {
-        $('#notification .notification-text').text('');
+    if (data && !data.memo) {
+        $('#notification .notification-text').hide();
 
         $(".event-list").append(`
             <li>${data.memo}</li>
