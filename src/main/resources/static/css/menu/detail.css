@@ -73,7 +73,7 @@ body {
     z-index: 1;
     width: 600px;
     height: 90px;
-    top: 1570px;
+    top: 1585px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -329,10 +329,17 @@ body {
     /*background-color: #ffffff;*/
 }
 
-.list > hr {
+.hr1 {
     border-width: 1px 0 0 0;
     border-style: dotted;
     border-color: #969696;
+}
+
+.hr2 {
+    border-width: 1px 0 0 0;
+    border-style: dotted;
+    border-color: #969696;
+    margin-bottom: 0px;
 }
 
 .tag_btn > input {
@@ -368,8 +375,7 @@ body {
     gap: 20px;
     align-items: center;
     padding: 5px;
-    margin-top: 3px;
-    margin-bottom: -5px;
+    margin-bottom: 0px;
 }
 
 .review-title {
@@ -414,7 +420,6 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 5px;
     box-sizing: border-box;
 }
 
@@ -433,6 +438,7 @@ body {
     -webkit-line-clamp: 5;
     max-height: calc(5 * 1.5em);
     cursor: pointer;
+    height: auto;
 }
 
 .review-text.expanded {
@@ -451,6 +457,7 @@ body {
 
 .review_hr{
     border-width: 1px 0 0 0;
+    margin: 8px;
     border-style: dotted;
     border-color: #969696;
 }

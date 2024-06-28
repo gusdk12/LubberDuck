@@ -57,8 +57,8 @@ function buildReviewSection(reviews){
 
 function renderPagination(reviewCount) {
     var pageSize = 4; // 한 페이지에 보여질 아이템 수
-    currentPage = 1;
     var totalPages = Math.ceil(reviewCount / pageSize);
+    var maxVisiblePages = 5;
 
     var paginationContainer = document.getElementById('pagination');
     paginationContainer.innerHTML = ''; // 기존의 내용을 모두 지움
@@ -67,11 +67,17 @@ function renderPagination(reviewCount) {
     var startPage = Math.max(1, currentPage - 2);
     var endPage = Math.min(totalPages, currentPage + 2);
 
+
     // 페이지 버튼 추가
-    for (var i = startPage; i <= endPage; i++) {
+    for (var i = 1; i <= totalPages; i++) {
         var pageLi = document.createElement('li');
         var pageNumberSpan = document.createElement('span');
         pageNumberSpan.textContent = i;
+
+        // 현재 페이지인 경우 .active 클래스 추가
+        if (i === currentPage) {
+            pageNumberSpan.classList.add('active');
+        }
 
         // 페이지 번호 클릭 시 이벤트 처리
         pageNumberSpan.addEventListener('click', function() {
@@ -102,7 +108,9 @@ function renderPagination(reviewCount) {
 
     // 초기 페이지의 활성 클래스 설정
     var initialActivePage = paginationContainer.querySelector('li:first-child span');
-    initialActivePage.classList.add('active');
+    if (initialActivePage) {
+        initialActivePage.classList.add('active');
+    }
 }
 
 
@@ -124,20 +132,40 @@ function changePage(pageNumber) {
         return Math.ceil(reviewCount / 4);
     }
 
+    var paginationContainer = document.getElementById('pagination');
+    var allPageNumbers = paginationContainer.querySelectorAll('li span');
+
+    // 모든 페이지 번호의 활성 클래스 제거
+    allPageNumbers.forEach(function(span) {
+        span.classList.remove('active');
+    });
+
+    // 클릭된 페이지 번호에 활성 클래스 추가
+    var currentPageSpan = paginationContainer.querySelector('li:nth-child(' + currentPage + ') span');
+    if (currentPageSpan) {
+        currentPageSpan.classList.add('active');
+    }
+
     var reviewPrev = $('#reviewPrev');
     var reviewNext = $('#reviewNext');
+    var reviewPrev2 = $('#reviewPrev2');
+    var reviewNext2 = $('#reviewNext2');
 
     // currentPage에 따라 CSS 조절
     if (currentPage > 1) {
         reviewPrev.css('display', 'block'); // 이전 버튼 보이기
+        reviewPrev2.css('display', 'block');
     } else {
         reviewPrev.css('display', 'none'); // 이전 버튼 숨기기
+        reviewPrev2.css('display', 'none');
     }
 
     if (currentPage < (parseInt(ceilDivideBy4(reviewCount)))) {
         reviewNext.css('display', 'block'); // 다음 버튼 보이기
+        reviewNext2.css('display', 'block');
     }else {
         reviewNext.css('display', 'none'); // 다음 버튼 숨기기
+        reviewNext2.css('display', 'none');
     }
 
     // 해당 페이지의 리뷰를 로드
