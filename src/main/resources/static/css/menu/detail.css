@@ -534,3 +534,37 @@ body {
     position: relative;
     left: 2%;
 }
+
+/* /////////// 별점 평균 ////////////// */
+.star-ratings {
+    position: relative;
+    width: max-content;
+    margin-right: 20px;
+}
+
+.star-ratings-fill {
+    position: absolute;
+    padding: 0;
+    top: 0;
+    left: 0;
+    display: flex;
+    z-index: 1;
+    overflow: hidden;
+    filter: invert(81%) sepia(98%) saturate(2015%) hue-rotate(322deg) brightness(100%) contrast(101%);
+}
+
+.star-ratings-base {
+    display: flex;
+    z-index: 0;
+    padding: 0;
+    filter: invert(90%) sepia(1%) saturate(0%) hue-rotate(54deg) brightness(92%) contrast(96%);
+}
+
+.star-ratings-score {
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+
+    font-size: 18px;
+}
