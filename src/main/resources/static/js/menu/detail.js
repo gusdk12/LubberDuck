@@ -10,13 +10,19 @@ window.addEventListener('load', async () => {
             await loadRecent(logged_id);
 
             const recentSectionCon = document.getElementById("recentSection-con");
+            const maxScrollTop = 1700; // 최대 스크롤 값
 
             window.addEventListener("scroll", function () {
-                // Get the current scroll position
                 const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-                // Set the top position of the element
-                recentSectionCon.style.top = scrollTop + "px";
+                let newTop = scrollTop;
+
+                // If the new top position would exceed the max scroll top, limit it
+                if (newTop + recentSectionCon.offsetHeight > maxScrollTop) {
+                    newTop = maxScrollTop - recentSectionCon.offsetHeight;
+                }
+
+                recentSectionCon.style.top = newTop + "px";
             });
         }
     } catch (error) {
