@@ -9,6 +9,71 @@ $(document).ready(function(){
 
     buildBody(); // buildBody를 호출하여 본문을 만듭니다.
 
+    // 모달 이벤트 리스너 설정
+    $(document).on('click', '.modal_btn', function(){
+        const reviewId = $(this).data('review-id');
+        const reviewContent = $(this).data('review-content');
+        const reviewRegdate = $(this).data('review-regdate');
+        const reviewMenuName = $(this).data('review-menu-name');
+        const reviewRate = $(this).data('review-rate');
+        const modalContent =
+            `
+            <div id="review-form">
+            <h3>리뷰 상세보기</h3>
+            <span class="form-group">
+                <label for="title" class="form-left">메뉴 이름</label>
+                <input type="text" id="title" name="title" value="${reviewMenuName}" disabled><br><br><hr>
+            </span>
+            <div class="form-group">
+                <label for="name" class="form-left">주문 일시</label>
+                <input type="text" id="name" name="name" value="${formatDateTime(reviewRegdate)}" disabled><br><hr>
+            </div>
+              <div class="form-group rating-group">
+                <label for="rate" class="form-left">별점</label>
+                      <div class="rating" id="star_rate">
+                    <input type="radio" name="rate" value="5" id="star5" ${reviewRate == 5 ? 'checked' : ''} disabled><label for="star5"></label>
+                    <input type="radio" name="rate" value="4" id="star4" ${reviewRate == 4 ? 'checked' : ''} disabled><label for="star4"></label>
+                    <input type="radio" name="rate" value="3" id="star3" ${reviewRate == 3 ? 'checked' : ''} disabled><label for="star3"></label>
+                    <input type="radio" name="rate" value="2" id="star2" ${reviewRate == 2 ? 'checked' : ''} disabled><label for="star2"></label>
+                    <input type="radio" name="rate" value="1" id="star1" ${reviewRate == 1 ? 'checked' : ''} disabled><label for="star1"></label>
+                </div>
+            </div>
+            <hr>
+            <div id="rateError" class="error"></div>
+            <div class="form-group">
+                <label for="content" class="form-left">리뷰 내용</label>
+                <textarea id="content" name="content" rows="8" cols="80" readonly>${reviewContent}</textarea>
+                <div id="contentError" class="error"></div>
+            </div>
+            <div class="text-center">
+                <button type="button" id="back_button">닫기</button>
+                <h5> * 작성하신 리뷰는 <마이페이지-나의리뷰>에서 확인하실 수 있습니다.</h5>
+            </div>
+        </div>`;
+        $('#modalContent').html(modalContent);
+
+        // 모달 위치를 클릭한 버튼 옆으로 이동
+        const buttonOffset = $(this).offset();
+        const modalWidth = $('#reviewModal').outerWidth();
+        const modalHeight = $('#reviewModal').outerHeight();
+
+        $('#reviewModal').css({
+            top: buttonOffset.top - modalHeight / 2 + 'px', // 클릭한 버튼의 중앙에 맞춤
+            left: buttonOffset.left + $(this).outerWidth() + 10 + 'px' // 버튼 오른쪽에 모달을 띄움
+        }).show(); // 모달을 표시합니다.
+    });
+
+    $(document).on('click', '.close_btn', function(){
+        $('#reviewModal').hide(); // 모달을 숨깁니다.
+    });
+
+    // 모달 외부 클릭 시 모달 닫기
+    $(window).on('click', function(event) {
+        if ($(event.target).is('#back_button')) {
+            $('#reviewModal').hide();
+        }
+    });
+
     // buildBody 이후에 정렬을 수행해야 합니다.
     var ordersContainer = $('.container');
     var orders = ordersContainer.find(".receipt");
@@ -39,7 +104,7 @@ function formatDateTime(dateTimeString) {
 function buildBody(){
     $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
 
-    if (orderList.length === 0) {
+    if (orderList == null) {
         // 주문이 없는 경우
         $('.container').append('<div class="no-orders">' +
             '<img id="icon" src="/img/mypage/order-icon.png">' +
@@ -57,7 +122,7 @@ function buildBody(){
             let buttonHTML = "";
             const findReview = itemReviewMap[item.id];
             if (findReview) {
-                buttonHTML = `<input type="button" value="리뷰확인" name="reviewBtn" id="view" onclick="location.href='/mypage/review/detail/' + ${findReview.id}">`;
+                buttonHTML = `<input type="button" value="리뷰확인" name="reviewBtn" class="modal_btn" data-review-id="${findReview.id}" data-review-content="${findReview.content}" data-review-rate="${findReview.rate}" data-review-regdate="${findReview.regdate}" data-review-menu-name="${findReview.menu.name}">`;
             } else {
                 buttonHTML = `<input type="button" value="리뷰작성" name="reviewBtn" onclick="location.href='/mypage/review/write/${item.id}'">`;
             }
@@ -113,4 +178,10 @@ function buildBody(){
             </div>
         `);
     });
+
+    $('body').append(`
+        <div id="reviewModal" class="modal" style="position: absolute; display: none;">
+                <p id="modalContent"></p>
+        </div>
+    `);
 }
