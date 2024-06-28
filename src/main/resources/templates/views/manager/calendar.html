@@ -37,7 +37,7 @@
                 </div>
                 <hr class="line">
                 <div class="menu-list">
-                    <div th:each="menu : ${menuList}" class="menu" th:data-menu-id="${menu.id}">
+                    <div th:each="menu : ${menuList}" th:unless="${menu.sequence == -1}" class="menu" th:data-menu-id="${menu.id}">
                         <img class="menu-img-list" th:src="${menu.imgUrl}" th:alt="${menu.name}">
                         <p class="menu-name" th:text="${menu.name}"></p>
                     </div>
