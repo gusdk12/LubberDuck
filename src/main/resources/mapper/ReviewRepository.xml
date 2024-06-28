@@ -108,10 +108,17 @@
     </select>
 
 
-    <select id="selectFromCocktailRow" resultMap="mapReview">
+    <select id="selectFromCocktailRowByDate" resultMap="mapReview">
         <include refid="SELECT_BASE"/>
         WHERE oi.cocktail_id = #{param1}
-        ORDER BY r.id DESC
+        ORDER BY r.regdate DESC
+        LIMIT #{param2}, #{param3}
+    </select>
+
+    <select id="selectFromCocktailRowByRate" resultMap="mapReview">
+        <include refid="SELECT_BASE"/>
+        WHERE oi.cocktail_id = #{param1}
+        ORDER BY r.rate DESC
         LIMIT #{param2}, #{param3}
     </select>
 
