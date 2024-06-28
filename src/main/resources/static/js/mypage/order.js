@@ -10,7 +10,6 @@ $(document).ready(function(){
     $(document).on('click', '#submit_btn', function (event) {
         event.preventDefault(); // 기본 제출 동작 방지
 
-        // var itemId = $('#itemId').val();
         var itemId = $(this).closest('#review-form').find('input[name="item_id"]').val();
         var selectedRating = $('.rating input:checked').val(); // 선택된 별점 값 가져오기
         var content = $('#content').val();
@@ -78,11 +77,11 @@ $(document).ready(function(){
             <h3>리뷰 상세보기</h3>
             <span class="form-group">
                 <label for="title" class="form-left">메뉴 이름</label>
-                <input type="text" id="title" name="title" value="${reviewMenuName}" disabled><br><br><hr>
+                <input type="text" id="title" name="title" class="detailReview" value="${reviewMenuName}" disabled><br><br><hr>
             </span>
             <div class="form-group">
                 <label for="name" class="form-left">주문 일시</label>
-                <input type="text" id="name" name="name" value="${formatDateTime(reviewRegdate)}" disabled><br><hr>
+                <input type="text" id="name" name="name" class="detailReview" value="${formatDateTime(reviewRegdate)}" disabled><br><hr>
             </div>
               <div class="form-group rating-group">
                 <label for="rate" class="form-left">별점</label>
@@ -98,7 +97,7 @@ $(document).ready(function(){
             <div id="rateError" class="error"></div>
             <div class="form-group">
                 <label for="content" class="form-left">리뷰 내용</label>
-                <textarea id="content" name="content" rows="8" cols="80" readonly>${reviewContent}</textarea>
+                <textarea id="content" name="content" rows="8" cols="80" class="detailReview" readonly>${reviewContent}</textarea>
                 <div id="contentError" class="error"></div>
             </div>
             <div class="text-center">
@@ -117,9 +116,11 @@ $(document).ready(function(){
             top: buttonOffset.top - modalHeight / 2 + 'px',
             left: buttonOffset.left + $(this).outerWidth() + 10 + 'px'
         }).show();
+
+        // 다른 모달 숨기기
+        $('#writeModal').hide();
     });
 
-    // 수정된 부분
     $(document).on('click', '.write_btn', function(){
         const reviewItemId = $(this).data('item-id');
         const reviewItemOrderRegdate = $(this).data('item-order-regdate');
@@ -132,11 +133,11 @@ $(document).ready(function(){
             <h3>리뷰 작성하기</h3>
             <span class="form-group">
                 <label for="title" class="form-left">메뉴 이름</label>
-                <input type="text" id="title" name="title" value="${reviewItemMenuName}" disabled><br><br><hr>
+                <input type="text" id="title" name="title" class="writeReview" value="${reviewItemMenuName}" disabled><br><br><hr>
             </span>
             <div class="form-group">
                 <label for="name" class="form-left">주문 일시</label>
-                <input type="text" id="name" name="name" value="${formatDateTime(reviewItemOrderRegdate)}" disabled><br><hr>
+                <input type="text" id="name" name="name" class="writeReview" value="${formatDateTime(reviewItemOrderRegdate)}" disabled><br><hr>
             </div>
             <div class="form-group rating-group">
                 <label for="rate" class="form-left">별점</label>
@@ -148,11 +149,11 @@ $(document).ready(function(){
                     <input type="radio" name="rate" value="1" id="star1"><label for="star1"></label>
                 </div>
             </div>
-            <hr>
             <div id="rateError" class="error"></div>
+            <hr>
             <div class="form-group">
                 <label for="content" class="form-left">리뷰 내용</label>
-                <textarea id="content" name="content" rows="8" cols="80" required></textarea>
+                <textarea id="content" class="writeReview" rows="8" cols="80" required></textarea>
                 <div id="contentError" class="error"></div>
             </div>
             <div class="text-center">
@@ -171,6 +172,9 @@ $(document).ready(function(){
             top: buttonOffset.top - modalHeight / 2 + 'px',
             left: buttonOffset.left + $(this).outerWidth() + 10 + 'px'
         }).show();
+
+        // 다른 모달 숨기기
+        $('#reviewModal').hide();
     });
 
     $(document).on('click', '#back_button', function(){

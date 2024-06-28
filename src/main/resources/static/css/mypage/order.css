@@ -290,7 +290,6 @@ textarea {
 
 input[type="text"] {
     float: right;
-    background-color: #EAF1EF;
 }
 
 textarea {
@@ -366,7 +365,6 @@ textarea#content {
     text-overflow: inherit;
     resize: none;
     padding: 15px;
-    background-color: #EAF1EF;
 }
 
 textarea#content:focus {
@@ -449,7 +447,7 @@ div#star_rate.rating{
 
 #submit_btn {
     padding: 12px 20px;
-    background-color: #10573e;
+    background-color: #9eb8c5;
     color: white;
     border: none;
     border-radius: 5px;
@@ -457,7 +455,17 @@ div#star_rate.rating{
     transition: background-color 0.3s;
     width: 100%;
     font-weight: 500;
+    font-size: 15px;
 }
+
+.writeReview{
+    background-color: #e0ebf0;
+}
+
+.detailReview{
+    background-color: #ecf1e9;
+}
+
 
 
 
