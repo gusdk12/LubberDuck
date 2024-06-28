@@ -2,6 +2,10 @@ body {
     caret-color: transparent;
 }
 
+.all {
+    height: 1000px;
+}
+
 .article {
     display: flex;
     justify-content: center;
@@ -32,6 +36,51 @@ body {
 .article::-webkit-scrollbar-thumb {
     background: #289871;
     border-radius: 5px 0 0 5px;
+}
+
+#bigHeart1, #bigHeart2 {
+    position: absolute;
+    top: 275px;
+    height: 50px;
+    width: 50px;
+    filter: invert(32%) sepia(59%) saturate(3068%) hue-rotate(339deg) brightness(80%) contrast(100%);
+}
+
+#bigHeart1 {
+    left: 50px;
+}
+
+#bigHeart2 {
+    right: 50px;
+}
+.bookEmpty {
+    font-family: "Nanum Pen Script", cursive;
+    font-weight: 550;
+    font-style: normal;
+    font-size: 24px;
+
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    top: 270px;
+    color: #10573e;
+    white-space: nowrap;
+}
+
+.bookEmpty a.add-link {
+    display: inline;
+    font-family: "Nanum Pen Script", cursive;
+    font-weight: 550;
+    font-style: normal;
+    font-size: 26px;
+
+    color: #10573e;
+    text-decoration: underline;
+}
+
+.bookEmpty a.add-link:visited {
+    color: #10573e;
 }
 
 .box {
