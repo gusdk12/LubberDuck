@@ -272,7 +272,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     position: absolute;
-    transform: translate(27%, 60px);
+    transform: translate(85px, 60px);
 }
 .todayname{
     /*background-color: #fdd8df;*/
@@ -323,14 +323,15 @@ body {
     background-repeat: no-repeat;
     background-position: bottom;
     transition: width 0.8s ease;
-    animation: leftwreathMove 7s infinite ease-in-out;
+    transform-origin: right bottom;
+    animation: leftwreathMove 5s infinite ease-in-out;
 }
 @keyframes leftwreathMove {
     0%, 100% {
         transform: translate(40px, -350px) rotate(0deg);
     }
     50% {
-        transform: translate(40px, -350px) rotate(-10deg);
+        transform: translate(40px, -350px) rotate(-9deg);
     }
 }
 #rightwreath{
@@ -347,23 +348,24 @@ body {
     background-repeat: no-repeat;
     background-position: bottom;
     transition: width 0.8s ease;
-    animation: rightwreathMove 7s infinite ease-in-out;
+    transform-origin: left bottom;
+    animation: rightwreathMove 5s infinite ease-in-out;
 }
 @keyframes rightwreathMove {
     0%, 100% {
         transform: translate(250px, -350px) rotate(0deg);
     }
     50% {
-        transform: translate(250px, -350px) rotate(10deg);
+        transform: translate(250px, -350px) rotate(9deg);
     }
 }
 #sunburst{
     z-index: 1;
     /*background-color: #fdd8df;*/
     position: absolute;
-    transform: translate(110px, -400px);
-    width: 250px;
-    height: 250px;
+    transform: translate(90px, -370px);
+    width: 300px;
+    height: 300px;
     bottom: 0px;
     background-image: url('/img/menu/sunburst.png');
     background-size: contain;
@@ -374,10 +376,10 @@ body {
 }
 @keyframes sunspin {
     from {
-        transform: translate(110px, -400px) rotate(0deg);
+        transform: translate(90px, -370px) rotate(0deg);
     }
     to {
-        transform: translate(110px, -400px) rotate(360deg);
+        transform: translate(90px, -370px) rotate(360deg);
     }
 }
 #todaypart:hover{
@@ -385,7 +387,7 @@ body {
     /*cursor: url('/img/cursor/pointHand.png'), auto;*/
     cursor: pointer;
     #sunburst{
-        opacity: 0.5;
+        opacity: 0.8;
         animation: sunspin 20s linear infinite;
     }
 }
@@ -393,23 +395,25 @@ body {
     z-index: 3;
     /*background-color: #fdd8df;*/
     position: absolute;
-    transform: translate(100px, -275px);
-    width: 300px;
-    height: 150px;
+    transform: translate(100px, -290px);
+    /*width: 300px;*/
+    width: 0px;
+    height: 140px;
     bottom: 0px;
-    background-image: url('/img/menu/todaylabel.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: transform 0.8s ease;
-    animation: labelMove 4s infinite ease-in-out;
+    /*background-image: url('/img/menu/todaylabel.png');*/
+    content: url('/img/menu/todaylabel.png');
+    /*background-size: contain;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    transition: transform 0.8s ease, width 0.9s ease;
+    /*animation: labelMove 3s infinite ease-in-out;*/
 }
 @keyframes labelMove {
     0%, 100% {
-        transform: translate(100px, -270px);
+        transform: translate(100px, -280px);
     }
     50% {
-        transform: translate(100px, -280px);
+        transform: translate(100px, -300px);
     }
 }
 

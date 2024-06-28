@@ -67,7 +67,7 @@ async function appendMenuToPlate() {
                     <div id="leftwreath"></div> 
                     <div id="rightwreath"></div> 
                     <div id="sunburst"></div> 
-                    <div id="todaylabel"></div> 
+                    <img id="todaylabel">
 <!--                    <div class="starRightEffect" style="transform: translate(300px, 350px) rotate(30deg)"><div class="starline"></div><div class="rotatestar"></div></div>-->
 <!--                    <div class="starRightEffect" style="transform: translate(320px, 275px)"><div class="starline"></div><div class="rotatestar"></div></div>-->
 <!--                    <div class="starRightEffect" style="transform: translate(300px, 200px) rotate(-30deg)"><div class="starline"></div><div class="rotatestar"></div></div>-->
@@ -179,6 +179,13 @@ function openMenu() {
 
     let menu = document.getElementById("menu");
     menu.style.width = `${paperCount * 500}px`;
+    menu.addEventListener('transitionend', function(event) {
+        if (event.propertyName === 'width') {
+            let todaylabel = document.getElementById("todaylabel");
+            (todaylabel) && (todaylabel.style.width = `300px`);
+        }
+    });
+
 
     const menuBody = document.querySelector('#menuBody');
     const menuscroll = document.querySelector('#menuscroll');
