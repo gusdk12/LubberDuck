@@ -9,7 +9,7 @@
 
     <sql id="SELECT_BASE">
         SELECT u.id           "u_id"
-             , u.nickname     "u_nickname"
+             , u.nickname     "nickname"
              , b.id           "id"
              , b.user_id      "user_id"
              , b.x_coordinate "x_coordinate"

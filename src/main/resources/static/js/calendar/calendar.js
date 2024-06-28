@@ -143,6 +143,7 @@ function addEvents() {
         }
     });
 
+    // 팝업 닫기 관련 함수
     function closePopup(popupId) {
         $(popupId).hide();
         popupOverlay.remove();
@@ -302,8 +303,6 @@ function addEvents() {
                 let dateStr = date.replace(/\./g, '');
                 let dateInt = Number(dateStr);
                 loadData(dateInt);
-            } else {
-                console.error("date 값이 없습니다.");
             }
         }
     });
@@ -352,7 +351,7 @@ function removeEvent(dateId) {
 
 // 달력에 년도와 월을 로드
 function loadYYMM(fullDate) {
-    clearTodayMenuMemo();
+    clearTodayMenuMemo(fullDate);
     let yy = fullDate.getFullYear(); // 년도
     let mm = fullDate.getMonth() + 1; // 월 (0부터 시작)
     let firstDay = new Date(yy, mm, 1); // 해당 월의 첫째 날
@@ -418,9 +417,9 @@ function clearTodayMenuMemo(){
 }
 
 // 이전 날짜인지 여부를 확인하는 함수
-function isPastDate(dateString) {
+function isPastDate(date) {
     const currentDate = new Date(); // 현재 날짜
-    const compareDate = new Date(dateString); // 비교할 날짜
+    const compareDate = new Date(date); // 비교할 날짜
 
     // 현재 날짜의 년, 월, 일 정보를 가져옴
     const currentYear = currentDate.getFullYear();
@@ -446,6 +445,8 @@ function buildTodayMenu(data) {
         $('.notification-menu-text').show();
         return;
     }
+
+    // 오늘의 메뉴 데이터가 있는 경우
     $("#btn-add-menu").hide();
     $('.notification-menu-text').hide();
 
@@ -468,14 +469,22 @@ function buildTodayMenu(data) {
     `);
 
     // 이전 날짜에는 버튼 숨기기
+    // 이전 날짜일 경우
     if (isPastDate(data.date)) {
         $(".btn-edit").hide();
         $(".btn-delete").hide();
         $(".edit-disabled-text").show();
+        // TODO
+        $(".btn-add-menu").hide();
+        $(".notification-menu-text").text("오늘의 메뉴를 추가할 수 없습니다.");
+    // 이후 날짜일 경우
     } else {
         $(".btn-edit").show();
         $(".btn-delete").show();
         $(".edit-disabled-text").hide();
+        // TODO
+        $(".btn-add-menu").show();
+        $(".notification-menu-text").text("등록한 오늘의 메뉴가 없습니다.");
     }
 }
 

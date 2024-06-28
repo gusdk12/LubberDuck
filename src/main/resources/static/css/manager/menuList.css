@@ -11,6 +11,7 @@ body {
     font-weight: 700;
     font-style: normal;
     font-size: 25px;
+    caret-color: transparent;
 }
 
 #conMenu {

@@ -66,7 +66,6 @@ async function loadData(dateId){
             }
         },
         error: function (xhr, status, error) {
-            console.error("AJAX 요청 실패:", status, error);
             alert("메뉴를 불러오지 못했습니다. 서버에서 오류가 발생했습니다.");
         }
     });
