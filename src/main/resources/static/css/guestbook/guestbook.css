@@ -1,0 +1,82 @@
+body{
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #10573e;
+    margin-bottom: 1000px;
+    caret-color: transparent;
+    overflow: hidden;
+}
+
+#guestbooksection{
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+#guestbook{
+    width: 2500px;
+    height: 1500px;
+    background-color: #fdd8df;
+    position: relative;
+}
+.postIt{
+    width: 250px;
+    height: 180px;
+    background-color: #ec1e37;
+}
+
+/*----------------------------------- edit section*/
+#editcontainer{
+    width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+#editcontainer:hover{
+    #edittogglebutton {
+        height: 0vh;
+    }
+    #editarea{
+        height: 200px;
+    }
+    .createpostIt{
+        height: 180px;
+    }
+}
+#edittogglebutton{
+    position: fixed;
+    background-color: #84c2b5;
+    width: 15vw;
+    height: 5vh;
+    bottom: 0px;
+    transition: height 0.5s ease;
+}
+#editarea{
+    position: fixed;
+    background-color: rgba(132, 194, 181, 0.66);
+    width: 1500px;
+    height: 0px;
+    bottom: 0px;
+    transition: height 0.3s ease;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.createpostIt{
+    width: 250px;
+    /*height: 180px;*/
+    height: 0px;
+    transition: height 0.5s ease;
+}
+#postIt1{background-color: darkmagenta}
+#postIt2{background-color: burlywood}
+#postIt3{background-color: blanchedalmond}
+#postIt4{background-color: cornflowerblue}
+#postIt5{background-color: aquamarine}
+
