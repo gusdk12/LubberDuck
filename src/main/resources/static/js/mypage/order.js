@@ -39,7 +39,7 @@ function formatDateTime(dateTimeString) {
 function buildBody(){
     $('.container').empty(); // 중복을 피하기 위해 컨테이너를 비웁니다.
 
-    if (orderList.length === 0) {
+    if (orderList == null) {
         // 주문이 없는 경우
         $('.container').append('<div class="no-orders">' +
             '<img id="icon" src="/img/mypage/order-icon.png">' +
