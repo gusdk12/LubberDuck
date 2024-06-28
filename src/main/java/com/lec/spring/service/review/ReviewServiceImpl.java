@@ -100,13 +100,18 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public QryReviewList findByItemMenuPaging(Long menu_id, Integer page) {
+    public QryReviewList findByItemMenuPaging(Long menu_id, Integer page, Integer sort) {
         QryReviewList list = new QryReviewList();
 
         int sizePerPage = 4;
 
         int start = (page - 1) * sizePerPage;
-        List<Review> reviews = reviewRepository.selectFromCocktailRow(menu_id, start, sizePerPage);
+
+        List<Review> reviews = null;
+        if(sort == 1) reviews = reviewRepository.selectFromCocktailRowByDate(menu_id, start, sizePerPage);
+        if(sort == 2) reviews = reviewRepository.selectFromCocktailRowByRate(menu_id, start, sizePerPage);
+
+        if(reviews == null) return null;
 
         list.setCount(reviews.size());
         list.setList(reviews);

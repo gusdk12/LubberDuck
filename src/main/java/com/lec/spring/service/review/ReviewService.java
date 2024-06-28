@@ -23,7 +23,7 @@ public interface ReviewService {
     Review findByItemId(Long item_id);
 
     QryReviewList findByItemMenu(Long menu_id);
-    QryReviewList findByItemMenuPaging(Long menu_id, Integer page);
+    QryReviewList findByItemMenuPaging(Long menu_id, Integer page, Integer sort);
 
     int countAll(Long menu_id);
 
