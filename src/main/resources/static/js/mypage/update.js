@@ -69,7 +69,7 @@ function buildBody() {
     $('.container').append(`
         <div id="review-form">
             <button type="button" id="back_btn">X</button>
-            <h1>리뷰 작성하기</h1>
+            <h1>리뷰 수정하기</h1>
             <span class="form-group">
                 <label for="title" class="form-left">메뉴 이름</label>
                 <input type="text" id="title" name="title" value="${review.menu.name}" disabled><br><br><hr>

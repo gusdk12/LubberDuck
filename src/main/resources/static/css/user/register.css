@@ -21,9 +21,9 @@ body{
     position: relative;
 }
 #decoContent{
-    top: 380px;
-    left: 920px;
-    z-index: 1;
+    top: 385px;
+    left: 1025px;
+    z-index: -1;
     position: relative;
 }
 
@@ -37,10 +37,6 @@ body{
 
 #pen{
     background-image: url('/img/user/pen.png');
-    left: 5%;
-    top: 52%;
-    opacity: 0.9;
-    z-index: -1;
 }
 
 

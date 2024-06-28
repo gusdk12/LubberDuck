@@ -121,6 +121,7 @@
     border: 1px solid rgb(211, 211, 211);
     font-weight: 500;
     float: right;
+    cursor: pointer;
 }
 
 [name="reviewBtn"]:hover {
@@ -135,6 +136,7 @@
 
 [value="리뷰확인"]{
     background-color: lightgray;
+    cursor: pointer;
 }
 
 #view {
@@ -288,7 +290,6 @@ textarea {
 
 input[type="text"] {
     float: right;
-    background-color: #EAF1EF;
 }
 
 textarea {
@@ -364,7 +365,6 @@ textarea#content {
     text-overflow: inherit;
     resize: none;
     padding: 15px;
-    background-color: #EAF1EF;
 }
 
 textarea#content:focus {
@@ -444,6 +444,28 @@ input#delete{
 div#star_rate.rating{
     margin-top: 10px;
 }
+
+#submit_btn {
+    padding: 12px 20px;
+    background-color: #9eb8c5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.writeReview{
+    background-color: #e0ebf0;
+}
+
+.detailReview{
+    background-color: #ecf1e9;
+}
+
 
 
 
