@@ -208,13 +208,6 @@ public class MyPageController {
         return "mypage/review/detail";
     }
 
-    @GetMapping("review/write/{item_id}")
-    public String write(Model model, @PathVariable("item_id") Long item_id){
-        OrderItem item = orderItemService.findById(item_id);
-        model.addAttribute("item", item);
-        return "mypage/review/write";
-    }
-
     @GetMapping("review/update/{id}")
     public String update(Model model, @PathVariable("id") Long id) {
         Review review = reviewService.selectById(id);

@@ -41,8 +41,7 @@ body {
     width: 380px;
     margin: 50px auto;
     padding: 20px;
-    background-image: url(/img/review/background.jpg);
-    background-size: contain;
+    background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border: 1px solid rgb(243, 243, 243);
 }
