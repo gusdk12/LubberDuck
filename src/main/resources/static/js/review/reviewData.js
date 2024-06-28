@@ -1,26 +1,5 @@
 
 
-// function loadReviews(cocktail, page){
-//     $.ajax({
-//         url: "/review/list/" + cocktail.id + "/" + page,
-//         type: "GET",
-//         cache: false,
-//         success: function (data, status) {
-//             if (status === "success") {
-//                 // 서버쪽 에러 메세지 있는경우
-//                 if (data.status !== "OK") {
-//                     // alert(data.status);
-//                     return;
-//                 }
-//
-//                 // data.data.forEach(review => alert(review.content));
-//                 buildReviewSection(data.data);
-//             }
-//         },
-//     });
-// }
-
-
 function buildReviewSection(reviews){
     //     // 예제 데이터로 임시 리뷰 목록 설정
     console.log(reviews);
@@ -29,15 +8,6 @@ function buildReviewSection(reviews){
     // 최신순으로 초기에 정렬하여 렌더링
     renderReviews(reviewsData);
 
-    // 정렬 함수: 최신순 또는 별점순으로 리뷰를 정렬합니다.
-    // function sortReviews(reviews, sortType) {
-    //     if (sortType === '최신순') {
-    //         return reviews.slice().sort((a, b) => new Date(b.regdate) - new Date(a.regdate));
-    //     } else if (sortType === '별점순') {
-    //         return reviews.slice().sort((a, b) => b.rate - a.rate);
-    //     }
-    //     return reviews;
-    // }
 
     // 리뷰 목록을 HTML에 렌더링합니다.
     function renderReviews(reviews) {
@@ -102,50 +72,23 @@ function renderPagination(totalPages) {
         paginationContainer.appendChild(pageLi);
     }
 
-    // 이전 버튼 추가
-    // if (currentPage > 1) {
-    //     var prevLi = document.createElement('li');
-    //     prevLi.innerHTML = '<span onclick="changePage(' + (currentPage - 1) + ')">이전</span>';
-    //     paginationContainer.appendChild(prevLi);
-    // }
-
-    // 다음 버튼 추가
-    // if (currentPage < totalPages) {
-    //     var nextLi = document.createElement('li');
-    //     nextLi.innerHTML = '<span onclick="changePage(' + (currentPage + 1) + ')">다음</span>';
-    //     paginationContainer.appendChild(nextLi);
-    // }
 
 }
 
-// 페이지 변경 함수 예시
-// function changePage(pageNumber) {
-//     // currentPage = pageNumber;
-//     // AJAX 요청을 통해 서버에서 해당 페이지의 데이터를 가져옴
-//     $.ajax({
-//         type: 'GET',
-//         url:  "/review/list/" + menu_id + "/" + pageNumber,
-//         type: "GET",
-//         success: function(response) {
-//             // 서버에서 데이터를 성공적으로 가져왔을 때의 처리
-//             var reviews = response.list; // 가져온 리뷰 데이터
-//             renderReviews(reviews); // 리뷰 데이터를 UI에 반영하는 함수 호출
-//
-//             // 현재 페이지 번호 업데이트
-//             currentPage = pageNumber;
-//
-//             // 페이징 버튼 업데이트
-//             renderPagination(response.totalPages, currentPage);
-//         },
-//         error: function(error) {
-//             console.error('Error fetching reviews:', error);
-//         }
-//     });
-// }
+
 
 function changePage(pageNumber) {
     // 현재 페이지 번호 업데이트
     currentPage = pageNumber;
+    var sortOption = document.querySelector('input[name="sort"]:checked').value;
+
+    document.querySelectorAll('input[name="sort"]').forEach((elem) => {
+        elem.addEventListener('change', function() {
+            sortOption = this.value;
+            changePage(1); // 정렬 기준 변경 시 첫 페이지로 이동
+        });
+    });
+
 
     var reviewPrev = $('#reviewPrev');
     var reviewNext = $('#reviewNext');
@@ -162,8 +105,9 @@ function changePage(pageNumber) {
     }else {
         reviewNext.css('display', 'none'); // 다음 버튼 숨기기
     }
+
     // 해당 페이지의 리뷰를 로드
-    loadReviews(currentCocktail, currentPage, 2);
+    loadReviews(currentCocktail, currentPage, sortOption);
 }
 
 function loadReviews(cocktail, page, sort) {
@@ -188,4 +132,7 @@ function loadReviews(cocktail, page, sort) {
         }
     });
 }
+
+
+
 

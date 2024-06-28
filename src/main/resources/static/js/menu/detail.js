@@ -145,6 +145,3 @@ function formatDate(dateString) {
     return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
-// $(document).ready(function () {
-
-// });
