@@ -46,12 +46,13 @@ public class ReviewController {
     private OrderService orderService;
 
 
-    @GetMapping("/list/{menu_id}/{page}")
+    @GetMapping("/list/{menu_id}/{page}/{sort}")
     public QryReviewList listByMenu(@PathVariable Long menu_id,
-                                    @PathVariable Integer page){
+                                    @PathVariable Integer page,
+                                    @PathVariable Integer sort){
 
 
-        return reviewService.findByItemMenuPaging(menu_id, page);
+        return reviewService.findByItemMenuPaging(menu_id, page, sort);
     }
 
 

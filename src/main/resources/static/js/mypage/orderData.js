@@ -47,7 +47,25 @@ async function addOrderItem(order_id, item) {
     });
 }
 
-async function avgRate(cocktail_id) {
-
+async function avgRate(cocktail) {
+    $.ajax({
+        url: "/order/starRate/" + cocktail.id,
+        type:"GET",
+        cache: false,
+        success: function (data, status) {
+            if(status === "success") {
+                if (data.status !== "OK") {
+                    alert(data.status);
+                    return;
+                }
+                buildRate(data.data);
+            }
+        }
+    })
 }
 
+function buildRate(data) {
+    $('#star').append($(`
+        <div>${data.avgRate}</div>
+    `));
+}
