@@ -55,64 +55,125 @@ function buildReviewSection(reviews){
     });
 }
 
+
+
 function renderPagination(reviewCount) {
-    var pageSize = 4; // 한 페이지에 보여질 아이템 수
+    var pageSize = 4; // Number of items per page
     var totalPages = Math.ceil(reviewCount / pageSize);
     var maxVisiblePages = 5;
-
     var paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = ''; // 기존의 내용을 모두 지움
+    paginationContainer.innerHTML = ''; // Clear existing content
 
-    // 최소한의 버튼 수를 정하는 경우
-    var startPage = Math.max(1, currentPage - 2);
-    var endPage = Math.min(totalPages, currentPage + 2);
+    var startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    var endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
+    if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
 
-    // 페이지 버튼 추가
-    for (var i = 1; i <= totalPages; i++) {
+    // Add previous (<<) button
+    var prev2Button = document.createElement('span');
+    prev2Button.textContent = '<<';
+    prev2Button.classList.add('pagination-button');
+
+    prev2Button.addEventListener('click', function() {
+        currentPage = 1;
+        renderPagination(reviewCount);
+    });
+
+    paginationContainer.appendChild(prev2Button);
+
+    // Add previous (<) button
+    var prevButton = document.createElement('span');
+    prevButton.textContent = '<';
+    prevButton.classList.add('pagination-button');
+    if (currentPage > 1) {
+        prevButton.addEventListener('click', function() {
+            currentPage--;
+            renderPagination(reviewCount);
+        });
+    } else {
+        prevButton.classList.add('disabled');
+    }
+    paginationContainer.appendChild(prevButton);
+
+    // Add page buttons
+    for (var i = startPage; i <= endPage; i++) {
         var pageLi = document.createElement('li');
         var pageNumberSpan = document.createElement('span');
         pageNumberSpan.textContent = i;
 
-        // 현재 페이지인 경우 .active 클래스 추가
+        // Add .active class to the current page
         if (i === currentPage) {
             pageNumberSpan.classList.add('active');
         }
 
-        // 페이지 번호 클릭 시 이벤트 처리
+        // Handle page number click event
         pageNumberSpan.addEventListener('click', function() {
             var pageNumber = parseInt(this.textContent);
-            currentPage = pageNumber; // 현재 페이지 업데이트
+            currentPage = pageNumber; // Update current page
 
-            // 모든 페이지 번호의 활성 클래스 제거
-            var allPageNumbers = paginationContainer.querySelectorAll('li span');
-            allPageNumbers.forEach(function(span) {
-                span.classList.remove('active');
-            });
-
-            // 클릭된 페이지 번호에 활성 클래스 추가
-            this.classList.add('active');
-
-            // 페이지 이동 함수 호출
-            changePage(currentPage);
+            renderPagination(reviewCount); // Re-render pagination
         });
 
-        // 페이지 번호를 li에 추가하고 ul에 추가
+        // Append page number to li and ul
         pageLi.appendChild(pageNumberSpan);
         paginationContainer.appendChild(pageLi);
     }
 
-    // 페이지 로드 후 첫 페이지 리뷰를 로드
+    // Add next (>) button
+    var nextButton = document.createElement('span');
+    nextButton.textContent = '>';
+    nextButton.classList.add('pagination-button');
+    if (currentPage < totalPages) {
+        nextButton.addEventListener('click', function() {
+            currentPage++;
+            renderPagination(reviewCount);
+        });
+    } else {
+        nextButton.classList.add('disabled');
+    }
+    paginationContainer.appendChild(nextButton);
+
+    // Add next (>>) button
+    var next2Button = document.createElement('span');
+    next2Button.textContent = '>>';
+    next2Button.classList.add('pagination-button');
+
+    next2Button.addEventListener('click', function() {
+        currentPage = totalPages;
+        renderPagination(reviewCount);
+    });
+
+    paginationContainer.appendChild(next2Button);
+
+// Handle visibility of previous (<) and next (>) buttons based on currentPage
+    if (currentPage === 1) {
+        prevButton.style.display = 'none';
+        prev2Button.style.display = 'none';
+    } else {
+        prevButton.style.display = 'inline-block';
+        prev2Button.style.display = 'inline-block';
+    }
+
+    if (currentPage === totalPages) {
+        nextButton.style.display = 'none';
+        next2Button.style.display = 'none';
+    } else {
+        nextButton.style.display = 'inline-block';
+        next2Button.style.display = 'inline-block';
+    }
+
+    // Handle page load for the current page
     var sortOption = document.querySelector('input[name="sort"]:checked').value;
     loadReviews(currentCocktail, currentPage, sortOption);
 
-    // 초기 페이지의 활성 클래스 설정
-    var initialActivePage = paginationContainer.querySelector('li:first-child span');
+    // Set initial active class
+    var initialActivePage = paginationContainer.querySelector('li span.active');
     if (initialActivePage) {
         initialActivePage.classList.add('active');
     }
 }
-
 
 
 function changePage(pageNumber) {

@@ -97,22 +97,22 @@ function addEvent(){
     });
 
 
-    $('#reviewPrev').click(function(e) {
-        changePage(currentPage-1);
-    });
-
-    $('#reviewNext').click(function(e) {
-        changePage(currentPage+1);
-    });
-
-    $('#reviewPrev2').click(function(e) {
-        changePage(1);
-    });
-
-    $('#reviewNext2').click(function(e) {
-        var totalPages = Math.ceil(reviewCount / 4);
-        changePage(totalPages);
-    });
+    // $('#reviewPrev').click(function(e) {
+    //     changePage(currentPage-1);
+    // });
+    //
+    // $('#reviewNext').click(function(e) {
+    //     changePage(currentPage+1);
+    // });
+    //
+    // $('#reviewPrev2').click(function(e) {
+    //     changePage(1);
+    // });
+    //
+    // $('#reviewNext2').click(function(e) {
+    //     var totalPages = Math.ceil(reviewCount / 4);
+    //     changePage(totalPages);
+    // });
 
 
 }
