@@ -116,10 +116,12 @@ body {
 }
 
 #menuscroll:hover {
-    cursor: url('/img/cursor/freeHand.png'), auto;
+    /*cursor: url('/img/cursor/freeHand.png'), auto;*/
+    cursor: auto;
 }
 #menuscroll:active {
-    cursor: url('/img/cursor/grabHand.png'), auto;
+    /*cursor: url('/img/cursor/grabHand.png'), auto;*/
+    cursor: grabbing;
 }
 
 #menuscroll > div {
@@ -380,7 +382,8 @@ body {
 }
 #todaypart:hover{
     background-color: #fff8f3;
-    cursor: url('/img/cursor/pointHand.png'), auto;
+    /*cursor: url('/img/cursor/pointHand.png'), auto;*/
+    cursor: pointer;
     #sunburst{
         opacity: 0.5;
         animation: sunspin 20s linear infinite;
@@ -495,7 +498,8 @@ body {
     filter: invert(63%) sepia(71%) saturate(461%) hue-rotate(309deg) brightness(101%) contrast(104%);
 }
 #cocktailadd:hover{
-    cursor: url('/img/cursor/pointHand.png'), auto;
+    /*cursor: url('/img/cursor/pointHand.png'), auto;*/
+    cursor: pointer;
     filter: invert(39%) sepia(38%) saturate(1775%) hue-rotate(319deg) brightness(97%) contrast(85%);
 }
 #cocktaildetail{
@@ -509,7 +513,8 @@ body {
     filter: invert(72%) sepia(15%) saturate(658%) hue-rotate(112deg) brightness(91%) contrast(87%);
 }
 #cocktaildetail:hover{
-    cursor: url('/img/cursor/pointHand.png'), auto;
+    /*cursor: url('/img/cursor/pointHand.png'), auto;*/
+    cursor: pointer;
     filter: invert(47%) sepia(79%) saturate(372%) hue-rotate(113deg) brightness(92%) contrast(95%);
 }
 
