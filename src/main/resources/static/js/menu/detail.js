@@ -3,6 +3,7 @@ window.addEventListener('load', async () => {
     try {
         loadMenu();
         addEvent();
+        avgRate(currentCocktail);
 
         if (logged_id !== -1) {
             await checkToRecent(currentCocktail);

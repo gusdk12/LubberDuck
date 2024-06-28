@@ -56,12 +56,13 @@
             <div id="cocktailInfo">
                 <div id="name"></div>
                 <div id="star">
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div>5.0</div> <!--임시-->
+                    <!-- 평균 평점 들어갈곳 -->
+<!--                    <div class="stars"></div>-->
+<!--                    <div class="stars"></div>-->
+<!--                    <div class="stars"></div>-->
+<!--                    <div class="stars"></div>-->
+<!--                    <div class="stars"></div>-->
+<!--                    <div>5.0</div>-->
                 </div>
                 <div id="info"></div>
                 <div id="price"></div>
@@ -143,10 +144,12 @@
     <script th:inline="javascript">
         const menuList = [[${menuList}]];
         const currentCocktail = [[${menu}]];
+
     </script>
     <section id="footer"></section>
 
     <script th:src="@{/js/review/reviewData.js}"></script>
+    <script th:src="@{/js/mypage/orderData.js}"></script>
     <script th:src="@{/js/menu/detail.js}"></script>
 
 
