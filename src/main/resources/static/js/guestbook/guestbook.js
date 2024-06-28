@@ -5,6 +5,8 @@ const POSTIT = 2;
 window.addEventListener('load', () => {
     initBoardDragEvent();
     initPostItCreateEvent();
+
+    loadGuestBookData();
 });
 
 function initBoardDragEvent(postItType, element) {
@@ -68,6 +70,18 @@ function addDragEventToPostIt(postItType, postItElement){
             newDiv.id = `${postItElement.getAttribute('id')}`;
             dropzone.appendChild(newDiv);
             postItElement = newDiv;
+
+            const memoBox = document.createElement('div');
+            memoBox.className = 'postItContent';
+            newDiv.appendChild(memoBox);
+
+            const username = document.createElement('div');
+            username.className = 'nickname';
+            memoBox.appendChild(username);
+
+            const contentBox = document.createElement('div');
+            contentBox.className = 'content';
+            memoBox.appendChild(contentBox);
         }
 
         postItElement.style.position = 'absolute';
