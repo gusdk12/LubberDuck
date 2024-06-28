@@ -27,7 +27,6 @@ async function checkDate(dateId) {
         return false;
     }
 }
-
 // 모든 일정 불러오기
 function loadCalendars(){
     $.ajax({
@@ -48,16 +47,22 @@ function loadCalendars(){
 
 // 특정 날짜 데이터 불러오기
 async function loadData(dateId){
-    console.log("AJAX 요청 URL:", "/calendar/detail/" + dateId);
     $.ajax({
         url: "/calendar/detail/" + dateId,
         type: "GET",
         cache: false,
         success: function (data, status) {
-            console.log("AJAX 요청 성공:", status, data);
+            console.log("data:", data, "/dataId:", dateId);
             if (status === "success") {
+                clearTodayMenuMemo();
                 buildTodayMenu(data);
                 buildMemo(data);
+            }
+
+            if (data.id) {
+                addEvent(dateId);
+            } else {
+                removeEvent(dateId);
             }
         },
         error: function (xhr, status, error) {
@@ -70,58 +75,6 @@ async function loadData(dateId){
 /********************************************
                 오늘의 메뉴
  ********************************************/
-
-// 오늘의 메뉴 화면에 표시
-function buildTodayMenu(data) {
-    // 데이터 및 내용 비우기
-    $('.today-menu-container').empty();
-    initializePopup();
-
-    // 데이터가 없는 경우 알림 메시지를 표시
-    if (!data || !data.menu) {
-        $('#notification-menu .notification-menu-text').text('등록한 오늘의 메뉴가 없습니다.');
-    } else {
-        $('#notification-menu .notification-menu-text').text('');
-
-        // 메뉴 데이터를 추가
-        $('.today-menu-container').append(`
-            <div class="menu-item">
-                <p class="today-menu-name">${data.menu.name}</p>
-                <div class="img">
-                    <div class="menu-img" style="background-image: url('${data.menu.imgUrl}'); height: 200px;"></div>
-                </div>
-                <div class="menu-text">
-                    <textarea id="today-menu-text" readonly>${data.comment}</textarea>
-                </div>
-                <div class="menu-buttons">
-                    <button class="btn-edit">수정</button>
-                    <button class="btn-delete">삭제</button>
-                </div>
-            </div>
-        `);
-    }
-}
-
-// 오늘의 메뉴 데이터를 가져오는 함수
-async function buildEditTodayMenu(dateInt) {
-
-    const checkDateResult = await checkDate(dateInt);
-    if (!checkDateResult.exists) {
-        console.error("No valid data found for the given date.");
-        return null;
-    }
-
-    const menu = menuList.find(m => m.id === checkDateResult.menu_id);
-    if (menu) {
-        $('.select-menu-img').attr("src", menu.imgUrl);
-        $('.select-menu-name').text(menu.name);
-    }
-
-    return {
-        menu_id: checkDateResult.menu_id,
-        comment: checkDateResult.comment
-    };
-}
 
 // 오늘의 메뉴 추가
 async function addCalendarByMenu(menuId, comment) {
@@ -212,8 +165,6 @@ async function deleteCalendarByMenu(calendarId, menuId, comment) {
                 loadData(dateInt);
                 $('.today-menu-container').empty();
                 $('#select-menu-text').empty();
-                $(`.cal-body td[data-fdate="${selectedDate}"]`).removeClass("event");
-                $('#notification-menu .notification-menu-text').text('등록한 오늘의 메뉴가 없습니다.');
             }
         }
     });
@@ -223,31 +174,6 @@ async function deleteCalendarByMenu(calendarId, menuId, comment) {
 /********************************************
                     메모
  ********************************************/
-
-// 메모 화면에 표시
-function buildMemo(data) {
-    // 'event-list' 클래스를 비우기
-    $(".event-list").empty();
-    $("#notification").show();
-
-    // 데이터가 없는 경우, 알림 메시지를 표시
-    if (!data || !data.memo) {
-        $('#notification .notification-text').text('등록한 메모가 없습니다.');
-    } else {
-        $('#notification .notification-text').text('');
-
-        $(".event-list").append(`
-            <li>${data.memo}</li>
-             <button type="button" class="memo-edit">
-                <span class="fa fa-xmark"></span>
-            </button>
-            
-            <button type="button" class="memo-delete">
-                <span class="fa fa-xmark"></span>
-            </button>
-        `);
-    }
-}
 
 // 메모 추가
 async function addCalendarByMemo(memo) {

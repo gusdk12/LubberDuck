@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.spring.repository.guestBook.GuestBookRepository">
+
+    <insert id="insertByGuestBook" parameterType="com.lec.spring.domain.guestBook.GuestBook" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO ctt_guestbook (user_id, x_coordinate, y_coordinate, z_coordinate, content, postItKind)
+        VALUES (#{user_id}, #{x_coordinate}, #{y_coordinate}, #{z_coordinate}, #{content}, #{postItKind})
+    </insert>
+
+    <sql id="SELECT_BASE">
+        SELECT u.id           "u_id"
+             , u.nickname     "u_nickname"
+             , b.id           "id"
+             , b.user_id      "user_id"
+             , b.x_coordinate "x_coordinate"
+             , b.y_coordinate "y_coordinate"
+             , b.z_coordinate "z_coordinate"
+             , b.content      "content"
+             , b.postItKind   "postItKind"
+        FROM ctt_guestbook b,
+             ctt_user u
+        WHERE 1 = 1
+          AND b.user_id = u.id
+    </sql>
+
+    <select id="contentAll" resultType="com.lec.spring.domain.guestBook.GuestBook">
+        <include refid="SELECT_BASE"/>
+        ORDER BY b.z_coordinate DESC
+    </select>
+
+    <select id="findById" resultType="com.lec.spring.domain.guestBook.GuestBook">
+        <include refid="SELECT_BASE"/>
+        AND b.id = {#id}
+    </select>
+    
+<!--    <select id="findMaxZ" resultType="int">-->
+<!--        SELECT MAX(z_coordinate) AS MaxZ-->
+<!--        FROM ctt_guestbook-->
+<!--    </select>-->
+    
+    <update id="updateById" parameterType="com.lec.spring.domain.guestBook.GuestBook" flushCache="true" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        UPDATE ctt_guestbook
+        SET x_coordinate = #{x_coordinate}
+          , y_coordinate = #{y_coordinate}
+          , z_coordinate = #{z_coordinate}
+          , content      = #{content}
+          , postItKind   = #{postItKind}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteByPostIt" flushCache="true">
+        DELETE FROM ctt_guestbook WHERE id = #{id}
+    </delete>
+
+</mapper>

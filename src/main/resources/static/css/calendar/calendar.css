@@ -8,6 +8,7 @@ body {
     margin: 0 auto;
     padding: 0;
     background-color: #10573E !important;
+    caret-color: transparent;
 }
 
 *, *:before, *:after {
@@ -177,6 +178,7 @@ body {
     font-weight: 400;
     font-size: 15px;
     color: #434444;
+    caret-color: black;
 }
 
 #new-memo::-webkit-scrollbar {
@@ -502,6 +504,7 @@ body {
     background-color: #faf9f7;
     font-weight: 500;
     font-size: 17px;
+    caret-color: black;
 }
 
 #select-menu-text::-webkit-scrollbar {

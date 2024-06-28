@@ -296,5 +296,27 @@ function buildBook(result){
         swal("DELETE",cocktailName+'가 즐겨찾기에서 삭제되었습니다.',"success");
         $box.remove();
     });
+
+    $('#favorite').on('keydown', '.modifyBox', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();  // Prevent the default action of the Enter key
+            var $commentCon = $(this).closest('.comment-con');
+            var commentValue = $(this).val();
+
+            if (commentValue.length > 30) {
+                $commentCon.find('.error-message').show();
+            } else {
+                $commentCon.find('.error-message').hide();
+
+                var cocktailName = $(this).closest('.info').find('.cocktail_name').text();
+                var menuItem = list.find(menu => menu.name === cocktailName);
+
+                updateFromBook(menuItem, commentValue);
+
+                $(this).closest('.box').find('.C1').css('display', 'block');
+                $(this).closest('.box').find('.comment-con').css('display', 'none');
+            }
+        }
+    });
 }
 

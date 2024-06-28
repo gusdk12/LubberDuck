@@ -79,28 +79,15 @@ function addEvent(){
 
     // addToBook
     $('#commentCheck').click(function() {
-        var cocktailName = $(this).closest('#cocktailsection').find('#name').text();
-        var commentValue = $(this).closest('#cocktailsection').find('.comment').val();
-        var errorMessage = $(this).closest('#cocktailsection').find('.comment-error-message');
+        handleCommentSubmit();
+    });
 
-        // 글자 수 체크
-        var maxLength = 30;
-        if (commentValue.length > maxLength) {
-            var currentLength = commentValue.length;
-            var message = '코멘트는 30자까지 작성 가능합니다. (현재 ' + currentLength + '글자)';
-            errorMessage.text(message);
-            errorMessage.css('display','block');
-            return; // 글자 수가 넘어가면 함수 종료
-        } else {
-            errorMessage.css('display', 'none');
+    // addToBook
+    $('.comment-con').on('keydown', '.comment', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();  // Prevent the default action of the Enter key
+            handleCommentSubmit();
         }
-
-        addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
-        swal("SUCCESS", "즐겨찾기에 추가되었습니다", "success");
-        $("#heart").css('display', 'block');
-
-        switchToFullHeart();
-        closeComment();
     });
 
     $('#reviewPrev').click(function(e) {
@@ -133,7 +120,32 @@ function closeComment() {
     $('.comment').css('height', '0px');
 }
 
+// 코멘트 내용 저장하기
+function handleCommentSubmit() {
+    var $cocktailSection = $('#commentCheck').closest('#cocktailsection');
+    var cocktailName = $cocktailSection.find('#name').text();
+    var commentValue = $cocktailSection.find('.comment').val();
+    var errorMessage = $cocktailSection.find('.comment-error-message');
 
+    // 글자 수 체크
+    var maxLength = 30;
+    if (commentValue.length > maxLength) {
+        var currentLength = commentValue.length;
+        var message = '코멘트는 30자까지 작성 가능합니다. (현재 ' + currentLength + '글자)';
+        errorMessage.text(message);
+        errorMessage.css('display', 'block');
+        return; // 글자 수가 넘어가면 함수 종료
+    } else {
+        errorMessage.css('display', 'none');
+    }
+
+    addToBook(menuList.find(menu => menu.name === cocktailName), commentValue);
+    swal("SUCCESS", "즐겨찾기에 추가되었습니다", "success");
+    $("#heart").css('display', 'block');
+
+    switchToFullHeart();
+    closeComment();
+}
 
 function formatDate(dateString) {
     const date = new Date(dateString);
