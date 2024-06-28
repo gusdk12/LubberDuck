@@ -197,3 +197,18 @@ INSERT INTO ctt_recent (user_id, cocktail_id) VALUES
 INSERT INTO ctt_recent(user_id, cocktail_id)
 VALUES (5,12)
 ;
+
+INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, content, postItKind) VALUES
+    (1, 46.54, 89.87, 1, '분위기가 너무 좋아요!', 2);
+
+INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, content, postItKind) VALUES
+    (5, 654.54, 893.87, 2, '사장님이 친절하세요~', 1);
+
+INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, content, postItKind) VALUES
+    (3, 897.34, 234.87, 3, '또 올거예요!!', 4);
+
+INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, content, postItKind) VALUES
+    (5, 346.56, 987.37, 4, '이번엔 다른 친구랑 같이 왔어요~~~', 3);
+
+INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, content, postItKind) VALUES
+    (4, 345.54, 679.87, 5, '칵테일이 맛있네요~~~', 5);
