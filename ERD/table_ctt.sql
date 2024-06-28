@@ -195,3 +195,26 @@ ALTER TABLE ctt_aichat
     ADD CONSTRAINT FK_ctt_user_TO_ctt_aichat
         FOREIGN KEY (user_id)
             REFERENCES ctt_user (id);
+
+CREATE TABLE ctt_guestbook
+(
+    id           INT          NOT NULL AUTO_INCREMENT COMMENT '게시판 아이디',
+    user_id      INT          NOT NULL COMMENT '유저아이디',
+    x_coordinate DOUBLE       NOT NULL COMMENT 'x좌표',
+    y_coordinate DOUBLE       NOT NULL COMMENT 'y좌표',
+    z_coordinate INT          NOT NULL COMMENT 'z좌표',
+    content      VARCHAR(100) NULL     COMMENT '작성글',
+    postItKind   INT   CHECK (postItKind between 1 AND 5)       NOT NULL COMMENT '포스트잇종류',
+    PRIMARY KEY (id)
+) COMMENT '게시판';
+
+ALTER TABLE ctt_guestbook
+    ADD CONSTRAINT UQ_id UNIQUE (id);
+
+ALTER TABLE ctt_guestbook
+    ADD CONSTRAINT UQ_z_coordinate UNIQUE (z_coordinate);
+
+ALTER TABLE ctt_guestbook
+    ADD CONSTRAINT FK_ctt_user_TO_ctt_board
+        FOREIGN KEY (user_id)
+            REFERENCES ctt_user (id);
