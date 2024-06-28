@@ -303,7 +303,6 @@ body {
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    /*font-size: 25px;*/
 }
 
 .containerD {
@@ -429,16 +428,6 @@ body {
     cursor: pointer;
 }
 
-.review-text::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 1.5em;
-    width: 100%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 80%);
-}
-
 .review-text.expanded {
     -webkit-line-clamp: initial;
     max-height: none;
@@ -544,66 +533,47 @@ body {
 
 
 /*페이징*/
-.paginationContainer{
+.paginationContainer {
     display: flex;
     justify-content: center;
+    align-items: center; /* 추가: 세로 정렬을 위해 */
     font-size: 20px;
 }
 
-#pagination{
-    padding: 5px;
+#pagination {
     display: flex;
     justify-content: center;
-    text-decoration: none;
-}
-
-.pagination-button,
-.pagination li a {
-    position: relative;
-    z-index: 50;
-    pointer-events: auto;
+    list-style: none; /* 추가: 리스트 스타일 제거 */
+    padding: 0;
+    margin: 0;
 }
 
 .pagination li {
     margin: 0 5px;
+}
+
+.pagination li span {
     color: #ed8f8f;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
 }
 
-.pagination li:hover {
+.pagination-button {
+    color: #ed8f8f;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.pagination li span:hover,
+.pagination-button:hover {
     background-color: #ffffff;
 }
 
-.pagination li.active{
+.pagination li span:active,
+.pagination-button:active,
+.pagination li span.active {
     background-color: #dda7a7;
     color: white;
-}
-
-
-#reviewPrev{
-    color: #ed8f8f;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.reviewPrev:hover {
-    background-color: #ffffff;
-}
-
-#reviewNext{
-    color: #ed8f8f;
-    display: block;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.reviewNext:hover {
-    background-color: #ffffff;
 }

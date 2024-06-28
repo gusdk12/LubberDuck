@@ -70,11 +70,39 @@ function renderPagination(reviewCount) {
     // 페이지 버튼 추가
     for (var i = startPage; i <= endPage; i++) {
         var pageLi = document.createElement('li');
-        pageLi.innerHTML = '<span onclick="changePage(' + i + ')">' + i + '</span>';
+        var pageNumberSpan = document.createElement('span');
+        pageNumberSpan.textContent = i;
+
+        // 페이지 번호 클릭 시 이벤트 처리
+        pageNumberSpan.addEventListener('click', function() {
+            var pageNumber = parseInt(this.textContent);
+            currentPage = pageNumber; // 현재 페이지 업데이트
+
+            // 모든 페이지 번호의 활성 클래스 제거
+            var allPageNumbers = paginationContainer.querySelectorAll('li span');
+            allPageNumbers.forEach(function(span) {
+                span.classList.remove('active');
+            });
+
+            // 클릭된 페이지 번호에 활성 클래스 추가
+            this.classList.add('active');
+
+            // 페이지 이동 함수 호출
+            changePage(currentPage);
+        });
+
+        // 페이지 번호를 li에 추가하고 ul에 추가
+        pageLi.appendChild(pageNumberSpan);
         paginationContainer.appendChild(pageLi);
     }
 
+    // 페이지 로드 후 첫 페이지 리뷰를 로드
+    var sortOption = document.querySelector('input[name="sort"]:checked').value;
+    loadReviews(currentCocktail, currentPage, sortOption);
 
+    // 초기 페이지의 활성 클래스 설정
+    var initialActivePage = paginationContainer.querySelector('li:first-child span');
+    initialActivePage.classList.add('active');
 }
 
 
@@ -90,6 +118,8 @@ function changePage(pageNumber) {
             changePage(1); // 정렬 기준 변경 시 첫 페이지로 이동
         });
     });
+
+
     function ceilDivideBy4(reviewCount) {
         return Math.ceil(reviewCount / 4);
     }
