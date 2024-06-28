@@ -56,12 +56,13 @@
             <div id="cocktailInfo">
                 <div id="name"></div>
                 <div id="star">
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div class="stars"></div> <!--임시-->
-                    <div>5.0</div> <!--임시-->
+                    <!-- 평균 평점 들어갈곳 -->
+<!--                    <div class="stars"></div>-->
+<!--                    <div class="stars"></div>-->
+<!--                    <div class="stars"></div>-->
+<!--                    <div class="stars"></div>-->
+<!--                    <div class="stars"></div>-->
+<!--                    <div>5.0</div>-->
                 </div>
                 <div id="info"></div>
                 <div id="price"></div>
@@ -100,12 +101,13 @@
                             </div>
                         </div>
 
-                    </div>
-
-                    <div class="pagination">
-                        <ul class="pagination" id="pagination">
-                            <!-- 여기에 페이징 버튼이 동적으로 추가될 예정 -->
-                        </ul>
+                        <div class="pagination">
+                            <span id="reviewPrev" style="display: none; background-color: red;">이전</span>
+                            <ul class="pagination" id="pagination">
+                                <!-- 여기에 페이징 버튼이 동적으로 추가될 예정 -->
+                            </ul>
+                            <span id="reviewNext" style="display: block; background-color: red;">다음</span>
+                        </div>
                     </div>
 
                 </div>
@@ -143,10 +145,12 @@
     <script th:inline="javascript">
         const menuList = [[${menuList}]];
         const currentCocktail = [[${menu}]];
+        const reviewCount = [[${reviewCount}]];
     </script>
     <section id="footer"></section>
 
     <script th:src="@{/js/review/reviewData.js}"></script>
+    <script th:src="@{/js/mypage/orderData.js}"></script>
     <script th:src="@{/js/menu/detail.js}"></script>
 
 

@@ -3,34 +3,30 @@ window.addEventListener('load', async () => {
     try {
         loadMenu();
         addEvent();
+        avgRate(currentCocktail);
 
         if (logged_id !== -1) {
             await checkToRecent(currentCocktail);
             await loadRecent(logged_id);
+
+            const recentSectionCon = document.getElementById("recentSection-con");
+
+            window.addEventListener("scroll", function () {
+                // Get the current scroll position
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+                // Set the top position of the element
+                recentSectionCon.style.top = scrollTop + "px";
+            });
         }
     } catch (error) {
         console.error('Error during initialization:', error);
     }
 
-    loadReviews(menu.id, 1); // 리뷰 로드
-});
-window.addEventListener('popstate', function (event) {
-    // This code runs when the back button is clicked
-    alert('popstate event triggered');
-    location.reload(); // Refresh the page
+    changePage(1);
+    renderPagination((parseInt(reviewCount/4)) + 1);
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    const recentSectionCon = document.getElementById("recentSection-con");
-
-    window.addEventListener("scroll", function() {
-        // Get the current scroll position
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-        // Set the top position of the element
-        recentSectionCon.style.top = scrollTop + "px";
-    });
-});
 
 async function loadMenu() {
     $('#img').css({'background-image': `url('${menu.imgUrl}')`});
@@ -105,6 +101,14 @@ function addEvent(){
 
         switchToFullHeart();
         closeComment();
+    });
+
+    $('#reviewPrev').click(function(e) {
+        changePage(currentPage-1);
+    });
+
+    $('#reviewNext').click(function(e) {
+        changePage(currentPage+1);
     });
 }
 
