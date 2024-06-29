@@ -113,12 +113,22 @@ function addDragEventToPostIt(postItType, postItElement){
         document.body.onmousemove = onMouseMove;
 
         document.body.onmouseup = function () {
-            isMouseDown = false;
-            postItElement.style.zIndex = 1; // TODO
+            if(!isMouseDown) return;
 
-            // console.log("x-coordinate : " + postItElement.offsetLeft);
-            // console.log("y-coordinate : " + postItElement.offsetTop);
-            // console.log("z-coordinate : " + 1);
+            isMouseDown = false;
+            postItElement.style.zIndex = 1;
+
+            // let x_coordinate = postItElement.offsetLeft;
+            // let y_coordinate = postItElement.offsetTop;
+            // let z_coordinate = postItElement.zIndex;
+            // if(postItType === CREATEPOSTIT){ // postItType이 CREATEPOSTIT인 경우는,
+            //                                  // 처음에 포스트잇 종류 5개 중 클릭해서 새로운 포스트잇을 게시판에 놓은 경우.
+            //     createGuestBookData(x_coordinate, y_coordinate, z_coordinate, content);
+            // }else if(postItType === POSTIT){ // postItType이 POSTIT인 경우는,
+            //                                  // 이미 게시판에 붙은 포스트잇을 드래그해서, 새로운 위치에 갖다놓은 경우.
+            //     updateGuestBookData(x_coordinate, y_coordinate, z_coordinate);
+            // }
+
             addDragEventToPostIt(POSTIT, postItElement);
         };
     });

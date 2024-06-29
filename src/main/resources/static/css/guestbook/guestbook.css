@@ -23,7 +23,7 @@ body{
     top: 83px;
     position: relative;
     z-index: 3;
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 #guestbook_background {

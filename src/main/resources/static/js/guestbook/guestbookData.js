@@ -60,7 +60,7 @@ function buildGuestBookData(guestBook) {
 
         memoBox.appendChild(contentBox);
 
-
+        addDragEventToPostIt(POSTIT, newDiv);
 
 
     });
