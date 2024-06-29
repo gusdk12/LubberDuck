@@ -608,28 +608,80 @@ body {
 
 
 /*페이징*/
+/*.paginationContainer {*/
+/*    margin-top: 10px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center; !* 추가: 세로 정렬을 위해 *!*/
+/*    font-size: 20px;*/
+/*}*/
+
+/*#pagination {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    list-style: none; !* 추가: 리스트 스타일 제거 *!*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.pagination li {*/
+/*    margin-left: 5px;*/
+/*    margin-right: 5px;*/
+/*}*/
+
+/*.pagination li span {*/
+/*    color: #ed8f8f;*/
+/*    border-radius: 5px;*/
+/*    padding: 7px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.pagination-button {*/
+/*    color: #ed8f8f;*/
+/*    border-radius: 5px;*/
+/*    padding: 7px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.pagination li span:hover,*/
+/*.pagination-button:hover {*/
+/*    background-color: #ffffff;*/
+/*}*/
+
+/*.pagination li span:active,*/
+/*.pagination-button:active,*/
+/*.pagination li span.active {*/
+/*    background-color: #dda7a7;*/
+/*    color: white;*/
+/*}*/
+
 .paginationContainer {
     margin-top: 10px;
     display: flex;
     justify-content: center;
-    align-items: center; /* 추가: 세로 정렬을 위해 */
+    align-items: center; /* 세로 정렬 */
     font-size: 20px;
 }
 
 #pagination {
     display: flex;
     justify-content: center;
-    list-style: none; /* 추가: 리스트 스타일 제거 */
+    list-style: none; /* 리스트 스타일 제거 */
     padding: 0;
     margin: 0;
 }
 
-.pagination li {
+.pagination div, .pagination span {
+    display: flex;
+    align-items: center; /* 세로 정렬 */
+}
+
+.pagination div {
     margin-left: 5px;
     margin-right: 5px;
 }
 
-.pagination li span {
+.pagination div span {
     color: #ed8f8f;
     border-radius: 5px;
     padding: 7px;
@@ -643,14 +695,19 @@ body {
     cursor: pointer;
 }
 
-.pagination li span:hover,
+.pagination div span:hover,
 .pagination-button:hover {
     background-color: #ffffff;
 }
 
-.pagination li span:active,
+.pagination div span:active,
 .pagination-button:active,
-.pagination li span.active {
+.pagination div span.active {
     background-color: #dda7a7;
     color: white;
+}
+
+.pagination-button.disabled {
+    pointer-events: none;
+    opacity: 0;
 }

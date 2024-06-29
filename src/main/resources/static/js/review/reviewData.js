@@ -54,15 +54,133 @@ function buildReviewSection(reviews){
         renderReviews(sortedReviews);
     });
 }
-
-
+//
+//
+//
+// function renderPagination(reviewCount) {
+//     var pageSize = 4; // Number of items per page
+//     var totalPages = Math.ceil(reviewCount / pageSize);
+//     var maxVisiblePages = 5;
+//     var paginationContainer = document.getElementById('pagination');
+//     paginationContainer.innerHTML = ''; // Clear existing content
+//
+//     var startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+//     var endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+//
+//     if (endPage - startPage + 1 < maxVisiblePages) {
+//         startPage = Math.max(1, endPage - maxVisiblePages + 1);
+//     }
+//
+//     // Add previous (<<) button
+//     var prev2Button = document.createElement('span');
+//     prev2Button.textContent = '<<';
+//     prev2Button.classList.add('pagination-button');
+//
+//     prev2Button.addEventListener('click', function() {
+//         currentPage = 1;
+//         renderPagination(reviewCount);
+//     });
+//
+//     paginationContainer.appendChild(prev2Button);
+//
+//     // Add previous (<) button
+//     var prevButton = document.createElement('span');
+//     prevButton.textContent = '<';
+//     prevButton.classList.add('pagination-button');
+//     if (currentPage > 1) {
+//         prevButton.addEventListener('click', function() {
+//             currentPage--;
+//             renderPagination(reviewCount);
+//         });
+//     } else {
+//         prevButton.classList.add('disabled');
+//     }
+//     paginationContainer.appendChild(prevButton);
+//
+//     // Add page buttons
+//     for (var i = startPage; i <= endPage; i++) {
+//         var pageLi = document.createElement('li');
+//         var pageNumberSpan = document.createElement('span');
+//         pageNumberSpan.textContent = i;
+//
+//         // Add .active class to the current page
+//         if (i === currentPage) {
+//             pageNumberSpan.classList.add('active');
+//         }
+//
+//         // Handle page number click event
+//         pageNumberSpan.addEventListener('click', function() {
+//             var pageNumber = parseInt(this.textContent);
+//             currentPage = pageNumber; // Update current page
+//
+//             renderPagination(reviewCount); // Re-render pagination
+//         });
+//
+//         // Append page number to li and ul
+//         pageLi.appendChild(pageNumberSpan);
+//         paginationContainer.appendChild(pageLi);
+//     }
+//
+//     // Add next (>) button
+//     var nextButton = document.createElement('span');
+//     nextButton.textContent = '>';
+//     nextButton.classList.add('pagination-button');
+//     if (currentPage < totalPages) {
+//         nextButton.addEventListener('click', function() {
+//             currentPage++;
+//             renderPagination(reviewCount);
+//         });
+//     } else {
+//         nextButton.classList.add('disabled');
+//     }
+//     paginationContainer.appendChild(nextButton);
+//
+//     // Add next (>>) button
+//     var next2Button = document.createElement('span');
+//     next2Button.textContent = '>>';
+//     next2Button.classList.add('pagination-button');
+//
+//     next2Button.addEventListener('click', function() {
+//         currentPage = totalPages;
+//         renderPagination(reviewCount);
+//     });
+//
+//     paginationContainer.appendChild(next2Button);
+//
+// // Handle visibility of previous (<) and next (>) buttons based on currentPage
+//     if (currentPage === 1) {
+//         prevButton.style.display = 'none';
+//         prev2Button.style.display = 'none';
+//     } else {
+//         prevButton.style.display = 'inline-block';
+//         prev2Button.style.display = 'inline-block';
+//     }
+//
+//     if (currentPage === totalPages) {
+//         nextButton.style.display = 'none';
+//         next2Button.style.display = 'none';
+//     } else {
+//         nextButton.style.display = 'inline-block';
+//         next2Button.style.display = 'inline-block';
+//     }
+//
+//     // Handle page load for the current page
+//     var sortOption = document.querySelector('input[name="sort"]:checked').value;
+//     loadReviews(currentCocktail, currentPage, sortOption);
+//
+//     // Set initial active class
+//     var initialActivePage = paginationContainer.querySelector('li span.active');
+//     if (initialActivePage) {
+//         initialActivePage.classList.add('active');
+//     }
+// }
 
 function renderPagination(reviewCount) {
-    var pageSize = 4; // Number of items per page
+    var pageSize = 4;
     var totalPages = Math.ceil(reviewCount / pageSize);
     var maxVisiblePages = 5;
     var paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = ''; // Clear existing content
+    paginationContainer.innerHTML = '';
 
     var startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     var endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
@@ -71,105 +189,73 @@ function renderPagination(reviewCount) {
         startPage = Math.max(1, endPage - maxVisiblePages + 1);
     }
 
-    // Add previous (<<) button
-    var prev2Button = document.createElement('span');
-    prev2Button.textContent = '<<';
-    prev2Button.classList.add('pagination-button');
+    // 버튼을 감싸는 div 추가 함수
+    function addButton(text, handler, isDisabled) {
+        var buttonContainer = document.createElement('div');
+        var button = document.createElement('span');
+        button.textContent = text;
+        button.classList.add('pagination-button');
+        if (isDisabled) button.classList.add('disabled');
+        button.addEventListener('click', handler);
+        buttonContainer.appendChild(button);
+        paginationContainer.appendChild(buttonContainer);
+    }
 
-    prev2Button.addEventListener('click', function() {
-        currentPage = 1;
-        renderPagination(reviewCount);
-    });
+    // 이전 (<<) 버튼 추가
+    addButton('<<', function() {
+        if (currentPage !== 1) {
+            currentPage = 1;
+            renderPagination(reviewCount);
+        }
+    }, currentPage === 1);
 
-    paginationContainer.appendChild(prev2Button);
-
-    // Add previous (<) button
-    var prevButton = document.createElement('span');
-    prevButton.textContent = '<';
-    prevButton.classList.add('pagination-button');
-    if (currentPage > 1) {
-        prevButton.addEventListener('click', function() {
+    // 이전 (<) 버튼 추가
+    addButton('<', function() {
+        if (currentPage > 1) {
             currentPage--;
             renderPagination(reviewCount);
-        });
-    } else {
-        prevButton.classList.add('disabled');
-    }
-    paginationContainer.appendChild(prevButton);
+        }
+    }, currentPage === 1);
 
-    // Add page buttons
+    // 페이지 번호 버튼 추가
     for (var i = startPage; i <= endPage; i++) {
-        var pageLi = document.createElement('li');
+        var pageDiv = document.createElement('div');
         var pageNumberSpan = document.createElement('span');
         pageNumberSpan.textContent = i;
-
-        // Add .active class to the current page
         if (i === currentPage) {
             pageNumberSpan.classList.add('active');
         }
-
-        // Handle page number click event
         pageNumberSpan.addEventListener('click', function() {
             var pageNumber = parseInt(this.textContent);
-            currentPage = pageNumber; // Update current page
-
-            renderPagination(reviewCount); // Re-render pagination
-        });
-
-        // Append page number to li and ul
-        pageLi.appendChild(pageNumberSpan);
-        paginationContainer.appendChild(pageLi);
-    }
-
-    // Add next (>) button
-    var nextButton = document.createElement('span');
-    nextButton.textContent = '>';
-    nextButton.classList.add('pagination-button');
-    if (currentPage < totalPages) {
-        nextButton.addEventListener('click', function() {
-            currentPage++;
+            currentPage = pageNumber;
             renderPagination(reviewCount);
         });
-    } else {
-        nextButton.classList.add('disabled');
-    }
-    paginationContainer.appendChild(nextButton);
-
-    // Add next (>>) button
-    var next2Button = document.createElement('span');
-    next2Button.textContent = '>>';
-    next2Button.classList.add('pagination-button');
-
-    next2Button.addEventListener('click', function() {
-        currentPage = totalPages;
-        renderPagination(reviewCount);
-    });
-
-    paginationContainer.appendChild(next2Button);
-
-// Handle visibility of previous (<) and next (>) buttons based on currentPage
-    if (currentPage === 1) {
-        prevButton.style.display = 'none';
-        prev2Button.style.display = 'none';
-    } else {
-        prevButton.style.display = 'inline-block';
-        prev2Button.style.display = 'inline-block';
+        pageDiv.appendChild(pageNumberSpan);
+        paginationContainer.appendChild(pageDiv);
     }
 
-    if (currentPage === totalPages) {
-        nextButton.style.display = 'none';
-        next2Button.style.display = 'none';
-    } else {
-        nextButton.style.display = 'inline-block';
-        next2Button.style.display = 'inline-block';
-    }
+    // 다음 (>) 버튼 추가
+    addButton('>', function() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPagination(reviewCount);
+        }
+    }, currentPage === totalPages);
 
-    // Handle page load for the current page
+    // 다음 (>>) 버튼 추가
+    addButton('>>', function() {
+        if (currentPage !== totalPages) {
+            currentPage = totalPages;
+            renderPagination(reviewCount);
+        }
+    }, currentPage === totalPages);
+
+    // 현재 페이지에 대한 로드 처리
     var sortOption = document.querySelector('input[name="sort"]:checked').value;
     loadReviews(currentCocktail, currentPage, sortOption);
 
-    // Set initial active class
-    var initialActivePage = paginationContainer.querySelector('li span.active');
+    // 초기 활성 클래스 설정
+    var initialActivePage = paginationContainer.querySelector('div span.active');
     if (initialActivePage) {
         initialActivePage.classList.add('active');
     }
@@ -205,28 +291,6 @@ function changePage(pageNumber) {
     var currentPageSpan = paginationContainer.querySelector('li:nth-child(' + currentPage + ') span');
     if (currentPageSpan) {
         currentPageSpan.classList.add('active');
-    }
-
-    var reviewPrev = $('#reviewPrev');
-    var reviewNext = $('#reviewNext');
-    var reviewPrev2 = $('#reviewPrev2');
-    var reviewNext2 = $('#reviewNext2');
-
-    // currentPage에 따라 CSS 조절
-    if (currentPage > 1) {
-        reviewPrev.css('display', 'block'); // 이전 버튼 보이기
-        reviewPrev2.css('display', 'block');
-    } else {
-        reviewPrev.css('display', 'none'); // 이전 버튼 숨기기
-        reviewPrev2.css('display', 'none');
-    }
-
-    if (currentPage < (parseInt(ceilDivideBy4(reviewCount)))) {
-        reviewNext.css('display', 'block'); // 다음 버튼 보이기
-        reviewNext2.css('display', 'block');
-    }else {
-        reviewNext.css('display', 'none'); // 다음 버튼 숨기기
-        reviewNext2.css('display', 'none');
     }
 
     // 해당 페이지의 리뷰를 로드
