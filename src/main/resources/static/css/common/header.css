@@ -67,20 +67,33 @@ section {
     cursor: pointer;
 }
 
-#drop {
+#drop_manager {
     display: none;
     position: absolute;
-    background-image: url('/img/header/dropmenu.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-color: #fceedf;
+    width: 200px;
     height: 250px;
+    border-radius: 10px;
     z-index: 100;
+    padding-top: 5px;
+}
+
+#drop_customer {
+    display: none;
+    position: absolute;
+    background-color: #fceedf;
+    width: 200px;
+    height:65px;
+    border-radius: 10px;
+    z-index: 100;
+    padding-top: 5px;
 }
 
 .dropNav_list {
-    width: 200px;
+    width: 180px;
     height: 50px;
-    margin: 28px 0 0 30px;
+    margin: 10px 0 0 10px;
+    padding-left: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -88,6 +101,12 @@ section {
     font-family: 'Cafe24Ssurround';
     font-size: 21px;
     text-align: left;
+    border-bottom: 2px burlywood dotted;
+}
+
+.lastNav {
+    border-bottom: none;
+    margin: 5px 0 0 10px;
 }
 
 .dropNav_list:hover {
