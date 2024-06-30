@@ -19,7 +19,7 @@ public interface GuestBookRepository {
     int updateById(GuestBook guestBook);
 
     // 최대 Z좌표 가진 방명록 조회
-    GuestBook findMaxZ();
+    Long findMaxZ();
 
     // 방명록 삭제
     int deleteByPostIt(GuestBook guestBook);
