@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 body{
     margin: 0;
     width: 100vw;
@@ -99,3 +103,7 @@ body{
 #postIt4{background-image: url("/img/guestBook/blue.png")}
 #postIt5{background-image: url("/img/guestBook/purple.png")}
 
+.content {
+    caret-color: black;
+
+}

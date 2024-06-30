@@ -57,7 +57,7 @@
 <section id="footer">
 </section>
 
-<th:block sec:authorize="hasRole('CUSTOMER')">
+<th:block sec:authorize="hasAnyRole('CUSTOMER', 'MANAGER')">
     <th:block th:with="logged_user=${#authentication.principal.user}">
         <script th:inline="javascript">
             logged_id = [[${logged_user.id}]]

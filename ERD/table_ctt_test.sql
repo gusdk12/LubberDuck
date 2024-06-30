@@ -15,7 +15,7 @@ SELECT * FROM ctt_calendar;
 SELECT * FROM ctt_guestbook;
 
 SELECT u.id           "u_id"
-     , u.nickname     "u_nickname"
+     , u.nickname     "nickname"
      , b.id           "b_id"
      , b.user_id      "b_user_id"
      , b.x_coordinate "b_x_coordinate"
@@ -26,7 +26,8 @@ SELECT u.id           "u_id"
 FROM ctt_guestbook b,
      ctt_user u
 WHERE 1 = 1
-  AND b.user_id = u.id;
+  AND b.user_id = u.id
+ORDER BY z_coordinate DESC;
 
 SELECT MAX(z_coordinate) AS MaxZ
 FROM ctt_guestbook;

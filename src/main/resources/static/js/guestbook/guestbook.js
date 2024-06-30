@@ -1,8 +1,9 @@
-
 const CREATEPOSTIT = 1;
 const POSTIT = 2;
 
 window.addEventListener('load', () => {
+    $("#menunav").show();
+
     initBoardDragEvent();
     initPostItCreateEvent();
 
@@ -14,11 +15,11 @@ function initBoardDragEvent(postItType, element) {
     let startX, startY, scrollLeft, scrollTop;
     //const allcontainer = document.querySelector('#allcontainer');
 
-    document.addEventListener('contextmenu', function(e) {
+    document.addEventListener('contextmenu', function (e) {
         e.preventDefault(); // Prevent the default context menu from appearing
     });
 
-    document.addEventListener('mousedown', function(e) {
+    document.addEventListener('mousedown', function (e) {
         if (e.button === 2) { // Right mouse button
             isDragging = true;
             startX = e.clientX;
@@ -29,7 +30,7 @@ function initBoardDragEvent(postItType, element) {
         }
     });
 
-    document.addEventListener('mousemove', function(e) {
+    document.addEventListener('mousemove', function (e) {
         if (isDragging) {
             const dx = e.clientX - startX;
             const dy = e.clientY - startY;
@@ -44,27 +45,28 @@ function initBoardDragEvent(postItType, element) {
         }
     });
 
-    document.addEventListener('mouseup', function(e) {
+    document.addEventListener('mouseup', function (e) {
         if (isDragging) {
             isDragging = false;
             document.body.style.cursor = 'grab';
         }
     });
 }
-function initPostItCreateEvent(){
+
+function initPostItCreateEvent() {
     const draggableList = document.querySelectorAll('.createpostIt');
 
-    for(let draggable of draggableList){
+    for (let draggable of draggableList) {
         addDragEventToPostIt(CREATEPOSTIT, draggable);
     }
 }
 
-function addDragEventToPostIt(postItType, postItElement){
+function addDragEventToPostIt(postItType, postItElement) {
     const dropzone = document.querySelector('#guestbook');
     let offsetX, offsetY;
 
     postItElement.addEventListener('mousedown', (e) => {
-        if(postItType === CREATEPOSTIT){
+        if (postItType === CREATEPOSTIT) {
             const newDiv = document.createElement('div');
             newDiv.className = 'postIt';
             newDiv.id = `${postItElement.getAttribute('id')}`;
@@ -75,12 +77,10 @@ function addDragEventToPostIt(postItType, postItElement){
             memoBox.className = 'postItContent';
             newDiv.appendChild(memoBox);
 
-            const username = document.createElement('div');
-            username.className = 'nickname';
-            memoBox.appendChild(username);
-
-            const contentBox = document.createElement('div');
+            const contentBox = document.createElement('input');
             contentBox.className = 'content';
+            contentBox.type = 'text';
+            contentBox.placeholder = '방명록을 작성해주세요';
             memoBox.appendChild(contentBox);
         }
 
@@ -110,26 +110,35 @@ function addDragEventToPostIt(postItType, postItElement){
         function onMouseMove(event) {
             isMouseDown && moveAt(event.pageX, event.pageY);
         }
+
         document.body.onmousemove = onMouseMove;
 
         document.body.onmouseup = function () {
-            if(!isMouseDown) return;
+            if (!isMouseDown) return;
 
             isMouseDown = false;
-            postItElement.style.zIndex = 1;
 
-            // let x_coordinate = postItElement.offsetLeft;
-            // let y_coordinate = postItElement.offsetTop;
-            // let z_coordinate = postItElement.zIndex;
-            // if(postItType === CREATEPOSTIT){ // postItType이 CREATEPOSTIT인 경우는,
-            //                                  // 처음에 포스트잇 종류 5개 중 클릭해서 새로운 포스트잇을 게시판에 놓은 경우.
-            //     createGuestBookData(x_coordinate, y_coordinate, z_coordinate, content);
-            // }else if(postItType === POSTIT){ // postItType이 POSTIT인 경우는,
-            //                                  // 이미 게시판에 붙은 포스트잇을 드래그해서, 새로운 위치에 갖다놓은 경우.
-            //     updateGuestBookData(x_coordinate, y_coordinate, z_coordinate);
-            // }
+            let x_coordinate = parseFloat(postItElement.offsetLeft);
+            let y_coordinate = parseFloat(postItElement.offsetTop);
+            let memoId = postItElement.dataset.memoId;
+            let postIt = (postItElement.id).replace('postIt', '');
 
-            addDragEventToPostIt(POSTIT, postItElement);
+            if (postItType === CREATEPOSTIT) {  // postItType이 CREATEPOSTIT인 경우는,
+                                                // 처음에 포스트잇 종류 5개 중 클릭해서 새로운 포스트잇을 게시판에 놓은 경우.
+                postItElement.querySelector('.content').addEventListener("focusout", function (event) {
+                    let content = postItElement.querySelector('.content').value;
+                    if (content !== '') {
+                        createGuestBookData(x_coordinate, y_coordinate, content, postIt);
+                        window.location.reload();
+                        addDragEventToPostIt(POSTIT, postItElement);
+                    }
+                });
+            } else if (postItType === POSTIT) {  // postItType이 POSTIT인 경우는,
+                                                 // 이미 게시판에 붙은 포스트잇을 드래그해서, 새로운 위치에 갖다놓은 경우.
+                updateGuestBookData(memoId, x_coordinate, y_coordinate);
+                window.location.reload();
+            }
+            // addDragEventToPostIt(POSTIT, postItElement);
         };
     });
 }
