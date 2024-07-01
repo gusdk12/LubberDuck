@@ -1,175 +1,109 @@
+// 페이지네이션
+function renderPagination(reviewCount, currentPage, sortType) {
+    var paginationContainer = document.getElementById('pagination');
+    var reviewsContainer = document.querySelector('.reviews-container');
 
-
-function buildReviewSection(reviews){
-    //     // 예제 데이터로 임시 리뷰 목록 설정
-    console.log(reviews);
-    reviewsData = reviews;
-
-    // 최신순으로 초기에 정렬하여 렌더링
-    renderReviews(reviewsData);
-
-
-    // 리뷰 목록을 HTML에 렌더링합니다.
-    function renderReviews(reviews) {
-        var reviewsContainer = document.querySelector('.reviews-container');
-        reviewsContainer.innerHTML = ''; // 기존 리뷰를 비웁니다.
-
-        reviews.forEach(function (review) {
-            var reviewElement = document.createElement('div');
-            reviewElement.classList.add('review');
-
-            // 리뷰 내용 구성
-            reviewElement.innerHTML = `
-                <div class="review-content">
-                    <div class="review-header">
-                        <div class="review-title">
-                            <span class="star-img">${generateStars(review.rate)}</span>
-                            <span class="star_score">${review.rate}</span>
-                            <h6 id="review_name">${review.user.nickname}</h6>
-                        </div>
-                        <span class="review-regdate">${formatDate(review.regdate)}</span>
-                    </div>
-                    <div class="review-text">${review.content}</div>
-                    <hr class="review_hr">
-                </div>
-            `;
-
-            reviewsContainer.appendChild(reviewElement);
-        });
+    // 리뷰가 없는 경우
+    if (!reviewCount || reviewCount === 0) {
+        reviewsContainer.innerHTML = '<p id="review_null">아직 작성된 리뷰가 없습니다</p>';
+        paginationContainer.innerHTML = ''; // 페이지네이션 비우기
+        return;
     }
 
-    // 별점 이미지를 생성합니다.
-    function generateStars(score) {
-        var starImgFull = '<img src="/img/review/yellow_star.png" class="star-img">';
-        var starImgEmpty = '<img src="/img/review/grey_star.png" class="star-img">';
-        var fullStars = starImgFull.repeat(score);
-        var emptyStars = starImgEmpty.repeat(5 - score);
-        return fullStars + emptyStars;
-    }
-
-    // 라디오 버튼 변경 시 리뷰를 다시 정렬하여 렌더링
-    $('input[name="sort"]').change(function () {
-        var sortType = $(this).val();
-        var sortedReviews = sortReviews(reviewsData, sortType);
-        renderReviews(sortedReviews);
-    });
-}
-
-function renderPagination(reviewCount) {
-    var pageSize = 4; // 한 페이지에 보여질 아이템 수
+    var pageSize = 4;
     var totalPages = Math.ceil(reviewCount / pageSize);
     var maxVisiblePages = 5;
+    // var paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';
 
-    var paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = ''; // 기존의 내용을 모두 지움
+    var startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    var endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
-    // 최소한의 버튼 수를 정하는 경우
-    var startPage = Math.max(1, currentPage - 2);
-    var endPage = Math.min(totalPages, currentPage + 2);
+    if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
 
+    // 버튼을 감싸는 div 추가 함수
+    function addButton(text, handler, isDisabled) {
+        var buttonContainer = document.createElement('div');
+        var button = document.createElement('span');
+        button.textContent = text;
+        button.classList.add('pagination-button');
+        if (isDisabled) button.classList.add('disabled');
+        button.addEventListener('click', handler);
+        buttonContainer.appendChild(button);
+        paginationContainer.appendChild(buttonContainer);
+    }
 
-    // 페이지 버튼 추가
-    for (var i = 1; i <= totalPages; i++) {
-        var pageLi = document.createElement('li');
+    // 이전 (<<) 버튼 추가
+    addButton('<<', function() {
+        if (currentPage !== 1) {
+            currentPage = 1;
+            renderPagination(reviewCount, currentPage, sortType);
+        }
+    }, currentPage === 1);
+
+    // 이전 (<) 버튼 추가
+    addButton('<', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderPagination(reviewCount, currentPage, sortType);
+        }
+    }, currentPage === 1);
+
+    // 페이지 번호 버튼 추가
+    for (var i = startPage; i <= endPage; i++) {
+        var pageDiv = document.createElement('div');
         var pageNumberSpan = document.createElement('span');
         pageNumberSpan.textContent = i;
-
-        // 현재 페이지인 경우 .active 클래스 추가
         if (i === currentPage) {
             pageNumberSpan.classList.add('active');
         }
-
-        // 페이지 번호 클릭 시 이벤트 처리
         pageNumberSpan.addEventListener('click', function() {
             var pageNumber = parseInt(this.textContent);
-            currentPage = pageNumber; // 현재 페이지 업데이트
-
-            // 모든 페이지 번호의 활성 클래스 제거
-            var allPageNumbers = paginationContainer.querySelectorAll('li span');
-            allPageNumbers.forEach(function(span) {
-                span.classList.remove('active');
-            });
-
-            // 클릭된 페이지 번호에 활성 클래스 추가
-            this.classList.add('active');
-
-            // 페이지 이동 함수 호출
-            changePage(currentPage);
+            currentPage = pageNumber;
+            renderPagination(reviewCount, currentPage, sortType);
         });
-
-        // 페이지 번호를 li에 추가하고 ul에 추가
-        pageLi.appendChild(pageNumberSpan);
-        paginationContainer.appendChild(pageLi);
+        pageDiv.appendChild(pageNumberSpan);
+        paginationContainer.appendChild(pageDiv);
     }
 
-    // 페이지 로드 후 첫 페이지 리뷰를 로드
-    var sortOption = document.querySelector('input[name="sort"]:checked').value;
-    loadReviews(currentCocktail, currentPage, sortOption);
+    // 다음 (>) 버튼 추가
+    addButton('>', function() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPagination(reviewCount, currentPage, sortType);
+        }
+    }, currentPage === totalPages);
 
-    // 초기 페이지의 활성 클래스 설정
-    var initialActivePage = paginationContainer.querySelector('li:first-child span');
+    // 다음 (>>) 버튼 추가
+    addButton('>>', function() {
+        if (currentPage !== totalPages) {
+            currentPage = totalPages;
+            renderPagination(reviewCount, currentPage, sortType);
+        }
+    }, currentPage === totalPages);
+
+    // 현재 페이지에 대한 로드 처리
+    loadReviews(currentCocktail, currentPage, sortType);
+
+    // 초기 활성 클래스 설정
+    var initialActivePage = paginationContainer.querySelector('div span.active');
     if (initialActivePage) {
         initialActivePage.classList.add('active');
     }
-}
 
-
-
-function changePage(pageNumber) {
-    // 현재 페이지 번호 업데이트
-    currentPage = pageNumber;
-    var sortOption = document.querySelector('input[name="sort"]:checked').value;
-
+    // 라디오 버튼 변경 시 이벤트 핸들러 등록
     document.querySelectorAll('input[name="sort"]').forEach((elem) => {
-        elem.addEventListener('change', function() {
-            sortOption = this.value;
-            changePage(1); // 정렬 기준 변경 시 첫 페이지로 이동
-        });
+        elem.removeEventListener('change', sortChangeHandler); // 기존 이벤트 핸들러 제거
+        elem.addEventListener('change', sortChangeHandler); // 새로운 이벤트 핸들러 등록
     });
 
-
-    function ceilDivideBy4(reviewCount) {
-        return Math.ceil(reviewCount / 4);
+    // 정렬 옵션 변경 시 처리하는 함수
+    function sortChangeHandler() {
+        var newSortType = this.value;
+        renderPagination(reviewCount, 1, newSortType); // 첫 페이지로 이동하여 다시 렌더링
     }
-
-    var paginationContainer = document.getElementById('pagination');
-    var allPageNumbers = paginationContainer.querySelectorAll('li span');
-
-    // 모든 페이지 번호의 활성 클래스 제거
-    allPageNumbers.forEach(function(span) {
-        span.classList.remove('active');
-    });
-
-    // 클릭된 페이지 번호에 활성 클래스 추가
-    var currentPageSpan = paginationContainer.querySelector('li:nth-child(' + currentPage + ') span');
-    if (currentPageSpan) {
-        currentPageSpan.classList.add('active');
-    }
-
-    var reviewPrev = $('#reviewPrev');
-    var reviewNext = $('#reviewNext');
-    var reviewPrev2 = $('#reviewPrev2');
-    var reviewNext2 = $('#reviewNext2');
-
-    // currentPage에 따라 CSS 조절
-    if (currentPage > 1) {
-        reviewPrev.css('display', 'block'); // 이전 버튼 보이기
-        reviewPrev2.css('display', 'block');
-    } else {
-        reviewPrev.css('display', 'none'); // 이전 버튼 숨기기
-        reviewPrev2.css('display', 'none');
-    }
-
-    if (currentPage < (parseInt(ceilDivideBy4(reviewCount)))) {
-        reviewNext.css('display', 'block'); // 다음 버튼 보이기
-        reviewNext2.css('display', 'block');
-    }else {
-        reviewNext.css('display', 'none'); // 다음 버튼 숨기기
-        reviewNext2.css('display', 'none');
-    }
-
-    // 해당 페이지의 리뷰를 로드
-    loadReviews(currentCocktail, currentPage, sortOption);
 }
 
 function loadReviews(cocktail, page, sort) {
@@ -196,5 +130,45 @@ function loadReviews(cocktail, page, sort) {
 }
 
 
+// 리뷰 목록 생성 (buildReviewSection)
+function buildReviewSection(reviews){
+
+    // 리뷰 목록을 HTML에 렌더링합니다.
+    var reviewsContainer = document.querySelector('.reviews-container');
+    reviewsContainer.innerHTML = ''; // 기존 리뷰를 비웁니다.
+
+    reviews.forEach(function (review) {
+        var reviewElement = document.createElement('div');
+        reviewElement.classList.add('review');
+
+        // 리뷰 내용 구성
+        reviewElement.innerHTML = `
+            <div class="review-content">
+                <div class="review-header">
+                    <div class="review-title">
+                        <span class="star-img">${generateStars(review.rate)}</span>
+                        <span class="star_score">${review.rate}</span>
+                        <h6 id="review_name">${review.user.nickname}</h6>
+                    </div>
+                    <span class="review-regdate">${formatDate(review.regdate)}</span>
+                </div>
+                <div class="review-text">${review.content}</div>
+                <hr class="review_hr">
+            </div>
+        `;
+
+        reviewsContainer.appendChild(reviewElement);
+    });
+
+
+    // 별점 이미지를 생성합니다.
+    function generateStars(score) {
+        var starImgFull = '<img src="/img/review/yellow_star.png" class="star-img">';
+        var starImgEmpty = '<img src="/img/review/grey_star.png" class="star-img">';
+        var fullStars = starImgFull.repeat(score);
+        var emptyStars = starImgEmpty.repeat(5 - score);
+        return fullStars + emptyStars;
+    }
+}
 
 

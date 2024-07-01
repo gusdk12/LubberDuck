@@ -13,15 +13,15 @@ public interface GuestBookRepository {
     List<GuestBook> contentAll();
 
     // 해당 id 방명록 조회
-    GuestBook findById(Long id);
+//    GuestBook findById(Long id);
 
     // 해당 id 방명록 수정
     int updateById(GuestBook guestBook);
 
     // 최대 Z좌표 가진 방명록 조회
-    GuestBook findMaxZ();
+    Long findMaxZ();
 
     // 방명록 삭제
-    int deleteByPostIt(GuestBook guestBook);
+    int deleteByPostIt(Long id);
 
 }

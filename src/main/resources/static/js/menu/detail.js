@@ -29,8 +29,8 @@ window.addEventListener('load', async () => {
         console.error('Error during initialization:', error);
     }
 
-    changePage(1);
-    renderPagination(reviewCount);
+    // changePage(1);
+    renderPagination(reviewCount,1,1);
 });
 
 
@@ -95,26 +95,6 @@ function addEvent(){
             handleCommentSubmit();
         }
     });
-
-
-    $('#reviewPrev').click(function(e) {
-        changePage(currentPage-1);
-    });
-
-    $('#reviewNext').click(function(e) {
-        changePage(currentPage+1);
-    });
-
-    $('#reviewPrev2').click(function(e) {
-        changePage(1);
-    });
-
-    $('#reviewNext2').click(function(e) {
-        var totalPages = Math.ceil(reviewCount / 4);
-        changePage(totalPages);
-    });
-
-
 }
 
 function switchToFullHeart() {
