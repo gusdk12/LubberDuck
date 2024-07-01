@@ -13,7 +13,7 @@ public interface GuestBookRepository {
     List<GuestBook> contentAll();
 
     // 해당 id 방명록 조회
-    GuestBook findById(Long id);
+//    GuestBook findById(Long id);
 
     // 해당 id 방명록 수정
     int updateById(GuestBook guestBook);
@@ -22,6 +22,6 @@ public interface GuestBookRepository {
     Long findMaxZ();
 
     // 방명록 삭제
-    int deleteByPostIt(GuestBook guestBook);
+    int deleteByPostIt(Long id);
 
 }
