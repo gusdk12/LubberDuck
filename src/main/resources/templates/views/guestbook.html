@@ -20,6 +20,7 @@
 
     <script th:inline="javascript">
         var logged_id = -1;
+        var logged_authority = -1;
     </script>
     <title>방명록</title>
 
@@ -63,6 +64,7 @@
     <th:block th:with="logged_user=${#authentication.principal.user}">
         <script th:inline="javascript">
             logged_id = [[${logged_user.id}]]
+            logged_authority = [[${logged_user.authority_id}]]
         </script>
     </th:block>
 </th:block>

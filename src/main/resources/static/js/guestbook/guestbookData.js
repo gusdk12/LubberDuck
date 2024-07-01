@@ -36,25 +36,40 @@ function buildGuestBookData(guestBook) {
         newDiv.style.left = `${memo.x_coordinate}px`;   // x좌표
         newDiv.style.top = `${memo.y_coordinate}px`;    // y좌표
         newDiv.style.zIndex = `${memo.z_coordinate}`;   // z-index
-        newDiv.dataset.memoId = `${memo.id}`            // 방명록 id(PK)
+        newDiv.dataset.memoId = `${memo.id}`
+        newDiv.dataset.userId = `${memo.user_id}`// 방명록 id(PK)
 
         const delBtn = document.createElement('span');
-        delBtn.className = 'postItDel'
+        delBtn.className = 'postItDel';
         delBtn.textContent = 'X';
         newDiv.appendChild(delBtn);
 
-        // 마우스 이벤트 핸들러 추가
+
+        // 포스트잇 생성 시 삭제 버튼 추가
         newDiv.addEventListener('mouseenter', () => {
-            delBtn.style.display = 'block';
+            if (Number(newDiv.dataset.userId) === logged_id || (logged_authority && logged_authority === 2)) {
+                // 삭제 버튼 생성
+                delBtn.style.display = 'block';
+
+                // 삭제 버튼 클릭 이벤트 핸들러 추가
+                delBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteGuestBookData(newDiv.dataset.memoId);
+                });
+            } else {
+                // 삭제 버튼이 없는 경우
+                const delBtn = newDiv.querySelector('.postItDel');
+                if (delBtn) {
+                    newDiv.removeChild(delBtn);
+                }
+            }
         });
+
+        // 마우스가 벗어나면 삭제 버튼 제거
         newDiv.addEventListener('mouseleave', () => {
             delBtn.style.display = 'none';
         });
 
-        delBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            deleteGuestBookData(newDiv.dataset.memoId);
-        });
 
         const memoBox = document.createElement('div');
         memoBox.className = 'postItContent';

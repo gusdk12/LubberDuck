@@ -11,6 +11,7 @@ window.addEventListener('load', () => {
 });
 
 function initBoardDragEvent(postItType, element) {
+
     let isDragging = false;
     let startX, startY, scrollLeft, scrollTop;
     //const allcontainer = document.querySelector('#allcontainer');
@@ -62,6 +63,9 @@ function initPostItCreateEvent() {
 }
 
 function addDragEventToPostIt(postItType, postItElement) {
+
+    if (logged_id === -1) return;
+
     const dropzone = document.querySelector('#guestbook');
     let offsetX, offsetY;
 
