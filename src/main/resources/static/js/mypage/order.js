@@ -33,6 +33,10 @@ $(document).ready(function(){
             $('#contentError').text('리뷰 내용을 20자 이상 작성해주세요.');
             $('#contentError').show();
             isValid = false;
+        }  else if (content.length > 500) { // 리뷰 내용이 500자를 초과하는 경우
+            $('#contentError').text('리뷰 내용은 500자 이하여야 합니다.');
+            $('#contentError').show();
+            isValid = false;
         } else {
             $('#contentError').hide();
         }
