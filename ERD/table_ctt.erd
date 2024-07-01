@@ -4,8 +4,8 @@
   "settings": {
     "width": 3000,
     "height": 3000,
-    "scrollTop": -421,
-    "scrollLeft": -781.5517,
+    "scrollTop": -875,
+    "scrollLeft": -1429.5517,
     "zoomLevel": 0.8,
     "show": 511,
     "database": 4,
@@ -956,7 +956,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1718064510090,
+          "updateAt": 1719810150440,
           "createAt": 1718064483490
         }
       },
@@ -1205,18 +1205,18 @@
         "tableId": "_r6sdAmfUkBnHuWEk6f-m",
         "name": "content",
         "comment": "후기내용",
-        "dataType": "VARCHAR(500)",
+        "dataType": "LONGTEXT",
         "default": "",
         "options": 8,
         "ui": {
           "keys": 0,
           "widthName": 60,
           "widthComment": 60,
-          "widthDataType": 81,
+          "widthDataType": 60,
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1718066302006,
+          "updateAt": 1719810160313,
           "createAt": 1718066280321
         }
       },
@@ -2318,7 +2318,7 @@
       -1,
       {
         "name": 1718064486949,
-        "dataType": 1718064498293,
+        "dataType": 1719810150439,
         "comment": 1718064510090
       }
     ],
@@ -2437,7 +2437,7 @@
       -1,
       {
         "name": 1718066287925,
-        "dataType": 1718066296608,
+        "dataType": 1719810160312,
         "options(notNull)": 1718066298684,
         "comment": 1718066302006
       }
