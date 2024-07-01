@@ -15,10 +15,6 @@
 <body>
 <div class="container">
 
-    <section id="decoContent">
-        <div class="deco" id="pen"></div>
-    </section>
-
     <div class="member">
         <div class="logo">
             <h1>회원가입</h1>
@@ -49,7 +45,7 @@
 
             <div class="field">
                 <b>이메일</b>
-                <input name="email" type="email" placeholder="선택입력" th:value="${email}" required>
+                <input name="email" type="email" placeholder="필수입력" th:value="${email}" required>
             </div>
 
             <div class="field birth">
@@ -63,6 +59,11 @@
 
             <input type="submit" value="가입하기">
         </form>
+
+        <section id="decoContent">
+            <div class="deco" id="pen"></div>
+        </section>
+
     </div>
 </div>
 

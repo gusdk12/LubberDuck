@@ -13,13 +13,13 @@ body {
 
 #container{
     background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
-    height: 2000px;
+    height: 2300px;
     max-width: 900px;  /* 최대 폭 지정 */
     border-radius: 20px;
     margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content : space-between;
+    /*justify-content : space-between;*/
     align-items: center;
     gap: 30px;
 
@@ -73,7 +73,7 @@ body {
     z-index: 1;
     width: 600px;
     height: 90px;
-    top: 1585px;
+    top: 2180px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -90,12 +90,11 @@ body {
     justify-content : center;
     align-items: center;
     gap: 20px;
-    margin-top: 150px;
+    margin-top: 170px;
 }
 #cocktailImg{
     height: 80%;
     width: 45%;
-
     position: relative; /* 가연 */
 }
 #img{
@@ -314,12 +313,13 @@ body {
 #reviewSection{
     border-top: 1px solid #10573e;
     border-radius: 7px;
+    margin-top: 120px;
     height: 40%;
     width: 90%;
     /*background-color: #c4eacd;*/
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 700;
+    font-weight: 500;
     font-style: normal;
 }
 
@@ -452,20 +452,12 @@ body {
 }
 
 .review-text {
-    font-size: 11.5px;
+    font-size: 12px;
     text-align: justify;
-    /*margin-top: 3px;*/
-    padding: 15px;
+    padding: 10px;
     background-color: rgb(255, 248, 248);
     border-radius: 5px;
     box-sizing: border-box;
-    overflow: hidden;
-    position: relative;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    max-height: calc(5 * 1.5em);
-    cursor: pointer;
     height: auto;
 }
 
