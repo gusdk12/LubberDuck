@@ -92,6 +92,11 @@ function addEvents() {
             return;
         }
 
+        if (comment.length > 300) {
+            alert("입력된 글자 수가 300자를 초과했습니다.");
+            return;
+        }
+
         initializePopup();
         const {dateInt} = await checkAndConvertDate();
 
@@ -440,9 +445,48 @@ function isPastDate(date) {
 /*** 메뉴 관련 화면 구성 ***/
 // 오늘의 메뉴 화면에 표시
 function buildTodayMenu(data) {
+
+    // 이전 날짜에는 버튼 숨기기
+    // 이전 날짜일 경우
+    if (isPastDate(data.date)) {
+        $(".btn-edit").hide();
+        $(".btn-delete").hide();
+        $(".edit-disabled-text").show();
+        // TODO
+        $(".btn-add-menu").hide();
+        $(".notification-menu-text").text("오늘의 메뉴를 추가할 수 없습니다.");
+        // 이후 날짜일 경우
+    } else {
+        $(".btn-edit").show();
+        $(".btn-delete").show();
+        $(".edit-disabled-text").hide();
+        // TODO
+        $(".btn-add-menu").show();
+        $(".notification-menu-text").text("등록한 오늘의 메뉴가 없습니다.");
+    }
+
     // 오늘의 메뉴 데이터가 없는 경우
     if(!data.menu_id) {
         $('.notification-menu-text').show();
+        console.log(data.date);
+        console.log(isPastDate(data.date));
+        if (isPastDate(data.date)) {
+            $(".btn-edit").hide();
+            $(".btn-delete").hide();
+            $(".edit-disabled-text").show();
+            // TODO
+            $(".btn-add-menu").hide();
+            $(".notification-menu-text").text("오늘의 메뉴를 추가할 수 없습니다.");
+            // 이후 날짜일 경우
+        } else {
+            $(".btn-edit").show();
+            $(".btn-delete").show();
+            $(".edit-disabled-text").hide();
+            // TODO
+            $(".btn-add-menu").show();
+            $(".notification-menu-text").text("등록한 오늘의 메뉴가 없습니다.");
+        }
+
         return;
     }
 
@@ -467,25 +511,6 @@ function buildTodayMenu(data) {
             </div>
         </div>
     `);
-
-    // 이전 날짜에는 버튼 숨기기
-    // 이전 날짜일 경우
-    if (isPastDate(data.date)) {
-        $(".btn-edit").hide();
-        $(".btn-delete").hide();
-        $(".edit-disabled-text").show();
-        // TODO
-        $(".btn-add-menu").hide();
-        $(".notification-menu-text").text("오늘의 메뉴를 추가할 수 없습니다.");
-    // 이후 날짜일 경우
-    } else {
-        $(".btn-edit").show();
-        $(".btn-delete").show();
-        $(".edit-disabled-text").hide();
-        // TODO
-        $(".btn-add-menu").show();
-        $(".notification-menu-text").text("등록한 오늘의 메뉴가 없습니다.");
-    }
 }
 
 // 오늘의 메뉴 데이터를 가져오는 함수

@@ -11,6 +11,9 @@ import org.springframework.validation.Validator;
 
 @Component
 public class ManagerValidator implements Validator {
+
+    private static final int MAX_COMMENT_LENGTH = 400; // 오늘의 메뉴 comment 최대 글자 수
+
     @Override
     public boolean supports(Class<?> clazz) {
         // Menu, Calender 클래스 각각지원
@@ -28,6 +31,7 @@ public class ManagerValidator implements Validator {
     }
 
     private void validateMenu(Menu menu, Errors errors) {
+
         System.out.println("validate() 호출" + menu);
         // update 유효성 검사
         try {
@@ -43,10 +47,8 @@ public class ManagerValidator implements Validator {
     }
 
     private void validateCalendar(Calendar calendar, Errors errors) {
-        // date 필수 검증
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date", "date.required", "날짜는 필수입니다.");
-
-        // memo 필수 검증
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memo", "memo.required", "메모를 입력하세요.");
+        if (calendar.getComment() != null && calendar.getComment().length() > MAX_COMMENT_LENGTH) {
+            errors.rejectValue("comment", "comment.length", "최대 " + MAX_COMMENT_LENGTH + "자까지 입력 가능합니다.");
+        }
     }
 }
