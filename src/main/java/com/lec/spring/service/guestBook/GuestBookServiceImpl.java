@@ -21,18 +21,13 @@ public class GuestBookServiceImpl implements GuestBookService {
 
 
     @Override
-    public QryResult write(Long user_id, Double x_coordinate, Double y_coordinate, String content, Integer postItKind) {
-        Long newZ = guestBookRepository.findMaxZ();
-        if (newZ == null) {
-            newZ = 1L;
-        } else {
-            newZ++;
-        }
+    public QryResult write(Long user_id, Double x_coordinate, Double y_coordinate, Long z_coordinate, String content, Integer postItKind) {
+
         GuestBook guestBook = GuestBook.builder()
                 .user_id(user_id)
                 .x_coordinate(x_coordinate)
                 .y_coordinate(y_coordinate)
-                .z_coordinate(newZ)
+                .z_coordinate(z_coordinate)
                 .content(content)
                 .postItKind(postItKind)
                 .build();
@@ -59,15 +54,23 @@ public class GuestBookServiceImpl implements GuestBookService {
     }
 
     @Override
-    public QryResult updateByPostIt(Long id, Long user_id, Double x_coordinate, Double y_coordinate) {
-        Long newZ = guestBookRepository.findMaxZ() + 1;
+    public Long maxZ_index() {
+        Long newZ = guestBookRepository.findMaxZ();
+        if (newZ == null) {
+            newZ = 0L;
+        }
+        return newZ;
+    }
+
+    @Override
+    public QryResult updateByPostIt(Long id, Long user_id, Double x_coordinate, Double y_coordinate, Long z_coordinate) {
 
         GuestBook guestBook = GuestBook.builder()
                 .id(id)
                 .user_id(user_id)
                 .x_coordinate(x_coordinate)
                 .y_coordinate(y_coordinate)
-                .z_coordinate(newZ)
+                .z_coordinate(z_coordinate)
                 .build();
 
         int cnt = guestBookRepository.updateById(guestBook);
@@ -82,6 +85,12 @@ public class GuestBookServiceImpl implements GuestBookService {
 
     @Override
     public QryResult deleteById(Long id) {
-        return null;
+        int cnt = guestBookRepository.deleteByPostIt(id);
+
+        QryResult result = QryResult.builder()
+                .count(cnt)
+                .status("OK")
+                .build();
+        return result;
     }
 }

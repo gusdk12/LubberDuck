@@ -1,10 +1,134 @@
 $(document).ready(function() {
     initializePage(); // 페이지 로드 시 초기화 함수 호출
 
+    // 모달 추가
+    $('body').append(`
+        <div id="reviewModal" class="modal" style="position: absolute; display: none;">
+            <div class="modal-content">
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    `);
+
+    // 모달 닫기 버튼 클릭 시
+    $(document).on('click', '.close-button', function() {
+        $('#reviewModal').hide();
+    });
+
+    // 리뷰 수정 버튼 클릭 시
+    $(document).on('click', '.btn-update', function() {
+        const reviewId = $(this).data('review-id');
+        const reviewContent = $(this).data('review-content');
+        const reviewRegdate = $(this).data('review-regdate');
+        const reviewRate = $(this).data('review-rate');
+        const reviewMenuName = $(this).data('review-menu-name');
+
+        const modalContent = `
+            <div id="review-form">
+                <span class="close-button">&times;</span>
+                <h3>리뷰 수정하기</h3>
+                <span class="form-group">
+                    <label for="menuName" class="form-left">메뉴 이름</label>
+                    <input type="text" id="menuNameUpdate" name="menuName" value="${reviewMenuName}" disabled><br><br><hr>
+                </span>
+                <div class="form-group">
+                    <label for="orderDate" class="form-left">주문 일시</label>
+                    <input type="text" id="orderDateUpdate" name="orderDate" value="${formatDateTime(reviewRegdate)}" disabled><br><hr>
+                </div>
+                <div class="form-group rating-group">
+                    <label class="form-left">별점</label>
+                    <div class="rating" id="star_rate">
+                        <input type="radio" name="rate" value="5" id="star5" ${reviewRate == 5 ? 'checked' : ''}><label for="star5"></label>
+                        <input type="radio" name="rate" value="4" id="star4" ${reviewRate == 4 ? 'checked' : ''}><label for="star4"></label>
+                        <input type="radio" name="rate" value="3" id="star3" ${reviewRate == 3 ? 'checked' : ''}><label for="star3"></label>
+                        <input type="radio" name="rate" value="2" id="star2" ${reviewRate == 2 ? 'checked' : ''}><label for="star2"></label>
+                        <input type="radio" name="rate" value="1" id="star1" ${reviewRate == 1 ? 'checked' : ''}><label for="star1"></label>
+                    </div>
+                </div>
+                <hr>
+                <div id="rateError" class="error"></div>
+                <div class="form-group">
+                    <label for="reviewContent" class="form-left">리뷰 내용</label>
+                    <textarea id="reviewContentUpdate" name="reviewContent" rows="8" cols="80">${reviewContent}</textarea>
+                    <div id="contentError" class="error"></div>
+                </div>
+                <div class="text-center">
+                    <button type="button" id="submit_btn" data-review-id="${reviewId}">작성 완료</button>
+                    <h5> * 작성하신 리뷰는 <마이페이지-나의리뷰>에서 확인하실 수 있습니다.</h5>
+                </div>
+            </div>
+        `;
+
+        $('#modalContent').html(modalContent);
+        positionModal('#reviewModal', $(this)); // 모달 위치 조정 함수 호출
+        $('#reviewModal').show();
+    });
+
+    // 리뷰 수정 완료 버튼 클릭 시
+    $(document).on('click', '#submit_btn', function(event) {
+        event.preventDefault(); // 기본 제출 동작 방지
+
+        const reviewId = $(this).data('review-id'); // 리뷰 ID 가져오기
+        const selectedRating = $('input[name="rate"]:checked').val(); // 선택된 별점 값 가져오기
+        const content = $('#reviewContentUpdate').val(); // 리뷰 내용 가져오기
+
+        // 기존 오류 메시지 제거
+        $('.error').text('');
+
+        let isValid = true;
+
+        // 별점이 선택되지 않은 경우 에러 메시지 출력
+        if (!selectedRating) {
+            $('#rateError').text('별점을 선택해주세요.');
+            $('#rateError').show();
+            isValid = false;
+        }
+
+        // 리뷰 내용이 20자 미만인 경우 에러 메시지 출력
+        if (content.length < 20) {
+            $('#contentError').text('리뷰 내용을 20자 이상 작성해주세요.');
+            $('#contentError').show();
+            isValid = false;
+        }  else if (content.length > 500) { // 리뷰 내용이 500자를 초과하는 경우
+            $('#contentError').text('리뷰 내용은 500자 이하여야 합니다.');
+            $('#contentError').show();
+            isValid = false;
+        } else {
+            $('#contentError').hide();
+        }
+
+        if (!isValid) {
+            return;
+        }
+
+        $.ajax({
+            url: '/review/modify',
+            type: 'POST',
+            data: {
+                id: reviewId,
+                rate: selectedRating,
+                comment: content
+            },
+            cache: false,
+            success: function(response) {
+                swal('수정 성공!', '리뷰 목록에서 수정된 리뷰를 확인해보세요!', 'success')
+                    .then(function() {
+                        window.location.href = '/mypage/review'; // 리뷰 목록 페이지로 리디렉션
+                    });
+            },
+            error: function(error) {
+                swal('수정 실패!', '다시 시도해주세요.', 'warning');
+            }
+        });
+
+        // 모달 닫기
+        $('#reviewModal').hide();
+    });
+
     // 리뷰 삭제 버튼 클릭 시
     $(document).on('click', '.btn-delete', function() {
-        var $reviewContainer = $(this).closest('.reviews-container'); // 리뷰 컨테이너 jQuery 객체로 저장
-        var reviewId = $reviewContainer.find('.review-id').val(); // 리뷰 ID 가져오기
+        const reviewId = $(this).data('review-id'); // 리뷰 ID 가져오기
+        const $reviewContainer = $(this).closest('.reviews-container'); // 리뷰 컨테이너 jQuery 객체로 저장
 
         // 사용자에게 삭제 확인 창 띄우기
         if (confirm('리뷰를 삭제하시겠습니까?')) {
@@ -20,42 +144,26 @@ $(document).ready(function() {
                     $reviewContainer.slideUp('slow', function() {
                         $(this).remove();
                     });
-                    swal('삭제 성공!', "리뷰가 정상적으로 삭제되었습니다.", 'success')
-                        .then(function (){
-                            window.location.href = '/mypage/review';
-                        })
+                    swal('삭제 성공!', '리뷰가 정상적으로 삭제되었습니다.', 'success')
+                        .then(function() {
+                            window.location.href = '/mypage/review'; // 리뷰 목록 페이지로 리디렉션
+                        });
                 },
                 error: function(xhr, status, error) {
                     console.error('Error deleting review:', error);
                     // 실패 시 처리
                 }
             });
+
+            // 모달 닫기
+            $('#reviewModal').hide();
         }
     });
 
     // 최신순, 별점순 라디오 버튼 클릭 시 처리
     $('input[name="sort"]').change(function() {
-        var sortType = $(this).val(); // 선택된 정렬 타입 (최신순 또는 별점순)
+        const sortType = $(this).val(); // 선택된 정렬 타입 (최신순 또는 별점순)
         sortReviews(sortType); // 리뷰 정렬 함수 호출
-    });
-
-    // 리뷰 텍스트 클릭 시 토글 애니메이션
-    $(document).on('click', '.review-text', function() {
-        var $reviewContent = $(this).closest('.review-content');
-        var $extraButtons = $reviewContent.find('.extra-buttons');
-        var $reviewText = $(this);
-
-        // 다른 review-text들의 확장 상태를 초기화하고 추가 버튼을 숨깁니다.
-        $('.review-text.expanded').not(this).removeClass('expanded').css('max-height', 'calc(5 * 1.5em)').next('.extra-buttons').slideUp('slow');
-
-        // 현재 클릭한 review-text와 해당하는 추가 버튼의 상태를 toggle하며 애니메이션 적용
-        if ($reviewText.hasClass('expanded')) {
-            $reviewText.removeClass('expanded').css('max-height', 'calc(5 * 1.5em)');
-            $extraButtons.slideUp('slow');
-        } else {
-            $reviewText.addClass('expanded').css('max-height', $reviewText[0].scrollHeight + 'px');
-            $extraButtons.slideDown('slow');
-        }
     });
 });
 
@@ -66,22 +174,25 @@ function initializePage() {
 }
 
 function buildBody() {
-    let itemsHTML = "";
+    let itemsHTML = '';
 
     $('.container').empty();
-    if (reviews === null) {
-        // 주문이 없는 경우
-        $('.container').append('<div class="no-reviews">' +
-            '<img id="icon" src="/img/mypage/order-icon.png">' +
-            '<p>리뷰 목록이 없습니다.</p>' +
-            '<a href="/home">홈으로 가기</a>' +
-            '</div>');
+    if (!reviews) {
+        // 리뷰가 없는 경우
+        $('.container').append(`
+            <div class="no-reviews">
+                <img id="icon" src="/img/mypage/order-icon.png">
+                <p>리뷰 목록이 없습니다.</p>
+                <a href="/home">홈으로 가기</a>
+            </div>
+        `);
         return;
     }
 
     reviews.forEach(review => {
-        const stars = generateStars(review.rate); // Generate stars based on rating
-        const formattedDate = formatDate(review.regdate); // Format the date
+        const stars = generateStars(review.rate); // 평점에 따른 별점 생성
+        const formattedDate = formatDate(review.regdate); // 날짜 형식화
+
         itemsHTML += `
             <div class="reviews-container">
                 <input type="hidden" class="review-id" value="${review.id}">
@@ -96,11 +207,13 @@ function buildBody() {
                                     <span class="star_score">${review.rate}</span>
                                 </div>
                             </div>
-                            <div class="review-text">${review.content}</div>
-                            <div class="extra-buttons" style="display: none;">
-                                <div class="review-date" value="${review.regdate}">${formattedDate}</div>
-                                <button class="btn-update" onclick="location.href='/mypage/review/update/${review.id}'">수정</button>
-                                <button class="btn-delete">삭제</button>
+                            <div class="review-text" data-review-id="${review.id}" data-review-content="${review.content}" data-review-regdate="${review.regdate}" data-review-rate="${review.rate}" data-review-menu-name="${review.menu.name}">
+                                ${review.content}
+                            </div>
+                            <div class="review-date">${formattedDate}</div>
+                            <div class="text-center">
+                                <button type="button" class="btn-update" data-review-id="${review.id}" data-review-rate="${review.rate}" data-review-content="${review.content}" data-review-menu-name="${review.menu.name}" data-review-regdate="${review.regdate}">수정</button>
+                                <button type="button" class="btn-delete" data-review-id="${review.id}">삭제</button>
                             </div>
                         </div>
                     </div>
@@ -109,17 +222,21 @@ function buildBody() {
         `;
     });
 
-    let lastestInput = "";
-    let ratingInput = "";
-    (sort === 1) && (lastestInput = "checked");
-    (sort === 2) && (ratingInput = "checked");
+    let latestInput = '';
+    let ratingInput = '';
+    if (sort === 1) {
+        latestInput = 'checked';
+    } else if (sort === 2) {
+        ratingInput = 'checked';
+    }
+
     $('.container').append(`
         <div class="list">
             <h2>${user.nickname}님</h2>
-            <h5>REVIEW |  ${totalReviews} 개 </h5>
+            <h5>REVIEW | ${totalReviews} 개 </h5>
             <hr>
             <div class="tag_btn">
-                <input type="radio" name="sort" id="latest" value="latest" ${lastestInput}>
+                <input type="radio" name="sort" id="latest" value="latest" ${latestInput}>
                 <label for="latest">최신순</label>
                 <input type="radio" name="sort" id="rating" value="rating" ${ratingInput}>
                 <label for="rating">별점순</label>
@@ -128,33 +245,14 @@ function buildBody() {
             ${itemsHTML}
         </div>
     `);
-
-    // sortReviews('최신순'); // 페이지 로드 시 최신순으로 정렬
 }
 
 function sortReviews(sortType) {
-
-    (sortType === 'latest') && (location.href=`${url }?sort=${1}&page=${page}`);
-    (sortType === 'rating') && (location.href=`${url }?sort=${2}&page=${page}`);
-
-    // var reviewsContainer = $('.list'); // 리뷰 목록이 담긴 컨테이너
-    // var reviewsElements = reviewsContainer.find('.reviews-container'); // 각 리뷰 요소들
-    //
-    // reviewsElements.detach(); // 기존 리뷰 요소들을 제거합니다.
-    //
-    // reviewsElements.sort(function(a, b) {
-    //     if (sortType === 'latest') {
-    //         let dateA = new Date($(a).find('.review-date').attr('value'));
-    //         let dateB = new Date($(b).find('.review-date').attr('value'));
-    //         return dateB - dateA; // 최신순 정렬
-    //     } else if (sortType === 'rating') {
-    //         var ratingA = $(a).find('.star_score').text(); // 리뷰 별점 가져오기
-    //         var ratingB = $(b).find('.star_score').text();
-    //         return ratingB - ratingA; // 별점순 정렬
-    //     }
-    // });
-    //
-    // reviewsElements.appendTo(reviewsContainer); // 정렬된 요소들을 다시 추가합니다.
+    if (sortType === 'latest') {
+        location.href = `${url}?sort=${1}&page=${page}`;
+    } else if (sortType === 'rating') {
+        location.href = `${url}?sort=${2}&page=${page}`;
+    }
 }
 
 function generateStars(score) {
@@ -168,4 +266,26 @@ function generateStars(score) {
 function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     return new Date(dateString).toLocaleDateString('ko-KR', options);
+}
+
+function formatDateTime(dateString) {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleDateString('ko-KR', options);
+}
+
+function positionModal(modalId, button) {
+    const modal = $(modalId);
+    const buttonOffset = button.offset();
+    const modalWidth = modal.outerWidth();
+    const modalHeight = modal.outerHeight();
+    const topMargin = 20; // 모달 상단 여백
+
+    const modalLeft = buttonOffset.left + button.outerWidth() + 100;
+    const modalTop = buttonOffset.top - modalHeight / 2;
+
+    modal.css({
+        'top': modalTop + 'px',
+        'left': modalLeft + 'px',
+        'position': 'absolute'
+    });
 }

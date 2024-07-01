@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Ownglyph_UNZ-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2406-1@1.0/Ownglyph_UNZ-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 *{
     box-sizing: border-box;
 }
@@ -27,7 +34,10 @@ body{
     top: 83px;
     position: relative;
     z-index: 3;
-    /*pointer-events: none;*/
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
 }
 
 #guestbook_background {
@@ -103,7 +113,52 @@ body{
 #postIt4{background-image: url("/img/guestBook/blue.png")}
 #postIt5{background-image: url("/img/guestBook/purple.png")}
 
+.postItDel {
+    float: right;
+    margin:5px 25px 0 0;
+    font-size: 20px;
+    display: none;
+}
+
+.postItDel:hover,
+.postItDel:focus {
+    color: #ec1e37;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.postItContent {
+    margin: 15px 0 0 30px;
+    font-family: 'Ownglyph_UNZ-Rg';
+}
+
 .content {
     caret-color: black;
+    font-size: 25px;
+    margin: 10px 0 0 0;
+    width: 190px;
+    height: 95px;
+}
 
+.contentBox {
+    caret-color: black;
+    font-size: 25px;
+    margin: 20px 0 0 25px;
+    width: 195px;
+    height: 120px;
+    outline: 2px solid red;
+}
+
+.content::placeholder, .contentBox::placeholder {
+    font-family: 'Ownglyph_UNZ-Rg';
+    font-size: 25px;
+}
+
+.content:focus, .contentBox:focus {
+    font-family: 'Ownglyph_UNZ-Rg';
+    font-size: 25px;
+}
+
+.nickname {
+    font-size: 28px;
 }
