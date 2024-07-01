@@ -60,7 +60,7 @@ function buildGuestBookData(guestBook) {
                 // 삭제 버튼이 없는 경우
                 const delBtn = newDiv.querySelector('.postItDel');
                 if (delBtn) {
-                    newDiv.removeChild(delBtn);
+                    delBtn.style.display = 'none';
                 }
             }
         });
