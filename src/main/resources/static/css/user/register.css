@@ -8,7 +8,9 @@
     font-style: normal;
 }
 body{
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden; /* x축 스크롤 비활성화 */
+
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;

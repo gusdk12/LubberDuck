@@ -29,8 +29,8 @@ window.addEventListener('load', async () => {
         console.error('Error during initialization:', error);
     }
 
-    changePage(1);
-    renderPagination(reviewCount);
+    // changePage(1);
+    renderPagination(reviewCount,1,1);
 });
 
 
