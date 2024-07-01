@@ -61,7 +61,8 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
     ('Whiskey Sour', '/img/menu/WhiskeySour.png', '레몬 주스와 설탕으로 신맛과 단맛이 부드럽게 조화를 이루는 칵테일 (18도)', 5, 4000),
     ('White Lady', '/img/menu/WhiteLady.png', '갓 짜낸 레몬 주스처럼 귀여운 연노랑색 빛깔의 상큼함과 세련되고 부드러운 크리미한 질감을 가진 칵테일 (30도)', -1, 9000),
     ('White Russian', '/img/menu/WhiteRussian.png', 'Black Russian에 크림을 첨가해 훨씬 부드럽고 중후한 맛을 가진 칵테일 (23도)', -1, 7700),
-    ('Zombie', '/img/menu/Zombie.png', '여러 과일과 시럽의 조합으로 새콤달콤한 맛을 가졌지만 "Zombie" 이름처럼 될 수 있는 높은 도수의 칵테일 (31도)', 4, 7800);
+    ('Zombie', '/img/menu/Zombie.png', '여러 과일과 시럽의 조합으로 새콤달콤한 맛을 가졌지만 "Zombie" 이름처럼 될 수 있는 높은 도수의 칵테일 (31도)', 4, 7800)
+;
 
 
 ;
@@ -170,6 +171,9 @@ INSERT INTO ctt_review (item_id, rate, content) VALUES
 
 INSERT INTO ctt_review (item_id, rate, content) VALUES
     (15, 3, '흑흑 이걸 마신다고 해도 그녀가 잊혀지지 않아!!!!!!!!!!!');
+
+INSERT INTO ctt_review (item_id, rate, content) VALUES
+    (8, 1, '정말 맛있어요 최고예요. 달콤한 맛이 계속 기억에 남네요!');
 
 -- 샘플 최근
 INSERT INTO ctt_recent (user_id, cocktail_id) VALUES

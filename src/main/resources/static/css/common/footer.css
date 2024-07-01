@@ -1,0 +1,30 @@
+
+#bottom_line{
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    height: 1px;
+    margin-top: 200px;
+    background-color: #f8e9d7;
+    border-radius: 20px;
+}
+#bottomnav_container {
+    max-width: 1300px; /* 최대 폭 지정 */
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 100;
+}
+#aboutUs{
+    margin-top: 20px;
+    font-family: "Playwrite AU VIC", cursive;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 25px;
+    color: #f8e9d7;
+    text-align: center;
+}
+#aboutUs:hover{
+    cursor: pointer;
+}

@@ -306,15 +306,14 @@ function buildBook(result){
         var menuItem = list.find(menu => menu.name === cocktailName);
 
         if (menuItem) {
-            deleteFromBook(menuItem);
             swal({
                 title: "DELETE",
-                text: cocktailName + '가 즐겨찾기에서 삭제되었습니다.',
+                text: cocktailName + '를 즐겨찾기에서 삭제할까요?.',
                 icon: "success",
                 buttons: true,
             }).then((willDelete) => {
                 if (willDelete) {
-                    $box.remove();
+                    deleteFromBook(menuItem);
                     location.reload();
                 }
             });

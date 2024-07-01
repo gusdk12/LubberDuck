@@ -1,3 +1,22 @@
+@font-face {
+    font-family: 'GmarketSansLight';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'GmarketSansLight';
+    font-weight: 600;
+}
+
 
 .article{
     height: auto;
@@ -9,7 +28,6 @@
 .container{
     display: flex;
     justify-content: center; /* 가로 중앙 정렬 */
-    font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
@@ -101,6 +119,7 @@
     padding: 5px;
     box-sizing: border-box;
     width: 370px;
+    position: relative;
 }
 
 .review-header {
@@ -147,15 +166,16 @@
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     box-sizing: border-box;
-    overflow: hidden;
+    /*overflow: hidden;*/
     position: relative;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5; /* 5줄로 제한 */
-    max-height: calc(5 * 1.5em); /* 높이 제한 */
+    /*-webkit-line-clamp: 5; !* 5줄로 제한 *!*/
+    /*max-height: calc(5 * 1.5em); !* 높이 제한 *!*/
     cursor: pointer;
-    transition: max-height 0.5s ease-out; /* max-height 변화 애니메이션 */
+    /*transition: max-height 0.5s ease-out; !* max-height 변화 애니메이션 *!*/
     min-height: 100px;
+    font-weight: 600;
 }
 
 .review-text::after {
@@ -190,30 +210,6 @@
     color: #aaaaaa;
     margin-top: 8px;
     float: left;
-}
-
-.btn-update, .btn-delete {
-    background-color: #10573e;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    right: 0;
-    font-size: 13px;
-}
-
-.btn-update:hover, .btn-delete:hover {
-    background-color: #468969;
-}
-
-.btn-delete {
-    background-color: #e74c3c;
-}
-
-.btn-delete:hover {
-    background-color: #c0392b;
 }
 
 .star-img {
@@ -261,3 +257,282 @@
     width: 55px;
     margin-bottom: 7px;
 }
+
+#review-form {
+    width: 380px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(243, 243, 243);
+    position: relative;
+    z-index: 5;
+    height: 540px;
+}
+
+.form-group label {
+    margin-top: 7px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    justify-items: center;
+}
+
+input[type="text"],
+textarea {
+    width: 78%;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.form-left {
+    float: left;
+    font-size: 12px;
+}
+
+input[type="text"] {
+    float: right;
+}
+
+textarea {
+    min-height: 100px;
+    resize: none;
+    float: right;
+}
+
+#back_button {
+    padding: 12px 20px;
+    background-color: #10573e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    font-weight: 500;
+}
+
+#back_button:hover {
+    background-color: #468969;
+}
+
+#review-form hr {
+    border: none;
+    height: 1px;
+    background-color: #dbdbdb;
+    width: 100%;
+}
+
+.footer {
+    margin-top: 20px;
+}
+
+#star_rate{
+    display: block;
+    align-items: center;
+    margin-left: 63px;
+    direction: rtl;
+}
+
+/*찬별*/
+.rating > input:checked ~ label, .rating > input:checked ~ label:before {
+    background-image: url(/img/review/yellow_star.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 30px;
+    height: 29px;
+    margin: 0 0;
+    margin-bottom: 2px;
+}
+
+/*빈별*/
+.rating > label {
+    display: inline-block;
+    background-image: url(/img/review/grey_star.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 30px;
+    height: 29px;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    margin: 0 0;
+    margin-bottom: 2px;
+}
+
+.rating > input[type="radio"] {
+    display: none;
+}
+
+textarea#content {
+    height: 150px;
+    text-overflow: inherit;
+    resize: none;
+    padding: 15px;
+}
+
+textarea#content:focus {
+    outline: none; /* 클릭 시 발생하는 기본적인 아웃라인 스타일을 제거합니다. */
+}
+
+textarea#content::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+    height: 5px; /*가로 스크롤바 높이*/
+}
+
+textarea#content::-webkit-scrollbar-track {
+    background:none; /* 트랙 배경 색상 */
+    border-radius: 10px; /* 트랙 모서리 둥글게 */
+}
+
+textarea#content::-webkit-scrollbar-thumb {
+    background: #10573e; /* 핸들 색상 */
+    border-radius: 10px; /* 핸들 모서리 둥글게 */
+}
+
+textarea#content::-webkit-scrollbar-thumb:hover {
+    background: #10573e; /* 호버 시 핸들 색상 */
+}
+
+.rating-group {
+    display: flex;
+    align-items: center;
+}
+
+.buttons{
+    float: right;
+}
+input#back, input#update, input#delete{
+    background-color: #c4eacd;
+    margin-right: 7px;
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    width: 80px;
+}
+
+input#delete{
+    background-color: #ffe5e5;
+    color: red;
+    border: none;
+}
+
+.text-center > h5 {
+    text-align: center;
+    font-size: 10px;
+    color: #bfbfbf;
+}
+
+#back_btn {
+    float: right; /* 오른쪽 정렬 */
+    background-color: transparent; /* 배경색 투명 */
+    border: none; /* 테두리 제거 */
+    font-size: 20px; /* 폰트 크기 조정 */
+    cursor: pointer; /* 포인터 모양 변경 */
+    margin-right: 10px; /* 오른쪽 여백 조정 */
+    color: black;
+}
+
+/* 에러 메시지 스타일 추가 */
+.error {
+    color: red;
+    margin-top: 5px;
+    font-size: 12px;
+    float: left;
+    width: 400px;
+    margin-top: -5px;
+    margin-left: 87px;
+    margin-bottom: 1px;
+}
+
+div#star_rate.rating{
+    margin-top: 10px;
+}
+
+#submit_btn {
+    padding: 12px 20px;
+    background-color: #9eb8c5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.writeReview{
+    background-color: #e0ebf0;
+}
+
+.detailReview{
+    background-color: #ecf1e9;
+}
+
+.close-button {
+    float: right;
+    margin-top: 3px;
+    font-size: xx-large;
+    cursor: pointer;
+}
+
+.btn-update {
+    background-color: #4CAF50; /* 초록색 배경 */
+    color: white; /* 흰색 텍스트 */
+    border: none; /* 테두리 없음 */
+    cursor: pointer; /* 포인터 모양 */
+    transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
+    margin-left: 200px;
+}
+
+.btn-update:hover {
+    background-color: #45a049; /* 마우스 오버시 색상 변경 */
+}
+
+/* 삭제 버튼 */
+.btn-delete {
+    background-color: #f44336; /* 빨간색 배경 */
+    color: white; /* 흰색 텍스트 */
+    border: none; /* 테두리 없음 */
+    cursor: pointer; /* 포인터 모양 */
+    transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
+}
+
+.btn-delete:hover {
+    background-color: #da190b; /* 마우스 오버시 색상 변경 */
+}
+
+.btn-update, .btn-delete{
+    padding: 8px 18px;
+    border-radius: 20px;
+}
+
+
+textarea#reviewContentUpdate::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+    height: 5px; /*가로 스크롤바 높이*/
+}
+
+textarea#reviewContentUpdate::-webkit-scrollbar-track {
+    background:none; /* 트랙 배경 색상 */
+    border-radius: 10px; /* 트랙 모서리 둥글게 */
+}
+
+textarea#reviewContentUpdate::-webkit-scrollbar-thumb {
+    background: #104a57; /* 핸들 색상 */
+    border-radius: 10px; /* 핸들 모서리 둥글게 */
+}
+
+textarea#reviewContentUpdate::-webkit-scrollbar-thumb:hover {
+    background: #0e4652; /* 핸들 색상 */
+}
+
+h3 {
+    font-weight: 600;
+}
+
+

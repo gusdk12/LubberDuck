@@ -104,7 +104,7 @@ CREATE TABLE ctt_review
     id      INT          NOT NULL AUTO_INCREMENT COMMENT '후기아이디',
     item_id INT          NOT NULL COMMENT '주문아이템아이디',
     rate    INT          NOT NULL DEFAULT 0 COMMENT '별점',
-    content VARCHAR(500) NOT NULL COMMENT '후기내용',
+    content LONGTEXT NOT NULL COMMENT '후기내용',
     regdate DATETIME     NOT NULL DEFAULT now() COMMENT '둥록일시',
     PRIMARY KEY (id)
 ) COMMENT '후기테이블';

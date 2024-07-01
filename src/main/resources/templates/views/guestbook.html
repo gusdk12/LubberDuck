@@ -16,8 +16,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@387&display=swap" rel="stylesheet">
 
+    <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script th:inline="javascript">
         var logged_id = -1;
+        var logged_authority = -1;
     </script>
     <title>방명록</title>
 
@@ -29,14 +32,14 @@
 <!-- chat&cart -->
 <th:block th:insert="~{common/chatCart::chatCart}"></th:block>
 
-<section id="guestbooksection">
+<section id="guestbooksection" >
     <div id="guestbookcontainer">
         <div id="guestbook"></div>
         <div id="guestbook_background"></div>
     </div>
 </section>
 
-<section id="editsection">
+<section id="editsection" sec:authorize="hasAnyRole('CUSTOMER', 'MANAGER')">
     <div id="editcontainer">
         <div id="edittogglebutton"></div>
         <div id="editarea">
@@ -61,6 +64,7 @@
     <th:block th:with="logged_user=${#authentication.principal.user}">
         <script th:inline="javascript">
             logged_id = [[${logged_user.id}]]
+            logged_authority = [[${logged_user.authority_id}]]
         </script>
     </th:block>
 </th:block>
