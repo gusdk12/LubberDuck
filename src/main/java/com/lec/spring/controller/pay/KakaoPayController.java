@@ -34,4 +34,9 @@ public class KakaoPayController {
         log.info("kakaoPay Success get................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
     }
+
+    @GetMapping("/kakaoPayCancle")
+    public String kakaoPayCancle(){
+        return "redirect:/pay/list";
+    }
 }
