@@ -109,13 +109,9 @@
 
 
                         <div class="paginationContainer" >
-                            <span id="reviewPrev2" class="pagination-button"><<</span>
-                            <span id="reviewPrev" class="pagination-button"><</span>
-                            <ul class="pagination" id="pagination">
+                            <div class="pagination" id="pagination">
                                 <!-- 여기에 페이징 버튼이 동적으로 추가될 예정 -->
-                            </ul>
-                            <span id="reviewNext" class="pagination-button">></span>
-                            <span id="reviewNext2" class="pagination-button">>></span>
+                            </div>
                         </div>
                     </div>
 
@@ -158,6 +154,7 @@
     </script>
     <section id="footer"></section>
 
+    <script th:src="@{/js/common/header.js}"></script>
     <script th:src="@{/js/review/reviewData.js}"></script>
     <script th:src="@{/js/mypage/orderData.js}"></script>
     <script th:src="@{/js/menu/detail.js}"></script>

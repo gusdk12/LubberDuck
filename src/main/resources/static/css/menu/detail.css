@@ -13,13 +13,13 @@ body {
 
 #container{
     background: linear-gradient(to bottom, #fffbf5, #F8F0E5, #fde0e5);
-    height: 1700px;
+    height: 2000px;
     max-width: 900px;  /* 최대 폭 지정 */
     border-radius: 20px;
     margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content : center;
+    justify-content : space-between;
     align-items: center;
     gap: 30px;
 
@@ -83,13 +83,14 @@ body {
 }
 
 #cocktailsection{
-    height: 40%;
+    height: 30%;
     width: 90%;
 
     display: flex;
     justify-content : center;
     align-items: center;
     gap: 20px;
+    margin-top: 150px;
 }
 #cocktailImg{
     height: 80%;
@@ -609,46 +610,69 @@ body {
 
 /*페이징*/
 .paginationContainer {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
-    align-items: center; /* 추가: 세로 정렬을 위해 */
+    align-items: center; /* 세로 정렬 */
     font-size: 20px;
 }
 
 #pagination {
     display: flex;
     justify-content: center;
-    list-style: none; /* 추가: 리스트 스타일 제거 */
+    list-style: none; /* 리스트 스타일 제거 */
     padding: 0;
     margin: 0;
 }
 
-.pagination li {
-    margin: 0 5px;
+.pagination div, .pagination span {
+    display: flex;
+    align-items: center; /* 세로 정렬 */
 }
 
-.pagination li span {
+.pagination div {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.pagination div span {
     color: #ed8f8f;
     border-radius: 5px;
-    padding: 10px;
+    padding: 7px;
     cursor: pointer;
 }
 
 .pagination-button {
     color: #ed8f8f;
     border-radius: 5px;
-    padding: 10px;
+    padding: 7px;
     cursor: pointer;
 }
 
-.pagination li span:hover,
+.pagination div span:hover,
 .pagination-button:hover {
     background-color: #ffffff;
 }
 
-.pagination li span:active,
+.pagination div span:active,
 .pagination-button:active,
-.pagination li span.active {
+.pagination div span.active {
     background-color: #dda7a7;
     color: white;
+}
+
+.pagination-button.disabled {
+    pointer-events: none;
+    opacity: 0;
+}
+
+#review_null {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 20px;
+
+    text-align: center;
+    margin-top: 50px;
 }

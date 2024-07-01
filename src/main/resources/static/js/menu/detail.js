@@ -10,21 +10,27 @@ window.addEventListener('load', async () => {
             await loadRecent(logged_id);
 
             const recentSectionCon = document.getElementById("recentSection-con");
+            const maxScrollTop = 1700; // 최대 스크롤 값
 
             window.addEventListener("scroll", function () {
-                // Get the current scroll position
                 const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-                // Set the top position of the element
-                recentSectionCon.style.top = scrollTop + "px";
+                let newTop = scrollTop;
+
+                // If the new top position would exceed the max scroll top, limit it
+                if (newTop + recentSectionCon.offsetHeight > maxScrollTop) {
+                    newTop = maxScrollTop - recentSectionCon.offsetHeight;
+                }
+
+                recentSectionCon.style.top = newTop + "px";
             });
         }
     } catch (error) {
         console.error('Error during initialization:', error);
     }
 
-    changePage(1);
-    renderPagination(reviewCount);
+    // changePage(1);
+    renderPagination(reviewCount,1,1);
 });
 
 
@@ -89,26 +95,6 @@ function addEvent(){
             handleCommentSubmit();
         }
     });
-
-
-    $('#reviewPrev').click(function(e) {
-        changePage(currentPage-1);
-    });
-
-    $('#reviewNext').click(function(e) {
-        changePage(currentPage+1);
-    });
-
-    $('#reviewPrev2').click(function(e) {
-        changePage(1);
-    });
-
-    $('#reviewNext2').click(function(e) {
-        var totalPages = Math.ceil(reviewCount / 4);
-        changePage(totalPages);
-    });
-
-
 }
 
 function switchToFullHeart() {

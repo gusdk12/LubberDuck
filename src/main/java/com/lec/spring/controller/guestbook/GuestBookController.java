@@ -15,16 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class GuestBookController {
 
-    @Autowired
-    private GuestBookService guestBookService;
-
-    @Autowired
-    private UserService userService;
 
     @GetMapping("/guestbook")
-    public void guestbook(Model model,
-                          @AuthenticationPrincipal UserDetails userDetails){
-        model.addAttribute("postItAll", guestBookService.postItAll());
+    public void guestbook(Model model){
+
     }
 
 

@@ -38,7 +38,7 @@ public class ManagerController {
 
     @GetMapping("/calendar")
     public void calendar(Model model) {
-        List<Menu> menuList = menuService.sequenceList();
+        List<Menu> menuList = menuService.list();
         model.addAttribute("menuList", menuList);
     }
 
