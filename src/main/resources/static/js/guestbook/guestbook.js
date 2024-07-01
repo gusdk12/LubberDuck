@@ -14,7 +14,7 @@ function initBoardDragEvent(postItType, element) {
 
     let isDragging = false;
     let startX, startY, scrollLeft, scrollTop;
-    //const allcontainer = document.querySelector('#allcontainer');
+    const guestbookcontainer = document.querySelector('#guestbooksection');
 
     document.addEventListener('contextmenu', function (e) {
         e.preventDefault(); // Prevent the default context menu from appearing
@@ -39,6 +39,13 @@ function initBoardDragEvent(postItType, element) {
             //     return;
 
             window.scrollTo(scrollLeft - dx, scrollTop - dy);
+
+            // if(scrollLeft - dx < 0){
+            //     guestbookcontainer.style.left = `${guestbookcontainer.offsetLeft - (scrollLeft - dx)}px`;
+            //     console.log(guestbookcontainer.offsetLeft);
+            // } else {
+            //     guestbookcontainer.style.left = `0px`;
+            // }
             // allcontainer.style.left = `${scrollLeft - dx}px`;
             // allcontainer.style.top = `${scrollTop - dy}px`;
             // console.log("left " + (scrollLeft - dx));

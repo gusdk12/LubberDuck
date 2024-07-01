@@ -16,7 +16,7 @@ body{
     background-color: #10573e;
     margin-bottom: 1000px;
     caret-color: transparent;
-    /*overflow: hidden;*/
+    overflow-x: hidden;
 }
 
 #guestbooksection{
@@ -57,6 +57,8 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    filter: drop-shadow(3px 0px 3px rgba(0, 0, 0, 0.3)) /* Right and bottom shadow */
+            drop-shadow(-3px 5px 3px rgba(0, 0, 0, 0.3)) /* Left and bottom shadow */;
 }
 
 /*----------------------------------- edit section*/
@@ -90,7 +92,9 @@ body{
 }
 #editarea{
     position: fixed;
-    background-color: rgba(132, 194, 181, 0.66);
+    /*background-color: rgba(132, 194, 181, 0.66);*/
+    background: linear-gradient(to top, rgba(213, 223, 238, 0.5), rgba(233, 241, 231, 0.5), rgba(245, 232, 221, 0.5), rgba(238, 211, 217, 0.5));
+    border-radius: 20px;
     width: 1500px;
     height: 0px;
     bottom: 0px;
@@ -109,6 +113,8 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    filter: drop-shadow(3px 0px 3px rgba(0, 0, 0, 0.3)) /* Right and bottom shadow */
+    drop-shadow(-3px 5px 3px rgba(0, 0, 0, 0.3)) /* Left and bottom shadow */;
 }
 #postIt1 {background-image: url("/img/guestBook/pink.png")}
 #postIt2{background-image: url("/img/guestBook/yellow.png")}
