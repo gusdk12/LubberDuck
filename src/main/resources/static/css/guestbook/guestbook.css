@@ -106,6 +106,9 @@ body{
     /*height: 180px;*/
     height: 0px;
     transition: height 0.2s ease;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 #postIt1 {background-image: url("/img/guestBook/pink.png")}
 #postIt2{background-image: url("/img/guestBook/yellow.png")}
@@ -146,7 +149,6 @@ body{
     margin: 20px 0 0 25px;
     width: 195px;
     height: 120px;
-    outline: 2px solid red;
 }
 
 .content::placeholder, .contentBox::placeholder {
