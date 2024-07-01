@@ -1,0 +1,16 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+#container3D{
+    position: absolute;
+}
+#messages{
+    width: 30vw;
+    height: 80vh;
+    position: absolute;
+    right: 0px;
+    background-color: rgba(222, 184, 135, 0.44);
+}
