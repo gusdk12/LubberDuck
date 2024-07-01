@@ -10,7 +10,7 @@ window.addEventListener('load', async () => {
             await loadRecent(logged_id);
 
             const recentSectionCon = document.getElementById("recentSection-con");
-            const maxScrollTop = 1700; // 최대 스크롤 값
+            const maxScrollTop = 2300; // 최대 스크롤 값
 
             window.addEventListener("scroll", function () {
                 const scrollTop = window.scrollY || document.documentElement.scrollTop;
