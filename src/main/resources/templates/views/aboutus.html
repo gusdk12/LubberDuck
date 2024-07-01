@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>About Us</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/aboutus/aboutus.css}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+</head>
+<script>
+    let isLoading = true;
+</script>
+<body>
+
+<div id="mainsection">
+    <div id="container3D"></div>
+    <div id="card"></div>
+    <div id="goto" onclick="location.href='/home'">
+        <div id="duckImg">
+    </div>
+</div>
+
+<div id="loadingsection">
+    <div id="loading">
+        <div id="loadingimg"></div>
+    </div>
+</div>
+
+<script type="module" th:src="@{/js/aboutus/aboutus.js}"></script>
+</body>
+</html>

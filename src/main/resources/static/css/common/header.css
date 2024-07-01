@@ -76,6 +76,7 @@ section {
     border-radius: 10px;
     z-index: 100;
     padding-top: 5px;
+    margin-top: 10px;
 }
 
 #drop_customer {
@@ -87,6 +88,7 @@ section {
     border-radius: 10px;
     z-index: 100;
     padding-top: 5px;
+    margin-top: 10px;
 }
 
 .dropNav_list {

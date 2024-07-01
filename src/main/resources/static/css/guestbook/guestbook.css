@@ -16,7 +16,7 @@ body{
     background-color: #10573e;
     margin-bottom: 1000px;
     caret-color: transparent;
-    /*overflow: hidden;*/
+    overflow-x: hidden;
 }
 
 #guestbooksection{
@@ -57,6 +57,8 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    filter: drop-shadow(3px 0px 3px rgba(0, 0, 0, 0.3)) /* Right and bottom shadow */
+            drop-shadow(-3px 5px 3px rgba(0, 0, 0, 0.3)) /* Left and bottom shadow */;
 }
 
 /*----------------------------------- edit section*/
@@ -82,18 +84,24 @@ body{
 }
 #edittogglebutton{
     position: fixed;
-    background-color: #84c2b5;
-    width: 15vw;
-    height: 5vh;
-    bottom: 0px;
+    background-image: url("/img/guestBook/arrow.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: invert(100%) sepia(5%) saturate(4714%) hue-rotate(305deg) brightness(95%) contrast(108%);
+    width: 50vw;
+    height: 10vh;
+    bottom: 0;
     transition: height 0.5s ease;
 }
 #editarea{
     position: fixed;
-    background-color: rgba(132, 194, 181, 0.66);
+    /*background-color: rgba(132, 194, 181, 0.66);*/
+    background: linear-gradient(to top, rgba(213, 223, 238, 0.5), rgba(233, 241, 231, 0.5), rgba(245, 232, 221, 0.5), rgba(238, 211, 217, 0.5));
+    border-radius: 20px;
     width: 1500px;
-    height: 0px;
-    bottom: 0px;
+    height: 0;
+    bottom: 0;
     transition: height 0.2s ease;
 
     display: flex;
@@ -104,8 +112,13 @@ body{
 .createpostIt{
     width: 250px;
     /*height: 180px;*/
-    height: 0px;
+    height: 0;
     transition: height 0.2s ease;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: drop-shadow(3px 0px 3px rgba(0, 0, 0, 0.3)) /* Right and bottom shadow */
+    drop-shadow(-3px 5px 3px rgba(0, 0, 0, 0.3)) /* Left and bottom shadow */;
 }
 #postIt1 {background-image: url("/img/guestBook/pink.png")}
 #postIt2{background-image: url("/img/guestBook/yellow.png")}
@@ -146,7 +159,6 @@ body{
     margin: 20px 0 0 25px;
     width: 195px;
     height: 120px;
-    outline: 2px solid red;
 }
 
 .content::placeholder, .contentBox::placeholder {

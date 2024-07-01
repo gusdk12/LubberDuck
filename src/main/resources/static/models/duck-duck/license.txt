@@ -1,0 +1,11 @@
+Model Information:
+* title:	Duck-Duck 🦆
+* source:	https://sketchfab.com/3d-models/duck-duck-98604d4f895b4fc79d880dd427bf3a01
+* author:	td991 (https://sketchfab.com/td991)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Duck-Duck 🦆" (https://sketchfab.com/3d-models/duck-duck-98604d4f895b4fc79d880dd427bf3a01) by td991 (https://sketchfab.com/td991) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

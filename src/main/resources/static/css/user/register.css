@@ -20,13 +20,12 @@ body{
     line-height: 1.5em;
     color :  black;
     margin: 0;
-    position: relative;
 }
 #decoContent{
-    top: 385px;
-    left: 1025px;
+    top: 390px;
+    left: 265px;
+    position: absolute;
     z-index: -1;
-    position: relative;
 }
 
 .deco{
@@ -34,7 +33,6 @@ body{
     background-repeat: no-repeat;
     width: 400px;
     height: 400px;
-    position: absolute;
 }
 
 #pen{
@@ -52,6 +50,7 @@ body{
     margin: auto;
     padding: 5px 20px;
     background-color: white;
+    position: relative;
 }
 
 .member .logo{
@@ -86,6 +85,10 @@ body{
 @media (max-width:1080px) {
     .member{
         width: 80%;
+    }
+
+    #decoContent{
+        display: none;
     }
 }
 
