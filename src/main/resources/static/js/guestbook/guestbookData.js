@@ -136,11 +136,6 @@ async function updateGuestBookData(memoId, x_coordinate, y_coordinate, z_coordin
         data: postItData,
         success(postItData, status) {
             if (status === "success") {
-                // 해당 포스트잇의 z-index 값만 변경
-                const postItElement = document.querySelector(`[data-memo-id = "${memoId}"]`);
-                if (postItElement) {
-                    postItElement.style.zIndex = z_coordinate;
-                }
                 loadGuestBookData();
             }
         }

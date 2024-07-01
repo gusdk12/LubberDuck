@@ -146,7 +146,6 @@ body{
     margin: 20px 0 0 25px;
     width: 195px;
     height: 120px;
-    outline: 2px solid red;
 }
 
 .content::placeholder, .contentBox::placeholder {
