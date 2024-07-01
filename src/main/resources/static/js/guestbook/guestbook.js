@@ -79,6 +79,7 @@ function addDragEventToPostIt(postItType, postItElement) {
     postItElement.addEventListener('mousedown', (e) => {
             // 부모 이벤트 막기
             if (e.target !== e.currentTarget) return;
+            if (e.button === 2) return;
 
             if (postItType === CREATEPOSTIT) {
                 const newDiv = document.createElement('div');
