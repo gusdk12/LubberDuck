@@ -184,7 +184,7 @@ public class MyPageController {
         orderService.orderList(user.getId(), page, model);
 
         // mypage/order 뷰를 반환합니다.
-        return "/mypage/order";
+        return "mypage/order";
     }
 
     @GetMapping("/review")
