@@ -1,11 +1,18 @@
-
+body{
+    margin: 0;
+}
 
 .all{
     height: auto;
 }
 
-.article {
+.article{
     height: auto;
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
     min-height: 1100px;
 }
 
@@ -237,25 +244,6 @@
     color: #fff;
     cursor: pointer;
     transition: box-shadow 0.2s;
-}
-
-@font-face {
-    font-family: 'GmarketSansLight';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
-    font-family: 'GmarketSansLight';
-    font-weight: 600;
 }
 
 #review-form {
