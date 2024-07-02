@@ -1,11 +1,9 @@
 package com.lec.spring.controller.guestbook;
 
 import com.lec.spring.domain.QryResult;
-import com.lec.spring.domain.cart.QryCartList;
 import com.lec.spring.domain.guestBook.QryGuestBookLIst;
 import com.lec.spring.service.guestBook.GuestBookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

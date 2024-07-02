@@ -147,6 +147,7 @@ async function appendMenuToPlate() {
         cocktailadd.addEventListener("click", function (e) {
             e.preventDefault();
             var cocktailName = $(this).parent().siblings(".cocktailname").text();
+            addAnimationStart(e);
             addToCart(menuList.find(menu => menu.name === cocktailName));
         });
     }

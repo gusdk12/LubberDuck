@@ -58,7 +58,6 @@ function buildGuestBookData(guestBook) {
                 });
             } else {
                 // 삭제 버튼이 없는 경우
-                const delBtn = newDiv.querySelector('.postItDel');
                 if (delBtn) {
                     delBtn.style.display = 'none';
                 }
@@ -93,9 +92,10 @@ function buildGuestBookData(guestBook) {
 }   // end buildGuestBookData();
 
 // zIndex 최댓값 받아오기
-function getMaxZIndex(postItElement) {
+async function getMaxZIndex(postItElement) {
     // AJAX 요청 보내기
-    $.ajax({
+    // await : 비동기 함수 실행 대기하게 하는 역할
+    await $.ajax({
         url: '/guestbook/find',
         method: 'POST',
         success: function (maxZIndex) {
