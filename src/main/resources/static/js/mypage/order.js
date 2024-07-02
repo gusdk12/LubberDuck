@@ -156,8 +156,8 @@ $(document).ready(function(){
                 <input type="text" id="name" name="name" class="writeReview" value="${formatDateTime(reviewItemOrderRegdate)}" disabled><br><hr>
             </div>
             <div class="form-group rating-group">
-                <label for="rate" class="form-left">별점</label>
-                <div class="rating" id="star_rate" aria-required="true">
+                <label for="rate" class="form-left" >별점</label>
+                <div class="rating" id="star_rate" name="write_rate" aria-required="true">
                     <input type="radio" name="rate" value="5" id="star5"><label for="star5"></label>
                     <input type="radio" name="rate" value="4" id="star4"><label for="star4"></label>
                     <input type="radio" name="rate" value="3" id="star3"><label for="star3"></label>

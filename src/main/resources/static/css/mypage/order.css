@@ -459,10 +459,6 @@ div#star_rate.rating{
     background-color: #ecf1e9;
 }
 
-.rating input[type="radio"] + label {
+div[name="write_rate"] > label {
     cursor: pointer;
 }
-
-
-
-
