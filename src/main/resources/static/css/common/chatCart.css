@@ -26,6 +26,9 @@
     justify-content: center;
     align-items: center;
 }
+#chatbuttonback:hover{
+    cursor: pointer;
+}
 #chatbuttonback .buttonimg{
     width: 60%;
     height: 60%;
@@ -47,6 +50,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#cartbuttonback:hover{
+    cursor: pointer;
 }
 #cartbuttonback .buttonimg{
     width: 70%;
@@ -79,7 +85,7 @@
     align-items: center;
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 1000;
+    font-weight: 400;
     font-style: normal;
     font-size: 16px;
     overflow: hidden;
@@ -171,9 +177,58 @@
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10px;
+    /*display: flex;*/
+    /*justify-content: right;*/
 }
 .chatMenuInfo:hover{
-    background-color: #f5e2be;
+    /*background-color: #f5e2be;*/
+    #chatcocktailadd{
+        opacity: 1;
+    }
+    #chatcocktaildetail{
+        opacity: 1;
+    }
+}
+#chatcocktailadd{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /*margin-left: 5px;*/
+    width: 28px;
+    height: 28px;
+    /*background-color: #ffdcd9;*/
+    float: right;
+    background-image: url('/img/menu/addIcon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(63%) sepia(71%) saturate(461%) hue-rotate(309deg) brightness(101%) contrast(104%);
+    opacity: 0;
+}
+#chatcocktailadd:hover{
+    /*cursor: url('/img/cursor/pointHand.png'), auto;*/
+    cursor: pointer;
+    filter: invert(39%) sepia(38%) saturate(1775%) hue-rotate(319deg) brightness(97%) contrast(85%);
+}
+#chatcocktaildetail{
+    position: absolute;
+    right: 30px;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
+    float: right;
+    /*background-color: #ffdcd9;*/
+    background-image: url('/img/menu/scopeIcon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(72%) sepia(15%) saturate(658%) hue-rotate(112deg) brightness(91%) contrast(87%);
+    opacity: 0;
+}
+#chatcocktaildetail:hover{
+    /*cursor: url('/img/cursor/pointHand.png'), auto;*/
+    cursor: pointer;
+    filter: invert(47%) sepia(79%) saturate(372%) hue-rotate(113deg) brightness(92%) contrast(95%);
 }
 .customerChat{
     background-color: #84c2b5;
@@ -388,6 +443,7 @@
 }
 #quantityminus:hover{
     background-color: white;
+    cursor: pointer;
     filter: invert(14%) sepia(26%) saturate(934%) hue-rotate(314deg) brightness(95%) contrast(90%);
 }
 #quantitytext{
@@ -405,6 +461,7 @@
 }
 #quantityplus:hover{
     background-color: white;
+    cursor: pointer;
     filter: invert(14%) sepia(26%) saturate(934%) hue-rotate(314deg) brightness(95%) contrast(90%);
 }
 #banbox{
