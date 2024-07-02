@@ -346,6 +346,7 @@ img:hover:not(.ctt_img, #preview_img, #backgoundframe1, #backgoundframe2) {
     color: white;
 }
 
+/* type=number 화살표 제거 */
 /* 크로스 브라우저 호환성을 위한 스타일 */
 /* Webkit 브라우저 (Chrome, Safari) */
 #ch_price::-webkit-inner-spin-button, #ch_price::-webkit-outer-spin-button {
@@ -353,6 +354,7 @@ img:hover:not(.ctt_img, #preview_img, #backgoundframe1, #backgoundframe2) {
     margin: 0;
 }
 
+/* type=number 화살표 제거 */
 #ch_price {
     -moz-appearance: textfield; /* Firefox */
     appearance: textfield; /* 일반 브라우저 스타일 재정의 */
