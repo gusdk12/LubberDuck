@@ -160,7 +160,7 @@ function addDragEventToPostIt(postItType, postItElement) {
                         });
                     } else {
                         createGuestBookData(x_coordinate, y_coordinate, z_coordinate, content, postIt);
-                        console.log(z_coordinate)
+                        // console.log(z_coordinate)
                         document.querySelector('#edittogglebutton').style.display = 'block';
                     }
                 });
