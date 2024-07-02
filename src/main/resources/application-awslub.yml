@@ -61,7 +61,7 @@ app:
 
   # OAuth2
   oauth2:
-    password: 1234   # oauth2 인증한 회원에 대한 전용 패스워드, 보안주의!
+    password: ${rds.oauthpassword}   # oauth2 인증한 회원에 대한 전용 패스워드, 보안주의!
 
     # Kakao 로그인 관련 세팅값
     kakao:
