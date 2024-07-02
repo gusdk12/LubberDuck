@@ -34,7 +34,7 @@ public class ChatController {
             @RequestParam("user_Id") Long user_Id,
             @RequestParam("role") String role,
             @RequestParam("content") String content){
-        ChatManager.getInstance().addHistory(role, content);
+        ChatManager.getInstance().addUserHistory(user_Id, role, content);
         return chatServiceImpl.add(user_Id, role, content);
     }
 
@@ -43,7 +43,8 @@ public class ChatController {
             @RequestParam("user_Id") Long user_Id,
             @RequestParam("role") String role){
         createInitPrompt();
-        String fullPrompt = ChatManager.getInstance().getHistory();
+        String fullPrompt = ChatManager.getInstance().getUserHistory(user_Id);
+        System.out.println(fullPrompt);
         String response = chatServiceImpl.getResponse(fullPrompt).replace("\n", "\\n").replace("\"", "\\\"");
         response = response.replace("바텐더: ", "");
         return chatServiceImpl.add(user_Id, role, response);

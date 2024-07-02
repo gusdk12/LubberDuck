@@ -3,14 +3,11 @@ package com.lec.spring.service.chat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lec.spring.domain.QryResult;
-import com.lec.spring.domain.User;
-import com.lec.spring.domain.cart.Cart;
 import com.lec.spring.domain.chat.Chat;
 import com.lec.spring.domain.chat.ChatManager;
 import com.lec.spring.domain.chat.QryChatList;
 import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.repository.chat.ChatRepository;
-import com.lec.spring.service.menu.MenuService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +18,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -107,7 +102,7 @@ public class ChatServiceImpl implements ChatService {
         list.setStatus("OK");
         list.setMenuList(menuList);
 
-        ChatManager.getInstance().makeHistory(chats);
+        ChatManager.getInstance().makeUserHistory(user_id, chats);
 
         return list;
     }
