@@ -109,7 +109,7 @@ const ageChart = new Chart(ctx, {
                 right: 80 // 오른쪽 여백을 늘려 이미지가 잘리지 않도록 설정
             }
         },
-        barThickness: 80, // 막대 두께 설정
+        barThickness: 60, // 막대 두께 설정
     },
     plugins: [imagePlugin]
 });
