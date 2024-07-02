@@ -68,16 +68,16 @@ $(document).ready(function(){
 
     buildBody(); // buildBody를 호출하여 본문을 만듭니다.
 
-    // 모달 이벤트 리스너 설정
     $(document).on('click', '.modal_btn', function(){
+        closeAllModals(); // Close all modals before opening a new one
+
         const reviewId = $(this).data('review-id');
         const reviewContent = $(this).data('review-content');
         const reviewRegdate = $(this).data('review-regdate');
         const reviewMenuName = $(this).data('review-menu-name');
         const reviewRate = $(this).data('review-rate');
         const modalContent =
-            `
-            <div id="review-form">
+            `<div id="review-form">
             <h3>리뷰 상세보기</h3>
             <span class="form-group">
                 <label for="title" class="form-left">메뉴 이름</label>
@@ -87,9 +87,9 @@ $(document).ready(function(){
                 <label for="name" class="form-left">주문 일시</label>
                 <input type="text" id="name" name="name" class="detailReview" value="${formatDateTime(reviewRegdate)}" disabled><br><hr>
             </div>
-              <div class="form-group rating-group">
+            <div class="form-group rating-group">
                 <label for="rate" class="form-left">별점</label>
-                      <div class="rating" id="star_rate">
+                <div class="rating" id="star_rate">
                     <input type="radio" name="rate" value="5" id="star5" ${reviewRate == 5 ? 'checked' : ''} disabled><label for="star5"></label>
                     <input type="radio" name="rate" value="4" id="star4" ${reviewRate == 4 ? 'checked' : ''} disabled><label for="star4"></label>
                     <input type="radio" name="rate" value="3" id="star3" ${reviewRate == 3 ? 'checked' : ''} disabled><label for="star3"></label>
@@ -109,6 +109,7 @@ $(document).ready(function(){
                 <h5> * 작성하신 리뷰는 <마이페이지-나의리뷰>에서 확인하실 수 있습니다.</h5>
             </div>
         </div>`;
+
         $('#modalContent').html(modalContent);
 
         // 모달 위치를 클릭한 버튼 옆으로 이동
@@ -118,20 +119,31 @@ $(document).ready(function(){
 
         $('#reviewModal').css({
             top: buttonOffset.top - modalHeight / 2 + 'px',
-            left: buttonOffset.left + $(this).outerWidth() + 10 + 'px'
+            left: buttonOffset.left + $(this).outerWidth() + 'px'
         }).show();
 
         // 다른 모달 숨기기
         $('#writeModal').hide();
     });
 
+    // 리뷰 작성 모달 닫을 때 초기화
+    $('#writeModal').on('hidden.bs.modal', function () {
+        $('#writeContent').html(''); // 모달 내용 초기화
+    });
+
+    $(document).on('click', '#back_button', function(){
+        $('#reviewModal').hide(); // 모달을 숨깁니다.
+        $('#modalContent').html('');
+    });
+
     $(document).on('click', '.write_btn', function(){
+        closeAllModals(); // Close all modals before opening a new one
+
         const reviewItemId = $(this).data('item-id');
         const reviewItemOrderRegdate = $(this).data('item-order-regdate');
         const reviewItemMenuName = $(this).data('item-menu-name');
         const writeContent =
-            `
-            <div id="review-form">
+            `<div id="review-form">
             <input type="hidden" name="item_id" value="${reviewItemId}">
             <button type="button" id="back_btn">X</button>
             <h3>리뷰 작성하기</h3>
@@ -145,7 +157,7 @@ $(document).ready(function(){
             </div>
             <div class="form-group rating-group">
                 <label for="rate" class="form-left">별점</label>
-                      <div class="rating" id="star_rate" aria-required="true">
+                <div class="rating" id="star_rate" aria-required="true">
                     <input type="radio" name="rate" value="5" id="star5"><label for="star5"></label>
                     <input type="radio" name="rate" value="4" id="star4"><label for="star4"></label>
                     <input type="radio" name="rate" value="3" id="star3"><label for="star3"></label>
@@ -165,6 +177,7 @@ $(document).ready(function(){
                 <h5> * 작성하신 리뷰는 <마이페이지-나의리뷰>에서 확인하실 수 있습니다.</h5>
             </div>
         </div>`;
+
         $('#writeContent').html(writeContent);
 
         // 모달 위치를 클릭한 버튼 옆으로 이동
@@ -174,11 +187,15 @@ $(document).ready(function(){
 
         $('#writeModal').css({
             top: buttonOffset.top - modalHeight / 2 + 'px',
-            left: buttonOffset.left + $(this).outerWidth() + 10 + 'px'
+            left: buttonOffset.left + $(this).outerWidth() + 'px'
         }).show();
 
         // 다른 모달 숨기기
         $('#reviewModal').hide();
+    });
+
+    $(document).on('click', '#back_btn', function(){
+        $('#writeModal').hide(); // 모달을 숨깁니다.
     });
 
     $(document).on('click', '#back_button', function(){
@@ -305,4 +322,11 @@ function buildBody(){
                 <p id="writeContent"></p>
         </div>
     `);
+}
+
+function closeAllModals() {
+    $('#reviewModal').hide();
+    $('#writeModal').hide();
+    $('#modalContent').html('');
+    $('#writeContent').html('');
 }

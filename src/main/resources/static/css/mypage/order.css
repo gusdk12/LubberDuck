@@ -1,4 +1,9 @@
 
+
+.all{
+    height: auto;
+}
+
 .article {
     height: auto;
 }
@@ -466,7 +471,9 @@ div#star_rate.rating{
     background-color: #ecf1e9;
 }
 
-
+.rating input[type="radio"] + label {
+    cursor: pointer;
+}
 
 
 
