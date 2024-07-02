@@ -1,4 +1,9 @@
 
+
+.all{
+    height: auto;
+}
+
 .article {
     height: auto;
     min-height: 1100px;
@@ -467,7 +472,9 @@ div#star_rate.rating{
     background-color: #ecf1e9;
 }
 
-
+.rating input[type="radio"] + label {
+    cursor: pointer;
+}
 
 
 
