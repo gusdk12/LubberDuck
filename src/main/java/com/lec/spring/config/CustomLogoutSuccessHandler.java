@@ -8,6 +8,8 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
@@ -15,9 +17,14 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         System.out.println("### 로그아웃 성공 : CustomLogoutSuccessHandler 동작 ###");
 
+        ZoneId zoneId = ZoneId.of("Asia/Seoul");
+
         // 로그아웃 시간 남기기
-        LocalDateTime logoutTime = LocalDateTime.now();
-        System.out.println("로그아웃시간: " + logoutTime);
+        LocalDateTime logoutTime = LocalDateTime.now(zoneId);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println("로그아웃시간: " + logoutTime.format(formatter));
+
+
 
         // 사용시간 (로그인 ~ 로그아웃) 계산해보기
         LocalDateTime loginTime = (LocalDateTime) request.getSession().getAttribute("loginTime");

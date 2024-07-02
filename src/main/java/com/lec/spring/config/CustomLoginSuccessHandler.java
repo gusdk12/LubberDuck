@@ -8,6 +8,8 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,12 +50,14 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         });
         System.out.println("authorities: " + roleNames);
 
+        ZoneId zoneId = ZoneId.of("Asia/Seoul");
+
+
         // 로그인 시간을 세션에 저장하기 (※ logout 예제에서 사용)
-        LocalDateTime loginTime = LocalDateTime.now();
-        System.out.println("로그인 시간: " + loginTime);
+        LocalDateTime loginTime = LocalDateTime.now(zoneId);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println("로그인 시간: " + loginTime.format(formatter));
         request.getSession().setAttribute("loginTime", loginTime);
-
-
 
     }
 
