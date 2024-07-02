@@ -44,7 +44,6 @@ public class ChatController {
             @RequestParam("role") String role){
         createInitPrompt();
         String fullPrompt = ChatManager.getInstance().getUserHistory(user_Id);
-        System.out.println(fullPrompt);
         String response = chatServiceImpl.getResponse(fullPrompt).replace("\n", "\\n").replace("\"", "\\\"");
         response = response.replace("바텐더: ", "");
         return chatServiceImpl.add(user_Id, role, response);
