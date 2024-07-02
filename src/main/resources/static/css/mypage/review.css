@@ -1,20 +1,18 @@
-@font-face {
-    font-family: 'GmarketSansLight';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+
+body {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    margin: 0;
 }
 
-@font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
+.article{
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
     font-style: normal;
-}
-
-* {
-    font-family: 'GmarketSansLight';
-    font-weight: 600;
+    font-size: 25px;
 }
 
 .all{
@@ -176,10 +174,15 @@
     -webkit-box-orient: vertical;
     /*-webkit-line-clamp: 5; !* 5줄로 제한 *!*/
     /*max-height: calc(5 * 1.5em); !* 높이 제한 *!*/
-    cursor: pointer;
     /*transition: max-height 0.5s ease-out; !* max-height 변화 애니메이션 *!*/
     min-height: 100px;
     font-weight: 600;
+    overflow-wrap: anywhere;
+
+    -webkit-user-select:all;
+    -moz-user-select:all;
+    -ms-user-select:all;
+    user-select:all
 }
 
 .review-text::after {
@@ -271,7 +274,6 @@
     border: 1px solid rgb(243, 243, 243);
     position: relative;
     z-index: 5;
-    height: 540px;
 }
 
 .form-group label {
@@ -292,6 +294,7 @@ textarea {
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    background-color: #e0ebf0;
 }
 
 .form-left {
@@ -538,5 +541,14 @@ textarea#reviewContentUpdate::-webkit-scrollbar-thumb:hover {
 h3 {
     font-weight: 600;
 }
+
+textarea:focus {
+    outline: none; /* 클릭 시 발생하는 기본적인 아웃라인 스타일을 제거합니다. */
+}
+
+#review-form .rating label {
+    cursor: pointer;
+}
+
 
 

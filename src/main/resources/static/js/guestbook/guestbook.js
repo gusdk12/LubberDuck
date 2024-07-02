@@ -160,7 +160,7 @@ function addDragEventToPostIt(postItType, postItElement) {
                         });
                     } else {
                         createGuestBookData(x_coordinate, y_coordinate, z_coordinate, content, postIt);
-                        console.log(z_coordinate)
+                        // console.log(z_coordinate)
                         document.querySelector('#edittogglebutton').style.display = 'block';
                     }
                 });
@@ -188,7 +188,7 @@ function addDragEventToPostIt(postItType, postItElement) {
                         } else {
                             // 포커스 아웃 이벤트 트리거
                             postItElement.querySelector('.contentBox').blur();
-                            console.log(z_coordinate)
+                            // console.log(z_coordinate)
                             document.querySelector('#edittogglebutton').style.display = 'block';
                         }
                     }
@@ -196,7 +196,7 @@ function addDragEventToPostIt(postItType, postItElement) {
             } else if (postItType === POSTIT) {  // postItType이 POSTIT인 경우는,
                 // 이미 게시판에 붙은 포스트잇을 드래그해서, 새로운 위치에 갖다놓은 경우.
                 updateGuestBookData(memoId, x_coordinate, y_coordinate, z_coordinate);
-                console.log(z_coordinate)
+                // console.log(z_coordinate)
             }
             addDragEventToPostIt(POSTIT, postItElement);
         };

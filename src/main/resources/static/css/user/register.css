@@ -76,9 +76,25 @@ body{
     color: #f8e9d7;
 }
 
+
+/* type=number 화살표 제거 */
+/* 크로스 브라우저 호환성을 위한 스타일 */
+/* Webkit 브라우저 (Chrome, Safari) */
+.field.birth input::-webkit-inner-spin-button, .field.birth input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* type=number 화살표 제거 */
+.field.birth input {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* 일반 브라우저 스타일 재정의 */
+}
+
 .field.birth div{
     display: flex;
     gap:10px;
+
 }
 
 
