@@ -84,6 +84,6 @@ public class KakaoPayService {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        return "/pay/payOk";
+        return "/pay";
     }
 }
