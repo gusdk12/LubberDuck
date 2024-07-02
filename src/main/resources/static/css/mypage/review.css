@@ -1,20 +1,15 @@
-@font-face {
-    font-family: 'GmarketSansLight';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 
-@font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+body {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 
-* {
-    font-family: 'GmarketSansLight';
-    font-weight: 600;
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
 }
 
 .all{
@@ -176,10 +171,15 @@
     -webkit-box-orient: vertical;
     /*-webkit-line-clamp: 5; !* 5줄로 제한 *!*/
     /*max-height: calc(5 * 1.5em); !* 높이 제한 *!*/
-    cursor: pointer;
     /*transition: max-height 0.5s ease-out; !* max-height 변화 애니메이션 *!*/
     min-height: 100px;
     font-weight: 600;
+    overflow-wrap: anywhere;
+
+    -webkit-user-select:all;
+    -moz-user-select:all;
+    -ms-user-select:all;
+    user-select:all
 }
 
 .review-text::after {
@@ -538,5 +538,7 @@ textarea#reviewContentUpdate::-webkit-scrollbar-thumb:hover {
 h3 {
     font-weight: 600;
 }
+
+
 
 
