@@ -80,12 +80,25 @@ $(document).ready(function () {
 
                     $('#menuList tbody').append(newRow); // #menuList 테이블에 새로운 행 추가
                     addedMenuNames.add(itemName); // 추가된 메뉴 이름을 Set에 추가
+                    console.log(menuSequence)
                     $(this).prop('checked', false); // 생성 후, 체크박스 해제
                     $('#selectAll').prop('checked', false); // 생성 후, 체크박스 해제
 
-                    // 변경 중 정보조회 링크 이벤트 방지
-                    $('#menuList .item a.itemName').off('click').on('click', function (event) {
-                        event.preventDefault();
+                    // 바뀐 sequence 에 맞게 새로 정렬
+                    let rows = $('#menuList tbody tr').get();
+                    rows.sort((a, b) => {
+                        const A = parseInt($(a).find('.sequence').text());
+                        const B = parseInt($(b).find('.sequence').text());
+                        return A - B;
+                    });
+                    // 화면에 새로운 정렬 업데이트
+                    $('#menuList tbody').empty();
+                    $.each(rows, function (index, row) {
+                        $('#menuList tbody').append(row);
+                        // 변경 중 정보조회 링크 이벤트 방지
+                        $('#menuList .item a.itemName').off('click').on('click', function (event) {
+                            event.preventDefault();
+                        });
                     });
                 }
             }
@@ -98,6 +111,8 @@ $(document).ready(function () {
         } else if (duplicateDetected) {
             swal("메뉴 생성 실패!", "중복된 메뉴는 생성되지 않습니다", "error");
         }
+
+
     }); // end $('.btn_add').click()
 
     // 화살표 버튼으로 순서 바꾸기

@@ -284,6 +284,7 @@ function buildBook(result){
             var menuItem = menuList.find(menu => menu.name === cocktailName);
 
             if (menuItem) {
+                addAnimationStart(e);
                 addToCart(menuItem);
                 swal("SUCCESS",cocktailName+' 담기 완료',"success");
             } else {

@@ -62,8 +62,9 @@ function addEvent(){
     });
 
     // addToCart
-    $('#toCart').click(function(){
+    $('#toCart').click(function(e){
         var cocktailName = $(this).parent().siblings("#name").text();
+        addAnimationStart(e);
         addToCart(menuList.find(menu => menu.name === cocktailName));
     });
 

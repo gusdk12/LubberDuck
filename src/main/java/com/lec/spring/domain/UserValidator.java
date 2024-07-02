@@ -45,7 +45,7 @@ public class UserValidator implements Validator {
         if (password == null || password.trim().isEmpty()) {
             errors.rejectValue("password", "password 는 필수입니다.");
         } else if (!isValidPassword(password)) {
-            errors.rejectValue("password", "password 는 6글자 이상이어야 하며, 숫자 및 특수문자 1개를 포함해야 합니다.");
+            errors.rejectValue("password", "password 는 6글자 이상이어야 하며, <br>숫자 및 특수문자 1개를 포함해야 합니다.");
         }
 
         // 입력 password, re_password 가 동일한지 비교
