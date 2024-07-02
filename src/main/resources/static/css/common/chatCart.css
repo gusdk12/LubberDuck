@@ -555,4 +555,5 @@
     height: 20px;
     background: linear-gradient(to top, #F37472, #DD3F3D);
     border-radius: 50%;
+    pointer-events: none;
 }
