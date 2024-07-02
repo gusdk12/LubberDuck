@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+    $('.sm').eq(2).css({
+        'background-color':'#FCF7EF',
+        'border-radius' : "10px 0 0 10px",
+        'color' : '#54320f',
+        'font-weight': 'bold'
+    });
+
     initializePage(); // 페이지 로드 시 초기화 함수 호출
 
     // 모달 추가
@@ -29,7 +37,7 @@ $(document).ready(function() {
                 <h3>리뷰 수정하기</h3>
                 <span class="form-group">
                     <label for="menuName" class="form-left">메뉴 이름</label>
-                    <input type="text" id="menuNameUpdate" name="menuName" value="${reviewMenuName}" disabled><br><br><hr>
+                    <input type="text" id="menuNameUpdate" name="menuName" value="${reviewMenuName}" disabled><br><hr>
                 </span>
                 <div class="form-group">
                     <label for="orderDate" class="form-left">주문 일시</label>
@@ -49,7 +57,7 @@ $(document).ready(function() {
                 <div id="rateError" class="error"></div>
                 <div class="form-group">
                     <label for="reviewContent" class="form-left">리뷰 내용</label>
-                    <textarea id="reviewContentUpdate" name="reviewContent" rows="8" cols="80">${reviewContent}</textarea>
+                    <textarea id="reviewContentUpdate" name="reviewContent" rows="8" cols="80" spellcheck="false">${reviewContent}</textarea>
                     <div id="contentError" class="error"></div>
                 </div>
                 <div class="text-center">
@@ -207,7 +215,7 @@ function buildBody() {
                                     <span class="star_score">${review.rate}</span>
                                 </div>
                             </div>
-                            <div class="review-text" data-review-id="${review.id}" data-review-content="${review.content}" data-review-regdate="${review.regdate}" data-review-rate="${review.rate}" data-review-menu-name="${review.menu.name}">
+                            <div class="review-text" spellcheck="false" data-review-id="${review.id}" data-review-content="${review.content}" data-review-regdate="${review.regdate}" data-review-rate="${review.rate}" data-review-menu-name="${review.menu.name}">
                                 ${review.content}
                             </div>
                             <div class="review-date">${formattedDate}</div>
