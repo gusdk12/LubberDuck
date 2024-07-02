@@ -4,7 +4,10 @@ body {
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
+    margin: 0;
+}
 
+.article{
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
@@ -271,7 +274,6 @@ body {
     border: 1px solid rgb(243, 243, 243);
     position: relative;
     z-index: 5;
-    height: 540px;
 }
 
 .form-group label {
@@ -292,6 +294,7 @@ textarea {
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    background-color: #e0ebf0;
 }
 
 .form-left {
@@ -537,6 +540,10 @@ textarea#reviewContentUpdate::-webkit-scrollbar-thumb:hover {
 
 h3 {
     font-weight: 600;
+}
+
+textarea:focus {
+    outline: none; /* 클릭 시 발생하는 기본적인 아웃라인 스타일을 제거합니다. */
 }
 
 
