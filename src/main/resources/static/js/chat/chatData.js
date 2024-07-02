@@ -26,7 +26,11 @@ function buildChat(data, menudata){
             const findMenu = menudata.find(menu => chat.content.includes(menu.name));
             let menuData = "";
             if(findMenu){
-                menuData = `<div class="chatMenuInfo" style="background-image: url(${findMenu.imgUrl})" onClick="location.href ='/menu/detail/${findMenu.id}'"></div>`;
+                // menuData = `<!--<div class="chatMenuInfo" style="background-image: url(${findMenu.imgUrl})" onClick="location.href ='/menu/detail/${findMenu.id}'"></div>-->`;
+                menuData = `<div class="chatMenuInfo" style="background-image: url(${findMenu.imgUrl})">
+                                <div id="chatcocktaildetail" onClick="location.href ='/menu/detail/${findMenu.id}'"></div>
+                                <div id="chatcocktailadd" value="${findMenu.name}"></div>
+                            </div>`;
             }
 
             $('#historycontainer').append(`
@@ -44,6 +48,14 @@ function buildChat(data, menudata){
             `);
         }
     });
+
+    for(cocktailadd of document.querySelectorAll("#chatcocktailadd")){
+        cocktailadd.addEventListener("click", function(e){
+            e.preventDefault();
+            let cocktailName = $(this).attr('value');
+            addToCart(menuList.find(menu => menu.name === cocktailName));
+        });
+    }
 }
 
 function addCustomerChat(content){

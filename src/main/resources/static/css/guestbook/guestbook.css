@@ -143,6 +143,7 @@ body{
 .postItContent {
     margin: 15px 0 0 30px;
     font-family: 'Ownglyph_UNZ-Rg';
+    width: 190px;
 }
 
 .content {
@@ -151,14 +152,37 @@ body{
     margin: 10px 0 0 0;
     width: 190px;
     height: 95px;
+    word-break: break-all;
 }
 
 .contentBox {
     caret-color: black;
+    font-family: 'Ownglyph_UNZ-Rg';
     font-size: 25px;
     margin: 20px 0 0 25px;
-    width: 195px;
+    width: 200px;
     height: 120px;
+    resize: none;
+    word-break: break-all;
+}
+
+.contentBox::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+    height: 5px; /*가로 스크롤바 높이*/
+}
+
+.contentBox::-webkit-scrollbar-track {
+    background: none; /* 트랙 배경 색상 */
+    border-radius: 10px; /* 트랙 모서리 둥글게 */
+}
+
+.contentBox::-webkit-scrollbar-thumb {
+    background: rgba(16, 87, 62, 0.89); /* 핸들 색상 */
+    border-radius: 10px; /* 핸들 모서리 둥글게 */
+}
+
+.contentBox::-webkit-scrollbar-thumb:hover {
+    background: #10573e; /* 호버 시 핸들 색상 */
 }
 
 .content::placeholder, .contentBox::placeholder {

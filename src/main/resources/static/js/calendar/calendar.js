@@ -322,6 +322,7 @@ function addEvents() {
 function buildCalendar(data){
     if(!data) return;
 
+    // 데이터가 있는 경우
     data.forEach(date => {
         const year = date.id.toString().substring(0, 4);
         const month =  date.id.toString().substring(4, 6);
@@ -356,20 +357,20 @@ function removeEvent(dateId) {
 
 // 달력에 년도와 월을 로드
 function loadYYMM(fullDate) {
-    clearTodayMenuMemo(fullDate);
+    clearTodayMenuMemo();
     let yy = fullDate.getFullYear(); // 년도
-    let mm = fullDate.getMonth() + 1; // 월 (0부터 시작)
+    let mm = fullDate.getMonth(); // 월 (0부터 시작)
     let firstDay = new Date(yy, mm, 1); // 해당 월의 첫째 날
     let lastDay = new Date(yy, mm + 1, 0); // 해당 월의 마지막 날
     let markToday;
 
     // 오늘 날짜를 표시하기 위한 변수 설정
-    if ((mm - 1) === init.today.getMonth() && yy === init.today.getFullYear()) {
+    if ((mm) === init.today.getMonth() && yy === init.today.getFullYear()) {
         markToday = init.today.getDate();
     }
 
     // 월과 년도를 UI에 표시
-    $(".cal-month").text(init.monList[mm - 1]);
+    $(".cal-month").text(init.monList[mm]);
     $(".cal-year").text(yy + "년");
 
     let trtd = "";
@@ -386,7 +387,7 @@ function loadYYMM(fullDate) {
             } else {
                 // 각 날짜에 대한 정보 설정
                 let fullDate =
-                    yy + "." + init.addZero(mm) + "." + init.addZero(countDay + 1); // 날짜 포맷 설정
+                    yy + "." + init.addZero(mm + 1) + "." + init.addZero(countDay + 1); // 날짜 포맷 설정
 
                 trtd += `<td class="day`;  // td 요소에 클래스 추가
                 trtd += markToday && markToday === countDay + 1 ? ' today" ' : '"'; // 오늘 날짜인 경우 클래스 추가
@@ -411,7 +412,6 @@ function loadYYMM(fullDate) {
 function clearTodayMenuMemo(){
     // 메뉴 데이터 및 내용 비우기
     $('.today-menu-container').empty();
-    $("#btn-add-menu").show();
     initializePopup();
 
     // 메모 데이터 및 내용 비우기
@@ -445,48 +445,10 @@ function isPastDate(date) {
 /*** 메뉴 관련 화면 구성 ***/
 // 오늘의 메뉴 화면에 표시
 function buildTodayMenu(data) {
-
-    // 이전 날짜에는 버튼 숨기기
-    // 이전 날짜일 경우
-    if (isPastDate(data.date)) {
-        $(".btn-edit").hide();
-        $(".btn-delete").hide();
-        $(".edit-disabled-text").show();
-        // TODO
-        $(".btn-add-menu").hide();
-        $(".notification-menu-text").text("오늘의 메뉴를 추가할 수 없습니다.");
-        // 이후 날짜일 경우
-    } else {
-        $(".btn-edit").show();
-        $(".btn-delete").show();
-        $(".edit-disabled-text").hide();
-        // TODO
-        $(".btn-add-menu").show();
-        $(".notification-menu-text").text("등록한 오늘의 메뉴가 없습니다.");
-    }
-
     // 오늘의 메뉴 데이터가 없는 경우
     if(!data.menu_id) {
+        $("#btn-add-menu").show();
         $('.notification-menu-text').show();
-        console.log(data.date);
-        console.log(isPastDate(data.date));
-        if (isPastDate(data.date)) {
-            $(".btn-edit").hide();
-            $(".btn-delete").hide();
-            $(".edit-disabled-text").show();
-            // TODO
-            $(".btn-add-menu").hide();
-            $(".notification-menu-text").text("오늘의 메뉴를 추가할 수 없습니다.");
-            // 이후 날짜일 경우
-        } else {
-            $(".btn-edit").show();
-            $(".btn-delete").show();
-            $(".edit-disabled-text").hide();
-            // TODO
-            $(".btn-add-menu").show();
-            $(".notification-menu-text").text("등록한 오늘의 메뉴가 없습니다.");
-        }
-
         return;
     }
 
@@ -511,6 +473,24 @@ function buildTodayMenu(data) {
             </div>
         </div>
     `);
+
+    // 이전 날짜에는 버튼 숨기기
+    // 이전 날짜일 경우
+    if (isPastDate(data.date)) {
+        $(".btn-edit").hide();
+        $(".btn-delete").hide();
+        $(".edit-disabled-text").show();
+        $(".btn-add-menu").hide(); // 왜 안돼?
+        // $(".notification-menu-text").text("오늘의 메뉴를 추가할 수 없습니다.");
+        // 이후 날짜일 경우
+    } else {
+        $(".btn-edit").show();
+        $(".btn-delete").show();
+        $(".edit-disabled-text").hide();
+        $(".btn-add-menu").show();
+        $(".notification-menu-text").text("등록한 오늘의 메뉴가 없습니다.");
+    }
+
 }
 
 // 오늘의 메뉴 데이터를 가져오는 함수
