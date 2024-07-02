@@ -82,7 +82,6 @@ public class UserController {
                                      RedirectAttributes redirectAttrs) {
 
         if (result.hasErrors()) {
-            // 유효성 검사 오류 처리
             redirectAttrs.addFlashAttribute("username", user.getUsername());
             redirectAttrs.addFlashAttribute("nickname", user.getNickname());
             redirectAttrs.addFlashAttribute("email", user.getEmail());
@@ -100,9 +99,6 @@ public class UserController {
         }
 
         user.setBirth_date(LocalDate.of(year, month, day));
-
-
-        user.setBirth_date(LocalDate.of(year, month, day));
         int cnt = userService.register(user, "ROLE_CUSTOMER");
         model.addAttribute("result", cnt);
         return "/user/registerCustomer";
@@ -118,7 +114,6 @@ public class UserController {
                                      RedirectAttributes redirectAttrs) {
 
         if (result.hasErrors()) {
-            // 유효성 검사 오류 처리
             redirectAttrs.addFlashAttribute("username", user.getUsername());
             redirectAttrs.addFlashAttribute("nickname", user.getNickname());
             redirectAttrs.addFlashAttribute("email", user.getEmail());
