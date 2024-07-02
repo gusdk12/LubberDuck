@@ -217,7 +217,7 @@ function addAnimationStart(event){
     document.body.appendChild(circle);
 
     let cartbutton = document.getElementById('cartbuttonback');
-    let rect = smallDiv.getBoundingClientRect();
+    let rect = cartbutton.getBoundingClientRect();
     let targetX = rect.left + rect.width / 2 - 10;
     let targetY = rect.top + rect.height / 2 - 10;
 
