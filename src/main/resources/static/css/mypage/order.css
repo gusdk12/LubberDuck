@@ -1,6 +1,7 @@
 
 .article {
     height: auto;
+    min-height: 1100px;
 }
 
 .container {
