@@ -26,14 +26,14 @@ spring:
       client:
         registration:
           naver:
-            client-id: aaaa
-            client-secret: aaaa
+            client-id: ${rds.naver_id}
+            client-secret: ${rds.naver_secret}
             scope:
               - name
               - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: aaaa
+            redirect-uri: ${rds.naver_redirect_url}
         provider:
           naver:
             authorization-uri: https://nid.naver.com/oauth2.0/authorize
@@ -45,12 +45,12 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
 
 kakaopay:
-  admin-key: dddd
-  cid: eeee
+  admin-key: ${rds.kakao_key}
+  cid: ${rds.kakao_cid}
 
 cohere:
   api:
-    key: ffff
+    key: ${rds.cohere_key}
 
 
 app:
@@ -62,11 +62,11 @@ app:
   # OAuth2
   oauth2:
 
-    password: gggg   # oauth2 인증한 회원에 대한 전용 패스워드, 보안주의!
+    password: ${rds.oauth_password}   # oauth2 인증한 회원에 대한 전용 패스워드, 보안주의!
 
     # Kakao 로그인 관련 세팅값
     kakao:
-      client-id: bbbb  # REST Api 앱 키
-      redirect-uri: cccc # Redirect URI
+      client-id: ${rds.kakao_client_id}  # REST Api 앱 키
+      redirect-uri: ${rds.kakao_redirect_url} # Redirect URI
       token-uri: https://kauth.kakao.com/oauth/token  # access token 요청 URI
       user-info-uri: https://kapi.kakao.com/v2/user/me  # 사용자 profile 요청 URI
