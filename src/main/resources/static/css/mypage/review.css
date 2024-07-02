@@ -546,6 +546,9 @@ textarea:focus {
     outline: none; /* 클릭 시 발생하는 기본적인 아웃라인 스타일을 제거합니다. */
 }
 
+#review-form .rating label {
+    cursor: pointer;
+}
 
 
 
