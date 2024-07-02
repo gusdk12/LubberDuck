@@ -50,6 +50,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.1s ease;
 }
 #cartbuttonback:hover{
     cursor: pointer;
@@ -546,4 +547,12 @@
 }
 .hidden{
     display: none;
+}
+
+.addcircle {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(to top, #F37472, #DD3F3D);
+    border-radius: 50%;
 }

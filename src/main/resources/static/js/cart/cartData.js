@@ -208,3 +208,29 @@ function buildCart(cart){
     scrollableDiv.scrollTop = currentscrollTop;
     document.querySelector(`#carttotal`).textContent = `Total ${totalPrice} ￦`;
 }
+
+function addAnimationStart(event){
+    let circle = document.createElement('div');
+    circle.classList.add('addcircle');
+    circle.style.left = `${event.clientX - 10}px`;
+    circle.style.top = `${event.clientY - 10}px`;
+    document.body.appendChild(circle);
+
+    let cartbutton = document.getElementById('cartbuttonback');
+    let rect = smallDiv.getBoundingClientRect();
+    let targetX = rect.left + rect.width / 2 - 10;
+    let targetY = rect.top + rect.height / 2 - 10;
+
+    circle.style.transition = 'transform 0.7s ease';
+    requestAnimationFrame(() => {
+        circle.style.transform = `translate(${targetX - event.clientX + 10}px, ${targetY - event.clientY + 10}px)`;
+    });
+
+    circle.addEventListener('transitionend', () => {
+        circle.remove();
+        cartbutton.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+            cartbutton.style.transform = 'scale(1)';
+        }, 300);
+    });
+}
