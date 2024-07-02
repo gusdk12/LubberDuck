@@ -99,7 +99,7 @@ async function getMaxZIndex(postItElement) {
         url: '/guestbook/find',
         method: 'POST',
         success: function (maxZIndex) {
-            console.log('Maximum zIndex:', maxZIndex);
+            // console.log('Maximum zIndex:', maxZIndex);
             postItElement.style.zIndex = maxZIndex;
         }
     });
