@@ -34,25 +34,25 @@ body {
     position: absolute;
 }
 #leftup{
-    background-image: url('/img/maindeco/leftup.png');
+    background-image: url('/img/maindeco/leftup.webp');
     left: 0%;
     top: 0%;
     transition: left 0.5s ease; /* Smooth transition */
 }
 #rightup{
-    background-image: url('/img/maindeco/rightup.png');
+    background-image: url('/img/maindeco/rightup.webp');
     right: 0%;
     top: 0%;
     transition: right 0.5s ease; /* Smooth transition */
 }
 #leftdown{
-    background-image: url('/img/maindeco/leftdown.png');
+    background-image: url('/img/maindeco/leftdown.webp');
     left: 0%;
     bottom: 0%;
     transition: left 0.5s ease; /* Smooth transition */
 }
 #rightdown{
-    background-image: url('/img/maindeco/rightdown.png');
+    background-image: url('/img/maindeco/rightdown.webp');
     right: 0%;
     bottom: 0%;
     transition: right 0.5s ease; /* Smooth transition */
@@ -141,7 +141,7 @@ body {
     align-items: center;
 }
 .menuTitle #label{
-    background-image: url('/img/menu/barLabel.png');
+    background-image: url('/img/menu/barLabel.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -318,7 +318,7 @@ body {
     width: 180px;
     height: 360px;
     bottom: 0px;
-    background-image: url('/img/menu/leftwreath.png');
+    background-image: url('/img/menu/leftwreath.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -343,7 +343,7 @@ body {
     width: 180px;
     height: 360px;
     bottom: 0px;
-    background-image: url('/img/menu/rightwreath.png');
+    background-image: url('/img/menu/rightwreath.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -367,7 +367,7 @@ body {
     width: 300px;
     height: 300px;
     bottom: 0px;
-    background-image: url('/img/menu/sunburst.png');
+    background-image: url('/img/menu/sunburst.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -409,8 +409,7 @@ body {
     width: 300px;
     height: 140px;
     bottom: 0px;
-    /*background-image: url('/img/menu/todaylabel.png');*/
-    content: url('/img/menu/todaylabel.png');
+    content: url('/img/menu/todaylabel.webp');
     /*background-size: contain;*/
     /*background-repeat: no-repeat;*/
     /*background-position: center;*/

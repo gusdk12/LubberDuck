@@ -42,7 +42,7 @@ body{
 
 #guestbook_background {
     position: absolute;
-    background-image: url("/img/guestBook/guestBook.png");
+    background-image: url("/img/guestBook/guestBook.webp");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -84,7 +84,7 @@ body{
 }
 #edittogglebutton{
     position: fixed;
-    background-image: url("/img/guestBook/arrow.png");
+    background-image: url("/img/guestBook/arrow.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -120,11 +120,11 @@ body{
     filter: drop-shadow(3px 0px 3px rgba(0, 0, 0, 0.3)) /* Right and bottom shadow */
     drop-shadow(-3px 5px 3px rgba(0, 0, 0, 0.3)) /* Left and bottom shadow */;
 }
-#postIt1 {background-image: url("/img/guestBook/pink.png")}
-#postIt2{background-image: url("/img/guestBook/yellow.png")}
-#postIt3{background-image: url("/img/guestBook/green.png")}
-#postIt4{background-image: url("/img/guestBook/blue.png")}
-#postIt5{background-image: url("/img/guestBook/purple.png")}
+#postIt1 {background-image: url("/img/guestBook/pink.webp")}
+#postIt2{background-image: url("/img/guestBook/yellow.webp")}
+#postIt3{background-image: url("/img/guestBook/green.webp")}
+#postIt4{background-image: url("/img/guestBook/blue.webp")}
+#postIt5{background-image: url("/img/guestBook/purple.webp")}
 
 .postItDel {
     float: right;
