@@ -96,7 +96,7 @@ function updateMessage() {
         messagesDiv.textContent = "";
     } else if (angle >= -1.2 && angle < -1.0) {
         const message = messages[0];
-        const progress = (angle + 1.2) / 0.2; // Normalize angle from -1 to -0.7 to 0 to 1
+        const progress = (angle + 1.2) / 0.2; // Normalize angle from -1.2 to -1.0 to 0 to 1
         const charsToShow = Math.min(Math.floor(message.length * progress), message.length);
         messagesDiv.textContent = message.substring(0, charsToShow);
     } else if (angle >= -1.0 && angle < -0.8) {

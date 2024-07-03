@@ -1,7 +1,6 @@
 package com.lec.spring.controller.chat;
 
 import com.lec.spring.domain.QryResult;
-import com.lec.spring.domain.chat.ChatManager;
 import com.lec.spring.domain.chat.QryChatList;
 import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.service.chat.ChatServiceImpl;
@@ -42,8 +41,8 @@ public class ChatController {
     public QryResult request(
             @RequestParam("user_Id") Long user_Id,
             @RequestParam("role") String role){
-        createInitPrompt();
         String fullPrompt = getFullPrompt(user_Id);
+        System.out.println(fullPrompt);
         String response = chatServiceImpl.getResponse(fullPrompt).replace("\n", "\\n").replace("\"", "\\\"");
         response = response.replace("바텐더: ", "");
         return chatServiceImpl.add(user_Id, role, response);
@@ -54,7 +53,7 @@ public class ChatController {
         return chatServiceImpl.clear(user_Id);
     }
 
-    private void createInitPrompt(){
+    private String createInitPrompt(){
         List<Menu> menuList = menuService.sequenceList();
         ArrayList<String> menus = new ArrayList<>();
         for(Menu menu : menuList){
@@ -75,7 +74,7 @@ public class ChatController {
                 ", '물론이죠, 여기서는 훌륭한 칵테일뿐만 아니라 마음의 평화도 찾으실 수 있습니다. 불안과 두려움을 잠시 잊고 편안한 밤을 보내는 데에 도움을 드리고 싶군요.'" +
                 ", '손님이 기쁘시다면 저도 기쁩니다!'";
 
-        ChatManager.getInstance().setBartendarSetting(initProm + exampleProm);
+        return initProm + exampleProm;
     }
 
     private String getFullPrompt(Long user_id){
@@ -85,10 +84,9 @@ public class ChatController {
         allChat.getList().forEach(chat -> chatList.add(chat.getRole() + ": " + chat.getContent()));
         Collections.reverse(chatList);
 
-        String result = ChatManager.getInstance().getBartendarSetting() +
-                "지금까지의 대화 기록입니다. 대화기록을 확인하고, 적절한 대화를 이어가세요. - "
+        String result = "지금까지의 대화 기록입니다. 대화기록을 확인하고, 적절한 대화를 이어가세요. - "
                 + String.join(" ", chatList);
-        return result;
+        return createInitPrompt() + result;
     }
 
 }
