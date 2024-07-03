@@ -36,7 +36,6 @@ function loadCalendars(){
         success: function (data, status) {
             if (status === "success") {
                 if (data.status !== "OK") {
-                    alert(data.status);
                     return;
                 }
                 buildCalendar(data.data);
@@ -66,7 +65,7 @@ async function loadData(dateId){
             }
         },
         error: function (xhr, status, error) {
-            alert("메뉴를 불러오지 못했습니다. 서버에서 오류가 발생했습니다.");
+            swal("Error","캘린더를 불러오지 못했습니다. 서버에서 오류가 발생했습니다.","error");
         }
     });
 }
@@ -96,7 +95,7 @@ async function addCalendarByMenu(menuId, comment) {
         cache: false,
         success: function(data, status) {
             if (status === "success" && data.status === "OK") {
-                alert("오늘의 메뉴가 추가되었습니다.");
+                swal("SUCCESS","오늘의 메뉴가 추가되었습니다.","success");
                 loadData(dateInt);
                 $("#myForm2").hide();
                 $(".popup-overlay").remove();
@@ -124,7 +123,7 @@ async function updateCalendarByMenu(menuId, comment) {
         cache: false,
         success: function(data, status) {
             if (status === "success" && data.status === "OK") {
-                alert("오늘의 메뉴가 수정되었습니다.");
+                swal("SUCCESS","오늘의 메뉴가 수정되었습니다.","success");
                 loadData(dateInt);
                 $("#myForm2").hide();
                 $(".popup-overlay").remove();
@@ -160,7 +159,7 @@ async function deleteCalendarByMenu(calendarId, menuId, comment) {
         cache: false,
         success: function(data, status) {
             if (status === "success" && data.status === "OK") {
-                alert("오늘의 메뉴가 삭제되었습니다.");
+                swal("SUCCESS","오늘의 메뉴가 삭제되었습니다.","success");
                 loadData(dateInt);
                 $('.today-menu-container').empty();
                 $('#select-menu-text').empty();
@@ -195,7 +194,7 @@ async function addCalendarByMemo(memo) {
         cache: false,
         success: function(data, status) {
             if (status === "success" && data.status === "OK") {
-                alert("메모가 추가되었습니다.");
+                swal("SUCCESS","메모가 추가되었습니다.","success");
                 loadData(dateInt);
                 $(".memo-delete, .memo-edit").show();
             }
@@ -224,7 +223,7 @@ async function updateCalendarByMemo(memo) {
         success: function(data, status) {
             if (status === "success" && data.status === "OK") {
                 $("#new-memo").val("").hide();
-                alert("메모가 수정되었습니다.");
+                swal("SUCCESS","메모가 수정되었습니다.","success");
                 loadData(dateInt);
                 $(".memo-delete, .memo-edit").show();
             }
@@ -258,7 +257,7 @@ async function deleteCalendarByMemo(calendarId, memo) {
         cache: false,
         success: function(data, status) {
             if (status === "success" && data.status === "OK") {
-                alert("메모가 삭제되었습니다.");
+                swal("SUCCESS","메모가 삭제되었습니다.","success");
                 loadData(dateInt);
             }
         }

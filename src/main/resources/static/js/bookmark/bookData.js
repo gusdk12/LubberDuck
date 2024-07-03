@@ -251,7 +251,7 @@ function buildBook(result){
         var $commentCon = $(this).closest('.comment-con');
         var commentValue = $commentCon.find('.modifyBox').val();
 
-        if (commentValue.length > 30) {
+        if(commentValue.length > 30) {
             $commentCon.find('.error-message').show();
         } else {
             $commentCon.find('.error-message').hide();
@@ -281,12 +281,11 @@ function buildBook(result){
 
         if (cartStatus.includes('cartIn')) {
             // 칵테일 이름에 맞는 객체를 찾아서 addToCart 함수에 전달합니다.
-            var menuItem = menuList.find(menu => menu.name === cocktailName);
+            var menuItem = list.find(menu => menu.name === cocktailName);
 
             if (menuItem) {
                 addAnimationStart(e);
                 addToCart(menuItem);
-                swal("SUCCESS",cocktailName+' 담기 완료',"success");
             } else {
                 console.error('Menu item not found for name:', cocktailName);
             }

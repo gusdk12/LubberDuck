@@ -37,7 +37,7 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
     ('Hot Teddy', '/img/menu/HotTeddy.webp', '스코틀랜드에서 감기나 독감에 걸렸을 때 마시던 따뜻하고 부드러운 맛을 가진 칵테일 (12도)', -1, 5500),
     ('Hurricane', '/img/menu/Hurricane.webp', '처음의 충격과 충격이 지나간 후에 흔적이 남는 허리케인처럼 여름에 어울리는 깔끔하고 상쾌한 맛을 가진 트로피컬 칵테일 (26도)', -1, 5100),
     ('Long Island Iced Tea', '/img/menu/IcedTeaWithLemon.webp', '달달하고 부드러운 맛이 특징이며 강한 도수 때문에 칵테일계의 폭탄주라고 불리는 칵테일 (29도)', -1, 6000),
-    ('Irish Coffee', '/img/menu/IrishCream.webp', '고소한 풍미의 커피 향과 위스키의 조화로 달콤한 휘핑크림을 얹어 단맛과 쓴맛이 매력적인 칵테일 (14도)', 13, 5500),
+    ('Irish Cream', '/img/menu/IrishCream.webp', '고소한 풍미의 커피 향과 위스키의 조화로 달콤한 휘핑크림을 얹어 단맛과 쓴맛이 매력적인 칵테일 (14도)', 13, 5500),
     ('Kir Royale', '/img/menu/KirRoyale.webp', '샴페인의 청량함과 카시스의 달콤함으로 부드럽고 달콤한 매력적인 맛을 가진 칵테일 (14도)', -1, 6000),
     ('Lemonade Classic', '/img/menu/LemonadeClassic.webp', '진 베이스로 레몬의 새콤함과 시원한 맛을 가진 칵테일 (12도)', 15, 5000),
     ('Mai-Tai', '/img/menu/MaiTai.webp', '열대과일의 풍부한 향이 조화를 이루며 트로피컬 칵테일의 여왕이라고 불리는 칵테일 (30도)', 10, 7000),
@@ -216,3 +216,122 @@ INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, con
 
 INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, content, postItKind) VALUES
     (4, 345.54, 679.87, 5, '칵테일이 맛있네요~~~', 5);
+
+
+UPDATE ctt_menu
+SET img_url = '/img/menu/Americano.webp'
+WHERE id=1;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Aviation.webp'
+WHERE id=2;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Bellini.webp'
+WHERE id=3;
+UPDATE ctt_menu
+SET img_url = '/img/menu/BlackRussian.webp'
+WHERE id=4;
+UPDATE ctt_menu
+SET img_url = '/img/menu/BlueHawaii.webp'
+WHERE id=5;
+UPDATE ctt_menu
+SET img_url = '/img/menu/ButterRum.webp'
+WHERE id=6;
+UPDATE ctt_menu
+SET img_url = '/img/menu/CloverClub.webp'
+WHERE id=7;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Cosmopolitan.webp'
+WHERE id=8;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Eggnog.webp'
+WHERE id=9;
+UPDATE ctt_menu
+SET img_url = '/img/menu/GodFather.webp'
+WHERE id=10;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Grog.webp'
+WHERE id=11;
+UPDATE ctt_menu
+SET img_url = '/img/menu/HotTeddy.webp'
+WHERE id=12;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Hurricane.webp'
+WHERE id=13;
+UPDATE ctt_menu
+SET img_url = '/img/menu/IcedTeaWithLemon.webp'
+WHERE id=14;
+UPDATE ctt_menu
+SET img_url = '/img/menu/IrishCream.webp'
+WHERE id=15;
+UPDATE ctt_menu
+SET img_url = '/img/menu/KirRoyale.webp'
+WHERE id=16;
+UPDATE ctt_menu
+SET img_url = '/img/menu/LemonadeClassic.webp'
+WHERE id=17;
+UPDATE ctt_menu
+SET img_url = '/img/menu/MaiTai.webp'
+WHERE id=18;
+UPDATE ctt_menu
+SET img_url = '/img/menu/MartiniDry.webp'
+WHERE id=19;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Mojito.webp'
+WHERE id=20;
+UPDATE ctt_menu
+SET img_url = '/img/menu/MulledAppleCider.webp'
+WHERE id=21;
+UPDATE ctt_menu
+SET img_url = '/img/menu/MulledWine.webp'
+WHERE id=22;
+UPDATE ctt_menu
+SET img_url = '/img/menu/OldFashioned.webp'
+WHERE id=23;
+UPDATE ctt_menu
+SET img_url = '/img/menu/PlantersPunch.webp'
+WHERE id=24;
+UPDATE ctt_menu
+SET img_url = '/img/menu/RobRoy.webp'
+WHERE id=25;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Sazerac.webp'
+WHERE id=26;
+UPDATE ctt_menu
+SET img_url = '/img/menu/ScrewDriver.webp'
+WHERE id=27;
+UPDATE ctt_menu
+SET img_url = '/img/menu/SeaBreeze.webp'
+WHERE id=28;
+UPDATE ctt_menu
+SET img_url = '/img/menu/SingaporeSling.webp'
+WHERE id=29;
+UPDATE ctt_menu
+SET img_url = '/img/menu/StrawberryLomonade.webp'
+WHERE id=30;
+UPDATE ctt_menu
+SET img_url = '/img/menu/StrawberryPeachSmoothie.webp'
+WHERE id=31;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Tom&Jerry.webp'
+WHERE id=32;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WatermelonFreshJuice.webp'
+WHERE id=33;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WatermelonKiwiSmoothie.webp'
+WHERE id=34;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WhiskeyCola.webp'
+WHERE id=35;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WhiskeySour.webp'
+WHERE id=36;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WhiteLady.webp'
+WHERE id=37;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WhiteRussian.webp'
+WHERE id=38;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Zombie.webp'
+WHERE id=39;
