@@ -87,7 +87,7 @@ function waitForBartenderAnswer(){
     document.getElementById('sendButton').disabled = true;
     $('#chatInput').css({'background-color': '#b2ada4'});
     $('#chatInput').css({'caret-color': 'transparent'});
-    $('#sendImg').css({'background-image': 'url(\'/img/maindeco/chatLoading.png\')'});
+    $('#sendImg').css({'background-image': 'url(\'/img/maindeco/chatLoading.webp\')'});
     $('#sendImg').addClass("rotateLoading");
 }
 function deliveredBartenderAnswer(){
