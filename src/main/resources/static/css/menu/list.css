@@ -318,7 +318,7 @@ body {
     width: 180px;
     height: 360px;
     bottom: 0px;
-    background-image: url('/img/menu/leftwreath.png');
+    background-image: url('/img/menu/leftwreath.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -343,7 +343,7 @@ body {
     width: 180px;
     height: 360px;
     bottom: 0px;
-    background-image: url('/img/menu/rightwreath.png');
+    background-image: url('/img/menu/rightwreath.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
