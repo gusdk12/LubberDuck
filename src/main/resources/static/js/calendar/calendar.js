@@ -88,12 +88,12 @@ function addEvents() {
         const comment = $("#select-menu-text").val();
 
         if (!comment) {
-            alert("코멘트를 입력하세요.");
+            swal("WARNING","코멘트를 입력하세요.","warning");
             return;
         }
 
         if (comment.length > 300) {
-            alert("입력된 글자 수가 300자를 초과했습니다.");
+            swal("WARNING","입력된 글자 수가 300자를 초과했습니다.","warning");
             return;
         }
 
@@ -109,7 +109,7 @@ function addEvents() {
             if (selectedMenuId) {
                 await addCalendarByMenu(selectedMenuId, comment);
             } else {
-                alert("메뉴를 선택하세요.");
+                swal("WARNING","메뉴를 선택하세요.","warning");
             }
         }
 
@@ -138,14 +138,37 @@ function addEvents() {
 
     // 오늘의 메뉴 삭제
     $(document).on("click", '.btn-delete', async function () {
-        if (confirm("오늘의 메뉴를 삭제하시겠습니까?")) {
-            const {dateInt} = await checkAndConvertDate();
-            const checkDateResult = await checkDate(dateInt);
+        swal({
+            text: '오늘의 메뉴를 삭제하시겠습니까?',
+            icon: "warning",
+            content: '<span class="swal-text">오늘의 메뉴를 삭제하시겠습니까?</span>',
+            buttons: {
+                cancel: {
+                    text: "취소",
+                    value: null,
+                    visible: true,
+                    className: "btn-swal-cancel",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "삭제",
+                    value: true,
+                    visible: true,
+                    className: "btn-swal-confirm",
+                    closeModal: true,
+                }
+            },
+        })
+            .then(async (willDelete) => {
+                if (willDelete) {
+                    const {dateInt} = await checkAndConvertDate();
+                    const checkDateResult = await checkDate(dateInt);
 
-            if (checkDateResult.exists) {
-                await deleteCalendarByMenu(checkDateResult.id, checkDateResult.menu_id, checkDateResult.comment);
-            }
-        }
+                    if (checkDateResult.exists) {
+                        await deleteCalendarByMenu(checkDateResult.id, checkDateResult.menu_id, checkDateResult.comment);
+                    }
+                }
+            });
     });
 
     // 팝업 닫기 관련 함수
@@ -199,7 +222,7 @@ function addEvents() {
     });
 
     // 메모 저장 + 수정
-    // 입력창에서 엔터키 누를 때 메모 저장
+    // 입력창에서 엔터키 누를 때 메모 저장, tab 키는 줄바꿈
     $("#new-memo").on("keydown", async function (e) {
         if (e.key === "Enter") {
             e.preventDefault();
@@ -211,6 +234,18 @@ function addEvents() {
             } else {
                 await addCalendarByMemo(memoText);
             }
+        }  else if (e.key === "Tab") {
+            e.preventDefault();
+            const memoValue = $(this).val();
+            const cursorPosition = this.selectionStart;
+
+            // 탭키 누를 때 현재 커서 위치에 줄바꿈 문자를 삽입
+            const newMemoValue = memoValue.substring(0, cursorPosition) + "\n" + memoValue.substring(cursorPosition);
+            $(this).val(newMemoValue);
+
+            // 입력창 높이 자동 조절
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
         } else if (e.key === "Escape") {
             $(this).val("").hide();
         }
@@ -237,9 +272,7 @@ function addEvents() {
 
         // 기존 메모가 있는 경우 수정 모드로 설정
         if ($(".event-list li").length !== 0) {
-
             $(".memo-delete, .memo-edit").hide();
-
             const memoText = $(".event-list li").text().trim();
 
             // 기존 메모 높이 가져오기
@@ -281,7 +314,6 @@ function addEvents() {
     // 날짜 클릭
     $(".date").on("click", function () {
         const selectedDate = $(this).data("date"); // 클릭한 날짜의 데이터 속성 값 가져오기
-        alert(selectedDate);
     });
 
     // 사용자가 클릭한 날짜 표시
@@ -480,8 +512,8 @@ function buildTodayMenu(data) {
         $(".btn-edit").hide();
         $(".btn-delete").hide();
         $(".edit-disabled-text").show();
-        $(".btn-add-menu").hide(); // 왜 안돼?
-        // $(".notification-menu-text").text("오늘의 메뉴를 추가할 수 없습니다.");
+        $(".btn-add-menu").hide();
+
         // 이후 날짜일 경우
     } else {
         $(".btn-edit").show();
