@@ -18,7 +18,7 @@ window.addEventListener('unload', function(e){
 function preloadImages(){
     // 미리 로드할 이미지 URL 목록
     var images = [
-        '/img/manager/menu.jpg'
+        '/img/manager/menu.webp'
     ];
 
     for(let menu of menuList){

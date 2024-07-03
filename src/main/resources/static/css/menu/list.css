@@ -141,7 +141,7 @@ body {
     align-items: center;
 }
 .menuTitle #label{
-    background-image: url('/img/menu/barLabel.png');
+    background-image: url('/img/menu/barLabel.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -367,7 +367,7 @@ body {
     width: 300px;
     height: 300px;
     bottom: 0px;
-    background-image: url('/img/menu/sunburst.png');
+    background-image: url('/img/menu/sunburst.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -409,8 +409,7 @@ body {
     width: 300px;
     height: 140px;
     bottom: 0px;
-    /*background-image: url('/img/menu/todaylabel.png');*/
-    content: url('/img/menu/todaylabel.png');
+    content: url('/img/menu/todaylabel.webp');
     /*background-size: contain;*/
     /*background-repeat: no-repeat;*/
     /*background-position: center;*/
