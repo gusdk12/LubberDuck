@@ -216,3 +216,122 @@ INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, con
 
 INSERT INTO ctt_guestbook(user_id, x_coordinate, y_coordinate, z_coordinate, content, postItKind) VALUES
     (4, 345.54, 679.87, 5, '칵테일이 맛있네요~~~', 5);
+
+
+UPDATE ctt_menu
+SET img_url = '/img/menu/Americano.webp'
+WHERE id=1;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Aviation.webp'
+WHERE id=2;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Bellini.webp'
+WHERE id=3;
+UPDATE ctt_menu
+SET img_url = '/img/menu/BlackRussian.webp'
+WHERE id=4;
+UPDATE ctt_menu
+SET img_url = '/img/menu/BlueHawaii.webp'
+WHERE id=5;
+UPDATE ctt_menu
+SET img_url = '/img/menu/ButterRum.webp'
+WHERE id=6;
+UPDATE ctt_menu
+SET img_url = '/img/menu/CloverClub.webp'
+WHERE id=7;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Cosmopolitan.webp'
+WHERE id=8;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Eggnog.webp'
+WHERE id=9;
+UPDATE ctt_menu
+SET img_url = '/img/menu/GodFather.webp'
+WHERE id=10;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Grog.webp'
+WHERE id=11;
+UPDATE ctt_menu
+SET img_url = '/img/menu/HotTeddy.webp'
+WHERE id=12;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Hurricane.webp'
+WHERE id=13;
+UPDATE ctt_menu
+SET img_url = '/img/menu/IcedTeaWithLemon.webp'
+WHERE id=14;
+UPDATE ctt_menu
+SET img_url = '/img/menu/IrishCream.webp'
+WHERE id=15;
+UPDATE ctt_menu
+SET img_url = '/img/menu/KirRoyale.webp'
+WHERE id=16;
+UPDATE ctt_menu
+SET img_url = '/img/menu/LemonadeClassic.webp'
+WHERE id=17;
+UPDATE ctt_menu
+SET img_url = '/img/menu/MaiTai.webp'
+WHERE id=18;
+UPDATE ctt_menu
+SET img_url = '/img/menu/MartiniDry.webp'
+WHERE id=19;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Mojito.webp'
+WHERE id=20;
+UPDATE ctt_menu
+SET img_url = '/img/menu/MulledAppleCider.webp'
+WHERE id=21;
+UPDATE ctt_menu
+SET img_url = '/img/menu/MulledWine.webp'
+WHERE id=22;
+UPDATE ctt_menu
+SET img_url = '/img/menu/OldFashioned.webp'
+WHERE id=23;
+UPDATE ctt_menu
+SET img_url = '/img/menu/PlantersPunch.webp'
+WHERE id=24;
+UPDATE ctt_menu
+SET img_url = '/img/menu/RobRoy.webp'
+WHERE id=25;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Sazerac.webp'
+WHERE id=26;
+UPDATE ctt_menu
+SET img_url = '/img/menu/ScrewDriver.webp'
+WHERE id=27;
+UPDATE ctt_menu
+SET img_url = '/img/menu/SeaBreeze.webp'
+WHERE id=28;
+UPDATE ctt_menu
+SET img_url = '/img/menu/SingaporeSling.webp'
+WHERE id=29;
+UPDATE ctt_menu
+SET img_url = '/img/menu/StrawberryLomonade.webp'
+WHERE id=30;
+UPDATE ctt_menu
+SET img_url = '/img/menu/StrawberryPeachSmoothie.webp'
+WHERE id=31;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Tom&Jerry.webp'
+WHERE id=32;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WatermelonFreshJuice.webp'
+WHERE id=33;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WatermelonKiwiSmoothie.webp'
+WHERE id=34;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WhiskeyCola.webp'
+WHERE id=35;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WhiskeySour.webp'
+WHERE id=36;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WhiteLady.webp'
+WHERE id=37;
+UPDATE ctt_menu
+SET img_url = '/img/menu/WhiteRussian.webp'
+WHERE id=38;
+UPDATE ctt_menu
+SET img_url = '/img/menu/Zombie.webp'
+WHERE id=39;
