@@ -101,7 +101,7 @@ $(document).ready(function(){
             <div id="rateError" class="error"></div>
             <div class="form-group">
                 <label for="content" class="form-left">리뷰 내용</label>
-                <textarea id="content" name="content" rows="8" cols="80" class="detailReview" readonly>${reviewContent}</textarea>
+                <textarea id="content" name="content" rows="8" cols="80" class="detailReview"  spellcheck="false" readonly>${reviewContent}</textarea>
                 <div id="contentError" class="error"></div>
             </div>
             <div class="text-center">
@@ -169,7 +169,7 @@ $(document).ready(function(){
             <hr>
             <div class="form-group">
                 <label for="content" class="form-left">리뷰 내용</label>
-                <textarea id="content" class="writeReview" rows="8" cols="80" required></textarea>
+                <textarea id="content" class="writeReview" rows="8" cols="80" spellcheck="false" required></textarea>
                 <div id="contentError" class="error"></div>
             </div>
             <div class="text-center">
