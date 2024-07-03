@@ -33,7 +33,7 @@ body {
     height: 450px;
     align-self: baseline;
     top: -100px;
-    background-image: url('/img/menu/detailFlower1.png');
+    background-image: url('/img/menu/detailFlower1.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
@@ -47,7 +47,7 @@ body {
     height: 400px;
     align-self: end;
     top: 600px;
-    background-image: url('/img/menu/detailFlower2.png');
+    background-image: url('/img/menu/detailFlower2.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
