@@ -20,6 +20,7 @@ DELETE FROM ctt_AIchat;
 DELETE FROM ctt_order;
 DELETE FROM ctt_order_item;
 DELETE FROM ctt_guestbook;
+DELETE FROM ctt_menu;
 
 
 

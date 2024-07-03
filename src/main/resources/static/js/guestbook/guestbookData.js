@@ -36,8 +36,8 @@ function buildGuestBookData(guestBook) {
         newDiv.style.left = `${memo.x_coordinate}px`;   // x좌표
         newDiv.style.top = `${memo.y_coordinate}px`;    // y좌표
         newDiv.style.zIndex = `${memo.z_coordinate}`;   // z-index
-        newDiv.dataset.memoId = `${memo.id}`
-        newDiv.dataset.userId = `${memo.user_id}`// 방명록 id(PK)
+        newDiv.dataset.memoId = `${memo.id}`    // 방명록 id(PK)
+        newDiv.dataset.userId = `${memo.user_id}`   // 사용자 id(FK)
 
         const delBtn = document.createElement('span');
         delBtn.className = 'postItDel';
@@ -53,14 +53,12 @@ function buildGuestBookData(guestBook) {
 
                 // 삭제 버튼 클릭 이벤트 핸들러 추가
                 delBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
+                    e.stopPropagation();    // 부모 이벤트 막기
                     deleteGuestBookData(newDiv.dataset.memoId);
                 });
             } else {
                 // 삭제 버튼이 없는 경우
-                if (delBtn) {
                     delBtn.style.display = 'none';
-                }
             }
         });
 

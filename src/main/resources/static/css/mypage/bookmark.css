@@ -115,7 +115,7 @@ body {
 .background1 #memoImg, .background2 #memoImg,
 .background3 #memoImg, .background4 #memoImg,
 .background5 #memoImg, .background6 #memoImg {
-    content: url('/img/bookmark/memo1.png');
+    content: url('/img/bookmark/memo1.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -131,22 +131,22 @@ body {
 }
 
 .background2 #memoImg {
-    content: url('/img/bookmark/memo2.png');
+    content: url('/img/bookmark/memo2.webp');
 }
 .background3 #memoImg {
-    content: url('/img/bookmark/memo3.png');
+    content: url('/img/bookmark/memo3.webp');
     height: 117%;
     top: 52%;
 }
 .background4 #memoImg {
-    content: url('/img/bookmark/memo4.png');
+    content: url('/img/bookmark/memo4.webp');
 }
 .background5 #memoImg {
-    content: url('/img/bookmark/memo5.png');
+    content: url('/img/bookmark/memo5.webp');
     left: 47%;
 }
 .background6 #memoImg {
-    content: url("/img/bookmark/memo6.png");
+    content: url("/img/bookmark/memo6.webp");
     top: 47%;
 }
 
