@@ -49,6 +49,10 @@ async function loadMenu() {
         isBookmarked && switchToFullHeart(); // 참
         isBookmarked || switchToEmptyHeart(); // 거짓
     }
+    if(menu.sequence == -1) {
+        $('#toCart').text("판매종료");
+        $('#toCart').addClass('endSell');
+    }
 }
 
 function addEvent(){

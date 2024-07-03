@@ -37,7 +37,7 @@ INSERT INTO ctt_menu (name, img_url, info, sequence, price) VALUES
     ('Hot Teddy', '/img/menu/HotTeddy.webp', '스코틀랜드에서 감기나 독감에 걸렸을 때 마시던 따뜻하고 부드러운 맛을 가진 칵테일 (12도)', -1, 5500),
     ('Hurricane', '/img/menu/Hurricane.webp', '처음의 충격과 충격이 지나간 후에 흔적이 남는 허리케인처럼 여름에 어울리는 깔끔하고 상쾌한 맛을 가진 트로피컬 칵테일 (26도)', -1, 5100),
     ('Long Island Iced Tea', '/img/menu/IcedTeaWithLemon.webp', '달달하고 부드러운 맛이 특징이며 강한 도수 때문에 칵테일계의 폭탄주라고 불리는 칵테일 (29도)', -1, 6000),
-    ('Irish Coffee', '/img/menu/IrishCream.webp', '고소한 풍미의 커피 향과 위스키의 조화로 달콤한 휘핑크림을 얹어 단맛과 쓴맛이 매력적인 칵테일 (14도)', 13, 5500),
+    ('Irish Cream', '/img/menu/IrishCream.webp', '고소한 풍미의 커피 향과 위스키의 조화로 달콤한 휘핑크림을 얹어 단맛과 쓴맛이 매력적인 칵테일 (14도)', 13, 5500),
     ('Kir Royale', '/img/menu/KirRoyale.webp', '샴페인의 청량함과 카시스의 달콤함으로 부드럽고 달콤한 매력적인 맛을 가진 칵테일 (14도)', -1, 6000),
     ('Lemonade Classic', '/img/menu/LemonadeClassic.webp', '진 베이스로 레몬의 새콤함과 시원한 맛을 가진 칵테일 (12도)', 15, 5000),
     ('Mai-Tai', '/img/menu/MaiTai.webp', '열대과일의 풍부한 향이 조화를 이루며 트로피컬 칵테일의 여왕이라고 불리는 칵테일 (30도)', 10, 7000),

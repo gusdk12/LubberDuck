@@ -292,7 +292,7 @@ body {
 #cart #toCart{
     background-color: #F9E3CC;
     height: 80%;
-    width: 120px;
+    width: 140px;
     border-radius: 10px;
     font-size: 30px;
     text-align: center;
@@ -302,6 +302,10 @@ body {
 }
 #cart #toCart:hover{
     background-color: #F3BD86;
+}
+.endSell{
+    background-color: #8a8a8a;
+    pointer-events: none;
 }
 
 /*-----------------------------------*/
