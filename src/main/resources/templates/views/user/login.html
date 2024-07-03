@@ -61,11 +61,11 @@
            th:href="@{https://kauth.kakao.com/oauth/authorize(response_type=${'code'},
                     client_id=${@environment.getProperty('app.oauth2.kakao.client-id')},
                     redirect_uri=${@environment.getProperty('app.oauth2.kakao.redirect-uri')})}">
-            <img th:src="@{/img/user/kakao_login.png}" height="40px" width=" 150px">
+            <img th:src="@{/img/user/kakao_login.webp}" height="40px" width=" 150px">
         </a>
         <br>
         <a class="btnNaver" th:href="@{/oauth2/authorization/naver}">
-            <img th:src="@{/img/user/naver_login.png}" height="40px" width=" 150px">
+            <img th:src="@{/img/user/naver_login.webp}" height="40px" width=" 150px">
         </a>
 
         </div>
