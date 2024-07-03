@@ -89,9 +89,9 @@ public class ChatServiceImpl implements ChatService {
 
         List<Chat> chats = chatRepository.findByUser(user_id);
         if(chats.isEmpty()){
-            add(user_id, "바텐더", "안녕하세요, Rubber Bar에 오신걸 환영해요! 오늘은 기분이 어떠신가요, 손님?");
+            add(user_id, "바텐더", "오늘은 기분이 어떠신가요, 손님?");
             Chat greetingschat = Chat.builder().user_id(user_id).role("바텐더")
-                    .content("안녕하세요, Rubber Bar에 오신걸 환영해요! 오늘은 기분이 어떠신가요, 손님?")
+                    .content("오늘은 기분이 어떠신가요, 손님?")
                     .build();
             chats.add(greetingschat);
         }
