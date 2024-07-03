@@ -272,7 +272,7 @@ function addEvents() {
         // 기존 메모가 있는 경우 수정 모드로 설정
         if ($(".event-list li").length !== 0) {
             $(".memo-delete, .memo-edit").hide();
-            const memoText = $(".event-list li").text().trim();
+            const memoText = $(".event-list li").text();
 
             // 기존 메모 높이 가져오기
             const existingMemoHeight = $(".event-list li").outerHeight();
