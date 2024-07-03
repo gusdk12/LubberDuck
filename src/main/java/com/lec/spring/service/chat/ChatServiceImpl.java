@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lec.spring.domain.QryResult;
 import com.lec.spring.domain.chat.Chat;
-import com.lec.spring.domain.chat.ChatManager;
 import com.lec.spring.domain.chat.QryChatList;
 import com.lec.spring.domain.menu.Menu;
 import com.lec.spring.repository.chat.ChatRepository;
@@ -101,8 +100,6 @@ public class ChatServiceImpl implements ChatService {
         list.setList(chats);
         list.setStatus("OK");
         list.setMenuList(menuList);
-
-        ChatManager.getInstance().makeUserHistory(user_id, chats);
 
         return list;
     }

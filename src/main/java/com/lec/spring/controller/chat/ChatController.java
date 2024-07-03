@@ -9,6 +9,7 @@ import com.lec.spring.service.menu.MenuService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,6 @@ public class ChatController {
             @RequestParam("user_Id") Long user_Id,
             @RequestParam("role") String role,
             @RequestParam("content") String content){
-        ChatManager.getInstance().addUserHistory(user_Id, role, content);
         return chatServiceImpl.add(user_Id, role, content);
     }
 
@@ -43,7 +43,7 @@ public class ChatController {
             @RequestParam("user_Id") Long user_Id,
             @RequestParam("role") String role){
         createInitPrompt();
-        String fullPrompt = ChatManager.getInstance().getUserHistory(user_Id);
+        String fullPrompt = getFullPrompt(user_Id);
         String response = chatServiceImpl.getResponse(fullPrompt).replace("\n", "\\n").replace("\"", "\\\"");
         response = response.replace("바텐더: ", "");
         return chatServiceImpl.add(user_Id, role, response);
@@ -75,7 +75,20 @@ public class ChatController {
                 ", '물론이죠, 여기서는 훌륭한 칵테일뿐만 아니라 마음의 평화도 찾으실 수 있습니다. 불안과 두려움을 잠시 잊고 편안한 밤을 보내는 데에 도움을 드리고 싶군요.'" +
                 ", '손님이 기쁘시다면 저도 기쁩니다!'";
 
-        ChatManager.getInstance().addInitSetting(initProm + exampleProm);
+        ChatManager.getInstance().setBartendarSetting(initProm + exampleProm);
+    }
+
+    private String getFullPrompt(Long user_id){
+        QryChatList allChat = chatServiceImpl.findByUser(user_id, menuService.sequenceList());
+
+        List<String> chatList = new ArrayList<>();
+        allChat.getList().forEach(chat -> chatList.add(chat.getContent()));
+        Collections.reverse(chatList);
+
+        String result = ChatManager.getInstance().getBartendarSetting() +
+                "지금까지의 대화 기록입니다. 대화기록을 확인하고, 적절한 대화를 이어가세요. - "
+                + String.join(" ", chatList);
+        return result;
     }
 
 }

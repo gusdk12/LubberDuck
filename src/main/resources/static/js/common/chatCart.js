@@ -96,5 +96,5 @@ function deliveredBartenderAnswer(){
     $('#chatInput').css({'background-color': '#fff8ea'});
     $('#chatInput').css({'caret-color': 'black'});
     $('#sendImg').removeClass("rotateLoading");
-    $('#sendImg').css({'background-image': 'url(\'/img/maindeco/chatSend.png\')'});
+    $('#sendImg').css({'background-image': 'url(\'/img/maindeco/chatSend.webp\')'});
 }
