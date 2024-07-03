@@ -158,8 +158,7 @@ function addEvents() {
                     closeModal: true,
                 }
             },
-        })
-            .then(async (willDelete) => {
+        }).then(async (willDelete) => {
                 if (willDelete) {
                     const {dateInt} = await checkAndConvertDate();
                     const checkDateResult = await checkDate(dateInt);
@@ -168,7 +167,7 @@ function addEvents() {
                         await deleteCalendarByMenu(checkDateResult.id, checkDateResult.menu_id, checkDateResult.comment);
                     }
                 }
-            });
+        });
     });
 
     // 팝업 닫기 관련 함수
@@ -290,15 +289,37 @@ function addEvents() {
 
     // 메모 삭제
     $(document).on("click", ".memo-delete", async function () {
-        if (confirm("메모를 삭제하시겠습니까?")) {
-            const memoText = $("#new-memo").val();
-            const {dateInt} = await checkAndConvertDate();
-            const checkDateResult = await checkDate(dateInt);
+        swal({
+            text: '메모를 삭제하시겠습니까?',
+            icon: "warning",
+            content: '<span class="swal-text">오늘의 메뉴를 삭제하시겠습니까?</span>',
+            buttons: {
+                cancel: {
+                    text: "취소",
+                    value: null,
+                    visible: true,
+                    className: "btn-swal-cancel",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "삭제",
+                    value: true,
+                    visible: true,
+                    className: "btn-swal-confirm",
+                    closeModal: true,
+                }
+            },
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const memoText = $("#new-memo").val();
+                const {dateInt} = await checkAndConvertDate();
+                const checkDateResult = await checkDate(dateInt);
 
-            if (checkDateResult.exists) {
-                await deleteCalendarByMemo(checkDateResult.id, memoText);
+                if (checkDateResult.exists) {
+                    await deleteCalendarByMemo(checkDateResult.id, memoText);
+                }
             }
-        }
+        });
     });
 
     /****************************************************************
