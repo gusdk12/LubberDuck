@@ -38,6 +38,12 @@ public class MypageValidator implements Validator {
     }
 
     private void validateUser(User user, Errors errors) {
+
+        String nickname = user.getNickname();
+        if(nickname == null || nickname.trim().isEmpty()){
+            errors.rejectValue("nickname", "닉네임은 공백을 입력할수 없습니다.");
+        }
+
         // 이메일 유효성 검사
         String email = user.getEmail();
         if (email == null || email.trim().isEmpty() || !isValidEmail(email)) {
