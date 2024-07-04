@@ -14,6 +14,9 @@ public interface GuestBookService {
     // 최대 z_coordinate찾기
     Long maxZ_index();
 
+    // z_coordinate 기준 정렬 및 1부터 다시 줄세우기
+    void organizeZIndex();
+
     // 특정 id 방명록 수정
     QryResult updateByPostIt(Long id, Long user_id, Double x_coordinate, Double y_coordinate, Long z_coordinate);
 
