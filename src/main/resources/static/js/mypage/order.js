@@ -231,7 +231,7 @@ function formatDateTime(dateTimeString) {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
 
     let date = new Date(dateTimeString);
-    date.setHours(date.getHours() + 9);
+    // date.setHours(date.getHours() + 9);
 
     return date.toLocaleDateString('ko-KR', options);
 
