@@ -220,16 +220,25 @@ $(document).ready(function(){
 });
 
 function formatDateTime(dateTimeString) {
-    const date = new Date(dateTimeString);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
+    // const date = new Date(dateTimeString);
+    // const year = date.getFullYear();
+    // const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+    // const day = date.getDate();
+    // const hours = date.getHours();
+    // const minutes = date.getMinutes();
+    // const seconds = date.getSeconds();
+
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+
+    let date = new Date(dateTimeString);
+    date.setHours(date.getHours() + 9);
+
+    return date.toLocaleDateString('ko-KR', options);
 
     // 두 자리 숫자를 맞추기 위해 padStart 사용
-    const formattedDate = `${year}년 ${month}월 ${day}일 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    let formattedDate = `${year}년 ${month}월 ${day}일 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+
     return formattedDate;
 }
 
