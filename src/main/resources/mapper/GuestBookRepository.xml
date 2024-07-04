@@ -25,7 +25,7 @@
 
     <select id="contentAll" resultType="com.lec.spring.domain.guestBook.GuestBook">
         <include refid="SELECT_BASE"/>
-        ORDER BY b.z_coordinate DESC
+        ORDER BY b.z_coordinate ASC
     </select>
 
     <select id="findById" resultType="com.lec.spring.domain.guestBook.GuestBook">
