@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import java.util.HashMap;
@@ -175,6 +176,11 @@ public class MyPageController {
             }
         }
 
+        ZoneId zoneId = ZoneId.of("Asia/Seoul");
+        orders.forEach(order -> {
+            order.setRegdate(order.getRegdate().atZone(ZoneId.systemDefault()).toLocalDateTime());
+        });
+
         // 모델에 주문 목록과 주문 항목 맵을 추가합니다.
         model.addAttribute("orders", orders);
         model.addAttribute("user", user);
@@ -192,7 +198,11 @@ public class MyPageController {
         String username = userDetails.getUsername();
         User user = userService.findByUsername(username);
 
+        ZoneId zoneId = ZoneId.of("Asia/Seoul");
         List<Review> reviews = reviewService.findByUserId(user.getId());
+        reviews.forEach(review -> {
+            review.setRegdate(review.getRegdate().atZone(ZoneId.systemDefault()).toLocalDateTime());
+        });
 
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
