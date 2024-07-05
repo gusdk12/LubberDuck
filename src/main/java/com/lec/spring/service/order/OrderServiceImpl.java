@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
         QryOrder result = new QryOrder();
 
         result.setCount(cnt);
-        result.setOrder_id(orders.get(0).getUser_id());
+        result.setOrder_id(orders.get(0).getId());
         result.setStatus("OK");
 
         return result;
