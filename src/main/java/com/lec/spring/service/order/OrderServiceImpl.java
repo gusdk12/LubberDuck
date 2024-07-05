@@ -66,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public QryResult addOrderItem(Long order_id, Long menu_id, Integer quantity, Integer price) {
+        System.out.println("오더아이디 : " + order_id);
         OrderItem item = OrderItem.builder()
                 .order_id(order_id)
                 .cocktail_id(menu_id)
