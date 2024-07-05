@@ -39,8 +39,8 @@
 
     <insert id="insert" flushCache="true" parameterType="com.lec.spring.domain.order.Order"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO ctt_order(id, user_id)
-        VALUES(#{id}, #{user_id})
+        INSERT INTO ctt_order(user_id)
+        VALUE(#{user_id})
     </insert>
 
     <select id="selectFromOrder" resultMap="mapOrder">
