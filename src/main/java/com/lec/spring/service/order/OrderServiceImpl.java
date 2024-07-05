@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
         Long new_id = (long)(orderRepository.countAll() + 1);
 
         Order order = Order.builder()
-                .id(new_id)
+//                .id(new_id)
                 .user_id(user_id)
                 .build();
 
