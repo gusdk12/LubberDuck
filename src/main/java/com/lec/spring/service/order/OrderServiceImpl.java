@@ -53,11 +53,12 @@ public class OrderServiceImpl implements OrderService {
                 .build();
 
         int cnt = orderRepository.insert(order);
+        List<Order> orders = findByUser(user_id);
 
         QryOrder result = new QryOrder();
 
         result.setCount(cnt);
-        result.setOrder_id(new_id);
+        result.setOrder_id(orders.get(0).getUser_id());
         result.setStatus("OK");
 
         return result;
