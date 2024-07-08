@@ -17,6 +17,9 @@ function loadCartData() {
                 }
                 let cartItems = [];
                 data.data.forEach(item => {
+                    if(item.menu.sequence === -1)
+                        return;
+
                     let itemInfo = {
                         menu_id : item.menu_id,
                         quantity : item.quantity,
