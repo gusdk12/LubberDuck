@@ -21,7 +21,7 @@ async function addOrder(user_id, itemList) {
 }
 
 async function addOrderItem(order_id, item) {
-    if (!item)
+    if (!item || item.sequence === -1)
         return;
 
     const data = {
