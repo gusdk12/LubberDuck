@@ -1,6 +1,6 @@
 # 🌟 Rubber Bar란?
 <p align="right">
-  <a href="https://www.youtube.com/watch?v=yM-aERb-wBk&list=PLedGoSru7949vE2KofRZ2Vg4aINCrD_jQ&index=3">‘🔗 Rubber Bar 발표 영상’</a> / 
+  <a href="https://www.youtube.com/watch?v=yM-aERb-wBk&list=PLedGoSru7949vE2KofRZ2Vg4aINCrD_jQ&index=3">‘🔗Rubber Bar 발표 영상’</a> / 
   <a href="https://www.youtube.com/watch?v=Ob8DiW1jE_0&list=PLedGoSru7949vE2KofRZ2Vg4aINCrD_jQ&index=7">‘🔗Rubber Bar 발표 화면’</a>
 </p>
 
@@ -18,8 +18,8 @@
         - 비회원 - 칵테일 메뉴 조회 및 방명록 조회
         - 사용자 - 칵테일 메뉴 조회 및 주문/결제, AI 바텐더와의 채팅, 즐겨찾기 관리, 리뷰 등록 및 수정, 삭제,
           <br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;방명록 작성 및 삭제(본인 것만), 위치 이동 가능
-        - 관리자 - 메뉴 관리(메뉴판 추가 및 순서 변경, 삭제 / 메뉴 정보 조회 및 수정), 차트 관리(메뉴별 / 연령별 인기 메뉴 파악),
-          <br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;캘린더 관리(오늘의 메뉴, 일정 작성), 방명록 관리(작성 및 모든 방명록 삭제 가능, 위치 이동 가능)
+        - 관리자 - 메뉴 관리(메뉴판 추가 및 순서 변경, 삭제 / 메뉴 정보 조회 및 수정), <br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;차트 관리(메뉴별 / 연령별 인기 메뉴 파악),
+          캘린더 관리(오늘의 메뉴, 일정 작성), 방명록 관리(작성 및 모든 방명록 삭제 가능, 위치 이동 가능)
 - **‘Cohere API’** 활용으로 AI 바텐더 챗봇 제작으로 사용자 간의 채팅 가능(칵테일 추천 및 정보 제공)
 
 ### [진행 기간]
@@ -27,7 +27,7 @@
 
 ### [기획 순서]
 브레인스토밍 →  ERD 및 흐름도, 스토리보드 작성 → 개발 일정 계획 → 각 페이지 개발 시작 
-→ 각 페이지 QA 진행 및  수정<br/> → AWS 배포  → 시연 및 발표
+<br/>→ 각 페이지 QA 진행 및  수정 → AWS 배포 → 시연 및 발표
 
 ### [역할]
 <table>
@@ -37,34 +37,35 @@
     <td>내용</td>
   </thead>
   <tr>
-    <td align="center">송유신&nbsp; (팀장)</td>
+    <td align="center">송유신&nbsp; &nbsp; (팀장)</td>
     <td>- 메인 페이지<br/>- About Us 페이지<br/>- AI 바텐더 챗봇<br/>- 장바구니<br/>- 결제<br/>- Project Manager 및 개발 QA</td>
-    <td>- 일정 조율, 개발QA<br/>- 3D 모델링을 활용한 About Us 페이지 제작<br/>- 메인 페이지 CSS 전담 및 구현<br/>- Cohere에서 제공하는 Command R+ AI 모델을 활용한 바텐더 챗봇 구현
+    <td>- 일정 조율, 개발QA<br/>- 3D 모델링을 활용한 About Us 페이지 제작<br/>- 메인 페이지 CSS 전담 및 구현<br/>- Cohere에서 제공하는 Command R+ AI 모델을 활용한 <br/>&nbsp; 바텐더 챗봇 구현
       <br/>- AJAX를 활용한 AI 챗봇 채팅 CRUD 구현<br/>- 장바구니 CRUD 및 프론트 구현<br/>- 카카오페이 API를 활용한 결제 기능 구현</td>
   </tr>
   <tr>
     <td align="center">신현아</td>
     <td>- 메뉴 관리 페이지<br/>- 차트 관리 페이지<br/>- 방명록 페이지</td>
-    <td>- Thymeleaf와 AJAX를 활용해 메뉴 RU 및 프론트 구현<br/>- Chart.js 라이브러리를 활용해 ‘메뉴별/연령별 인기 메뉴’ 확인할 수 있게<br/>&nbsp; 차트 페이지 구현
-      <br/>- AJAX를 활용해 사용자들이 자유롭게 작성할 수 있는 방명록 CRUD 및<br/>&nbsp; 프론트 구현</td>
+    <td>- Thymeleaf와 AJAX를 활용해 메뉴 RU 및 프론트 구현<br/>- Chart.js 라이브러리를 활용해 ‘메뉴별/연령별 인기 메뉴’ 확인할 수 <br/>&nbsp; 있게 차트 페이지 구현
+      <br/>- AJAX를 활용해 사용자들이 자유롭게 작성할 수 있는 방명록 CRUD <br/>&nbsp; 및 프론트 구현</td>
   </tr>
   <td align="center">유인아</td>
-    <td>- 사용자 CRUD(OAuth2 활용)<br/>- 리뷰 목록 페이지<br/>&nbsp; (메뉴 상세 페이지)</td>
-    <td>- OAuth2(네이버, 카카오)를 활용하여 사용자 CRUD 및 프론트 구현<br/>- 메뉴 상세페이지에 들어갔을 때 메뉴에 대한 리뷰 목록 확인할 수 있도록 페이지 구현
+    <td>- 사용자 CRUD<br/>&nbsp; (OAuth2 활용)<br/>- 리뷰 목록 페이지<br/>&nbsp; (메뉴 상세 페이지)</td>
+    <td>- OAuth2(네이버, 카카오)를 활용하여 사용자 CRUD 및 프론트 구현<br/>- 메뉴 상세페이지에 들어갔을 때 메뉴에 대한 리뷰 목록 확인할 수 <br/>&nbsp; 있도록 페이지 구현
       <br/>- AJAX를 이용해 페이징 구현<br/>- QA로 페이지 오류 확인</td>
   </tr>
   <td align="center">홍가연</td>
     <td>- 즐겨찾기 페이지<br/>- 최근 본 품목<br/>- 별점 평균 구현</td>
-    <td>- 칵테일을 즐겨찾기로 관리할 수 있는 CRUD 및 프론트 구현<br/>- 최근 본 품목으로 최신순으로 4개까지 확인할 수 있게 보여주는 프론트와 CRUD 구현
+    <td>- 칵테일을 즐겨찾기로 관리할 수 있는 CRUD 및 프론트 구현<br/>- 최근 본 품목으로 최신순으로 4개까지 확인할 수 있게 보여주는 <br/>&nbsp; 프론트와 CRUD 구현
       <br/>- AJAX를 이용한 별점 평균 및 CSS 구현<br/>- EC2 RDS를 활용해 AWS에 배포</td>
   </tr>
   <td align="center">이다혜</td>
     <td>- 리뷰 페이지(마이페이지)<br/>- 주문 목록 페이지</td>
-    <td>- AJAX를 통한 리뷰 CRUD 및 프론트 구현<br/>- MyBatis와 XML 데이터를 활용해 데이터 조인을 통한 주문 목록 페이지 프론트 구현<br/>- 주문 목록 및 리뷰 내역 속 ‘최신순/별점순’ 정렬 기능 및 페이징 구현</td>
+    <td>- AJAX를 통한 리뷰 CRUD 및 프론트 구현<br/>- MyBatis와 XML 데이터를 활용해 데이터 조인을 통한 주문 목록 <br/>&nbsp; 페이지 프론트 구현
+      <br/>- 주문 목록 및 리뷰 내역 속 ‘최신순/별점순’ 정렬 기능 및 페이징 <br/>&nbsp; 구현</td>
   </tr>
   <td align="center">김다현</td>
     <td>- 오늘의 메뉴 페이지<br/>- 일정(캘린더) 페이지</td>
-    <td>- AJAX를 활용한 오늘의 메뉴 CRUD와 일정(캘린더)를 관리할 수 있는 CRUD 및 <br/>&nbsp; 프론트 구현<br/>- 일정(캘린더)에는 메모, 오늘의 메뉴 추가하여 관리할 수 있도록 구현</td>
+    <td>- AJAX를 활용한 오늘의 메뉴 CRUD와 일정(캘린더)를 관리할 수 <br/>&nbsp; 있는 CRUD 및 프론트 구현<br/>- 일정(캘린더)에는 메모, 오늘의 메뉴 추가하여 관리할 수 있도록 <br/>&nbsp; 구현</td>
   </tr>
 </table>
 
