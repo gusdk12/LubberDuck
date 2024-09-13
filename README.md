@@ -37,7 +37,7 @@
     <td>내용</td>
   </thead>
   <tr>
-    <td align="center">송유신 (팀장)</td>
+    <td align="center">송유신&nbsp; (팀장)</td>
     <td>- 메인 페이지<br/>- About Us 페이지<br/>- AI 바텐더 챗봇<br/>- 장바구니<br/>- 결제<br/>- Project Manager 및 개발 QA</td>
     <td>- 일정 조율, 개발QA<br/>- 3D 모델링을 활용한 About Us 페이지 제작<br/>- 메인 페이지 CSS 전담 및 구현<br/>- Cohere에서 제공하는 Command R+ AI 모델을 활용한 바텐더 챗봇 구현
       <br/>- AJAX를 활용한 AI 챗봇 채팅 CRUD 구현<br/>- 장바구니 CRUD 및 프론트 구현<br/>- 카카오페이 API를 활용한 결제 기능 구현</td>
